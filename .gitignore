@@ -1,0 +1,24 @@
+# macOS / OS Files
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# Environment & Backups
+.env
+backups/
+*.sql
+*.tar.gz
+*.log
+
+# WordPress Core downloads (if local)
+wp-config.php
+wp-config-local.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/advanced-cache.php
+
+# Node & Editor
+node_modules/
+.vscode/
+.idea/

@@ -1,0 +1,85 @@
+[
+  {
+    "key": "group_ai_workflow_meta_2026",
+    "title": "AI Workflow & MCP Server Metadata 2026",
+    "fields": [
+      {
+        "key": "field_short_description",
+        "label": "Short Description",
+        "name": "short_description",
+        "type": "textarea",
+        "instructions": "A 1-2 sentence high-level overview of the workflow or MCP server.",
+        "required": 1,
+        "rows": 3
+      },
+      {
+        "key": "field_github_link",
+        "label": "GitHub Repository URL",
+        "name": "github_link",
+        "type": "url",
+        "instructions": "Link to the GitHub repository or code gist."
+      },
+      {
+        "key": "field_demo_url",
+        "label": "Live Demo / Video URL",
+        "name": "demo_url",
+        "type": "url",
+        "instructions": "Link to a live demo or video walkthrough."
+      },
+      {
+        "key": "field_tech_stack_text",
+        "label": "Tech Stack List",
+        "name": "tech_stack_text",
+        "type": "text",
+        "instructions": "Comma-separated tech stack items (e.g. n8n, Claude 3.5 Sonnet, Python, LangChain)."
+      },
+      {
+        "key": "field_difficulty",
+        "label": "Difficulty Level",
+        "name": "difficulty",
+        "type": "select",
+        "choices": {
+          "Beginner": "Beginner",
+          "Intermediate": "Intermediate",
+          "Advanced": "Advanced",
+          "Expert": "Expert"
+        },
+        "default_value": "Intermediate"
+      },
+      {
+        "key": "field_status",
+        "label": "Project Status",
+        "name": "status",
+        "type": "select",
+        "choices": {
+          "Active": "Active",
+          "Beta": "Beta",
+          "Deprecated": "Deprecated"
+        },
+        "default_value": "Active"
+      }
+    ],
+    "location": [
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "workflow"
+        }
+      ],
+      [
+        {
+          "param": "post_type",
+          "operator": "==",
+          "value": "mcp_server"
+        }
+      ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "active": true
+  }
+]

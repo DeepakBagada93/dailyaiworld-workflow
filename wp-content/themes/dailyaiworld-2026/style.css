@@ -1,0 +1,424 @@
+/*
+Theme Name: Daily AI World 2026
+Theme URI: https://github.com/dailyaiworld/dailyaiworld-2026
+Author: Daily AI World Engineering
+Description: Ultra-fast, mobile-first dark theme for AI Workflow Directory & MCP Servers Registry 2026.
+Version: 1.0.0
+Text Domain: dailyaiworld-2026
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+*/
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES & COLOR PALETTE
+   -------------------------------------------------------------------------- */
+:root {
+  --bg-dark: #050507;
+  --bg-card: #111113;
+  --bg-card-hover: #18181c;
+  --bg-glass: rgba(17, 17, 19, 0.85);
+  
+  --accent-purple: #a855f7;
+  --accent-purple-hover: #9333ea;
+  --accent-purple-glow: rgba(168, 85, 247, 0.25);
+  --accent-purple-light: rgba(168, 85, 247, 0.12);
+  
+  --border-muted: rgba(255, 255, 255, 0.08);
+  --border-active: rgba(168, 85, 247, 0.4);
+  
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'Fira Code', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  
+  --max-width: 1240px;
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+a {
+  color: var(--accent-purple);
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+a:hover {
+  color: var(--accent-purple-hover);
+}
+
+/* --------------------------------------------------------------------------
+   3. CONTAINER & HEADER NAVIGATION
+   -------------------------------------------------------------------------- */
+.container {
+  width: 90%;
+  max-width: var(--max-width);
+  margin: 0 auto;
+}
+
+.site-header {
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-muted);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  padding: 16px 0;
+}
+
+.header-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.brand-logo {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.03em;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.brand-logo span {
+  color: var(--accent-purple);
+}
+
+.brand-year {
+  font-size: 0.75rem;
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+  padding: 2px 8px;
+  border-radius: 9999px;
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  font-weight: 700;
+}
+
+.nav-links {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  list-style: none;
+}
+
+.nav-links a {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.nav-links a:hover {
+  color: #ffffff;
+}
+
+/* Mobile Menu Toggle */
+.mobile-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+  .nav-links.active {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: var(--bg-card);
+    padding: 20px;
+    border-bottom: 1px solid var(--border-muted);
+  }
+  .mobile-toggle {
+    display: block;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. BUTTONS & UI COMPONENTS
+   -------------------------------------------------------------------------- */
+.btn-vibrant {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-purple);
+  color: #ffffff !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 18px var(--accent-purple-glow);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-vibrant:hover {
+  background: var(--accent-purple-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px var(--accent-purple-glow);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-primary) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-muted);
+  transition: all 0.25s ease;
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-purple);
+  background: var(--accent-purple-light);
+  color: var(--accent-purple) !important;
+}
+
+/* Badges */
+.tag-badge {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-workflow {
+  background: var(--accent-purple-light);
+  color: var(--accent-purple);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+}
+
+.badge-mcp {
+  background: rgba(59, 130, 246, 0.15);
+  color: #60a5fa;
+  border: 1px solid rgba(59, 130, 246, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   5. HOMEPAGE HERO SECTION
+   -------------------------------------------------------------------------- */
+.hero-wrapper {
+  padding: 80px 0 60px 0;
+  text-align: center;
+  position: relative;
+}
+
+.hero-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--accent-purple-light);
+  border: 1px solid rgba(168, 85, 247, 0.3);
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.85rem;
+  color: var(--accent-purple);
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.hero-title-main {
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.hero-title-gradient {
+  background: linear-gradient(135deg, #ffffff 30%, #e2e8f0 60%, var(--accent-purple) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero-desc {
+  font-size: 1.2rem;
+  color: var(--text-secondary);
+  max-width: 720px;
+  margin: 0 auto 36px auto;
+}
+
+.hero-ctas {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* --------------------------------------------------------------------------
+   6. CARDS GRID & CARDS DESIGN (#111113)
+   -------------------------------------------------------------------------- */
+.section-header-flex {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 28px;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.section-heading {
+  font-size: 1.8rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+}
+
+.grid-3-col {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+}
+
+.card-item {
+  background: var(--bg-card);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-md);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.25s ease;
+  position: relative;
+}
+
+.card-item:hover {
+  transform: translateY(-5px);
+  background: var(--bg-card-hover);
+  border-color: var(--border-active);
+  box-shadow: 0 12px 35px var(--accent-purple-glow);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.card-item-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.card-item-title a {
+  color: #ffffff;
+}
+
+.card-item-title a:hover {
+  color: var(--accent-purple);
+}
+
+.card-excerpt {
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+  margin-bottom: 24px;
+  flex-grow: 1;
+}
+
+.card-bottom-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-muted);
+  padding-top: 16px;
+}
+
+/* --------------------------------------------------------------------------
+   7. STATS & COMMUNITY BANNER
+   -------------------------------------------------------------------------- */
+.stats-banner {
+  background: var(--bg-card);
+  border: 1px solid var(--border-muted);
+  border-radius: var(--radius-lg);
+  padding: 40px;
+  margin: 60px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 32px;
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2.5rem;
+  font-weight: 900;
+  color: var(--accent-purple);
+}
+
+.stat-label {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   8. FOOTER STYLING
+   -------------------------------------------------------------------------- */
+.site-footer {
+  margin-top: auto;
+  border-top: 1px solid var(--border-muted);
+  padding: 40px 0;
+  background: #000000;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.footer-inner {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
