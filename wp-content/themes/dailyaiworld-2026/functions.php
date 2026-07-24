@@ -61,27 +61,10 @@ function dailyaiworld_2026_scripts() {
     // Google Fonts (Inter)
     wp_enqueue_style('dailyaiworld-font', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap', array(), null);
 
-    // Optional: Enqueue Tailwind CSS Play CDN for utility classes (Free Open Source)
-    wp_enqueue_script('tailwind-cdn', 'https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4', array(), null, false);
-
     // Theme main stylesheet
     wp_enqueue_style('dailyaiworld-2026-style', get_stylesheet_uri(), array(), '1.0.0');
 }
 add_action('wp_enqueue_scripts', 'dailyaiworld_2026_scripts');
-
-/**
- * Defer non-critical scripts for ultra-fast load time
- */
-function dailyaiworld_2026_defer_scripts($tag, $handle, $src) {
-    if (is_admin()) {
-        return $tag;
-    }
-    if (strpos($tag, 'defer') === false && strpos($tag, 'async') === false) {
-        return str_replace(' src', ' defer="defer" src', $tag);
-    }
-    return $tag;
-}
-add_filter('script_loader_tag', 'dailyaiworld_2026_defer_scripts', 10, 3);
 
 /**
  * Helper to get count of Published Custom Post Types for Hero Stats
