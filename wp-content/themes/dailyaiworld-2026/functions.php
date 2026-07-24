@@ -46,7 +46,6 @@ function dailyaiworld_2026_setup() {
         'script',
     ));
 
-    // Register Navigation Menus
     register_nav_menus(array(
         'primary_menu' => __('Primary Navigation 2026', 'dailyaiworld-2026'),
         'footer_menu'  => __('Footer Navigation 2026', 'dailyaiworld-2026'),
@@ -55,14 +54,18 @@ function dailyaiworld_2026_setup() {
 add_action('after_setup_theme', 'dailyaiworld_2026_setup');
 
 /**
- * Enqueue Styles and Scripts
+ * Enqueue Styles and GSAP Scripts
  */
 function dailyaiworld_2026_scripts() {
-    // Google Fonts (Inter)
-    wp_enqueue_style('dailyaiworld-font', 'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap', array(), null);
+    // Google Fonts (Plus Jakarta Sans & Fira Code)
+    wp_enqueue_style('dailyaiworld-font', 'https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&family=Fira+Code:wght@400;600&display=swap', array(), null);
+
+    // Enqueue GSAP 3.12+ Core & ScrollTrigger for High-End Motion UI
+    wp_enqueue_script('gsap-core', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js', array(), '3.12.5', true);
+    wp_enqueue_script('gsap-scrolltrigger', 'https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js', array('gsap-core'), '3.12.5', true);
 
     // Theme main stylesheet
-    wp_enqueue_style('dailyaiworld-2026-style', get_stylesheet_uri(), array(), '1.0.0');
+    wp_enqueue_style('dailyaiworld-2026-style', get_stylesheet_uri(), array(), '2.0.0');
 }
 add_action('wp_enqueue_scripts', 'dailyaiworld_2026_scripts');
 
