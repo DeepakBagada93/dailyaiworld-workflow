@@ -54,7 +54,7 @@ get_header();
                 <span class="tag-badge badge-workflow">Automation Pipelines</span>
                 <h2 class="section-heading" style="margin-top: 6px;">Featured AI Workflows</h2>
             </div>
-            <a href="<?php echo esc_url(home_url('/workflows')); ?>" class="btn-outline">View All Workflows &rarr;</a>
+            <a href="<?php echo esc_url(home_url('/explore')); ?>" class="btn-outline">View All Workflows &rarr;</a>
         </div>
 
         <div class="grid-3-col">
@@ -69,6 +69,7 @@ get_header();
                 while ($wf_query->have_posts()) : $wf_query->the_post();
                     $exec_time = get_field('execution_time') ?: '5 mins';
                     $trigger   = get_field('trigger_type') ?: 'Webhook';
+                    $short_desc= get_field('short_description') ?: get_the_excerpt();
                     ?>
                     <article class="card-item">
                         <div class="card-top">
@@ -79,7 +80,7 @@ get_header();
                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                         </h3>
                         <div class="card-excerpt">
-                            <p><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
+                            <p><?php echo wp_trim_words($short_desc, 20); ?></p>
                         </div>
                         <div class="card-bottom-meta">
                             <span>⚡ Trigger: <?php echo esc_html(ucfirst($trigger)); ?></span>
@@ -90,7 +91,7 @@ get_header();
                 endwhile;
                 wp_reset_postdata();
             else :
-                // Fallback demo card if CPT has no posts yet
+                // Demo workflows dataset rendered if WP query is empty
                 ?>
                 <article class="card-item">
                     <div class="card-top">
@@ -99,38 +100,40 @@ get_header();
                     </div>
                     <h3 class="card-item-title"><a href="#">Autonomous GitHub PR Code Reviewer</a></h3>
                     <div class="card-excerpt">
-                        <p>Triggers on GitHub PR creation, analyzes incoming code diffs, generates inline security reviews via Claude 3.5 Sonnet.</p>
+                        <p>Triggers on GitHub PR creation, analyzes incoming code diffs, generates inline security & performance reviews via Claude 3.5 Sonnet.</p>
                     </div>
                     <div class="card-bottom-meta">
                         <span>⚡ Trigger: Webhook</span>
                         <a href="#" style="font-weight: 600;">View Workflow &rarr;</a>
                     </div>
                 </article>
+
                 <article class="card-item">
                     <div class="card-top">
                         <span class="tag-badge badge-workflow">Workflow</span>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">⏱️ 10 mins</span>
                     </div>
-                    <h3 class="card-item-title"><a href="#">Multi-Source RAG Knowledge Ingestion</a></h3>
+                    <h3 class="card-item-title"><a href="#">Multi-Source Vector RAG Ingestion Pipeline</a></h3>
                     <div class="card-excerpt">
-                        <p>Automatically syncs Notion docs, PDF whitepapers, and web pages into a Qdrant vector database for AI Agent retrieval.</p>
+                        <p>Monitors Notion databases, PDF whitepapers, and technical docs. Chunks documents and upserts vector embeddings to Qdrant.</p>
                     </div>
                     <div class="card-bottom-meta">
                         <span>⚡ Trigger: Cron Schedule</span>
                         <a href="#" style="font-weight: 600;">View Workflow &rarr;</a>
                     </div>
                 </article>
+
                 <article class="card-item">
                     <div class="card-top">
                         <span class="tag-badge badge-workflow">Workflow</span>
                         <span style="font-size: 0.8rem; color: var(--text-muted);">⏱️ 1 min</span>
                     </div>
-                    <h3 class="card-item-title"><a href="#">Automated Executive News Summarizer</a></h3>
+                    <h3 class="card-item-title"><a href="#">Executive AI Briefing Telegram Bot</a></h3>
                     <div class="card-excerpt">
-                        <p>Scrapes top AI news RSS feeds, synthesizes bulleted executive briefings, and posts to Slack channels every morning.</p>
+                        <p>Monitors 50+ tech feeds and ArXiv papers, synthesizes bulleted executive digests via DeepSeek R1, and posts to Slack & Telegram.</p>
                     </div>
                     <div class="card-bottom-meta">
-                        <span>⚡ Trigger: Event</span>
+                        <span>⚡ Trigger: Event Driven</span>
                         <a href="#" style="font-weight: 600;">View Workflow &rarr;</a>
                     </div>
                 </article>
@@ -145,7 +148,7 @@ get_header();
                 <span class="tag-badge badge-mcp">Model Context Protocol</span>
                 <h2 class="section-heading" style="margin-top: 6px;">MCP Server Registry 2026</h2>
             </div>
-            <a href="<?php echo esc_url(home_url('/mcp-servers')); ?>" class="btn-outline">Browse All Servers &rarr;</a>
+            <a href="<?php echo esc_url(home_url('/explore')); ?>" class="btn-outline">Browse All Servers &rarr;</a>
         </div>
 
         <div class="grid-3-col">
@@ -160,6 +163,7 @@ get_header();
                 while ($mcp_query->have_posts()) : $mcp_query->the_post();
                     $transport = get_field('transport_protocol') ?: 'stdio';
                     $tools_cnt = get_field('tools_count') ?: '1';
+                    $short_desc= get_field('short_description') ?: get_the_excerpt();
                     ?>
                     <article class="card-item">
                         <div class="card-top">
@@ -170,7 +174,7 @@ get_header();
                             <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
                         </h3>
                         <div class="card-excerpt">
-                            <p><?php echo wp_trim_words(get_the_excerpt(), 20); ?></p>
+                            <p><?php echo wp_trim_words($short_desc, 20); ?></p>
                         </div>
                         <div class="card-bottom-meta">
                             <span>📡 <?php echo esc_html(strtoupper($transport)); ?></span>
@@ -181,7 +185,7 @@ get_header();
                 endwhile;
                 wp_reset_postdata();
             else :
-                // Fallback demo cards
+                // Demo MCP Servers dataset
                 ?>
                 <article class="card-item">
                     <div class="card-top">
@@ -190,13 +194,14 @@ get_header();
                     </div>
                     <h3 class="card-item-title"><a href="#">SQLite & PostgreSQL MCP Server</a></h3>
                     <div class="card-excerpt">
-                        <p>Allows Claude Desktop and Cursor to run read/write queries, inspect database schemas, and execute migrations safely.</p>
+                        <p>Official Model Context Protocol server enabling Claude Desktop and Cursor to inspect schemas and safely query databases.</p>
                     </div>
                     <div class="card-bottom-meta">
                         <span>📡 STDIO</span>
                         <a href="#" style="font-weight: 600;">Inspect Server &rarr;</a>
                     </div>
                 </article>
+
                 <article class="card-item">
                     <div class="card-top">
                         <span class="tag-badge badge-mcp">MCP Server</span>
@@ -204,13 +209,14 @@ get_header();
                     </div>
                     <h3 class="card-item-title"><a href="#">GitHub & GitLab API MCP Server</a></h3>
                     <div class="card-excerpt">
-                        <p>Integrate issue creation, pull request search, branch checkout, and repository search directly into your AI workflow.</p>
+                        <p>Provides AI coding assistants with direct tools to list issues, search code diffs, read files, and trigger CI/CD workflows.</p>
                     </div>
                     <div class="card-bottom-meta">
                         <span>📡 SSE / STDIO</span>
                         <a href="#" style="font-weight: 600;">Inspect Server &rarr;</a>
                     </div>
                 </article>
+
                 <article class="card-item">
                     <div class="card-top">
                         <span class="tag-badge badge-mcp">MCP Server</span>
@@ -218,7 +224,7 @@ get_header();
                     </div>
                     <h3 class="card-item-title"><a href="#">Brave Search & Web Scraping MCP</a></h3>
                     <div class="card-excerpt">
-                        <p>Provides live web search capabilities, real-time page extraction, and markdown conversion for LLM context windows.</p>
+                        <p>Enables live web searching, document fetching, and markdown conversion directly into LLM context windows.</p>
                     </div>
                     <div class="card-bottom-meta">
                         <span>📡 STDIO</span>

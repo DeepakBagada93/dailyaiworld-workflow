@@ -10,6 +10,16 @@ if (!defined('ABSPATH')) {
 }
 
 /**
+ * Fallback helper for get_field() if ACF plugin is not yet active
+ */
+if (!function_exists('get_field')) {
+    function get_field($selector, $post_id = false, $format_value = true) {
+        $post_id = $post_id ? $post_id : get_the_ID();
+        return get_post_meta($post_id, $selector, true);
+    }
+}
+
+/**
  * Include CPT Architecture, Taxonomies, ACF Fields & REST API Registration
  */
 require_once get_template_directory() . '/inc/cpt-architecture.php';
