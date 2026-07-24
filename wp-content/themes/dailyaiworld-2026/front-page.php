@@ -6,6 +6,52 @@
  */
 
 get_header();
+
+// Featured fallback articles list from blogs_rows.sql
+$fallback_articles = array(
+    array(
+        'title'   => 'Google Cloud Data Agents: Building the Agentic Data Cloud in 2026',
+        'excerpt' => 'Google Cloud launched 6 new data agents as part of the Agentic Data Cloud. Complete deployment and architecture guide.',
+        'date'    => 'Jun 20, 2026',
+        'author'  => 'Deepak Bagada',
+        'url'     => home_url('/explore'),
+    ),
+    array(
+        'title'   => 'The Step-by-Step Guide to Automating Meeting Tasks with Whisper & Claude AI',
+        'excerpt' => 'Learn how to wire OpenAI Whisper and Claude 3.5 to automatically convert raw meeting recordings into assigned Jira tickets.',
+        'date'    => 'May 17, 2026',
+        'author'  => 'Deepak Bagada',
+        'url'     => home_url('/explore'),
+    ),
+    array(
+        'title'   => 'Autonomous Synthetic User Testing Agent: AI UX Friction & Conversion Audit',
+        'excerpt' => 'Simulate hundreds of target user personas with Browser Use and Claude 3.7 Vision to discover UI friction points automatically.',
+        'date'    => 'Jul 21, 2026',
+        'author'  => 'Deepak Bagada',
+        'url'     => home_url('/explore'),
+    ),
+    array(
+        'title'   => 'AnySearch vs Firecrawl vs Tavily: Best Search API for AI Agents in 2026',
+        'excerpt' => 'Product Hunt #1 analysis comparing AnySearch, Firecrawl, and Tavily across cost, latency, and privacy-first vertical routing.',
+        'date'    => 'Jul 6, 2026',
+        'author'  => 'Deepak Bagada',
+        'url'     => home_url('/explore'),
+    ),
+    array(
+        'title'   => 'Building Self-Healing Data Pipelines with n8n & LangChain',
+        'excerpt' => 'How to detect schema drifts and API rate limits automatically using agentic fallback nodes and automated retry logic.',
+        'date'    => 'Jun 12, 2026',
+        'author'  => 'Deepak Bagada',
+        'url'     => home_url('/explore'),
+    ),
+    array(
+        'title'   => 'Model Context Protocol (MCP) Deep Dive for Enterprise Devs',
+        'excerpt' => 'Architecture breakdown of STDIO and SSE transport protocols in Anthropic MCP for Claude Desktop and Cursor integrations.',
+        'date'    => 'May 28, 2026',
+        'author'  => 'Deepak Bagada',
+        'url'     => home_url('/explore'),
+    ),
+);
 ?>
 
 <main class="container">
@@ -13,7 +59,7 @@ get_header();
     <section class="hero-wrapper">
         <div class="hero-pill gsap-hero-pill">
             <span class="logo-dot" style="width:6px; height:6px;"></span>
-            <span>Updated for 2026</span> • <span>780+ AI Workflows & Guides</span>
+            <span>Updated for 2026</span> • <span>780+ AI Workflows & Technical Guides</span>
         </div>
         <h1 class="hero-title-main gsap-hero-title">
             AI Workflow Directory & <br>
@@ -121,11 +167,25 @@ get_header();
                         <a href="#" style="font-weight: 700;">View Details &rarr;</a>
                     </div>
                 </article>
+                <article class="card-item">
+                    <div class="card-top">
+                        <span class="tag-badge badge-workflow">Workflow</span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);">⏱️ 1 min</span>
+                    </div>
+                    <h3 class="card-item-title"><a href="#">Executive AI Briefing Telegram Bot</a></h3>
+                    <div class="card-excerpt">
+                        <p>Monitors 50+ tech feeds and ArXiv papers, synthesizes bulleted executive digests via DeepSeek R1, and posts to Slack & Telegram.</p>
+                    </div>
+                    <div class="card-bottom-meta">
+                        <span>Trigger: Event Driven</span>
+                        <a href="#" style="font-weight: 700;">View Details &rarr;</a>
+                    </div>
+                </article>
             <?php endif; ?>
         </div>
     </section>
 
-    <!-- LATEST AI ARTICLES & GUIDES (FROM BLOGS_ROWS) -->
+    <!-- LATEST AI ARTICLES & GUIDES (GUARANTEED 6 ARTICLES) -->
     <section id="articles" style="margin-bottom: 80px;">
         <div class="section-header-flex">
             <div>
@@ -137,6 +197,7 @@ get_header();
 
         <div class="grid-3-col gsap-blog-grid">
             <?php
+            $rendered_count = 0;
             $blog_query = new WP_Query(array(
                 'post_type'      => 'post',
                 'posts_per_page' => 6,
@@ -144,8 +205,12 @@ get_header();
                 'no_found_rows'  => true,
             ));
 
-            if ($blog_query->have_posts()) :
-                while ($blog_query->have_posts()) : $blog_query->the_post();
+            if ($blog_query->have_posts()) {
+                while ($blog_query->have_posts()) {
+                    $blog_query->the_post();
+                    $t = get_the_title();
+                    if (empty($t) || $t === 'Auto Draft' || $t === 'Hello world!') continue;
+                    $rendered_count++;
                     ?>
                     <article class="card-item">
                         <div class="card-top">
@@ -153,7 +218,7 @@ get_header();
                             <span style="font-size: 0.8rem; color: var(--text-muted);"><?php echo get_the_date('M j, Y'); ?></span>
                         </div>
                         <h3 class="card-item-title">
-                            <a href="<?php the_permalink(); ?>"><?php the_title(); ?></a>
+                            <a href="<?php the_permalink(); ?>"><?php echo esc_html($t); ?></a>
                         </h3>
                         <div class="card-excerpt">
                             <p><?php echo wp_trim_words(get_the_excerpt(), 22); ?></p>
@@ -163,10 +228,33 @@ get_header();
                             <a href="<?php the_permalink(); ?>" style="font-weight: 700;">Read Guide &rarr;</a>
                         </div>
                     </article>
-                <?php
-                endwhile;
+                    <?php
+                }
                 wp_reset_postdata();
-            endif;
+            }
+
+            // Fill remaining slots up to 6 with rich featured fallback articles from blogs_rows.sql
+            for ($i = $rendered_count; $i < 6; $i++) {
+                $fb = $fallback_articles[$i % count($fallback_articles)];
+                ?>
+                <article class="card-item">
+                    <div class="card-top">
+                        <span class="tag-badge" style="background: rgba(236, 72, 153, 0.15); color: #f472b6; border: 1px solid rgba(236, 72, 153, 0.35);">Article</span>
+                        <span style="font-size: 0.8rem; color: var(--text-muted);"><?php echo esc_html($fb['date']); ?></span>
+                    </div>
+                    <h3 class="card-item-title">
+                        <a href="<?php echo esc_url($fb['url']); ?>"><?php echo esc_html($fb['title']); ?></a>
+                    </h3>
+                    <div class="card-excerpt">
+                        <p><?php echo esc_html($fb['excerpt']); ?></p>
+                    </div>
+                    <div class="card-bottom-meta">
+                        <span>Author: <?php echo esc_html($fb['author']); ?></span>
+                        <a href="<?php echo esc_url($fb['url']); ?>" style="font-weight: 700;">Read Guide &rarr;</a>
+                    </div>
+                </article>
+                <?php
+            }
             ?>
         </div>
     </section>
