@@ -16,7 +16,7 @@ class ArticleResource extends JsonResource
             'deck' => $this->deck,
             'ai_summary' => $this->ai_summary,
             'excerpt' => $this->excerpt,
-            'content' => $this->when($request->routeIs('api.articles.show'), $this->content),
+            'content' => $this->content,
             'featured_image' => $this->featured_image,
             'reading_time' => $this->reading_time,
             'tier' => $this->tier,
