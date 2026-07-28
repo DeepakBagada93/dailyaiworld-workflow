@@ -1,16 +1,16 @@
 <footer class="bg-[var(--bg-sec)] border-t border-[var(--border-subtle)] mt-24 pt-16 pb-12" role="contentinfo">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <!-- Top Section: Newsletter Subscribe Box -->
+        <!-- Top Section: Executive Newsletter Subscribe Box -->
         <div class="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-8 sm:p-12 mb-16 shadow-sm" x-data="{ subscribed: false }">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
                 <div class="lg:col-span-7">
-                    <span class="text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold">The Executive Dispatch</span>
+                    <span class="text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold">The Executive Briefing</span>
                     <h3 class="font-serif text-2xl sm:text-3xl font-bold text-[var(--text-heading)] mt-2">
-                        Get the morning intelligence brief trusted by 85,000+ AI founders & builders.
+                        AI Workflows, Tools & Insights for Builders.
                     </h3>
                     <p class="text-sm text-[var(--text-body)] mt-3 leading-relaxed">
-                        Curated breakdowns of frontier model architectures, compute market shifts, and enterprise AI playbooks delivered every weekday at 6:00 AM EST. Zero noise.
+                        Curated breakdowns of frontier model architectures, compute market shifts, and enterprise AI playbooks authored by Deepak Bagada (CEO, SaaSNext) delivered every weekday.
                     </p>
                 </div>
                 <div class="lg:col-span-5">
@@ -20,7 +20,7 @@
                               class="flex flex-col sm:flex-row gap-3">
                             @csrf
                             <label for="footer-email" class="sr-only">Email Address</label>
-                            <input type="email" id="footer-email" name="email" required placeholder="founder@company.com" 
+                            <input type="email" id="footer-email" name="email" required placeholder="builder@company.com" 
                                    class="bg-[var(--bg-main)] border border-[var(--border-subtle)] text-[var(--text-heading)] placeholder-[var(--text-muted)] text-sm rounded-md px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] flex-grow">
                             <button type="submit" class="btn-primary py-3 px-6 shrink-0 focus:outline-none focus:ring-2 focus:ring-[#6D28D9]" aria-label="Subscribe free to executive briefing">
                                 <span>Subscribe Free</span>
@@ -39,70 +39,75 @@
                     </template>
 
                     <p class="text-[11px] text-[var(--text-muted)] mt-2.5 font-mono">
-                        Instant 1-click unsubscribe. We respect your inbox privacy.
+                        Instant 1-click unsubscribe. Zero spam.
                     </p>
                 </div>
             </div>
         </div>
 
-        <!-- Middle Section: Nav Columns -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-8 pb-12 border-b border-[var(--border-subtle)] text-xs">
-            <div class="md:col-span-2">
-                <a href="{{ route('home') }}" class="inline-block focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
-                    <h4 class="font-serif text-2xl font-bold text-[var(--text-heading)]">Daily AI World</h4>
-                </a>
-                <p class="text-xs text-[var(--text-body)] mt-3 leading-relaxed max-w-sm font-sans">
-                    An independent, editorial-first journal dedicated to deep technical analysis, compute infrastructure, and economic dynamics of artificial intelligence.
-                </p>
-                <div class="mt-4 flex items-center gap-4 text-xs font-mono text-[var(--text-muted)]">
-                    <span class="inline-flex items-center gap-1.5">
-                        <span class="w-2 h-2 rounded-full bg-emerald-500"></span>
-                        Independent Journalism
-                    </span>
-                    <span>•</span>
-                    <span>No Sponsored Bias</span>
-                </div>
-            </div>
-
+        <!-- Middle Section: Fixed Footer Categorized Links (Company, Editorial, Resources, Legal, Social) -->
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-8 pb-12 border-b border-[var(--border-subtle)] text-xs">
+            
+            <!-- Company -->
             <div>
-                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Coverage Desks</h5>
-                <ul class="space-y-2.5 text-[var(--text-body)]">
-                    <li><a href="{{ route('categories.show', 'coding-architectures') }}" class="hover:text-[#6D28D9] transition-colors">Coding & LLMs</a></li>
-                    <li><a href="{{ route('categories.show', 'ai-tools') }}" class="hover:text-[#6D28D9] transition-colors">AI Tools & Agents</a></li>
-                    <li><a href="{{ route('categories.show', 'business-saas') }}" class="hover:text-[#6D28D9] transition-colors">Business & SaaS</a></li>
-                    <li><a href="{{ route('categories.show', 'research-papers') }}" class="hover:text-[#6D28D9] transition-colors">Frontier Research</a></li>
-                    <li><a href="{{ route('categories.show', 'open-source') }}" class="hover:text-[#6D28D9] transition-colors">Open Source</a></li>
+                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Company</h5>
+                <ul class="space-y-2.5 text-[var(--text-body)] font-sans">
+                    <li><a href="{{ route('home') }}" class="hover:text-[#6D28D9]">Daily AI World</a></li>
+                    <li><span class="text-[var(--text-muted)]">SaaSNext Media Group</span></li>
+                    <li><a href="{{ route('design-system') }}" class="hover:text-[#6D28D9]">Brand Specs</a></li>
                 </ul>
             </div>
 
+            <!-- Editorial -->
             <div>
-                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Journal</h5>
-                <ul class="space-y-2.5 text-[var(--text-body)]">
-                    <li><a href="{{ route('design-system') }}" class="hover:text-[#6D28D9] transition-colors">Design System</a></li>
-                    <li><a href="{{ route('bookmarks.index') }}" class="hover:text-[#6D28D9] transition-colors">Reading List</a></li>
-                    <li><a href="{{ route('search') }}" class="hover:text-[#6D28D9] transition-colors">Search Archive</a></li>
-                    <li><a href="{{ route('cms.dashboard') }}" class="hover:text-[#6D28D9] transition-colors">Enterprise Portal</a></li>
+                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Editorial</h5>
+                <ul class="space-y-2.5 text-[var(--text-body)] font-sans">
+                    <li><a href="{{ route('categories.show', 'ai-workflows') }}" class="hover:text-[#6D28D9]">AI Workflows</a></li>
+                    <li><a href="{{ route('categories.show', 'agentic-ai') }}" class="hover:text-[#6D28D9]">Agentic AI</a></li>
+                    <li><a href="{{ route('categories.show', 'coding') }}" class="hover:text-[#6D28D9]">Coding</a></li>
+                    <li><a href="{{ route('categories.show', 'ai-tools') }}" class="hover:text-[#6D28D9]">AI Tools</a></li>
+                    <li><a href="{{ route('categories.show', 'open-source') }}" class="hover:text-[#6D28D9]">Open Source</a></li>
                 </ul>
             </div>
 
+            <!-- Resources -->
             <div>
-                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Authority</h5>
-                <ul class="space-y-2.5 text-[var(--text-muted)]">
-                    <li>Editorial Independence</li>
-                    <li>Peer-Review Process</li>
+                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Resources</h5>
+                <ul class="space-y-2.5 text-[var(--text-body)] font-sans">
+                    <li><a href="{{ route('bookmarks.index') }}" class="hover:text-[#6D28D9]">Reading List</a></li>
+                    <li><a href="{{ route('search') }}" class="hover:text-[#6D28D9]">Search Archive</a></li>
+                    <li><a href="{{ route('design-system') }}" class="hover:text-[#6D28D9]">Design Tokens</a></li>
+                    <li><a href="{{ route('cms.dashboard') }}" class="hover:text-[#6D28D9]">Enterprise CMS</a></li>
+                </ul>
+            </div>
+
+            <!-- Legal -->
+            <div>
+                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Legal</h5>
+                <ul class="space-y-2.5 text-[var(--text-muted)] font-sans">
+                    <li>Terms of Service</li>
+                    <li>Privacy Policy</li>
+                    <li>Editorial Integrity</li>
                     <li>Disclosure Policy</li>
-                    <li>RSS & Open API</li>
+                </ul>
+            </div>
+
+            <!-- Social & Author -->
+            <div>
+                <h5 class="font-mono text-xs uppercase font-semibold text-[var(--text-heading)] tracking-wider mb-4">Social</h5>
+                <ul class="space-y-2.5 text-[var(--text-body)] font-sans">
+                    <li><a href="https://twitter.com/deepakbagada" target="_blank" class="hover:text-[#6D28D9]">X / Twitter</a></li>
+                    <li><a href="https://linkedin.com/in/deepakbagada" target="_blank" class="hover:text-[#6D28D9]">LinkedIn</a></li>
+                    <li><a href="https://github.com" target="_blank" class="hover:text-[#6D28D9]">GitHub</a></li>
                 </ul>
             </div>
         </div>
 
-        <!-- Bottom Copyright -->
+        <!-- Bottom Copyright (Fixed Rule Requirement) -->
         <div class="mt-8 flex flex-col sm:flex-row items-center justify-between text-xs text-[var(--text-muted)] font-mono gap-4">
-            <p>© {{ date('Y') }} Daily AI World Inc. All rights reserved. Built with Laravel 13.</p>
-            <div class="flex items-center gap-6">
-                <a href="#" class="hover:text-[#6D28D9]">Terms of Service</a>
-                <a href="#" class="hover:text-[#6D28D9]">Privacy Policy</a>
-                <a href="#" class="hover:text-[#6D28D9]">Security</a>
+            <p>© Daily AI World. Built by <strong class="text-[var(--text-heading)] font-sans">Deepak Bagada · CEO, SaaSNext</strong></p>
+            <div class="flex items-center gap-4">
+                <span>All Dispatches Peer Reviewed</span>
             </div>
         </div>
 

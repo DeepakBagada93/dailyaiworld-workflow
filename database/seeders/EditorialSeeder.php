@@ -7,7 +7,6 @@ use App\Models\Author;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\MarketIndex;
-use App\Models\NewsletterSubscriber;
 use App\Models\User;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
@@ -17,36 +16,23 @@ class EditorialSeeder extends Seeder
 {
     public function run(): void
     {
-        // 1. Default Roles
+        // 1. Roles & Permissions
         $roles = [
             ['name' => 'Admin', 'slug' => 'admin', 'description' => 'Full administrative control over publication'],
             ['name' => 'Editor', 'slug' => 'editor', 'description' => 'Can edit, review, and publish all editorial dispatches'],
             ['name' => 'Author', 'slug' => 'author', 'description' => 'Can write and submit draft articles'],
             ['name' => 'Subscriber', 'slug' => 'subscriber', 'description' => 'Registered reader with saved library access'],
-            ['name' => 'Guest', 'slug' => 'guest', 'description' => 'Anonymous reader'],
         ];
 
         foreach ($roles as $r) {
             DB::table('roles')->updateOrInsert(['slug' => $r['slug']], $r);
         }
 
-        // 2. Default Permissions
-        $permissions = [
-            ['name' => 'Manage System', 'slug' => 'manage-system', 'description' => 'Full system access'],
-            ['name' => 'Publish Posts', 'slug' => 'publish-posts', 'description' => 'Publish articles to production'],
-            ['name' => 'Edit Posts', 'slug' => 'edit-posts', 'description' => 'Edit article content'],
-            ['name' => 'Access CMS', 'slug' => 'access-cms', 'description' => 'Access enterprise CMS dashboard'],
-        ];
-
-        foreach ($permissions as $p) {
-            DB::table('permissions')->updateOrInsert(['slug' => $p['slug']], $p);
-        }
-
-        // 3. Admin User
-        $adminUser = User::firstOrCreate(
-            ['email' => 'admin@dailyaiworld.com'],
+        // 2. Main Admin User: Deepak Bagada
+        $deepakUser = User::firstOrCreate(
+            ['email' => 'deepak@saasnext.com'],
             [
-                'name' => 'Chief Editor & Admin',
+                'name' => 'Deepak Bagada',
                 'role' => 'Admin',
                 'password' => bcrypt('password'),
             ]
@@ -55,173 +41,174 @@ class EditorialSeeder extends Seeder
         $adminRole = DB::table('roles')->where('slug', 'admin')->first();
         if ($adminRole) {
             DB::table('role_user')->updateOrInsert(
-                ['role_id' => $adminRole->id, 'user_id' => $adminUser->id]
+                ['role_id' => $adminRole->id, 'user_id' => $deepakUser->id]
             );
         }
 
-        // 4. Categories & Desks
+        // 3. Primary Global Author: Deepak Bagada (CEO, SaaSNext)
+        $deepakAuthor = Author::updateOrCreate(
+            ['slug' => 'deepak-bagada'],
+            [
+                'user_id' => $deepakUser->id,
+                'name' => 'Deepak Bagada',
+                'slug' => 'deepak-bagada',
+                'title' => 'CEO, SaaSNext',
+                'avatar' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+                'bio' => 'Deepak Bagada is the CEO of SaaSNext and founder of Daily AI World. He covers AI workflows, agentic automation, LLM architectures, and founder growth strategies.',
+                'twitter' => '@deepakbagada',
+                'linkedin' => 'https://linkedin.com/in/deepakbagada',
+            ]
+        );
+
+        // Also create entry in authors_prod
+        DB::table('authors_prod')->updateOrInsert(
+            ['slug' => 'deepak-bagada'],
+            [
+                'user_id' => $deepakUser->id,
+                'name' => 'Deepak Bagada',
+                'slug' => 'deepak-bagada',
+                'title' => 'CEO, SaaSNext',
+                'avatar' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
+                'bio' => 'Deepak Bagada is the CEO of SaaSNext and founder of Daily AI World.',
+                'twitter' => '@deepakbagada',
+                'linkedin' => 'https://linkedin.com/in/deepakbagada',
+            ]
+        );
+
+        // 4. Fixed Global Categories
         $categories = [
-            [
-                'name' => 'Coding',
-                'slug' => 'coding-architectures',
-                'description' => 'Dispatches on frontier language models, code generation, reasoning tokens, and compiler optimization.',
-                'accent_color' => '#6D28D9',
-                'icon' => 'code-bracket',
-                'is_featured' => true,
-            ],
-            [
-                'name' => 'AI Tools',
-                'slug' => 'ai-tools',
-                'description' => 'Autonomous developer tools, stateful agent swarms, and IDE integration breakdowns.',
-                'accent_color' => '#2563EB',
-                'icon' => 'wrench-screwdriver',
-                'is_featured' => true,
-            ],
-            [
-                'name' => 'Business',
-                'slug' => 'business-saas',
-                'description' => 'Venture economics, ARR per employee metrics, enterprise deployment ROI, and silicon capital allocation.',
-                'accent_color' => '#059669',
-                'icon' => 'chart-bar',
-                'is_featured' => true,
-            ],
-            [
-                'name' => 'Research',
-                'slug' => 'research-papers',
-                'description' => 'Peer-reviewed breakdowns of breakthrough papers from DeepMind, FAIR, Stanford, and independent research labs.',
-                'accent_color' => '#DC2626',
-                'icon' => 'academic-cap',
-                'is_featured' => true,
-            ],
-            [
-                'name' => 'Open Source',
-                'slug' => 'open-source',
-                'description' => 'Mixture of Experts, local quantized weights, open benchmark evaluations, and permissive licenses.',
-                'accent_color' => '#D97706',
-                'icon' => 'folder-open',
-                'is_featured' => true,
-            ],
+            ['name' => 'AI Workflows', 'slug' => 'ai-workflows', 'description' => 'Step-by-step production AI workflow architectures, event loops, and agent orchestration for builders.', 'accent_color' => '#6D28D9', 'icon' => 'arrow-path', 'is_featured' => true],
+            ['name' => 'Agentic AI', 'slug' => 'agentic-ai', 'description' => 'Autonomous agent swarms, tool execution, long-horizon planning, and state management.', 'accent_color' => '#2563EB', 'icon' => 'bot', 'is_featured' => true],
+            ['name' => 'Coding', 'slug' => 'coding', 'description' => 'Frontier LLM code generation, AST parsers, compiler feedback loops, and developer tooling.', 'accent_color' => '#7C3AED', 'icon' => 'code-bracket', 'is_featured' => true],
+            ['name' => 'Automation', 'slug' => 'automation', 'description' => 'Headless background workers, workflow triggers, and enterprise process automation.', 'accent_color' => '#059669', 'icon' => 'bolt', 'is_featured' => true],
+            ['name' => 'AI Tools', 'slug' => 'ai-tools', 'description' => 'Evaluations and benchmarks of AI developer tools, IDE extensions, and vector databases.', 'accent_color' => '#D97706', 'icon' => 'wrench-screwdriver', 'is_featured' => true],
+            ['name' => 'Open Source', 'slug' => 'open-source', 'description' => 'Quantization techniques, GGUF/EXL2 weights, local deployment, and permissive AI licensing.', 'accent_color' => '#DC2626', 'icon' => 'folder-open', 'is_featured' => true],
+            ['name' => 'Business', 'slug' => 'business', 'description' => 'ARR per employee benchmarks, venture capital models, and AI business unit economics.', 'accent_color' => '#4B5563', 'icon' => 'chart-bar', 'is_featured' => false],
+            ['name' => 'Startups', 'slug' => 'startups', 'description' => 'Hyper-lean AI startup playbooks, go-to-market strategies, and founder growth.', 'accent_color' => '#6D28D9', 'icon' => 'rocket', 'is_featured' => false],
+            ['name' => 'Productivity', 'slug' => 'productivity', 'description' => 'Maximizing developer velocity and executive leverage using state-of-the-art AI stacks.', 'accent_color' => '#2563EB', 'icon' => 'sparkles', 'is_featured' => false],
+            ['name' => 'LLMs', 'slug' => 'llms', 'description' => 'Frontier model releases, mixture-of-experts, reasoning tokens, and context window dynamics.', 'accent_color' => '#7C3AED', 'icon' => 'cpu', 'is_featured' => false],
+            ['name' => 'AI News', 'slug' => 'ai-news', 'description' => 'Daily executive intelligence dispatches on compute markets and silicon supply chains.', 'accent_color' => '#059669', 'icon' => 'newspaper', 'is_featured' => false],
+            ['name' => 'Tutorials', 'slug' => 'tutorials', 'description' => 'Hands-on technical guides for building production AI applications with Laravel and Python.', 'accent_color' => '#D97706', 'icon' => 'book-open', 'is_featured' => false],
         ];
 
         foreach ($categories as $catData) {
             Category::updateOrCreate(['slug' => $catData['slug']], $catData);
         }
 
-        // 5. Tags
-        $tags = ['Transformers', 'Reasoning Tokens', 'MoE', 'H100', 'B200', 'Quantization', 'Agents', 'SaaS ARR'];
-        foreach ($tags as $t) {
-            DB::table('tags')->updateOrInsert(['slug' => Str::slug($t)], ['name' => $t, 'slug' => Str::slug($t)]);
-        }
+        $workflowsCat = Category::where('slug', 'ai-workflows')->first();
+        $agenticCat = Category::where('slug', 'agentic-ai')->first();
+        $codingCat = Category::where('slug', 'coding')->first();
+        $businessCat = Category::where('slug', 'business')->first();
 
-        // 6. Authors
-        $authorsData = [
+        // 5. Seeded Editorial Articles (All authored by Deepak Bagada · CEO, SaaSNext)
+        $articles = [
             [
-                'name' => 'Dr. Elena Vance',
-                'slug' => 'dr-elena-vance',
-                'title' => 'Chief AI Scholar & Former FAIR Fellow',
-                'avatar' => 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=400&q=80',
-                'bio' => 'Elena covers frontier model architectures, training scaling laws, and reasoning search trees.',
-                'twitter' => '@elenavance_ai',
-                'linkedin' => 'elena-vance-ai',
-            ],
-            [
-                'name' => 'Marcus Sterling',
-                'slug' => 'marcus-sterling',
-                'title' => 'Senior Compute & Silicon Analyst',
-                'avatar' => 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80',
-                'bio' => 'Marcus focuses on GPU cluster economics, custom ASIC hardware, and data center megawatt bottlenecks.',
-                'twitter' => '@msterling_tech',
-                'linkedin' => 'marcus-sterling-compute',
-            ],
-        ];
+                'title' => 'The Production Agentic Workflow Stack: How We Build Autonomous AI Pipelines at SaaSNext',
+                'slug' => 'production-agentic-workflow-stack-saasnext',
+                'deck' => 'An inside breakdown of event-driven agent swarms, state persistence, deterministic fallback loops, and reasoning token budget caps built for enterprise SaaS deployment.',
+                'ai_summary' => 'In this deep dive, Deepak Bagada (CEO, SaaSNext) outlines the production architecture for agentic AI workflows. The article covers stateful memory persistence, circuit-breaker token budgets, and compiler verification loops.',
+                'category_id' => $workflowsCat->id,
+                'author_id' => $deepakAuthor->id,
+                'tier' => 'Deep Dive',
+                'is_hero' => true,
+                'is_featured' => true,
+                'reading_time' => 9,
+                'featured_image' => 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+                'audio_url' => 'https://actions.google.com/sounds/v1/ambiences/humming_fan.ogg',
+                'key_takeaways' => [
+                    'Stateful workflow recovery prevents lost execution states during API timeouts.',
+                    'Deterministic AST verifiers catch 95% of hallucinated code prior to runtime.',
+                    'Token budget circuit breakers cap maximum search tokens per enterprise request.'
+                ],
+                'faqs' => [
+                    [
+                        'question' => 'Why are traditional chat assistants insufficient for enterprise workflows?',
+                        'answer' => 'Traditional single-turn chat assistants require continuous manual human intervention. Stateful agent swarms operate asynchronously against APIs and databases to complete end-to-end multi-step tasks.'
+                    ]
+                ],
+                'excerpt' => 'Deploying raw foundation model outputs straight to production is a recipe for instability. At SaaSNext, we wrap probabilistic models in deterministic compiler feedback loops.',
+                'content' => <<<MARKDOWN
+## The Paradigm Shift from Chatbots to Autonomous Workflows
 
-        foreach ($authorsData as $auth) {
-            Author::updateOrCreate(['slug' => $auth['slug']], array_merge($auth, ['user_id' => $adminUser->id]));
-        }
+For the past three years, the tech ecosystem focused heavily on single-turn chat interfaces. But for builders and SaaS founders, conversational UI was only a temporary stepping stone. 
 
-        $codingCat = Category::where('slug', 'coding-architectures')->first();
-        $elena = Author::where('slug', 'dr-elena-vance')->first();
-
-        // 7. Hero Article
-        $heroArticleData = [
-            'title' => 'The Architecture Beyond Transformers: How Test-Time Compute is Reshaping AI Economics',
-            'slug' => 'architecture-beyond-transformers-test-time-compute',
-            'deck' => 'As brute-force pre-training scaling laws encounter physical power limits, frontier labs are pivoting to test-time reasoning search—fundamentally altering how enterprise software is architected and priced.',
-            'ai_summary' => 'This comprehensive report explores the industry shift from static pre-training weight scaling to dynamic inference-time reasoning (test-time search). By trading off extra compute at execution time, models achieve expert human accuracy at a fraction of raw parameter size, redefining cloud unit economics and enterprise software architecture.',
-            'category_id' => $codingCat->id,
-            'author_id' => $elena->id,
-            'tier' => 'Deep Dive',
-            'is_hero' => true,
-            'is_featured' => true,
-            'reading_time' => 9,
-            'featured_image' => 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
-            'audio_url' => 'https://actions.google.com/sounds/v1/ambiences/humming_fan.ogg',
-            'key_takeaways' => [
-                'Pre-training scaling cost is shifting toward inference-time Search & Planning tokens.',
-                'Reasoning models allow 100x lower parameters while achieving human-expert accuracy on benchmarks.',
-                'Enterprise infrastructure must now optimize for low latency KV-cache reuse rather than raw prompt ingestion throughput.'
-            ],
-            'faqs' => [
-                [
-                    'question' => 'What is test-time compute scaling?',
-                    'answer' => 'Test-time compute scaling refers to allowing a foundation model to execute search algorithms, verification loops, and self-correction steps during inference before returning a final response to the user.'
-                ]
-            ],
-            'excerpt' => 'For five years, the scaling hypothesis reigned supreme: double the data, quadruple the parameters, and intelligence scales monotonically. But behind closed doors, the focus has drastically shifted to test-time search.',
-            'content' => <<<MARKDOWN
-## The Scaling Hypothesis Encounters Physical Limits
-
-For five years, the scaling hypothesis reigned supreme across machine learning labs worldwide: double the tokens, quadruple the parameter count, and general capability will follow monotonically. Yet, as the industry encounters power constraints and electrical grid bottlenecks, a new consensus has emerged.
-
-**Intelligence is no longer strictly bound to static weight parameters; it is dynamically generated during inference.**
+The real value of artificial intelligence lies in **headless, event-driven agentic workflows** that run continuously in the background.
 
 ```python
-# Conceptual Test-Time Reasoning & Verification Loop
-class ReasoningEngine:
-    def __init__(self, generator_model, verifier_model):
-        self.generator = generator_model
-        self.verifier = verifier_model
+# Production Agentic Execution Pipeline at SaaSNext
+class WorkflowOrchestrator:
+    def __init__(self, agent_swarm, state_store):
+        self.swarm = agent_swarm
+        self.state_store = state_store
 
-    def execute_thought_tree(self, context, query, max_depth=5):
-        candidates = self.generator.sample_hypotheses(context, query, k=8)
-        best_candidate = None
-        highest_score = 0.0
-
-        for candidate in candidates:
-            score = self.verifier.evaluate(context, candidate)
-            if score > 0.95:
-                return candidate  # Instant high-confidence exit
-            if score > highest_score:
-                highest_score = score
-                best_candidate = candidate
-
-        return self.branch_search(best_candidate, depth=max_depth)
+    def dispatch_task(self, payload):
+        state = self.state_store.initialize(payload.id)
+        while not state.is_complete():
+            action = self.swarm.next_action(state.current_context())
+            result = self.execute_guarded_tool(action)
+            state.update(result)
+        return state.final_output()
 ```
 
-## The Paradigm Shift in Capital Allocation
+## Key Architectural Pillars at SaaSNext
 
-Venture capital firms and cloud providers are reorganizing their capital allocation strategies:
+1. **State Persistence**: Workflows survive process restarts with event-sourced transaction logs.
+2. **Deterministic Guardrails**: Financial and legal boundaries enforced by schema validators.
+3. **Outcome Metrics**: Software pricing evolves from seat licenses to verified work output.
 
-1. **KV-Cache Memory Bandwidth**: High HBM3e memory bandwidth is now prioritized over raw compute TFLOPs.
-2. **Verification vs. Generation**: Verifier models are 10x smaller than generator models, running at hyper-fast speeds.
-3. **Unit Economics**: Enterprise contracts are shifting from "pay per million input tokens" to "pay per verified solution."
-
-> "We are witnessing the transition from static knowledge lookup to active mental simulation inside the model runtime." — *Dr. Elena Vance*
+> "Our focus at SaaSNext is building software that executes work, not just software that displays data." — *Deepak Bagada, CEO SaaSNext*
 MARKDOWN
+            ],
+            [
+                'title' => 'Deterministic Fallback Loops in AI Code Generation',
+                'slug' => 'deterministic-fallback-loops-ai-code-generation',
+                'deck' => 'How top engineering teams combine LLM code generation with AST parsers, static type-checkers, and automated test runners.',
+                'ai_summary' => 'Deepak Bagada details engineering patterns for wrapping code generation models in compiler feedback loops.',
+                'category_id' => $codingCat->id,
+                'author_id' => $deepakAuthor->id,
+                'tier' => 'Deep Dive',
+                'reading_time' => 8,
+                'featured_image' => 'https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80',
+                'key_takeaways' => [
+                    'AST verification catches syntax errors before execution.',
+                    'Self-correcting compiler loops reduce manual PR review overhead.'
+                ],
+                'excerpt' => 'Deploying raw LLM code outputs straight to production is a recipe for disaster.',
+                'content' => 'Technical analysis of compiler loop integration...',
+            ],
+            [
+                'title' => 'SaaS 3.0 Valuation Frameworks: Why ARR per Employee Has Jumped 5x',
+                'slug' => 'saas-3-valuation-frameworks-arr-per-employee',
+                'deck' => 'An analysis of Series A and Series B AI companies reveals how hyper-lean teams scale past $10M ARR.',
+                'ai_summary' => 'Deepak Bagada analyzes AI-native software company valuation models.',
+                'category_id' => $businessCat->id,
+                'author_id' => $deepakAuthor->id,
+                'tier' => 'Founder Story',
+                'reading_time' => 7,
+                'featured_image' => 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80',
+                'key_takeaways' => [
+                    'Average team size for $10M ARR AI startups is under 15 employees.',
+                    'Marginal cost of customer onboarding approaches zero with AI agents.'
+                ],
+                'excerpt' => 'Traditional software metrics dictated hiring 100 people for every $10M in ARR.',
+                'content' => 'Venture valuation models for AI-native software companies...',
+            ],
         ];
 
-        Article::updateOrCreate(
-            ['slug' => $heroArticleData['slug']],
-            array_merge($heroArticleData, [
-                'status' => 'published',
-                'published_at' => now()->subDays(2),
-                'updated_date' => now()->subHours(4),
-                'view_count' => 34200,
-                'trending_score' => 99.9,
-            ])
-        );
+        foreach ($articles as $index => $articleData) {
+            Article::updateOrCreate(
+                ['slug' => $articleData['slug']],
+                array_merge($articleData, [
+                    'status' => 'published',
+                    'published_at' => now()->subDays($index * 2),
+                    'updated_date' => now()->subHours($index * 4 + 1),
+                    'view_count' => rand(4500, 38000),
+                    'trending_score' => 99.9 - ($index * 3.0),
+                ])
+            );
+        }
 
-        // 8. Market Ticker
+        // 6. Market Ticker
         $marketIndices = [
             ['symbol' => 'LLM-MMLU', 'name' => 'Frontier MMLU-Pro Avg', 'value' => '92.4%', 'change_pct' => '+1.8%', 'direction' => 'up', 'type' => 'benchmark'],
             ['symbol' => 'H100-SPOT', 'name' => 'H100 SXM Spot Rate', 'value' => '$2.35/hr', 'change_pct' => '-4.2%', 'direction' => 'down', 'type' => 'gpu'],
@@ -233,26 +220,5 @@ MARKDOWN
         foreach ($marketIndices as $idx) {
             MarketIndex::updateOrCreate(['symbol' => $idx['symbol']], $idx);
         }
-
-        // 9. Navigation Settings & Menus
-        DB::table('settings')->updateOrInsert(
-            ['key' => 'site_title'],
-            ['key' => 'site_title', 'value' => 'Daily AI World', 'type' => 'string']
-        );
-
-        DB::table('menus')->updateOrInsert(
-            ['location' => 'header'],
-            [
-                'name' => 'Primary Navigation',
-                'location' => 'header',
-                'items_json' => json_encode([
-                    ['title' => 'Coding', 'url' => '/category/coding-architectures'],
-                    ['title' => 'AI Tools', 'url' => '/category/ai-tools'],
-                    ['title' => 'Business', 'url' => '/category/business-saas'],
-                    ['title' => 'Research', 'url' => '/category/research-papers'],
-                    ['title' => 'Open Source', 'url' => '/category/open-source'],
-                ]),
-            ]
-        );
     }
 }
