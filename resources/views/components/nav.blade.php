@@ -3,8 +3,14 @@
         
         <!-- Left: Logo & Brand Tagline -->
         <div class="flex items-center gap-4 shrink-0">
-            <a href="{{ route('home') }}" class="group flex items-center gap-2.5 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
-                <span class="w-3 h-3 rounded-full bg-[#6D28D9] group-hover:scale-125 transition-transform"></span>
+            <a href="{{ route('home') }}" class="group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
+                <!-- Black Container with Purple Inverted Triangle Logo SVG -->
+                <div class="w-9 h-9 rounded-lg bg-black flex items-center justify-center shrink-0 shadow-sm group-hover:scale-105 transition-transform">
+                    <svg class="w-5 h-5 text-[#8B5CF6]" viewBox="0 0 24 24" fill="currentColor">
+                        <polygon points="4,7 20,7 12,19" />
+                    </svg>
+                </div>
+
                 <div>
                     <span class="font-serif text-xl sm:text-2xl font-extrabold text-[#111827] group-hover:text-[#6D28D9] transition-colors leading-none block">
                         Daily AI World
