@@ -11,30 +11,30 @@
     <!-- Schema.org JSON-LD NewsArticle Markup -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "NewsArticle",
+        "@@context": "https://schema.org",
+        "@@type": "NewsArticle",
         "headline": "{{ addslashes($article->title) }}",
         "description": "{{ addslashes($article->deck ?? $article->excerpt) }}",
         "image": ["{{ $article->featured_image }}"],
         "datePublished": "{{ $article->iso_date }}",
         "dateModified": "{{ $article->iso_updated_date }}",
         "author": [{
-            "@type": "Person",
+            "@@type": "Person",
             "name": "{{ addslashes($article->author->name) }}",
             "jobTitle": "{{ addslashes($article->author->title) }}",
             "url": "{{ url()->current() }}"
         }],
         "publisher": {
-            "@type": "Organization",
+            "@@type": "Organization",
             "name": "Daily AI World",
             "logo": {
-                "@type": "ImageObject",
+                "@@type": "ImageObject",
                 "url": "{{ asset('images/logo.png') }}"
             }
         },
         "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "{{ url()->current() }}"
+            "@@type": "WebPage",
+            "@@id": "{{ url()->current() }}"
         }
     }
     </script>
@@ -43,15 +43,15 @@
     @if(!empty($article->faqs))
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
-        "@type": "FAQPage",
+        "@@context": "https://schema.org",
+        "@@type": "FAQPage",
         "mainEntity": [
             @foreach($article->faqs as $index => $faq)
             {
-                "@type": "Question",
+                "@@type": "Question",
                 "name": "{{ addslashes($faq['question']) }}",
                 "acceptedAnswer": {
-                    "@type": "Answer",
+                    "@@type": "Answer",
                     "text": "{{ addslashes($faq['answer']) }}"
                 }
             }{{ $loop->last ? '' : ',' }}
