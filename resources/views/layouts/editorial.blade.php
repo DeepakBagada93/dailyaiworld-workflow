@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" x-data="{ darkMode: localStorage.getItem('theme') === 'dark' }" :class="{ 'dark': darkMode }" x-init="$watch('darkMode', val => localStorage.setItem('theme', val ? 'dark' : 'light'))">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="bg-[#FFFFFF]">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -28,7 +28,7 @@
 
     @stack('head')
 </head>
-<body class="min-h-screen flex flex-col bg-[#FFFFFF] dark:bg-[#0B0B0F] text-[#4B5563] dark:text-[#D1D5DB] selection:bg-[#6D28D9] selection:text-white transition-colors duration-200"
+<body class="min-h-screen flex flex-col bg-[#FFFFFF] text-[#4B5563] selection:bg-[#6D28D9] selection:text-white antialiased"
       x-data="{ 
           audioOpen: false, 
           currentTrack: null,
