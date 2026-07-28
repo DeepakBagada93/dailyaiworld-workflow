@@ -8,12 +8,12 @@
     <title>@yield('title', 'Daily AI World — Ultra-Premium Artificial Intelligence Editorial & News')</title>
 
     <!-- Meta Description & SEO -->
-    <meta name="description" content="@yield('meta_description', 'Essential intelligence for AI founders, developers, SaaS builders, and executives. Deep dives into frontier models, compute infrastructure, and autonomous agent systems.')">
-    <meta name="author" content="Daily AI World Editorial Board">
+    <meta name="description" content="@yield('meta_description', 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.')">
+    <meta name="author" content="Deepak Bagada · CEO, SaaSNext">
     
     <!-- OpenGraph & Twitter Cards -->
     <meta property="og:title" content="@yield('title', 'Daily AI World — Artificial Intelligence Journal')">
-    <meta property="og:description" content="@yield('meta_description', 'Essential intelligence for AI founders, developers, SaaS builders, and executives.')">
+    <meta property="og:description" content="@yield('meta_description', 'AI Workflows, Tools & Insights for Builders.')">
     <meta property="og:type" content="website">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
@@ -28,7 +28,7 @@
 
     @stack('head')
 </head>
-<body class="min-h-screen flex flex-col bg-[var(--bg-main)] text-[var(--text-body)] selection:bg-[#6D28D9] selection:text-white"
+<body class="min-h-screen flex flex-col bg-[#FFFFFF] dark:bg-[#0B0B0F] text-[#4B5563] dark:text-[#D1D5DB] selection:bg-[#6D28D9] selection:text-white transition-colors duration-200"
       x-data="{ 
           audioOpen: false, 
           currentTrack: null,
@@ -57,7 +57,7 @@
     <!-- Top Market Ticker Bar -->
     <x-market-ticker />
 
-    <!-- Header Navigation -->
+    <!-- Pure White Header Navigation -->
     <x-nav />
 
     <!-- Main Content Container -->
