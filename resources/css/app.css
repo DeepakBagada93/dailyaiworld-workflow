@@ -1,0 +1,237 @@
+/* Google Fonts Import MUST be top line */
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-serif: 'Playfair Display', Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Global Color Tokens */
+  --color-primary: #6D28D9;
+  --color-primary-hover: #7C3AED;
+  --color-accent: #8B5CF6;
+  --color-bg: #FFFFFF;
+  --color-bg-secondary: #FAFAFC;
+  --color-bg-card: #FFFFFF;
+  --color-muted-surface: #F5F3FF;
+  --color-border: #E8E7EF;
+  --color-heading: #111827;
+  --color-body: #4B5563;
+  --color-muted: #9CA3AF;
+  --color-success: #22C55E;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+}
+
+/* Custom Base & Dark Mode Tokens */
+:root {
+  --brand-primary: #6D28D9;
+  --brand-hover: #7C3AED;
+  --brand-accent: #8B5CF6;
+  --bg-main: #FFFFFF;
+  --bg-sec: #FAFAFC;
+  --bg-card: #FFFFFF;
+  --bg-muted: #F5F3FF;
+  --border-subtle: #E8E7EF;
+  --text-heading: #111827;
+  --text-body: #4B5563;
+  --text-muted: #9CA3AF;
+}
+
+.dark {
+  --brand-primary: #8B5CF6;
+  --brand-hover: #A78BFA;
+  --brand-accent: #C4B5FD;
+  --bg-main: #0B0B0F;
+  --bg-sec: #12121A;
+  --bg-card: #161622;
+  --bg-muted: #1E1B2E;
+  --border-subtle: #272738;
+  --text-heading: #F9FAFB;
+  --text-body: #D1D5DB;
+  --text-muted: #9CA3AF;
+}
+
+body {
+  font-family: var(--font-sans);
+  background-color: var(--bg-main);
+  color: var(--text-body);
+  transition: background-color 0.2s ease, color 0.2s ease;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6, .font-serif-editorial {
+  font-family: var(--font-serif);
+  color: var(--text-heading);
+  letter-spacing: -0.02em;
+}
+
+/* Custom Utility Classes for Forbes/Bloomberg Editorial Aesthetics */
+.editorial-title {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  line-height: 1.12;
+  color: var(--text-heading);
+}
+
+.editorial-deck {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-body);
+}
+
+.editorial-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.editorial-card:hover {
+  border-color: rgba(109, 40, 217, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px -8px rgba(109, 40, 217, 0.08);
+}
+
+.dark .editorial-card:hover {
+  border-color: rgba(139, 92, 246, 0.4);
+  box-shadow: 0 12px 32px -8px rgba(0, 0, 0, 0.6);
+}
+
+/* Minimalist Button System */
+.btn-primary {
+  background-color: #6D28D9;
+  color: #FFFFFF;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.375rem;
+  transition: background-color 0.15s ease, transform 0.1s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn-primary:hover {
+  background-color: #7C3AED;
+}
+
+.btn-secondary {
+  background-color: var(--bg-muted);
+  color: #6D28D9;
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.375rem;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn-secondary:hover {
+  background-color: #EDE9FE;
+  color: #7C3AED;
+}
+
+.btn-outline {
+  border: 1px solid var(--border-subtle);
+  background-color: transparent;
+  color: var(--text-heading);
+  font-weight: 500;
+  padding: 0.625rem 1.25rem;
+  border-radius: 0.375rem;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+}
+
+.btn-outline:hover {
+  border-color: #6D28D9;
+  color: #6D28D9;
+}
+
+/* Article Prose Typography Rules */
+.prose-editorial {
+  font-family: var(--font-sans);
+  color: var(--text-body);
+  font-size: 1.125rem;
+  line-height: 1.8;
+}
+
+.prose-editorial h2 {
+  font-family: var(--font-serif);
+  font-size: 1.875rem;
+  font-weight: 700;
+  color: var(--text-heading);
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.25;
+}
+
+.prose-editorial h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-top: 2rem;
+  margin-bottom: 0.75rem;
+}
+
+.prose-editorial p {
+  margin-bottom: 1.5rem;
+}
+
+.prose-editorial blockquote {
+  border-left: 3px solid #6D28D9;
+  padding-left: 1.25rem;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--text-heading);
+  margin: 2rem 0;
+}
+
+.prose-editorial code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--bg-muted);
+  color: #6D28D9;
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+}
+
+.prose-editorial pre {
+  font-family: var(--font-mono);
+  background-color: #0F172A;
+  color: #F8FAFC;
+  padding: 1.25rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  margin: 1.75rem 0;
+  font-size: 0.875rem;
+  line-height: 1.6;
+}
+
+/* Custom Scrollbar for Minimalist Aesthetics */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-main);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border-subtle);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
