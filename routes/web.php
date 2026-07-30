@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminCMSController;
+use App\Http\Controllers\AdvertiseController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CategoryController;
@@ -10,6 +11,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\StripeWebhookController;
+use App\Http\Controllers\SubscribeController;
 use Illuminate\Support\Facades\Route;
 
 // Public Editorial Routes
@@ -18,6 +21,14 @@ Route::get('/article/{slug}', [ArticleController::class, 'show'])->name('article
 Route::post('/article/{article}/comments', [ArticleController::class, 'storeComment'])->name('articles.comments.store');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/search', [SearchController::class, 'index'])->name('search');
+
+// Revenue & Monetization Public Routes
+Route::get('/advertise', [AdvertiseController::class, 'index'])->name('advertise');
+Route::post('/advertise/lead', [AdvertiseController::class, 'submitLead'])->name('advertise.lead');
+
+Route::get('/subscribe', [SubscribeController::class, 'index'])->name('subscribe');
+Route::post('/subscribe/checkout', [SubscribeController::class, 'checkout'])->name('subscribe.checkout');
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('stripe.webhook');
 
 // Reading List / Bookmarks
 Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
@@ -49,6 +60,12 @@ Route::prefix('cms')->name('cms.')->group(function () {
     Route::get('/internal-linking', [AdminCMSController::class, 'internalLinking'])->name('internal-linking');
     Route::get('/deployment', [AdminCMSController::class, 'deployment'])->name('deployment');
     Route::get('/settings', [AdminCMSController::class, 'settings'])->name('settings');
+
+    // Revenue Architecture CMS Routes
+    Route::get('/monetization', [AdminCMSController::class, 'monetization'])->name('monetization');
+    Route::get('/sponsors', [AdminCMSController::class, 'sponsors'])->name('sponsors');
+    Route::post('/sponsors/create', [AdminCMSController::class, 'createSponsor'])->name('sponsors.create');
+    Route::get('/subscriptions', [AdminCMSController::class, 'subscriptions'])->name('subscriptions');
 });
 
 // Auth Dashboard (Breeze Integration)

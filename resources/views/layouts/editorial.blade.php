@@ -19,6 +19,11 @@
     <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
     <meta name="twitter:card" content="summary_large_image">
 
+    <!-- Site Icon / Favicon -->
+    <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">
+    <link rel="shortcut icon" href="{{ asset('images/logo.png') }}">
+    <link rel="apple-touch-icon" href="{{ asset('images/logo.png') }}">
+
     <!-- Preconnect Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,8 +59,6 @@
         </div>
     @endif
 
-    <!-- Top Market Ticker Bar -->
-    <x-market-ticker />
 
     <!-- Pure White Header Navigation -->
     <x-nav />

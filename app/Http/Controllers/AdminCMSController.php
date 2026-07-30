@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AffiliateLink;
 use App\Models\Article;
 use App\Models\Author;
 use App\Models\Category;
 use App\Models\Comment;
 use App\Models\MarketIndex;
 use App\Models\NewsletterSubscriber;
+use App\Models\Sponsor;
+use App\Models\Sponsorship;
+use App\Models\SponsorReport;
+use App\Models\Subscription;
 use Illuminate\Http\Request;
 
 class AdminCMSController extends Controller
@@ -18,6 +23,7 @@ class AdminCMSController extends Controller
         $draftsCount = Article::where('status', 'draft')->count();
         $totalViews = Article::sum('view_count');
         $subscribersCount = NewsletterSubscriber::count();
+        $mrr = Subscription::where('status', 'active')->sum('amount');
         
         $recentArticles = Article::with(['category', 'author'])
             ->latest()
@@ -32,7 +38,8 @@ class AdminCMSController extends Controller
             'totalViews',
             'subscribersCount',
             'recentArticles',
-            'categories'
+            'categories',
+            'mrr'
         ));
     }
 
@@ -141,5 +148,68 @@ class AdminCMSController extends Controller
     public function settings()
     {
         return view('cms.settings');
+    }
+
+    // Revenue Architecture & Monetization Modules
+    public function monetization()
+    {
+        $activeSubscribersCount = Subscription::where('status', 'active')->count();
+        $mrr = Subscription::where('status', 'active')->sum('amount');
+        $arr = $mrr * 12;
+
+        $activeSponsorships = Sponsorship::with('sponsor')
+            ->where('status', 'active')
+            ->get();
+        
+        $sponsorshipRevenue = Sponsorship::where('status', 'active')->sum('price_paid');
+        $affiliateRevenue = AffiliateLink::sum('revenue_earned');
+        $totalRevenueMonth = $mrr + $sponsorshipRevenue + $affiliateRevenue;
+
+        $affiliateLinks = AffiliateLink::with('article')->orderBy('click_count', 'desc')->take(8)->get();
+
+        return view('cms.monetization', compact(
+            'activeSubscribersCount',
+            'mrr',
+            'arr',
+            'activeSponsorships',
+            'sponsorshipRevenue',
+            'affiliateRevenue',
+            'totalRevenueMonth',
+            'affiliateLinks'
+        ));
+    }
+
+    public function sponsors()
+    {
+        $sponsors = Sponsor::with(['sponsorships', 'reports'])->get();
+        $sponsorships = Sponsorship::with(['sponsor', 'article'])->latest()->get();
+        $reports = SponsorReport::with('sponsor')->latest()->take(10)->get();
+
+        return view('cms.sponsors', compact('sponsors', 'sponsorships', 'reports'));
+    }
+
+    public function createSponsor(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'website_url' => 'required|url',
+            'contact_email' => 'required|email',
+            'status' => 'required|in:active,inactive,prospect',
+            'notes' => 'nullable|string',
+        ]);
+
+        Sponsor::create($validated);
+
+        return redirect()->back()->with('success', 'Sponsor company successfully added.');
+    }
+
+    public function subscriptions()
+    {
+        $subscriptions = Subscription::with('user')->latest()->paginate(15);
+        $activeCount = Subscription::where('status', 'active')->count();
+        $canceledCount = Subscription::where('status', 'canceled')->count();
+        $mrr = Subscription::where('status', 'active')->sum('amount');
+
+        return view('cms.subscriptions', compact('subscriptions', 'activeCount', 'canceledCount', 'mrr'));
     }
 }

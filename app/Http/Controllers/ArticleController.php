@@ -11,13 +11,16 @@ class ArticleController extends Controller
 {
     public function show(Request $request, string $slug)
     {
-        $article = Article::with(['category', 'author', 'comments'])
+        $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
             ->where('slug', $slug)
             ->published()
             ->firstOrFail();
 
         // Increment view count
         $article->increment('view_count');
+
+        // Check if user has active subscription
+        $isSubscribed = auth()->check() ? auth()->user()->isSubscribed() : false;
 
         // Previous and Next Article Navigation
         $prevArticle = Article::published()
@@ -62,7 +65,8 @@ class ArticleController extends Controller
             'relatedArticles',
             'prevArticle',
             'nextArticle',
-            'isBookmarked'
+            'isBookmarked',
+            'isSubscribed'
         ));
     }
 

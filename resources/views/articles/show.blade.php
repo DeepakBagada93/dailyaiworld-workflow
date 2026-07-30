@@ -222,10 +222,62 @@
                     </div>
                 @endif
 
+                <!-- SPONSOR SPOTLIGHT (If sponsored or has active sponsorship) -->
+                @if($article->sponsorships && $article->sponsorships->first())
+                    @php $sponsorship = $article->sponsorships->first(); @endphp
+                    <div class="my-6 p-4 bg-purple-50/80 border border-purple-200 rounded-xl flex items-center justify-between text-xs font-sans">
+                        <div class="flex items-center gap-3">
+                            <span class="px-2 py-0.5 bg-purple-600 text-white rounded font-mono font-bold text-[10px] uppercase">SPONSOR</span>
+                            <span class="text-gray-800 font-medium font-mono">{{ $sponsorship->sponsor->name }}:</span>
+                            <span class="text-gray-600">{{ $sponsorship->custom_copy }}</span>
+                        </div>
+                        <a href="{{ $sponsorship->sponsor->website_url }}" target="_blank" class="text-[#6D28D9] font-bold hover:underline shrink-0 ml-4">Learn More →</a>
+                    </div>
+                @endif
+
                 <!-- ARTICLE PROSE CONTENT (760PX MAX WIDTH, COMFORTABLE LINE HEIGHT, INTERNAL LINKS, QUOTES, CODE BLOCKS, TABLES) -->
-                <div class="prose-editorial">
-                    {!! Str::markdown($article->content) !!}
-                </div>
+                @if(($article->tier === 'Briefing' || $article->tier === 'Research Breakdown') && !$isSubscribed)
+                    <div class="prose-editorial relative">
+                        {!! Str::markdown(Str::limit($article->content, 600, '...')) !!}
+                        
+                        <!-- Fade Out Overlay & Paywall Box -->
+                        <div class="relative -mt-20 pt-24 bg-gradient-to-b from-transparent via-white/90 to-white text-center pb-8 border-b border-gray-200">
+                            <div class="bg-white border-2 border-[#6D28D9] rounded-2xl p-8 max-w-xl mx-auto shadow-2xl space-y-4">
+                                <div class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-mono font-bold">
+                                    EXECUTIVE MEMBERSHIP REQUIRED
+                                </div>
+                                <h3 class="font-serif text-2xl font-bold text-gray-900">
+                                    Unlock the Full {{ $article->tier }} Digest
+                                </h3>
+                                <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed">
+                                    This deep-dive architectural analysis is reserved for Daily AI World Executive Subscribers. Join founders, ML engineers, and CTOs accessing our complete research repository.
+                                </p>
+                                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
+                                    <a href="{{ route('subscribe') }}" class="w-full sm:w-auto bg-[#6D28D9] hover:bg-[#5B21B6] text-white px-6 py-3 rounded-lg text-sm font-bold shadow-md transition-all">
+                                        Unlock Full Research ($19/mo) →
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <div class="prose-editorial">
+                        {!! Str::markdown($article->content) !!}
+                    </div>
+                @endif
+
+                <!-- AFFILIATE LINKS DISCLOSURE -->
+                @if($article->affiliateLinks && $article->affiliateLinks->count())
+                    <div class="my-8 p-4 bg-gray-50 border border-gray-200 rounded-xl space-y-2 font-mono text-xs">
+                        <span class="text-[10px] text-gray-400 uppercase font-bold tracking-wider block">Recommended Partner Resources</span>
+                        @foreach($article->affiliateLinks as $aff)
+                            <div class="flex items-center justify-between">
+                                <a href="{{ $aff->url }}" target="_blank" class="text-[#6D28D9] font-bold hover:underline">{{ $aff->label }}</a>
+                                <span class="text-[10px] text-gray-400 font-sans">{{ $aff->disclosure_text }}</span>
+                            </div>
+                        @endforeach
+                    </div>
+                @endif
 
                 <!-- MID-ARTICLE / END-ARTICLE NEWSLETTER CTA -->
                 <div class="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-8 my-12 shadow-sm">

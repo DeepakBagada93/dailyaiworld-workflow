@@ -5,23 +5,66 @@
 @section('content')
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-20">
 
-    <!-- 1. FEATURED STORY (Text is Hero, Large Whitespace, Key Takeaways) -->
+    <!-- 1. FEATURED STORY HERO SECTION (Creative Animated Text & Visual Ambient Backdrops) -->
     @if($heroArticle)
-        <section class="border-b border-[var(--border-subtle)] pb-16">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
-                <!-- Left 8 cols: Large Playfair Title, Deck, Key Takeaways -->
+        <section class="relative border-b border-[var(--border-subtle)] pb-16 overflow-hidden" 
+                 x-data="{ 
+                     topics: ['AI Workflows', 'Frontier Compute', 'Agentic Intelligence', 'LLM Systems', 'SaaS Architecture'],
+                     topicIndex: 0,
+                     currentTopic: 'AI Workflows',
+                     animating: false,
+                     init() {
+                         setInterval(() => {
+                             this.animating = true;
+                             setTimeout(() => {
+                                 this.topicIndex = (this.topicIndex + 1) % this.topics.length;
+                                 this.currentTopic = this.topics[this.topicIndex];
+                                 this.animating = false;
+                             }, 250);
+                         }, 2600);
+                     }
+                 }">
+            
+            <!-- Creative Ambient Glow Backdrop -->
+            <div class="absolute -top-20 -left-20 w-96 h-96 bg-purple-600/10 rounded-full blur-3xl pointer-events-none"></div>
+            <div class="absolute top-1/2 -right-20 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-stretch">
+                <!-- Left 8 cols: Dynamic Animated Header, Playfair Title, Key Takeaways -->
                 <div class="lg:col-span-8 flex flex-col justify-between space-y-6">
                     <div>
-                        <div class="flex items-center gap-3 mb-4 font-mono text-xs">
-                            <span class="text-[#6D28D9] font-bold uppercase tracking-wider">{{ $heroArticle->category->name }}</span>
+                        <!-- Animated Top Badge & Ticker -->
+                        <div class="flex flex-wrap items-center gap-3 mb-5 font-mono text-xs">
+                            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-50 dark:bg-purple-950/60 border border-purple-200/80 dark:border-purple-800/80 shadow-xs">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6D28D9] opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#6D28D9]"></span>
+                                </span>
+                                <span class="text-[#6D28D9] dark:text-purple-300 font-bold uppercase tracking-wider text-[11px]">
+                                    Live Dispatch
+                                </span>
+                            </div>
+
+                            <span class="text-[var(--text-muted)]">•</span>
+
+                            <!-- Animated Cycling Keyword Text -->
+                            <div class="inline-flex items-center gap-1.5 text-[var(--text-body)]">
+                                <span>Focus:</span>
+                                <span class="font-bold text-[#6D28D9] inline-block transition-all duration-300 transform"
+                                      :class="animating ? 'opacity-0 -translate-y-1 scale-95' : 'opacity-100 translate-y-0 scale-100'"
+                                      x-text="currentTopic">
+                                </span>
+                            </div>
+
                             <span class="text-[var(--text-muted)]">•</span>
                             <x-badge :tier="$heroArticle->tier" />
                             <span class="text-[var(--text-muted)]">•</span>
                             <span class="text-[var(--text-muted)]">{{ $heroArticle->reading_time }} min read</span>
                         </div>
 
+                        <!-- Hero Title with Dynamic Gradient Hover -->
                         <a href="{{ route('articles.show', $heroArticle->slug) }}" class="group block">
-                            <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-[1.08] tracking-tight">
+                            <h1 class="font-serif text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-all duration-300 leading-[1.08] tracking-tight">
                                 {{ $heroArticle->title }}
                             </h1>
                         </a>
@@ -33,11 +76,11 @@
                         @endif
                     </div>
 
-                    <!-- Executive Key Takeaways Box (High Trust) -->
+                    <!-- Executive Key Takeaways Box (High Trust Creative Styling) -->
                     @if(!empty($heroArticle->key_takeaways))
-                        <div class="bg-[var(--bg-muted)] border-l-4 border-[#6D28D9] rounded-r-xl p-6 my-2">
+                        <div class="bg-[var(--bg-muted)] border-l-4 border-[#6D28D9] rounded-r-xl p-6 my-2 shadow-xs hover:shadow-md transition-shadow">
                             <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold mb-3">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                                <svg class="w-4 h-4 animate-pulse text-[#6D28D9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                                 <span>Executive Key Takeaways</span>
                             </div>
                             <ul class="space-y-2.5 text-xs sm:text-sm text-[var(--text-heading)] font-sans">
@@ -51,11 +94,11 @@
                         </div>
                     @endif
 
-                    <!-- Card Meta: Author, Date, Reading Time, Listen CTA -->
+                    <!-- Card Meta: Author, Date, Reading Time, Interactive Audio Player CTA -->
                     <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[var(--border-subtle)] font-mono text-xs text-[var(--text-muted)]">
                         <div class="flex items-center gap-3">
                             @if($heroArticle->author->avatar)
-                                <img src="{{ $heroArticle->author->avatar }}" alt="{{ $heroArticle->author->name }}" class="w-9 h-9 rounded-full object-cover border border-[var(--border-subtle)]">
+                                <img src="{{ $heroArticle->author->avatar }}" alt="{{ $heroArticle->author->name }}" class="w-9 h-9 rounded-full object-cover border border-[var(--border-subtle)] shadow-xs">
                             @endif
                             <div>
                                 <span class="block text-[var(--text-heading)] font-sans font-bold text-xs">{{ $heroArticle->author->name }}</span>
@@ -69,33 +112,41 @@
                             <span>{{ $heroArticle->reading_time }}m read</span>
                             
                             <button @click="audioOpen = true; isPlaying = true; currentTrack = { title: '{{ addslashes($heroArticle->title) }}', author: '{{ addslashes($heroArticle->author->name) }}' }"
-                                    class="btn-secondary text-xs py-1.5 px-3">
+                                    class="btn-secondary text-xs py-1.5 px-3 hover.scale-105 transition-transform flex items-center gap-2">
                                 <svg class="w-3.5 h-3.5 text-[#6D28D9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
-                                <span>Listen</span>
+                                <span>Listen Audio</span>
                             </button>
                         </div>
                     </div>
                 </div>
 
-                <!-- Right 4 cols: Secondary Editorial Visual -->
+                <!-- Right 4 cols: Secondary Creative Highlight Card -->
                 <div class="lg:col-span-4 flex">
-                    <a href="{{ route('articles.show', $heroArticle->slug) }}" class="group w-full relative rounded-xl overflow-hidden bg-gray-100 dark:bg-gray-800 border border-[var(--border-subtle)] flex flex-col justify-between p-6">
-                        @if($heroArticle->featured_image)
-                            <img src="{{ $heroArticle->featured_image }}" alt="{{ $heroArticle->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90">
-                            <div class="absolute inset-0 bg-gradient-to-t from-gray-950/90 via-gray-950/40 to-transparent"></div>
-                        @endif
-                        
-                        <div class="relative z-10 font-mono text-[10px] uppercase tracking-widest text-purple-300 font-bold">
-                            Cover Story
-                        </div>
-                        
-                        <div class="relative z-10 text-white mt-auto">
-                            <span class="font-mono text-xs text-gray-300 block mb-1">{{ $heroArticle->category->name }}</span>
-                            <h3 class="font-serif text-lg font-bold group-hover:text-purple-300 transition-colors">
-                                Read the full analysis →
+                    <div class="w-full bg-gradient-to-b from-[var(--bg-sec)] to-purple-50/20 border border-[var(--border-subtle)] hover:border-purple-300 rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xs hover:shadow-lg transition-all duration-300 group">
+                        <div>
+                            <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-[#6D28D9] font-bold mb-4">
+                                <span class="flex items-center gap-1.5">
+                                    <span class="w-1.5 h-1.5 rounded-full bg-[#6D28D9]"></span>
+                                    <span>Cover Analysis</span>
+                                </span>
+                                <span class="bg-[#6D28D9]/10 text-[#6D28D9] px-2 py-0.5 rounded-full">Featured</span>
+                            </div>
+                            <h3 class="font-serif text-xl font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-snug mb-3">
+                                {{ $heroArticle->title }}
                             </h3>
+                            @if($heroArticle->excerpt)
+                                <p class="text-xs text-[var(--text-body)] leading-relaxed font-sans line-clamp-4">
+                                    {{ $heroArticle->excerpt }}
+                                </p>
+                            @endif
                         </div>
-                    </a>
+
+                        <div class="pt-4 border-t border-[var(--border-subtle)]">
+                            <a href="{{ route('articles.show', $heroArticle->slug) }}" class="btn-primary w-full py-2.5 text-xs text-center justify-center shadow-xs group-hover:shadow-md transition-all">
+                                <span>Read Full Analysis →</span>
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>

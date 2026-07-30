@@ -65,6 +65,16 @@ class Article extends Model
         return $this->hasMany(Comment::class)->where('is_approved', true)->latest();
     }
 
+    public function sponsorships(): HasMany
+    {
+        return $this->hasMany(Sponsorship::class);
+    }
+
+    public function affiliateLinks(): HasMany
+    {
+        return $this->hasMany(AffiliateLink::class);
+    }
+
     public function scopePublished($query)
     {
         return $query->where('status', 'published')
