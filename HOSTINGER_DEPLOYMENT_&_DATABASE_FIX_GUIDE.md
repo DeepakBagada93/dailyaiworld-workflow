@@ -30,16 +30,16 @@ Laravel requires read/write access to `storage/` and `bootstrap/cache/`.
 
 ### 2.1 Create MySQL Database & User in Hostinger
 1. Log in to **Hostinger hPanel** -> **Databases** -> **MySQL Databases**.
-2. Under **Create a New MySQL Database and Database User**:
-   - **MySQL Database Name**: Enter name (e.g. `u123456789_dailyai`)
-   - **MySQL Username**: Enter user (e.g. `u123456789_admin`)
-   - **Password**: Create a strong password and save it securely.
-3. Click **Create**.
+2. Your database details (already created):
+   - **MySQL Database Name**: `u775719140_dailyai`
+   - **MySQL Username**: `u775719140_admin`
+   - **Password**: *(your password — keep it safe)*
+3. If not yet created, click **Create**.
 
 ### 2.2 Import `daily_ai_world_import.sql.gz` via phpMyAdmin
 1. In Hostinger hPanel -> **Databases** -> **phpMyAdmin** -> Click **Enter phpMyAdmin** next to your new database.
 2. Click the **Import** tab in the top navigation bar.
-3. Click **Choose File** and select `daily_ai_world_import.sql.gz` (located in your repository root).
+3. Click **Choose File** and select **`hostinger_import.sql.gz`** (located in your repository root — this file is pre-configured for your `u775719140_dailyai` database).
 4. Leave all default options as UTF-8 / Automatic.
 5. Scroll down and click **Go** (or **Import**).
 6. Wait 10-20 seconds. You will see a success message: *Import has been successfully finished*.
@@ -66,8 +66,8 @@ LOG_LEVEL=error
 DB_CONNECTION=mysql
 DB_HOST=127.0.0.1
 DB_PORT=3306
-DB_DATABASE=u123456789_dailyai
-DB_USERNAME=u123456789_admin
+DB_DATABASE=u775719140_dailyai
+DB_USERNAME=u775719140_admin
 DB_PASSWORD=your_actual_hostinger_db_password
 
 SESSION_DRIVER=database
