@@ -129,9 +129,9 @@
                     <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#E9D5FF] font-mono text-xs text-[#6B7280]">
                         <div class="flex items-center gap-3">
                             @if($heroArticle->author->avatar)
-                                <img src="{{ $heroArticle->author->avatar }}" alt="{{ $heroArticle->author->name }}" class="w-10 h-10 rounded-full object-cover shrink-0 aspect-square border border-[#E9D5FF] author-avatar-img shadow-xs">
+                                <img src="{{ $heroArticle->author->avatar }}" alt="{{ $heroArticle->author->name }}" class="w-11 h-11 mt-1 rounded-xl object-cover shrink-0 aspect-square border border-[#E9D5FF] ring-2 ring-[#6D28D9]/20 author-avatar-cover shadow-sm transition-all duration-300">
                             @else
-                                <div class="w-10 h-10 rounded-full bg-purple-100 text-[#6D28D9] flex items-center justify-center font-bold text-sm shrink-0 border border-[#E9D5FF] font-sans shadow-xs">
+                                <div class="w-11 h-11 mt-1 rounded-xl bg-purple-100 text-[#6D28D9] flex items-center justify-center font-bold text-sm shrink-0 border border-[#E9D5FF] ring-2 ring-[#6D28D9]/20 font-sans shadow-sm">
                                     {{ substr($heroArticle->author->name, 0, 1) }}
                                 </div>
                             @endif

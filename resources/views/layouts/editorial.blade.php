@@ -60,8 +60,6 @@
           }
       ">
 
-    <!-- Text-Based Minimal Preloader Component -->
-    <x-preloader />
 
     <!-- Accessible Skip to Main Content Link -->
     <a href="#main-content" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-5 focus:py-2.5 focus:bg-[#5B21B6] focus:text-white focus:rounded-xl focus:shadow-2xl focus:outline-none font-sans font-bold text-xs uppercase tracking-wider">
