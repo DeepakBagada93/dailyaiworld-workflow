@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Sponsor;
+use App\Models\Sponsorship;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -10,34 +12,37 @@ class SubscribeController extends Controller
 {
     public function index()
     {
-        $monthlyPrice = 19;
-        $annualPrice = 190;
+        $sponsors = Sponsor::where('status', 'active')->get();
+        $totalImpressions = Sponsorship::sum('impressions');
+        $activeSponsorships = Sponsorship::where('status', 'active')->count();
 
-        return view('subscribe', compact('monthlyPrice', 'annualPrice'));
+        return view('subscribe', compact('sponsors', 'totalImpressions', 'activeSponsorships'));
     }
 
     public function checkout(Request $request)
     {
         $validated = $request->validate([
             'email' => 'required|email',
-            'plan' => 'required|in:monthly,annual',
+            'name' => 'nullable|string|max:255',
+            'company' => 'nullable|string|max:255',
+            'plan' => 'nullable|string',
+            'message' => 'nullable|string',
         ]);
-
-        $amount = $validated['plan'] === 'annual' ? 190.00 : 19.00;
-        $periodDays = $validated['plan'] === 'annual' ? 365 : 30;
 
         $user = Auth::user();
 
-        $subscription = Subscription::create([
+        // Record inquiry as subscription lead / prospect
+        Subscription::create([
             'user_id' => $user?->id,
             'email' => $validated['email'],
-            'plan' => $validated['plan'],
-            'amount' => $amount,
-            'status' => 'active',
-            'stripe_subscription_id' => 'sub_sim_' . strtoupper(substr(md5(uniqid()), 0, 12)),
-            'current_period_end' => now()->addDays($periodDays),
+            'plan' => $validated['plan'] ?? 'executive',
+            'amount' => 0.00,
+            'status' => 'pending_inquiry',
+            'stripe_subscription_id' => 'inquiry_' . strtoupper(substr(md5(uniqid()), 0, 12)),
+            'current_period_end' => now()->addDays(365),
         ]);
 
-        return redirect()->route('home')->with('success', 'Welcome to Daily AI World Executive Tier! Your subscription is now active.');
+        return redirect()->back()->with('success', 'Thank you for your Executive Tier inquiry! Our team will contact you directly via email. You can also reach out anytime at connect@saasnext.in.');
     }
 }
+

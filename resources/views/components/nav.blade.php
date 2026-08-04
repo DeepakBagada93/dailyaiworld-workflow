@@ -31,11 +31,11 @@
                class="{{ request()->routeIs('news.index') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
                 Realtime News
             </a>
-            <a href="{{ route('advertise') }}" 
+            <a href="{{ route('advertise') }}#sponsor-tier" 
                class="{{ request()->routeIs('advertise') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
                 Sponsor
             </a>
-            <a href="{{ route('subscribe') }}" 
+            <a href="{{ route('subscribe') }}#executive-tier" 
                class="bg-[#FAF5FF] text-[#6D28D9] hover:bg-[#F3E8FF] px-2.5 py-1 rounded-md transition-colors text-[11px] font-bold border border-[#E9D5FF]">
                 Executive Tier
             </a>
@@ -101,11 +101,11 @@
            class="block px-3 py-2 rounded-md hover:bg-[#F5F3FF] hover:text-[#6D28D9] transition-colors {{ request()->is('category/ai-tools') ? 'text-[#6D28D9] font-bold bg-[#F5F3FF]' : '' }}">
             Tools
         </a>
-        <a href="{{ route('advertise') }}" 
+        <a href="{{ route('advertise') }}#sponsor-tier" 
            class="block px-3 py-2 rounded-md hover:bg-[#F5F3FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('advertise') ? 'text-[#6D28D9] font-bold bg-[#F5F3FF]' : '' }}">
-            Sponsor Rate Card
+            Sponsor Packages
         </a>
-        <a href="{{ route('subscribe') }}" 
+        <a href="{{ route('subscribe') }}#executive-tier" 
            class="block px-3 py-2 rounded-md bg-purple-50 text-[#6D28D9] font-bold">
             Executive Tier Pass
         </a>

@@ -14,7 +14,7 @@ class AdvertiseController extends Controller
         $totalImpressions = Sponsorship::sum('impressions');
         $activeSponsorships = Sponsorship::where('status', 'active')->count();
 
-        return view('advertise', compact('sponsors', 'totalImpressions', 'activeSponsorships'));
+        return view('subscribe', compact('sponsors', 'totalImpressions', 'activeSponsorships'));
     }
 
     public function submitLead(Request $request)
@@ -37,6 +37,7 @@ class AdvertiseController extends Controller
             'notes' => 'Contact: ' . $validated['name'] . ' | Interest: ' . $validated['placement_interest'] . ' | Budget: ' . ($validated['budget'] ?? 'Unspecified') . ' | Message: ' . ($validated['message'] ?? 'None'),
         ]);
 
-        return redirect()->back()->with('success', 'Thank you for your sponsorship inquiry. Our editorial director will contact your team within 24 hours with our current media kit and available placement inventory.');
+        return redirect()->back()->with('success', 'Thank you for your inquiry! Our editorial team will contact you directly via email. You can also reach out to us at connect@saasnext.in.');
     }
 }
+

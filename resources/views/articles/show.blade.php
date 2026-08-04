@@ -390,54 +390,6 @@
                     @endif
                 </div>
 
-                <!-- COMMENTS SECTION -->
-                <section class="my-12">
-                    <div class="flex items-center justify-between border-b border-[var(--border-subtle)] pb-4 mb-8">
-                        <h3 class="font-serif text-2xl font-bold text-[var(--text-heading)]">Reader Commentary</h3>
-                        <span class="font-mono text-xs text-[var(--text-muted)]">{{ $article->comments->count() }} Responses</span>
-                    </div>
-
-                    <!-- Comment Submission Form -->
-                    <form action="{{ route('articles.comments.store', $article->id) }}" method="POST" class="bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl p-6 mb-8 space-y-4">
-                        @csrf
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            <div>
-                                <label class="block text-xs font-mono text-[var(--text-heading)] font-semibold mb-1">Your Name</label>
-                                <input type="text" name="name" required placeholder="Dr. Jane Doe" 
-                                       class="w-full bg-[var(--bg-main)] border border-[var(--border-subtle)] text-[var(--text-heading)] text-sm rounded-md px-3.5 py-2.5 focus:outline-none focus:border-[#6D28D9]">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-mono text-[var(--text-heading)] font-semibold mb-1">Your Email</label>
-                                <input type="email" name="email" required placeholder="jane@lab.org" 
-                                       class="w-full bg-[var(--bg-main)] border border-[var(--border-subtle)] text-[var(--text-heading)] text-sm rounded-md px-3.5 py-2.5 focus:outline-none focus:border-[#6D28D9]">
-                            </div>
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-mono text-[var(--text-heading)] font-semibold mb-1">Commentary</label>
-                            <textarea name="content" rows="4" required placeholder="Add technical perspective or founder feedback..." 
-                                      class="w-full bg-[var(--bg-main)] border border-[var(--border-subtle)] text-[var(--text-heading)] text-sm rounded-md px-3.5 py-2.5 focus:outline-none focus:border-[#6D28D9]"></textarea>
-                        </div>
-
-                        <button type="submit" class="btn-primary py-2.5 px-5 text-xs">Submit Commentary</button>
-                    </form>
-
-                    <!-- Existing Comments Thread -->
-                    <div class="space-y-4">
-                        @foreach($article->comments as $comment)
-                            <div class="p-6 bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl space-y-2">
-                                <div class="flex items-center justify-between text-xs font-mono">
-                                    <span class="font-bold text-[var(--text-heading)] font-sans text-sm">{{ $comment->name }}</span>
-                                    <span class="text-[var(--text-muted)]">{{ $comment->formatted_date }}</span>
-                                </div>
-                                <p class="text-sm text-[var(--text-body)] leading-relaxed font-sans">
-                                    {{ $comment->content }}
-                                </p>
-                            </div>
-                        @endforeach
-                    </div>
-                </section>
-
                 <!-- RELATED ARTICLES GRID -->
                 @if($relatedArticles->count() > 0)
                     <section class="mt-16 pt-12 border-t border-[var(--border-subtle)]">
