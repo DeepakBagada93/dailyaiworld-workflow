@@ -1,10 +1,10 @@
 /* Google Fonts Import MUST be top line */
-@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-serif: 'Playfair Display', Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-serif: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-sans: 'Space Grotesk', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Global Color Tokens */
@@ -24,33 +24,139 @@
   --color-error: #EF4444;
 }
 
-/* Custom Base & Dark Mode Tokens */
+/* Custom Base & Purple Theme Tokens (Ultra-Clean White & Purple Aesthetic) */
 :root {
   --brand-primary: #6D28D9;
-  --brand-hover: #7C3AED;
-  --brand-accent: #8B5CF6;
+  --brand-hover: #5B21B6;
+  --brand-accent: #7C3AED;
   --bg-main: #FFFFFF;
-  --bg-sec: #FAFAFC;
+  --bg-sec: #FAF5FF;
   --bg-card: #FFFFFF;
   --bg-muted: #F5F3FF;
-  --border-subtle: #E8E7EF;
-  --text-heading: #111827;
-  --text-body: #4B5563;
-  --text-muted: #9CA3AF;
+  --border-subtle: #E9D5FF;
+  --text-heading: #1E1B4B;
+  --text-body: #374151;
+  --text-muted: #6B7280;
+  --focus-ring: #6D28D9;
 }
 
+/* Fallback for high accessibility */
 .dark {
-  --brand-primary: #8B5CF6;
-  --brand-hover: #A78BFA;
-  --brand-accent: #C4B5FD;
-  --bg-main: #0B0B0F;
-  --bg-sec: #12121A;
-  --bg-card: #161622;
-  --bg-muted: #1E1B2E;
-  --border-subtle: #272738;
-  --text-heading: #F9FAFB;
-  --text-body: #D1D5DB;
-  --text-muted: #9CA3AF;
+  --brand-primary: #6D28D9;
+  --brand-hover: #5B21B6;
+  --brand-accent: #7C3AED;
+  --bg-main: #FFFFFF;
+  --bg-sec: #FAF5FF;
+  --bg-card: #FFFFFF;
+  --bg-muted: #F5F3FF;
+  --border-subtle: #E9D5FF;
+  --text-heading: #1E1B4B;
+  --text-body: #374151;
+  --text-muted: #6B7280;
+  --focus-ring: #6D28D9;
+}
+
+/* High Contrast Accessibility Override Mode */
+.high-contrast {
+  --bg-main: #000000 !important;
+  --bg-sec: #0A0A0A !important;
+  --bg-card: #121212 !important;
+  --bg-muted: #1E1E1E !important;
+  --border-subtle: #FFFFFF !important;
+  --text-heading: #FFFFFF !important;
+  --text-body: #FFFFFF !important;
+  --text-muted: #FFFF00 !important;
+  --brand-primary: #FFFF00 !important;
+  --brand-hover: #00FFFF !important;
+}
+
+/* Accessibility Focus Visible Rings */
+:focus-visible {
+  outline: 3px solid var(--focus-ring) !important;
+  outline-offset: 3px !important;
+  border-radius: 4px;
+}
+
+/* Author Avatar Image Utility - Prevents clipping/squishing */
+.author-avatar-img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  flex-shrink: 0;
+  border-radius: 9999px;
+}
+
+/* Font Resizing Scale Utilities */
+.font-scale-lg {
+  font-size: 112.5% !important;
+}
+.font-scale-xl {
+  font-size: 125% !important;
+}
+
+/* OpenDyslexic / Accessible Font Override */
+.accessible-font {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif !important;
+  letter-spacing: 0.03em !important;
+  word-spacing: 0.1em !important;
+  line-height: 1.8 !important;
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Animated Typewriter Cursor */
+.typewriter-cursor::after {
+  content: '|';
+  display: inline-block;
+  color: #6D28D9;
+  font-weight: 700;
+  margin-left: 2px;
+  animation: typewriterBlink 0.8s infinite;
+}
+
+@keyframes typewriterBlink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+/* SVG Motion Graphics Animations */
+@keyframes svgLineDash {
+  0% {
+    stroke-dashoffset: 400;
+  }
+  50% {
+    stroke-dashoffset: 0;
+  }
+  100% {
+    stroke-dashoffset: -400;
+  }
+}
+
+.animate-svg-dash {
+  stroke-dasharray: 200;
+  animation: svgLineDash 8s linear infinite;
+}
+
+@keyframes orbitalRotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-orbital-spin {
+  animation: orbitalRotate 24s linear infinite;
+  transform-origin: center;
 }
 
 body {

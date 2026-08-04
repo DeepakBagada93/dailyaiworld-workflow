@@ -1,4 +1,4 @@
-@props(['article', 'layout' => 'standard', 'showImage' => true])
+@props(['article', 'layout' => 'standard', 'showImage' => false])
 
 @php
     $isBookmarked = false;
@@ -53,13 +53,17 @@
             </div>
             
             <div class="mt-4 flex items-center justify-between text-xs text-[var(--text-muted)] font-mono border-t border-[var(--border-subtle)] pt-3">
-                <div class="flex items-center gap-2">
+                <div class="flex items-center gap-2.5 min-w-0">
                     @if($article->author->avatar)
-                        <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-5 h-5 rounded-full object-cover" loading="lazy">
+                        <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-6 h-6 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
+                    @else
+                        <div class="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-[10px] shrink-0 border border-purple-200 dark:border-purple-800 font-sans">
+                            {{ substr($article->author->name, 0, 1) }}
+                        </div>
                     @endif
-                    <span class="text-[var(--text-heading)] font-sans font-medium">{{ $article->author->name }}</span>
+                    <span class="text-[var(--text-heading)] font-sans font-medium text-xs truncate">{{ $article->author->name }}</span>
                 </div>
-                <div class="flex items-center gap-3">
+                <div class="flex items-center gap-3 shrink-0">
                     <span>{{ $article->formatted_date }}</span>
                     <span>•</span>
                     <span>{{ $article->reading_time }} min read</span>
@@ -132,13 +136,17 @@
         </div>
 
         <div class="px-6 pb-6 pt-0 mt-auto border-t border-[var(--border-subtle)] pt-4 flex items-center justify-between text-xs text-[var(--text-muted)] font-mono">
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2.5 min-w-0">
                 @if($article->author->avatar)
-                    <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-5 h-5 rounded-full object-cover" loading="lazy">
+                    <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-6 h-6 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
+                @else
+                    <div class="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-[10px] shrink-0 border border-purple-200 dark:border-purple-800 font-sans">
+                        {{ substr($article->author->name, 0, 1) }}
+                    </div>
                 @endif
-                <span class="text-[var(--text-heading)] font-sans font-medium text-[11px] truncate max-w-[120px]">{{ $article->author->name }}</span>
+                <span class="text-[var(--text-heading)] font-sans font-medium text-xs truncate max-w-[130px]">{{ $article->author->name }}</span>
             </div>
-            <div class="flex items-center gap-2">
+            <div class="flex items-center gap-2 shrink-0">
                 <span>{{ $article->reading_time }}m read</span>
             </div>
         </div>

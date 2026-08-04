@@ -1,58 +1,136 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Daily AI World — Ultra-Premium Minimalist AI Journal & Realtime Intelligence
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+[![Laravel](https://img.shields.io/badge/Laravel-12.x-FF2D20?style=for-the-badge&logo=laravel&logoColor=white)](https://laravel.com)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.x-[#38BDF8]?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
+[![Alpine.js](https://img.shields.io/badge/Alpine.js-3.x-8BC0D0?style=for-the-badge&logo=alpine.js&logoColor=white)](https://alpinejs.dev)
+[![Typography](https://img.shields.io/badge/Typography-Space_Grotesk-6D28D9?style=for-the-badge)](https://fonts.google.com/specimen/Space+Grotesk)
+[![Accessibility](https://img.shields.io/badge/Accessibility-WCAG_2.1_AAA-22C55E?style=for-the-badge)](https://www.w3.org/WAI/standards-guidelines/wcag/)
 
-## About Laravel
+> **Daily AI World** is an executive-grade, text-first minimalist magazine journal designed for AI founders, developers, SaaS builders, and tech leaders. It delivers real-time dispatches, agentic workflow breakdowns, frontier compute research, and SaaS architecture analysis with high-contrast readability and zero visual clutter.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+---
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## 🌟 Key Features & Design System
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### 📰 1. Minimalist Magazine Layout Architecture
+- **Edition Masthead Banner**: Displays edition issue metadata (`VOL. 26 · ISSUE 04`), date dispatches, and realtime status.
+- **Asymmetric Lead Cover Feature**: Prominent lead story layout featuring a Space Grotesk headline, subdeck excerpt, executive key takeaways box, non-clipped author signature pill, and direct audio narration trigger.
+- **The Issue Index**: Numerical story directory (`01`, `02`, `03`...) rendered in large semi-transparent Space Grotesk figures.
+- **100% Text-First Aesthetic**: All article cards and desk categories focus purely on sharp typography, hairline rules (`divide-[#E9D5FF]`), and reading clarity without unnecessary hero image distractions.
 
-## Learning Laravel
+### 🎨 2. Pure White & Royal Purple Palette
+- **Canvas Background**: Crisp Pure White (`#FFFFFF`).
+- **Cards & Surfaces**: Light ice-lavender blocks (`#FAF5FF`, `#F5F3FF`) framed with soft purple hairline borders (`#E9D5FF`).
+- **Headlines & Text**: Midnight Purple (`#1E1B4B`) and Slate (`#374151`) with strict 100% WCAG 2.1 AAA contrast compliance.
+- **Brand Accents**: Royal Purple (`#6D28D9`), Vivid Violet (`#7C3AED`), and Deep Purple (`#5B21B6`).
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### 🔤 3. Global Space Grotesk Typography
+- Integrated **Space Grotesk** (weights 300 to 700) globally across `--font-sans`, `--font-serif`, `body`, headings (`h1` through `h6`), navigation links, and article card titles.
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### ⌨️ 4. Dynamic Hero Animations
+- **Typewriter Text Loop**: Dynamic live typing & deleting effect (`initTypewriter()`) cycling through key focus topics (*"Building Next-Gen AI Workflows..."*, *"Frontier Compute & Agentic Systems..."*, *"Scaling LLM Architectures in 2026..."*).
+- **Interactive SVG Motion Graphic**: Vector SVG neural network node graphic with animated dashed path connections (`.animate-svg-dash`) and rotating orbital ring artwork (`.animate-orbital-spin`).
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+### ♿ 5. 100% WCAG 2.1 AAA Accessibility
+- **Skip Navigation Link**: Accessible keyboard trigger (`Skip to main content`) directing focus immediately to `#main-content`.
+- **Landmark Navigation & ARIA Polish**: Explicit `role="main"`, `aria-label`, `aria-expanded`, and live screen-reader announcements (`aria-live="polite"`).
+- **Floating Preference Control Panel (`<x-accessibility-widget />`)**:
+  - **Text Resizing**: Scale text dynamically (100%, 115%, 125%).
+  - **High Contrast Mode**: High-visibility contrast override theme.
+  - **Accessible Font Mode**: Dyslexic-friendly letter & line spacing.
+  - **Reduced Motion Support**: Respects `@media (prefers-reduced-motion: reduce)`.
+- **Focus Rings**: High-visibility 3px focus outline rings (`:focus-visible`).
+- **Non-Clipped Author Avatars**: Applied `shrink-0 aspect-square object-cover author-avatar-img` with initial fallback badges (e.g. `D` for Deepak Bagada).
 
-## Agentic Development
+### ⚡ 6. Interactive Reading & Navigation Tools
+- **Sticky Reading Progress Bar**: Real-time scroll depth progress indicator at the top of the viewport.
+- **Global Search Modal (`⌘K` or `/`)**: Instant article search with quick tag filters.
+- **Sticky Audio Player (`a`)**: Audio narration player with speed control (1x, 1.25x, 1.5x, 2x).
+- **Keyboard Shortcuts Reference (`?`)**: Modal cheat sheet detailing all keyboard shortcuts.
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+---
 
-```bash
-composer require laravel/boost --dev
+## 🛠️ Technology Stack
 
-php artisan boost:install
-```
+| Layer | Technology |
+| :--- | :--- |
+| **Framework** | [Laravel 12+](https://laravel.com) |
+| **Language** | PHP 8.5+ |
+| **Styling** | [Tailwind CSS 4](https://tailwindcss.com) & Custom CSS Tokens |
+| **Reactivity** | [Alpine.js 3.x](https://alpinejs.dev) |
+| **Build Tool** | [Vite 8](https://vitejs.dev) |
+| **Typography** | [Space Grotesk](https://fonts.google.com/specimen/Space+Grotesk) & JetBrains Mono |
+| **Database** | MySQL / SQLite |
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## 🚀 Quick Start & Local Setup
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### Prerequisites
+- PHP `>= 8.2`
+- Composer
+- Node.js `>= 18` & npm
 
-## Code of Conduct
+### Installation Steps
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+1. **Clone the repository**:
+   ```bash
+   git clone https://github.com/DeepakBagada93/dailyaiworld-workflow.git
+   cd dailyaiworld-workflow
+   ```
 
-## Security Vulnerabilities
+2. **Install PHP dependencies**:
+   ```bash
+   composer install
+   ```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+3. **Install JavaScript dependencies**:
+   ```bash
+   npm install
+   ```
 
-## License
+4. **Environment Configuration**:
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+5. **Run Database Migrations & Seeders**:
+   ```bash
+   php artisan migrate --seed
+   ```
+
+6. **Build Frontend Assets**:
+   ```bash
+   npm run build
+   ```
+
+7. **Start Development Servers**:
+   ```bash
+   # Terminal 1: Start Laravel Server
+   php artisan serve
+
+   # Terminal 2: Start Vite Dev Server
+   npm run dev
+   ```
+
+   Visit `http-[#]127.0.0.1:8000` in your browser.
+
+---
+
+## ⌨️ Global Keyboard Shortcuts
+
+| Shortcut | Action |
+| :--- | :--- |
+| `⌘K` or `/` | Open Search Dialog |
+| `a` | Toggle Sticky Narration Audio Player |
+| `?` | Open Keyboard Shortcuts Reference |
+| `Esc` | Close Active Modal / Overlay |
+
+---
+
+## 👤 Author & License
+
+- **Author**: Deepak Bagada (CEO, SaaSNext)
+- **Repository**: [DeepakBagada93/dailyaiworld-workflow](https://github.com/DeepakBagada93/dailyaiworld-workflow)
+- **License**: Open-sourced software under the [MIT License](LICENSE).
