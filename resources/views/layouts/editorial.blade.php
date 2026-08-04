@@ -5,19 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>@yield('title', 'Daily AI World — Ultra-Premium Artificial Intelligence Editorial & News')</title>
+    @hasSection('title')
+        @php $pageTitle = View::getSection('title'); @endphp
+    @else
+        @php $pageTitle = 'Daily AI World — Ultra-Premium Artificial Intelligence Journal'; @endphp
+    @endif
 
-    <!-- Meta Description & SEO -->
-    <meta name="description" content="@yield('meta_description', 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.')">
-    <meta name="author" content="Deepak Bagada · CEO, SaaSNext">
-    
-    <!-- OpenGraph & Twitter Cards -->
-    <meta property="og:title" content="@yield('title', 'Daily AI World — Artificial Intelligence Journal')">
-    <meta property="og:description" content="@yield('meta_description', 'AI Workflows, Tools & Insights for Builders.')">
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="{{ url()->current() }}">
-    <meta property="og:image" content="@yield('og_image', asset('images/og-default.jpg'))">
-    <meta name="twitter:card" content="summary_large_image">
+    @hasSection('meta_description')
+        @php $pageDescription = View::getSection('meta_description'); @endphp
+    @else
+        @php $pageDescription = 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.'; @endphp
+    @endif
+
+    <!-- Global SEO, AEO, and GEO Optimization Head Component -->
+    <x-seo-head :title="$pageTitle" :description="$pageDescription" />
 
     <!-- Site Icon / Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">

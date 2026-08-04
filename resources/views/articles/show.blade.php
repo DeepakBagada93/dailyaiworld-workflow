@@ -39,6 +39,34 @@
     }
     </script>
 
+    <!-- Schema.org JSON-LD BreadcrumbList Markup -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {
+                "@type": "ListItem",
+                "position": 1,
+                "name": "Home",
+                "item": "{{ url('/') }}"
+            },
+            {
+                "@type": "ListItem",
+                "position": 2,
+                "name": "{{ addslashes($article->category->name) }}",
+                "item": "{{ route('categories.show', $article->category->slug) }}"
+            },
+            {
+                "@type": "ListItem",
+                "position": 3,
+                "name": "{{ addslashes($article->title) }}",
+                "item": "{{ url()->current() }}"
+            }
+        ]
+    }
+    </script>
+
     <!-- Schema.org JSON-LD FAQPage Markup -->
     @if(!empty($article->faqs))
     <script type="application/ld+json">

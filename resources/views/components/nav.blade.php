@@ -18,22 +18,18 @@
         </div>
 
         <!-- Center: Desktop Primary Navigation -->
-        <nav aria-label="Primary Navigation" class="hidden md:flex items-center gap-6 lg:gap-8 font-sans text-xs font-semibold text-[#1E1B4B] tracking-wide uppercase">
-            <a href="{{ route('categories.show', 'ai-workflows') }}" 
-               class="{{ request()->is('category/ai-workflows') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
+        <nav aria-label="Primary Navigation" class="hidden md:flex items-center gap-5 lg:gap-7 font-sans text-xs font-semibold text-[#1E1B4B] tracking-wide uppercase">
+            <a href="{{ route('workflows.index') }}" 
+               class="{{ request()->routeIs('workflows.index') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
                 Workflows
             </a>
-            <a href="{{ route('home') }}" 
-               class="{{ request()->routeIs('home') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
-                Insights
+            <a href="{{ route('mcp.index') }}" 
+               class="{{ request()->routeIs('mcp.index') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
+                MCP Directory
             </a>
-            <a href="{{ route('categories.show', 'coding') }}" 
-               class="{{ request()->is('category/coding') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
-                Categories
-            </a>
-            <a href="{{ route('categories.show', 'ai-tools') }}" 
-               class="{{ request()->is('category/ai-tools') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
-                Tools
+            <a href="{{ route('news.index') }}" 
+               class="{{ request()->routeIs('news.index') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">
+                Realtime News
             </a>
             <a href="{{ route('advertise') }}" 
                class="{{ request()->routeIs('advertise') ? 'text-[#6D28D9] font-bold border-b-2 border-[#6D28D9] pb-0.5' : 'hover:text-[#6D28D9] transition-colors' }}">

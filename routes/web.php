@@ -13,7 +13,24 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\SubscribeController;
+use App\Http\Controllers\SeoController;
+use App\Http\Controllers\McpDirectoryController;
+use App\Http\Controllers\WorkflowDirectoryController;
+use App\Http\Controllers\NewsDirectoryController;
 use Illuminate\Support\Facades\Route;
+
+// SEO, AEO & GEO Optimization Engine Endpoints
+Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/feed.xml', [SeoController::class, 'feed'])->name('feed');
+Route::get('/rss', [SeoController::class, 'feed']);
+Route::get('/llms.txt', [SeoController::class, 'llmsTxt'])->name('llms.txt');
+Route::get('/llms-full.txt', [SeoController::class, 'llmsFullTxt'])->name('llms.full');
+Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+
+// Directory Hubs (AEO & GEO High Priority Index Pages)
+Route::get('/mcp-directory', [McpDirectoryController::class, 'index'])->name('mcp.index');
+Route::get('/workflows', [WorkflowDirectoryController::class, 'index'])->name('workflows.index');
+Route::get('/latest-ai-news', [NewsDirectoryController::class, 'index'])->name('news.index');
 
 // Public Editorial Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
