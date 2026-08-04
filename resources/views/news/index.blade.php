@@ -8,11 +8,11 @@
     <script type="application/ld+json">
     {
         "@@context": "https://schema.org",
-        "@type": "DataCatalog",
+        "@@type": "DataCatalog",
         "name": "Realtime AI News & Breaking Dispatches",
         "description": "Real-time AI news analysis and technical dispatches.",
         "publisher": {
-            "@type": "Organization",
+            "@@type": "Organization",
             "name": "Daily AI World",
             "url": "{{ url('/') }}"
         }

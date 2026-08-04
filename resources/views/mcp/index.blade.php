@@ -8,11 +8,11 @@
     <script type="application/ld+json">
     {
         "@@context": "https://schema.org",
-        "@type": "DataCatalog",
+        "@@type": "DataCatalog",
         "name": "Model Context Protocol (MCP) Server & Tool Directory",
         "description": "Comprehensive catalog of MCP servers for Cursor, Claude Desktop, and AI agents.",
         "publisher": {
-            "@type": "Organization",
+            "@@type": "Organization",
             "name": "Daily AI World",
             "url": "{{ url('/') }}"
         }

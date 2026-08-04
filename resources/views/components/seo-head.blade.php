@@ -44,36 +44,36 @@
 <script type="application/ld+json">
 {
     "@@context": "https://schema.org",
-    "@graph": [
+    "@@graph": [
         {
-            "@type": "WebSite",
-            "@id": "{{ url('/') }}#website",
+            "@@type": "WebSite",
+            "@@id": "{{ url('/') }}#website",
             "url": "{{ url('/') }}",
             "name": "Daily AI World",
             "description": "Essential intelligence for AI founders, developers, SaaS builders, and executives.",
             "publisher": {
-                "@id": "{{ url('/') }}#organization"
+                "@@id": "{{ url('/') }}#organization"
             },
             "potentialAction": {
-                "@type": "SearchAction",
+                "@@type": "SearchAction",
                 "target": {
-                    "@type": "EntryPoint",
+                    "@@type": "EntryPoint",
                     "urlTemplate": "{{ route('search') }}?q={search_term_string}"
                 },
                 "query-input": "required name=search_term_string"
             }
         },
         {
-            "@type": "Organization",
-            "@id": "{{ url('/') }}#organization",
+            "@@type": "Organization",
+            "@@id": "{{ url('/') }}#organization",
             "name": "Daily AI World",
             "url": "{{ url('/') }}",
             "logo": {
-                "@type": "ImageObject",
+                "@@type": "ImageObject",
                 "url": "{{ asset('images/logo.png') }}"
             },
             "founder": {
-                "@type": "Person",
+                "@@type": "Person",
                 "name": "Deepak Bagada",
                 "jobTitle": "CEO, SaaSNext",
                 "url": "https://github.com/DeepakBagada93"

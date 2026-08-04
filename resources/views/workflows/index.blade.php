@@ -8,11 +8,11 @@
     <script type="application/ld+json">
     {
         "@@context": "https://schema.org",
-        "@type": "DataCatalog",
+        "@@type": "DataCatalog",
         "name": "AI Workflows & Automation Directory",
         "description": "Production-ready AI automation blueprints, agentic pipelines, and LLM architecture templates.",
         "publisher": {
-            "@type": "Organization",
+            "@@type": "Organization",
             "name": "Daily AI World",
             "url": "{{ url('/') }}"
         }
