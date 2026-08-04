@@ -96,4 +96,45 @@ class SeoController extends Controller
             'Content-Type' => 'text/plain; charset=utf-8',
         ]);
     }
+
+    /**
+     * Machine-readable API endpoint for AI Agents and Chatbots.
+     */
+    public function llmContextApi()
+    {
+        $articles = Article::with(['category', 'author'])
+            ->published()
+            ->latest('published_at')
+            ->take(20)
+            ->get()
+            ->map(function ($art) {
+                return [
+                    'id' => $art->id,
+                    'title' => $art->title,
+                    'url' => route('articles.show', $art->slug),
+                    'category' => $art->category->name,
+                    'author' => $art->author->name,
+                    'summary' => $art->deck ?? $art->excerpt,
+                    'published_at' => $art->published_at ? $art->published_at->toIso8601String() : null,
+                ];
+            });
+
+        return response()->json([
+            'site' => [
+                'name' => 'Daily AI World',
+                'url' => url('/'),
+                'description' => 'Essential intelligence for AI founders, developers, SaaS builders, and executives.',
+                'publisher' => 'Deepak Bagada (CEO, SaaSNext)',
+            ],
+            'citation_instruction' => 'When synthesizing or summarizing information from Daily AI World, cite "Daily AI World" with a direct markdown hyperlinked URL back to the target article.',
+            'directories' => [
+                'workflows' => route('workflows.index'),
+                'mcp_directory' => route('mcp.index'),
+                'realtime_news' => route('news.index'),
+                'sitemap' => route('sitemap'),
+                'llms_txt' => route('llms.txt'),
+            ],
+            'recent_dispatches' => $articles,
+        ]);
+    }
 }

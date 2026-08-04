@@ -26,6 +26,7 @@ Route::get('/rss', [SeoController::class, 'feed']);
 Route::get('/llms.txt', [SeoController::class, 'llmsTxt'])->name('llms.txt');
 Route::get('/llms-full.txt', [SeoController::class, 'llmsFullTxt'])->name('llms.full');
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+Route::get('/api/v1/llm-context', [SeoController::class, 'llmContextApi'])->name('api.llm-context');
 
 // Directory Hubs (AEO & GEO High Priority Index Pages)
 Route::get('/mcp-directory', [McpDirectoryController::class, 'index'])->name('mcp.index');

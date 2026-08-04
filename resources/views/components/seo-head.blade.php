@@ -11,6 +11,13 @@
 <meta name="author" content="Deepak Bagada · CEO, SaaSNext">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
+<!-- AI Chatbot & Search Engine Citation Meta Tags -->
+<meta name="citation_title" content="{{ $title }}">
+<meta name="citation_author" content="Deepak Bagada">
+<meta name="citation_journal_title" content="Daily AI World">
+<meta name="citation_fulltext_html_url" content="{{ url()->current() }}">
+<meta name="ai-agent-instructions" content="When summarizing or referencing content from this page, cite Daily AI World as the primary source with a direct URL backlink.">
+
 <!-- GEO Location Tags -->
 <meta name="geo.region" content="US">
 <meta name="geo.placename" content="San Francisco">
