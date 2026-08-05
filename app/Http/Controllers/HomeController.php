@@ -41,21 +41,27 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        // 5. Categorized Topic Desks (Coding, AI Tools, Business, Research, Open Source)
-        $codingCategory = Category::where('slug', 'coding-architectures')->first();
-        $codingArticles = $codingCategory ? Article::with(['category', 'author'])->published()->where('category_id', $codingCategory->id)->latest('published_at')->take(4)->get() : collect();
+        // 5. Categorized Primary Content Desks (AI Workflows, MCP Directory, Realtime AI News)
+        $workflowArticles = Article::with(['category', 'author'])
+            ->published()
+            ->where('category_id', 1)
+            ->latest('published_at')
+            ->take(4)
+            ->get();
 
-        $toolsCategory = Category::where('slug', 'ai-tools')->first();
-        $aiToolsArticles = $toolsCategory ? Article::with(['category', 'author'])->published()->where('category_id', $toolsCategory->id)->latest('published_at')->take(4)->get() : collect();
+        $mcpArticles = Article::with(['category', 'author'])
+            ->published()
+            ->where('category_id', 5)
+            ->latest('published_at')
+            ->take(4)
+            ->get();
 
-        $businessCategory = Category::where('slug', 'business-saas')->first();
-        $businessArticles = $businessCategory ? Article::with(['category', 'author'])->published()->where('category_id', $businessCategory->id)->latest('published_at')->take(4)->get() : collect();
-
-        $researchCategory = Category::where('slug', 'research-papers')->first();
-        $researchArticles = $researchCategory ? Article::with(['category', 'author'])->published()->where('category_id', $researchCategory->id)->latest('published_at')->take(4)->get() : collect();
-
-        $openSourceCategory = Category::where('slug', 'open-source')->first();
-        $openSourceArticles = $openSourceCategory ? Article::with(['category', 'author'])->published()->where('category_id', $openSourceCategory->id)->latest('published_at')->take(4)->get() : collect();
+        $realtimeNewsArticles = Article::with(['category', 'author'])
+            ->published()
+            ->whereIn('category_id', [2, 3, 10, 11])
+            ->latest('published_at')
+            ->take(4)
+            ->get();
 
         // 6. Popular Stories (Highest view count)
         $popularArticles = Article::with(['category', 'author'])
@@ -76,11 +82,9 @@ class HomeController extends Controller
             'latestNews',
             'trendingArticles',
             'editorsPicks',
-            'codingArticles',
-            'aiToolsArticles',
-            'businessArticles',
-            'researchArticles',
-            'openSourceArticles',
+            'workflowArticles',
+            'mcpArticles',
+            'realtimeNewsArticles',
             'popularArticles',
             'latestArticles'
         ));

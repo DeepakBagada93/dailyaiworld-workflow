@@ -312,74 +312,70 @@
             @foreach($editorsPicks as $pick)
                 <x-article-card :article="$pick" :showImage="false" />
             @endforeach
-        </div>
-    </section>
-
-    <!-- 4. TOPIC DESKS GRID -->
+            <!-- 4. PRIMARY CONTENT DESKS GRID (3 CORE PILLARS) -->
     <section class="space-y-16 border-b border-[#E9D5FF] pb-16">
         
-        <!-- DESK 1: CODING -->
-        @if($codingArticles->count() > 0)
+        <!-- DESK 1: AI WORKFLOWS & AUTOMATION BLUEPRINTS -->
+        @if(isset($workflowArticles) && $workflowArticles->count() > 0)
             <div class="space-y-6">
-                <div class="flex items-center justify-between border-b-2 border-[#1E1B4B] pb-3">
+                <div class="flex items-center justify-between border-b-2 border-[#6D28D9] pb-3">
                     <div class="flex items-center gap-3">
                         <span class="w-3 h-3 rounded-full bg-[#6D28D9]"></span>
-                        <h2 class="font-sans text-2xl font-extrabold text-[#1E1B4B]">Coding & Architectures</h2>
+                        <h2 class="font-sans text-2xl font-extrabold text-[#1E1B4B]">⚡ AI Workflows & Automation Blueprints</h2>
                     </div>
-                    <a href="{{ route('categories.show', 'coding-architectures') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
-                        View Archive →
+                    <a href="{{ route('workflows.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
+                        View All Workflows →
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach($codingArticles as $art)
+                    @foreach($workflowArticles as $art)
                         <x-article-card :article="$art" :showImage="false" />
                     @endforeach
                 </div>
             </div>
         @endif
 
-        <!-- DESK 2: AI TOOLS -->
-        @if($aiToolsArticles->count() > 0)
+        <!-- DESK 2: MCP DIRECTORY & SERVER TOOLS -->
+        @if(isset($mcpArticles) && $mcpArticles->count() > 0)
             <div class="space-y-6">
-                <div class="flex items-center justify-between border-b-2 border-[#1E1B4B] pb-3">
+                <div class="flex items-center justify-between border-b-2 border-[#7C3AED] pb-3">
                     <div class="flex items-center gap-3">
                         <span class="w-3 h-3 rounded-full bg-[#7C3AED]"></span>
-                        <h2 class="font-sans text-2xl font-extrabold text-[#1E1B4B]">AI Tools & Agent Systems</h2>
+                        <h2 class="font-sans text-2xl font-extrabold text-[#1E1B4B]">🛠️ MCP Directory & Tool Guides</h2>
                     </div>
-                    <a href="{{ route('categories.show', 'ai-tools') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
-                        View Archive →
+                    <a href="{{ route('mcp.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
+                        Explore MCP Directory →
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach($aiToolsArticles as $art)
+                    @foreach($mcpArticles as $art)
                         <x-article-card :article="$art" :showImage="false" />
                     @endforeach
                 </div>
             </div>
         @endif
 
-        <!-- DESK 3: BUSINESS -->
-        @if($businessArticles->count() > 0)
+        <!-- DESK 3: REALTIME AI NEWS & TECHNICAL BLOGS -->
+        @if(isset($realtimeNewsArticles) && $realtimeNewsArticles->count() > 0)
             <div class="space-y-6">
                 <div class="flex items-center justify-between border-b-2 border-[#1E1B4B] pb-3">
                     <div class="flex items-center gap-3">
-                        <span class="w-3 h-3 rounded-full bg-emerald-600"></span>
-                        <h2 class="font-sans text-2xl font-extrabold text-[#1E1B4B]">Business & SaaS Economics</h2>
+                        <span class="w-3 h-3 rounded-full bg-[#1E1B4B]"></span>
+                        <h2 class="font-sans text-2xl font-extrabold text-[#1E1B4B]">📰 Real-Time AI News & Technical Insights</h2>
                     </div>
-                    <a href="{{ route('categories.show', 'business-saas') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
-                        View Archive →
+                    <a href="{{ route('news.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
+                        View Latest AI News →
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-                    @foreach($businessArticles as $art)
+                    @foreach($realtimeNewsArticles as $art)
                         <x-article-card :article="$art" :showImage="false" />
                     @endforeach
                 </div>
             </div>
-        @endif
     </section>
 
 </div>
