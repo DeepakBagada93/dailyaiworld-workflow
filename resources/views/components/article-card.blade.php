@@ -89,7 +89,7 @@
     </article>
 @else
     <!-- Standard Editorial Card -->
-    <article class="editorial-card group rounded-xl overflow-hidden flex flex-col justify-between">
+    <article class="editorial-card group bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[#6D28D9] rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-md h-full">
         <div>
             @if($showImage && $article->featured_image)
                 <a href="{{ $article->url }}" class="block overflow-hidden aspect-[16/10] bg-gray-100 dark:bg-gray-800 relative focus:outline-none focus:ring-2 focus:ring-[#6D28D9]">
@@ -99,11 +99,11 @@
                 </a>
             @endif
 
-            <div class="p-6">
-                <div class="flex items-center justify-between gap-2 mb-3">
-                    <div class="flex items-center gap-2">
+            <div class="p-5 sm:p-6 space-y-3">
+                <div class="flex items-center justify-between gap-2">
+                    <div class="flex flex-wrap items-center gap-2">
                         <x-badge :tier="$article->tier" />
-                        <span class="text-xs text-[#6D28D9] font-semibold tracking-wide">{{ $article->category->name }}</span>
+                        <span class="text-xs text-[#6D28D9] font-bold tracking-wide font-mono">{{ $article->category->name }}</span>
                     </div>
                     
                     <!-- Micro-Animated Bookmark Button -->
@@ -121,32 +121,32 @@
                     </div>
                 </div>
 
-                <a href="{{ $article->url }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
-                    <h3 class="font-serif text-xl font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-snug">
+                <a href="{{ $article->url }}" class="block focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
+                    <h3 class="font-serif text-lg sm:text-xl font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-snug line-clamp-2">
                         {{ $article->title }}
                     </h3>
                 </a>
 
                 @if($article->deck ?? $article->excerpt)
-                    <p class="text-xs sm:text-sm text-[var(--text-body)] mt-2.5 line-clamp-3 leading-relaxed font-sans">
+                    <p class="text-xs sm:text-sm text-[var(--text-body)] line-clamp-3 leading-relaxed font-sans">
                         {{ $article->deck ?? $article->excerpt }}
                     </p>
                 @endif
             </div>
         </div>
 
-        <div class="px-6 pb-6 pt-0 mt-auto border-t border-[var(--border-subtle)] pt-4 flex items-center justify-between text-xs text-[var(--text-muted)] font-mono">
-            <div class="flex items-center gap-2.5 min-w-0">
+        <div class="px-5 sm:px-6 pb-5 pt-3 mt-auto border-t border-[var(--border-subtle)] flex items-center justify-between text-xs text-[var(--text-muted)] font-mono">
+            <div class="flex items-center gap-2 min-w-0">
                 @if($article->author->avatar)
-                    <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-6 h-6 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
+                    <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-5 h-5 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
                 @else
-                    <div class="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-[10px] shrink-0 border border-purple-200 dark:border-purple-800 font-sans">
+                    <div class="w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-[10px] shrink-0 border border-purple-200 dark:border-purple-800 font-sans">
                         {{ substr($article->author->name, 0, 1) }}
                     </div>
                 @endif
-                <span class="text-[var(--text-heading)] font-sans font-medium text-xs truncate max-w-[130px]">{{ $article->author->name }}</span>
+                <span class="text-[var(--text-heading)] font-sans font-medium text-xs truncate max-w-[120px]">{{ $article->author->name }}</span>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
+            <div class="flex items-center gap-2 shrink-0 text-[11px]">
                 <span>{{ $article->reading_time }}m read</span>
             </div>
         </div>
