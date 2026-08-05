@@ -23,7 +23,7 @@
     @if($heroArticle)
         <section class="relative border-b border-[#E9D5FF] pb-14 overflow-hidden" 
                  x-data="{ 
-                     textArray: ['Building Next-Gen AI Workflows...', 'Frontier Compute & Agentic Systems...', 'Scaling LLM Architectures in 2026...'],
+                     textArray: ['Building Enterprise AI Workflows...', 'Frontier Compute & Agentic Systems...', 'Scaling LLM Architectures in 2026...'],
                      displayText: '',
                      arrayIndex: 0,
                      charIndex: 0,
@@ -56,7 +56,7 @@
                  x-init="initTypewriter()">
 
             <!-- Background Ambient SVG Grid -->
-            <div class="absolute -top-12 -right-12 w-96 h-96 opacity-30 pointer-events-none">
+            <div class="absolute -top-12 -right-12 w-96 h-96 opacity-25 pointer-events-none">
                 <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg" class="w-full h-full animate-orbital-spin">
                     <circle cx="100" cy="100" r="80" fill="none" stroke="#6D28D9" stroke-width="1" stroke-dasharray="4,8"/>
                     <circle cx="100" cy="100" r="55" fill="none" stroke="#7C3AED" stroke-width="1.5" stroke-dasharray="6,6"/>
@@ -71,8 +71,8 @@
                 <div class="lg:col-span-8 flex flex-col justify-between space-y-6">
                     <div>
                         <!-- Typewriter Header Badge -->
-                        <div class="flex flex-wrap items-center gap-3 mb-4 font-mono text-xs">
-                            <span class="bg-[#FAF5FF] text-[#6D28D9] px-3 py-1 rounded-full font-bold uppercase tracking-wider text-[11px] border border-[#E9D5FF] flex items-center gap-2">
+                        <div class="flex flex-wrap items-center gap-3 mb-5 font-mono text-xs">
+                            <span class="bg-[#FAF5FF] text-[#6D28D9] px-3 py-1 rounded-full font-bold uppercase tracking-wider text-[11px] border border-[#E9D5FF] flex items-center gap-2 shadow-2xs">
                                 <span class="relative flex h-2 w-2">
                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6D28D9] opacity-75"></span>
                                     <span class="relative inline-flex rounded-full h-2 w-2 bg-[#6D28D9]"></span>
@@ -83,25 +83,23 @@
                             <span class="text-[#6B7280]">•</span>
 
                             <!-- Animated Typewriter Live Field -->
-                            <div class="inline-flex items-center gap-1 text-[#374151] font-mono text-xs">
+                            <div class="inline-flex items-center gap-1 text-[#374151] font-mono text-xs bg-[#FAF5FF] px-3 py-1 rounded-full border border-[#E9D5FF]">
                                 <span class="font-bold text-[#6D28D9] typewriter-cursor font-mono" x-text="displayText"></span>
                             </div>
 
                             <span class="text-[#6B7280]">•</span>
-                            <x-badge :tier="$heroArticle->tier" />
-                            <span class="text-[#6B7280]">•</span>
-                            <span class="text-[#6B7280]">{{ $heroArticle->reading_time }} min read</span>
+                            <span class="text-[#6B7280] font-mono text-xs">{{ $heroArticle->reading_time }} min read</span>
                         </div>
 
                         <!-- Hero Cover Title -->
                         <a href="{{ $heroArticle->url }}" class="group block">
-                            <h1 class="font-sans text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-[1.08] tracking-tight">
+                            <h1 class="font-sans text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-[1.06] tracking-tight">
                                 {{ $heroArticle->title }}
                             </h1>
                         </a>
 
                         @if($heroArticle->deck)
-                            <p class="text-base sm:text-lg text-[#374151] mt-4 leading-relaxed font-sans font-normal max-w-3xl">
+                            <p class="text-base sm:text-lg text-[#374151] mt-5 leading-relaxed font-sans font-normal max-w-3xl">
                                 {{ $heroArticle->deck }}
                             </p>
                         @endif
@@ -109,16 +107,16 @@
 
                     <!-- Executive Takeaways Card -->
                     @if(!empty($heroArticle->key_takeaways))
-                        <div class="bg-[#FAF5FF] border-l-4 border-[#6D28D9] rounded-r-xl p-5 my-2 border border-y border-r-[#E9D5FF] shadow-xs">
-                            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold mb-2.5">
+                        <div class="bg-[#FAF5FF] border-l-4 border-[#6D28D9] rounded-r-2xl p-5 my-2 border border-y border-r-[#E9D5FF] shadow-xs">
+                            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold mb-3">
                                 <svg class="w-4 h-4 text-[#6D28D9] animate-pulse" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
                                 <span>Executive Key Takeaways</span>
                             </div>
-                            <ul class="space-y-2 text-xs sm:text-sm text-[#1E1B4B] font-sans">
+                            <ul class="space-y-2.5 text-xs sm:text-sm text-[#1E1B4B] font-sans">
                                 @foreach($heroArticle->key_takeaways as $takeaway)
-                                    <li class="flex items-start gap-2">
-                                        <span class="text-[#6D28D9] font-bold">•</span>
-                                        <span>{{ $takeaway }}</span>
+                                    <li class="flex items-start gap-2.5">
+                                        <span class="text-[#6D28D9] font-bold shrink-0 mt-0.5">•</span>
+                                        <span class="leading-relaxed">{{ $takeaway }}</span>
                                     </li>
                                 @endforeach
                             </ul>
@@ -126,12 +124,12 @@
                     @endif
 
                     <!-- Cover Story Author Signature Meta -->
-                    <div class="flex flex-wrap items-center justify-between gap-4 pt-4 border-t border-[#E9D5FF] font-mono text-xs text-[#6B7280]">
+                    <div class="flex flex-wrap items-center justify-between gap-4 pt-5 border-t border-[#E9D5FF] font-mono text-xs text-[#6B7280]">
                         <div class="flex items-center gap-3">
                             @if($heroArticle->author->avatar)
-                                <img src="{{ $heroArticle->author->avatar }}" alt="{{ $heroArticle->author->name }}" class="w-11 h-11 mt-1 rounded-xl object-cover shrink-0 aspect-square border border-[#E9D5FF] ring-2 ring-[#6D28D9]/20 author-avatar-cover shadow-sm transition-all duration-300">
+                                <img src="{{ $heroArticle->author->avatar }}" alt="{{ $heroArticle->author->name }}" class="w-11 h-11 rounded-xl object-cover shrink-0 aspect-square border border-[#E9D5FF] ring-2 ring-[#6D28D9]/20 author-avatar-cover shadow-sm transition-all duration-300">
                             @else
-                                <div class="w-11 h-11 mt-1 rounded-xl bg-purple-100 text-[#6D28D9] flex items-center justify-center font-bold text-sm shrink-0 border border-[#E9D5FF] ring-2 ring-[#6D28D9]/20 font-sans shadow-sm">
+                                <div class="w-11 h-11 rounded-xl bg-purple-100 text-[#6D28D9] flex items-center justify-center font-bold text-sm shrink-0 border border-[#E9D5FF] ring-2 ring-[#6D28D9]/20 font-sans shadow-sm">
                                     {{ substr($heroArticle->author->name, 0, 1) }}
                                 </div>
                             @endif
@@ -145,7 +143,7 @@
                             <span>Published {{ $heroArticle->formatted_date }}</span>
                             <span>•</span>
                             <button @click="audioOpen = true; isPlaying = true; currentTrack = { title: '{{ addslashes($heroArticle->title) }}', author: '{{ addslashes($heroArticle->author->name) }}' }"
-                                    class="bg-[#FAF5FF] hover:bg-[#F3E8FF] text-[#6D28D9] border border-[#E9D5FF] text-xs py-1.5 px-3 rounded-lg flex items-center gap-2 font-bold transition-all">
+                                    class="bg-[#FAF5FF] hover:bg-[#F3E8FF] text-[#6D28D9] border border-[#E9D5FF] text-xs py-1.5 px-3.5 rounded-xl flex items-center gap-2 font-bold transition-all shadow-2xs">
                                 <svg class="w-3.5 h-3.5 text-[#6D28D9]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/></svg>
                                 <span>Listen Story</span>
                             </button>
@@ -155,10 +153,10 @@
 
                 <!-- Right 4 Cols: Animated SVG Interactive Neural Graphic Box -->
                 <div class="lg:col-span-4 flex">
-                    <div class="w-full bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xs hover:border-[#6D28D9]/40 transition-all duration-300 group relative overflow-hidden">
+                    <div class="w-full bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xs hover:border-[#6D28D9]/50 hover:shadow-md transition-all duration-300 group relative overflow-hidden">
                         
                         <!-- SVG Motion Graphic Artwork -->
-                        <div class="relative w-full h-40 flex items-center justify-center bg-white rounded-xl border border-[#E9D5FF] p-4 shadow-inner">
+                        <div class="relative w-full h-44 flex items-center justify-center bg-white rounded-xl border border-[#E9D5FF] p-4 shadow-inner">
                             <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
                                 <defs>
                                     <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -177,8 +175,8 @@
                                 <circle cx="215" cy="85" r="5" fill="#7C3AED"/>
                                 <circle cx="280" cy="60" r="6" fill="#5B21B6"/>
                             </svg>
-                            <span class="absolute bottom-2 right-3 font-mono text-[9px] text-[#6D28D9] uppercase font-bold tracking-widest bg-[#FAF5FF] px-2 py-0.5 rounded border border-[#E9D5FF]">
-                                Interactive SVG Node
+                            <span class="absolute bottom-2.5 right-3 font-mono text-[9px] text-[#6D28D9] uppercase font-bold tracking-widest bg-[#FAF5FF] px-2 py-0.5 rounded border border-[#E9D5FF]">
+                                AI Intelligence Network
                             </span>
                         </div>
 
@@ -187,7 +185,7 @@
                                 <span>Cover Feature</span>
                                 <span class="bg-[#6D28D9] text-white px-2 py-0.5 rounded-full text-[9px]">ESSENTIAL</span>
                             </div>
-                            <h3 class="font-sans text-xl font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug mb-3">
+                            <h3 class="font-sans text-xl font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug mb-3 line-clamp-2">
                                 {{ $heroArticle->title }}
                             </h3>
                             @if($heroArticle->excerpt)
@@ -197,11 +195,9 @@
                             @endif
                         </div>
 
-                        <div class="pt-3 border-t border-[#E9D5FF]">
-                            <a href="{{ $heroArticle->url }}" class="btn-primary w-full py-2.5 text-xs text-center justify-center font-bold shadow-xs transition-all">
-                                <span>Read Full Cover Analysis →</span>
-                            </a>
-                        </div>
+                        <a href="{{ $heroArticle->url }}" class="w-full bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-xs font-bold font-mono py-3 px-4 rounded-xl text-center block transition-all shadow-xs group-hover:shadow-md">
+                            Read Full Blueprint →
+                        </a>
                     </div>
                 </div>
             </div>
