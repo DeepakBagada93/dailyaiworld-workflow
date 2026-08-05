@@ -40,7 +40,7 @@
                         </form>
                     </div>
                 </div>
-                <a href="{{ route('articles.show', $article->slug) }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
+                <a href="{{ $article->url }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
                     <h3 class="font-serif text-xl sm:text-2xl font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-snug">
                         {{ $article->title }}
                     </h3>
@@ -77,7 +77,7 @@
             <x-badge :tier="$article->tier" />
             <span class="text-[var(--text-muted)]">{{ $article->formatted_date }}</span>
         </div>
-        <a href="{{ route('articles.show', $article->slug) }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
+        <a href="{{ $article->url }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
             <h4 class="font-serif text-base font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-snug">
                 {{ $article->title }}
             </h4>
@@ -92,7 +92,7 @@
     <article class="editorial-card group rounded-xl overflow-hidden flex flex-col justify-between">
         <div>
             @if($showImage && $article->featured_image)
-                <a href="{{ route('articles.show', $article->slug) }}" class="block overflow-hidden aspect-[16/10] bg-gray-100 dark:bg-gray-800 relative focus:outline-none focus:ring-2 focus:ring-[#6D28D9]">
+                <a href="{{ $article->url }}" class="block overflow-hidden aspect-[16/10] bg-gray-100 dark:bg-gray-800 relative focus:outline-none focus:ring-2 focus:ring-[#6D28D9]">
                     <img src="{{ $article->featured_image }}" alt="{{ $article->title }}" 
                          class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" 
                          loading="lazy" width="400" height="250">
@@ -121,7 +121,7 @@
                     </div>
                 </div>
 
-                <a href="{{ route('articles.show', $article->slug) }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
+                <a href="{{ $article->url }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
                     <h3 class="font-serif text-xl font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-snug">
                         {{ $article->title }}
                     </h3>

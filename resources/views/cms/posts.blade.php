@@ -83,7 +83,7 @@
                                 <input type="checkbox" value="{{ $post->id }}" x-model="selected" class="rounded border-[#272738] bg-[#0E0E14] text-[#8B5CF6]">
                             </td>
                             <td class="py-3.5 px-6 font-sans font-semibold text-white">
-                                <a href="{{ route('articles.show', $post->slug) }}" target="_blank" class="hover:text-[#8B5CF6] line-clamp-1">
+                                <a href="{{ $post->url }}" target="_blank" class="hover:text-[#8B5CF6] line-clamp-1">
                                     {{ $post->title }}
                                 </a>
                             </td>

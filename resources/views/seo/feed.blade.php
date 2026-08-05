@@ -11,8 +11,8 @@
         @foreach($articles as $article)
             <item>
                 <title><![CDATA[{{ $article->title }}]]></title>
-                <link>{{ route('articles.show', $article->slug) }}</link>
-                <guid isPermaLink="true">{{ route('articles.show', $article->slug) }}</guid>
+                <link>{{ $article->url }}</link>
+                <guid isPermaLink="true">{{ $article->url }}</guid>
                 <pubDate>{{ $article->published_at ? $article->published_at->toRssString() : date('r') }}</pubDate>
                 <dc:creator><![CDATA[{{ $article->author->name }}]]></dc:creator>
                 <category><![CDATA[{{ $article->category->name }}]]></category>

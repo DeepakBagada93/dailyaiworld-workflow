@@ -111,7 +111,7 @@ class SeoController extends Controller
                 return [
                     'id' => $art->id,
                     'title' => $art->title,
-                    'url' => route('articles.show', $art->slug),
+                    'url' => $art->url,
                     'category' => $art->category->name,
                     'author' => $art->author->name,
                     'summary' => $art->deck ?? $art->excerpt,

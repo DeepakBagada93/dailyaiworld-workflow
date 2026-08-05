@@ -29,7 +29,7 @@ DB_PASSWORD=your_password
 ```
 
 **If DB_HOST shows `127.0.0.1`, fix it:**
-```bash
+```bashcle
 sed -i 's/DB_HOST=127.0.0.1/DB_HOST=localhost/' .env
 ```
 

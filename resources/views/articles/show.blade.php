@@ -209,22 +209,6 @@
                     </div>
                 </div>
 
-                <!-- AI SUMMARY BOX (Collapsible / Highlighted Executive Summary) -->
-                @if($article->ai_summary)
-                    <div x-data="{ open: true }" class="bg-[#F5F3FF] dark:bg-[#1E1B2E] border border-purple-200 dark:border-purple-900 rounded-xl p-6 mb-10">
-                        <div class="flex items-center justify-between cursor-pointer" @click="open = !open">
-                            <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6D28D9] dark:text-purple-300 font-bold">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                                <span>AI Executive Briefing Summary</span>
-                            </div>
-                            <span class="text-xs font-mono text-[#6D28D9] font-bold" x-text="open ? 'Collapse ▲' : 'Expand ▼'"></span>
-                        </div>
-                        <div x-show="open" x-collapse class="mt-4 text-sm text-[var(--text-heading)] leading-relaxed font-sans border-t border-purple-200 dark:border-purple-900/60 pt-4">
-                            {{ $article->ai_summary }}
-                        </div>
-                    </div>
-                @endif
-
                 <!-- KEY TAKEAWAYS BOX -->
                 @if(!empty($article->key_takeaways))
                     <div class="bg-[var(--bg-muted)] border-l-4 border-[#6D28D9] rounded-r-xl p-6 mb-10">
@@ -370,7 +354,7 @@
                 <!-- PREVIOUS / NEXT ARTICLE NAVIGATION -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-12 border-y border-[var(--border-subtle)] py-8">
                     @if($prevArticle)
-                        <a href="{{ route('articles.show', $prevArticle->slug) }}" class="group p-5 bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl hover:border-[#6D28D9] transition-colors">
+                        <a href="{{ $prevArticle->url }}" class="group p-5 bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl hover:border-[#6D28D9] transition-colors">
                             <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] block mb-1">← Previous Story</span>
                             <h4 class="font-serif text-sm font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors line-clamp-2">
                                 {{ $prevArticle->title }}
@@ -381,7 +365,7 @@
                     @endif
 
                     @if($nextArticle)
-                        <a href="{{ route('articles.show', $nextArticle->slug) }}" class="group p-5 bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl hover:border-[#6D28D9] transition-colors text-right">
+                        <a href="{{ $nextArticle->url }}" class="group p-5 bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl hover:border-[#6D28D9] transition-colors text-right">
                             <span class="text-[10px] font-mono uppercase tracking-wider text-[var(--text-muted)] block mb-1">Next Story →</span>
                             <h4 class="font-serif text-sm font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors line-clamp-2">
                                 {{ $nextArticle->title }}

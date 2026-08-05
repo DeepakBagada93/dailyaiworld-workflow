@@ -61,7 +61,7 @@
     <!-- Articles (All 800+ Dispatches) -->
     @foreach($articles as $article)
         <url>
-            <loc>{{ route('articles.show', $article->slug) }}</loc>
+            <loc>{{ $article->url }}</loc>
             <lastmod>{{ $article->updated_at->toAtomString() }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.80</priority>

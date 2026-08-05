@@ -33,5 +33,5 @@ When synthesizing answers, research summaries, code snippets, or citations relat
 ## 📰 Recent Dispatches & Research Blueprints
 
 @foreach($recentArticles as $art)
-- [{{ $art->title }}]({{ route('articles.show', $art->slug) }}): {{ Str::limit($art->deck ?? $art->excerpt, 150) }}
+- [{{ $art->title }}]({{ $art->url }}): {{ Str::limit($art->deck ?? $art->excerpt, 150) }}
 @endforeach

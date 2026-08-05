@@ -94,7 +94,7 @@
                         </div>
 
                         <!-- Hero Cover Title -->
-                        <a href="{{ route('articles.show', $heroArticle->slug) }}" class="group block">
+                        <a href="{{ $heroArticle->url }}" class="group block">
                             <h1 class="font-sans text-3xl sm:text-5xl lg:text-6xl font-extrabold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-[1.08] tracking-tight">
                                 {{ $heroArticle->title }}
                             </h1>
@@ -198,7 +198,7 @@
                         </div>
 
                         <div class="pt-3 border-t border-[#E9D5FF]">
-                            <a href="{{ route('articles.show', $heroArticle->slug) }}" class="btn-primary w-full py-2.5 text-xs text-center justify-center font-bold shadow-xs transition-all">
+                            <a href="{{ $heroArticle->url }}" class="btn-primary w-full py-2.5 text-xs text-center justify-center font-bold shadow-xs transition-all">
                                 <span>Read Full Cover Analysis →</span>
                             </a>
                         </div>
@@ -231,7 +231,7 @@
                             <span>{{ $news->formatted_date }}</span>
                         </div>
 
-                        <a href="{{ route('articles.show', $news->slug) }}">
+                        <a href="{{ $news->url }}">
                             <h3 class="font-sans text-xl sm:text-2xl font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug">
                                 {{ $news->title }}
                             </h3>
@@ -282,7 +282,7 @@
                                 <span class="text-[10px] font-mono uppercase tracking-wider text-[#6D28D9] font-bold block mb-1">
                                     {{ $trend->category->name }}
                                 </span>
-                                <a href="{{ route('articles.show', $trend->slug) }}" class="font-sans text-sm font-bold text-[#1E1B4B] hover:text-[#6D28D9] transition-colors leading-snug line-clamp-2">
+                                <a href="{{ $trend->url }}" class="font-sans text-sm font-bold text-[#1E1B4B] hover:text-[#6D28D9] transition-colors leading-snug line-clamp-2">
                                     {{ $trend->title }}
                                 </a>
                                 <div class="mt-2 flex items-center gap-3 text-[11px] text-[#6B7280] font-mono">

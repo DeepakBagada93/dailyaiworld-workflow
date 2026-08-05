@@ -75,7 +75,7 @@
                     @foreach($recentArticles as $art)
                         <tr class="hover:bg-[var(--bg-sec)] transition-colors">
                             <td class="py-4 px-6 font-medium text-[var(--text-heading)]">
-                                <a href="{{ route('articles.show', $art->slug) }}" class="hover:text-[#6D28D9] font-serif text-sm font-bold">
+                                <a href="{{ $art->url }}" class="hover:text-[#6D28D9] font-serif text-sm font-bold">
                                     {{ $art->title }}
                                 </a>
                             </td>

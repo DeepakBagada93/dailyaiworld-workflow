@@ -9,12 +9,24 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function show(Request $request, string $slug)
+    public function show(Request $request, string $categorySlug, string $slug)
     {
-        $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
+        // Map URL prefix to category constraint
+        // /workflow/{slug} → AI Workflows (category_id=1)
+        // /blogs/{slug} → all other categories
+        $query = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
             ->where('slug', $slug)
-            ->published()
-            ->firstOrFail();
+            ->published();
+
+        if ($categorySlug === 'workflow') {
+            $query->where('category_id', 1);
+        } elseif ($categorySlug === 'blogs') {
+            $query->where('category_id', '!=', 1);
+        } else {
+            abort(404);
+        }
+
+        $article = $query->firstOrFail();
 
         // Increment view count
         $article->increment('view_count');

@@ -45,6 +45,99 @@ class Article extends Model
         'updated_date' => 'datetime',
     ];
 
+    /**
+     * SEO/AEO-optimized slug generation for new content.
+     * Old existing articles keep their original slugs (Google-indexed).
+     * New articles get auto-generated, keyword-rich slugs.
+     */
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function (Article $article) {
+            // Only auto-generate if no slug provided (existing content always has a slug)
+            if (empty($article->slug)) {
+                $article->slug = static::generateSeoSlug($article->title);
+            }
+
+            // Ensure uniqueness
+            $article->slug = static::ensureUniqueSlug($article->slug);
+        });
+
+        static::updating(function (Article $article) {
+            // Never change slug on existing articles — protects Google index
+            if ($article->isDirty('slug') && $article->getOriginal('slug')) {
+                // If someone explicitly changed the slug, ensure uniqueness
+                $article->slug = static::ensureUniqueSlug($article->slug, $article->id);
+            }
+        });
+    }
+
+    /**
+     * Generate AEO/SEO-optimized slug from title.
+     * - Removes filler/stop words for keyword density
+     * - Keeps it under 60 chars for clean SERP URLs
+     * - Lowercase, hyphen-separated
+     */
+    public static function generateSeoSlug(string $title): string
+    {
+        // Stop words to remove for higher keyword density in URL
+        $stopWords = [
+            'a', 'an', 'the', 'and', 'or', 'but', 'in', 'on', 'at', 'to',
+            'for', 'of', 'with', 'by', 'from', 'is', 'it', 'as', 'be',
+            'was', 'are', 'were', 'been', 'being', 'have', 'has', 'had',
+            'do', 'does', 'did', 'will', 'would', 'could', 'should',
+            'may', 'might', 'shall', 'can', 'that', 'this', 'these',
+            'those', 'what', 'which', 'who', 'whom', 'how', 'when',
+            'where', 'why', 'not', 'no', 'nor', 'so', 'than', 'too',
+            'very', 'just', 'about', 'into', 'your', 'you', 'our',
+            'its', 'his', 'her', 'their', 'my',
+        ];
+
+        // Convert to lowercase slug first
+        $slug = Str::slug($title);
+
+        // Split into words, remove stop words, keep keyword-rich terms
+        $words = explode('-', $slug);
+        $filtered = array_filter($words, function ($word) use ($stopWords) {
+            return !in_array($word, $stopWords) && strlen($word) > 1;
+        });
+
+        // Rejoin and trim to ~60 chars for clean SERP display
+        $slug = implode('-', $filtered);
+
+        // Trim to max 60 characters at word boundary
+        if (strlen($slug) > 60) {
+            $slug = substr($slug, 0, 60);
+            $slug = preg_replace('/-[^-]*$/', '', $slug); // don't cut mid-word
+        }
+
+        return $slug ?: Str::slug($title); // fallback to full slug if filtering empties it
+    }
+
+    /**
+     * Ensure slug is unique by appending -2, -3, etc. if needed.
+     */
+    public static function ensureUniqueSlug(string $slug, ?int $excludeId = null): string
+    {
+        $query = static::where('slug', $slug);
+        if ($excludeId) {
+            $query->where('id', '!=', $excludeId);
+        }
+
+        if (!$query->exists()) {
+            return $slug;
+        }
+
+        $i = 2;
+        while (static::where('slug', "{$slug}-{$i}")->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))->exists()) {
+            $i++;
+        }
+
+        return "{$slug}-{$i}";
+    }
+
+
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
@@ -105,5 +198,14 @@ class Article extends Model
     public function getIsoUpdatedDateAttribute(): string
     {
         return $this->updated_date ? $this->updated_date->toIso8601String() : $this->getIsoDateAttribute();
+    }
+
+    public function getUrlAttribute(): string
+    {
+        // Match production URL structure indexed in Google Search Console
+        // AI Workflows (category_id=1) → /workflow/{slug}
+        // All other categories → /blogs/{slug}
+        $categorySlug = ($this->category_id == 1) ? 'workflow' : 'blogs';
+        return route('articles.show', ['categorySlug' => $categorySlug, 'slug' => $this->slug]);
     }
 }

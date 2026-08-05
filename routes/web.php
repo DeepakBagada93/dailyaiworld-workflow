@@ -35,7 +35,13 @@ Route::get('/latest-ai-news', [NewsDirectoryController::class, 'index'])->name('
 
 // Public Editorial Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('/article/{slug}', [ArticleController::class, 'show'])->name('articles.show');
+
+// 301 redirect from old /article/{slug} URLs to preserve Google SEO juice
+Route::get('/article/{slug}', function (string $slug) {
+    $article = \App\Models\Article::where('slug', $slug)->published()->firstOrFail();
+    return redirect($article->url, 301);
+});
+
 Route::post('/article/{article}/comments', [ArticleController::class, 'storeComment'])->name('articles.comments.store');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.show');
 Route::get('/search', [SearchController::class, 'index'])->name('search');
@@ -96,5 +102,10 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+// Category-prefixed Article Routes (must be last — only matches /workflow/ and /blogs/)
+Route::get('/{categorySlug}/{slug}', [ArticleController::class, 'show'])
+    ->name('articles.show')
+    ->where('categorySlug', 'workflow|blogs');
 
 require __DIR__.'/auth.php';
