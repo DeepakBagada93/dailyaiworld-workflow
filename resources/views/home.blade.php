@@ -151,7 +151,7 @@
                     </div>
                 </div>
 
-                <!-- Right 4 Cols: Auto-Playing Interactive Card Shuffler / Carousel -->
+                <!-- Right 4 Cols: 3D Interactive Card Stack Shuffler -->
                 <div class="lg:col-span-4 flex"
                      x-data="{ 
                          activeTab: 0,
@@ -165,32 +165,44 @@
                              if (this.autoInterval) clearInterval(this.autoInterval);
                              this.autoInterval = setInterval(() => {
                                  if (!this.isHovered) {
-                                     this.activeTab = (this.activeTab + 1) % this.totalTabs;
+                                     this.nextTab();
                                  }
-                             }, 4000);
+                             }, 4500);
                          },
                          nextTab() {
                              this.activeTab = (this.activeTab + 1) % this.totalTabs;
                          },
                          prevTab() {
                              this.activeTab = (this.activeTab - 1 + this.totalTabs) % this.totalTabs;
+                         },
+                         getCardStyle(index) {
+                             let diff = (index - this.activeTab + this.totalTabs) % this.totalTabs;
+                             if (diff === 0) {
+                                 return 'z-30 opacity-100 translate-y-0 scale-100 rotate-0 shadow-xl border-[#6D28D9] pointer-events-auto';
+                             } else if (diff === 1) {
+                                 return 'z-20 opacity-75 translate-y-3.5 scale-95 rotate-1 shadow-md border-[#D8B4FE] pointer-events-none';
+                             } else if (diff === 2) {
+                                 return 'z-10 opacity-40 translate-y-7 scale-90 -rotate-1 shadow-sm border-[#E9D5FF] pointer-events-none';
+                             } else {
+                                 return 'z-0 opacity-0 translate-y-10 scale-85 pointer-events-none';
+                             }
                          }
                      }"
                      x-init="initCarousel()"
                      @mouseenter="isHovered = true"
                      @mouseleave="isHovered = false">
                     
-                    <div class="w-full bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-6 flex flex-col justify-between space-y-5 shadow-xs hover:border-[#6D28D9]/50 transition-all duration-300 relative overflow-hidden h-full">
+                    <div class="w-full bg-[#FAF5FF]/70 border border-[#E9D5FF] rounded-2xl p-6 flex flex-col justify-between space-y-5 shadow-sm hover:border-[#6D28D9]/40 transition-all duration-300 relative overflow-hidden h-full">
                         
                         <!-- Header with Controls & Auto-Shuffle Status Indicator -->
-                        <div class="flex items-center justify-between border-b border-[#E9D5FF] pb-3">
+                        <div class="flex items-center justify-between border-b border-[#E9D5FF] pb-3 z-40 relative">
                             <div class="flex items-center gap-2">
-                                <span class="relative flex h-2 w-2">
+                                <span class="relative flex h-2.5 w-2.5">
                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6D28D9] opacity-75"></span>
-                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#6D28D9]"></span>
+                                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#6D28D9]"></span>
                                 </span>
-                                <span class="font-mono text-xs font-bold text-[#6D28D9] uppercase tracking-widest">
-                                    Live Intel Feed
+                                <span class="font-mono text-xs font-bold text-[#6D28D9] uppercase tracking-widest flex items-center gap-1.5">
+                                    <span>3D Intel Deck</span>
                                 </span>
                             </div>
 
@@ -210,45 +222,47 @@
                             </div>
                         </div>
 
-                        <!-- Card Shuffler Content Stack -->
-                        <div class="relative flex-grow flex flex-col justify-between py-2">
+                        <!-- 3D Card Stack Container -->
+                        <div class="relative min-h-[220px] flex-grow flex items-start justify-center py-2" style="perspective: 1000px;">
                             @if(isset($latestNews) && $latestNews->count() > 0)
                                 @foreach($latestNews as $idx => $newsItem)
-                                    <div x-show="activeTab === {{ $idx }}" 
-                                         x-cloak
-                                         x-transition:enter="transition ease-out duration-300"
-                                         x-transition:enter-start="opacity-0 translate-x-4 scale-98"
-                                         x-transition:enter-end="opacity-100 translate-x-0 scale-100"
-                                         x-transition:leave="transition ease-in duration-200"
-                                         x-transition:leave-start="opacity-100 translate-x-0 scale-100"
-                                         x-transition:leave-end="opacity-0 -translate-x-4 scale-98"
-                                         class="space-y-3">
+                                    <div :class="getCardStyle({{ $idx }})" 
+                                         class="absolute inset-x-0 top-0 bg-white border rounded-xl p-5 transition-all duration-500 ease-out flex flex-col justify-between min-h-[210px] transform-gpu">
                                         
-                                        <div class="flex items-center justify-between text-xs font-mono">
-                                            <span class="bg-white text-[#6D28D9] px-2.5 py-0.5 rounded-md font-bold border border-[#E9D5FF] text-[10px] uppercase">
-                                                {{ $newsItem->category->name }}
-                                            </span>
-                                            <span class="text-[#6B7280] text-[11px]">{{ $newsItem->reading_time }}m read</span>
+                                        <div class="space-y-2.5">
+                                            <div class="flex items-center justify-between text-xs font-mono">
+                                                <span class="bg-[#FAF5FF] text-[#6D28D9] px-2.5 py-0.5 rounded-md font-bold border border-[#E9D5FF] text-[10px] uppercase">
+                                                    {{ $newsItem->category->name }}
+                                                </span>
+                                                <span class="text-[#6B7280] text-[11px]">{{ $newsItem->reading_time }}m read</span>
+                                            </div>
+
+                                            <a href="{{ $newsItem->url }}" class="block group">
+                                                <h3 class="font-serif text-base sm:text-lg font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug line-clamp-2">
+                                                    {{ $newsItem->title }}
+                                                </h3>
+                                            </a>
+
+                                            @if($newsItem->deck ?? $newsItem->excerpt)
+                                                <p class="text-xs text-[#374151] leading-relaxed font-sans line-clamp-2">
+                                                    {{ $newsItem->deck ?? $newsItem->excerpt }}
+                                                </p>
+                                            @endif
                                         </div>
 
-                                        <a href="{{ $newsItem->url }}" class="block group">
-                                            <h3 class="font-sans text-lg sm:text-xl font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug line-clamp-3">
-                                                {{ $newsItem->title }}
-                                            </h3>
-                                        </a>
-
-                                        @if($newsItem->deck ?? $newsItem->excerpt)
-                                            <p class="text-xs text-[#374151] leading-relaxed font-sans line-clamp-3">
-                                                {{ $newsItem->deck ?? $newsItem->excerpt }}
-                                            </p>
-                                        @endif
+                                        <div class="pt-3 mt-3 border-t border-[#E9D5FF] flex items-center justify-between font-mono text-[11px]">
+                                            <span class="text-[#6B7280]">By {{ $newsItem->author->name }}</span>
+                                            <a href="{{ $newsItem->url }}" class="text-[#6D28D9] font-bold hover:underline">
+                                                Read →
+                                            </a>
+                                        </div>
                                     </div>
                                 @endforeach
                             @endif
                         </div>
 
                         <!-- Footer CTA & Dot Indicators -->
-                        <div class="space-y-3 pt-3 border-t border-[#E9D5FF]">
+                        <div class="space-y-3 pt-3 border-t border-[#E9D5FF] z-40 relative">
                             <!-- Dot indicators -->
                             <div class="flex items-center justify-center gap-1.5">
                                 @if(isset($latestNews) && $latestNews->count() > 0)
