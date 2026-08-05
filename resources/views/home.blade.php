@@ -310,7 +310,7 @@
 
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
             @foreach($editorsPicks as $pick)
-                <x-article-card :article="$pick" :showImage="true" />
+                <x-article-card :article="$pick" :showImage="false" />
             @endforeach
         </div>
     </section>
@@ -324,7 +324,7 @@
                 <div class="flex flex-wrap items-center justify-between border-b-2 border-[#6D28D9] pb-3 gap-2">
                     <div class="flex items-center gap-3">
                         <span class="w-3 h-3 rounded-full bg-[#6D28D9] shrink-0"></span>
-                        <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">⚡ AI Workflows & Automation Blueprints</h2>
+                        <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">AI Workflows & Automation Blueprints</h2>
                     </div>
                     <a href="{{ route('workflows.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
                         View All Workflows →
@@ -333,7 +333,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                     @foreach($workflowArticles as $art)
-                        <x-article-card :article="$art" :showImage="true" />
+                        <x-article-card :article="$art" :showImage="false" />
                     @endforeach
                 </div>
             </div>
@@ -345,7 +345,7 @@
                 <div class="flex flex-wrap items-center justify-between border-b-2 border-[#7C3AED] pb-3 gap-2">
                     <div class="flex items-center gap-3">
                         <span class="w-3 h-3 rounded-full bg-[#7C3AED] shrink-0"></span>
-                        <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">🛠️ MCP Directory & Tool Guides</h2>
+                        <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">MCP Directory & Tool Guides</h2>
                     </div>
                     <a href="{{ route('mcp.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
                         Explore MCP Directory →
@@ -354,7 +354,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                     @foreach($mcpArticles as $art)
-                        <x-article-card :article="$art" :showImage="true" />
+                        <x-article-card :article="$art" :showImage="false" />
                     @endforeach
                 </div>
             </div>
@@ -366,7 +366,7 @@
                 <div class="flex flex-wrap items-center justify-between border-b-2 border-[#1E1B4B] pb-3 gap-2">
                     <div class="flex items-center gap-3">
                         <span class="w-3 h-3 rounded-full bg-[#1E1B4B] shrink-0"></span>
-                        <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">📰 Real-Time AI News & Technical Insights</h2>
+                        <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">Real-Time AI News & Technical Insights</h2>
                     </div>
                     <a href="{{ route('news.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
                         View Latest AI News →
@@ -375,7 +375,7 @@
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                     @foreach($realtimeNewsArticles as $art)
-                        <x-article-card :article="$art" :showImage="true" />
+                        <x-article-card :article="$art" :showImage="false" />
                     @endforeach
                 </div>
             </div>
