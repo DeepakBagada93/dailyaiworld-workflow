@@ -57,11 +57,11 @@
                 <span class="hidden lg:inline-block font-mono text-[10px] bg-white text-[#6D28D9] px-1.5 py-0.5 rounded border border-[#E9D5FF] font-bold">⌘K</span>
             </button>
 
-            <!-- Executive Pass Button -->
+            <!-- Executive Subscribe Button -->
             <a href="{{ route('subscribe') }}#executive-tier" 
                class="bg-gradient-to-r from-[#6D28D9] to-[#7C3AED] hover:from-[#5B21B6] hover:to-[#6D28D9] text-white px-3.5 py-2 rounded-xl transition-all duration-300 text-xs font-extrabold tracking-wide uppercase shadow-sm hover:shadow-md hover:shadow-purple-500/20 flex items-center gap-1.5">
-                <span class="hidden sm:inline">Executive Pass</span>
-                <span class="sm:hidden">Pass</span>
+                <span class="hidden sm:inline">Executive Subscribe</span>
+                <span class="sm:hidden">Subscribe</span>
             </a>
 
             @auth
@@ -99,23 +99,23 @@
          class="md:hidden border-t border-[#E9D5FF] bg-white px-4 pt-3 pb-6 space-y-2 font-sans text-xs font-bold uppercase tracking-wider text-[#1E1B4B] shadow-xl">
         <a href="{{ route('workflows.index') }}" 
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('workflows.index') ? 'text-[#6D28D9] bg-[#FAF5FF] font-bold' : '' }}">
-            ⚡ Workflows Library
+            Workflows Library
         </a>
         <a href="{{ route('mcp.index') }}" 
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('mcp.index') ? 'text-[#6D28D9] bg-[#FAF5FF] font-bold' : '' }}">
-            🛠️ MCP Directory
+            MCP Directory
         </a>
         <a href="{{ route('news.index') }}" 
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('news.index') ? 'text-[#6D28D9] bg-[#FAF5FF] font-bold' : '' }}">
-            📰 Realtime AI News
+            Realtime AI News
         </a>
         <a href="{{ route('advertise') }}#sponsor-tier" 
-           class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('advertise') ? 'text-[#6D28D9] bg-[#FAF5FF] font-bold' : '' }}">
-            💼 Sponsor Tier
+           class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('advertise') ? 'text-[#6D28D9] font-bold bg-[#FAF5FF]' : '' }}">
+            Sponsor Tier
         </a>
         <a href="{{ route('subscribe') }}#executive-tier" 
            class="block px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#6D28D9] to-[#7C3AED] text-white text-center font-extrabold mt-2">
-            ⭐ Executive Pass Access
+            Subscribe
         </a>
         @auth
             <a href="{{ route('cms.dashboard') }}" 
