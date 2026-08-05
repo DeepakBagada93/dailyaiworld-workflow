@@ -323,17 +323,17 @@
             <div class="space-y-6">
                 <div class="flex flex-wrap items-center justify-between border-b-2 border-[#6D28D9] pb-3 gap-2">
                     <div class="flex items-center gap-3">
-                        <span class="w-3 h-3 rounded-full bg-[#6D28D9] shrink-0"></span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-[#6D28D9] shrink-0 ring-4 ring-[#E9D5FF]"></span>
                         <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">AI Workflows & Automation Blueprints</h2>
                     </div>
-                    <a href="{{ route('workflows.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
+                    <a href="{{ route('workflows.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold bg-[#FAF5FF] px-3 py-1 rounded-full border border-[#E9D5FF]">
                         View All Workflows →
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                     @foreach($workflowArticles as $art)
-                        <x-article-card :article="$art" :showImage="false" />
+                        <x-article-card :article="$art" layout="workflow" :showImage="false" />
                     @endforeach
                 </div>
             </div>
@@ -344,17 +344,17 @@
             <div class="space-y-6">
                 <div class="flex flex-wrap items-center justify-between border-b-2 border-[#7C3AED] pb-3 gap-2">
                     <div class="flex items-center gap-3">
-                        <span class="w-3 h-3 rounded-full bg-[#7C3AED] shrink-0"></span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-[#7C3AED] shrink-0 ring-4 ring-[#E9D5FF]"></span>
                         <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">MCP Directory & Tool Guides</h2>
                     </div>
-                    <a href="{{ route('mcp.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
+                    <a href="{{ route('mcp.index') }}" class="font-mono text-xs text-[#7C3AED] hover:underline font-bold bg-[#FAF5FF] px-3 py-1 rounded-full border border-[#E9D5FF]">
                         Explore MCP Directory →
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                     @foreach($mcpArticles as $art)
-                        <x-article-card :article="$art" :showImage="false" />
+                        <x-article-card :article="$art" layout="mcp" :showImage="false" />
                     @endforeach
                 </div>
             </div>
@@ -365,17 +365,17 @@
             <div class="space-y-6">
                 <div class="flex flex-wrap items-center justify-between border-b-2 border-[#1E1B4B] pb-3 gap-2">
                     <div class="flex items-center gap-3">
-                        <span class="w-3 h-3 rounded-full bg-[#1E1B4B] shrink-0"></span>
+                        <span class="w-3.5 h-3.5 rounded-full bg-[#1E1B4B] shrink-0 ring-4 ring-gray-200"></span>
                         <h2 class="font-sans text-xl sm:text-2xl font-extrabold text-[#1E1B4B]">Real-Time AI News & Technical Insights</h2>
                     </div>
-                    <a href="{{ route('news.index') }}" class="font-mono text-xs text-[#6D28D9] hover:underline font-bold">
+                    <a href="{{ route('news.index') }}" class="font-mono text-xs text-[#1E1B4B] hover:underline font-bold bg-gray-100 px-3 py-1 rounded-full border border-gray-200">
                         View Latest AI News →
                     </a>
                 </div>
 
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 sm:gap-8">
                     @foreach($realtimeNewsArticles as $art)
-                        <x-article-card :article="$art" :showImage="false" />
+                        <x-article-card :article="$art" layout="standard" :showImage="false" />
                     @endforeach
                 </div>
             </div>

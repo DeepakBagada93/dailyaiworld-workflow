@@ -71,22 +71,103 @@
             </div>
         </div>
     </article>
-@elseif($layout === 'minimal')
-    <article class="group py-4 border-b border-[var(--border-subtle)] last:border-b-0">
-        <div class="flex items-center gap-2 mb-1.5 font-mono text-xs">
-            <x-badge :tier="$article->tier" />
-            <span class="text-[var(--text-muted)]">{{ $article->formatted_date }}</span>
+@elseif($layout === 'workflow')
+    <!-- Workflow Blueprint Card Layout -->
+    <article class="editorial-card group bg-[var(--bg-card)] border border-[#E9D5FF] hover:border-[#6D28D9] rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden h-full">
+        <!-- Top Accent Strip -->
+        <div class="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#6D28D9] via-[#7C3AED] to-[#5B21B6]"></div>
+
+        <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2 font-mono text-xs">
+                <span class="bg-[#FAF5FF] text-[#6D28D9] px-2.5 py-1 rounded-md font-bold uppercase tracking-wider text-[10px] border border-[#E9D5FF] flex items-center gap-1.5">
+                    <span class="w-1.5 h-1.5 rounded-full bg-[#6D28D9] animate-pulse"></span>
+                    <span>Workflow Blueprint</span>
+                </span>
+                <span class="text-xs text-[#6B7280] font-semibold">{{ $article->reading_time }}m read</span>
+            </div>
+
+            <a href="{{ $article->url }}" class="block focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
+                <h3 class="font-serif text-xl font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug line-clamp-2">
+                    {{ $article->title }}
+                </h3>
+            </a>
+
+            @if($article->deck ?? $article->excerpt)
+                <p class="text-xs sm:text-sm text-[#374151] line-clamp-3 leading-relaxed font-sans">
+                    {{ $article->deck ?? $article->excerpt }}
+                </p>
+            @endif
+
+            <!-- Mini Blueprint Capability Badges -->
+            <div class="flex flex-wrap items-center gap-1.5 pt-1">
+                <span class="bg-[#F3E8FF] text-[#5B21B6] text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-[#E9D5FF]">
+                    Multi-File Code
+                </span>
+                <span class="bg-[#F3E8FF] text-[#5B21B6] text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-[#E9D5FF]">
+                    ASCII Diagram
+                </span>
+                <span class="bg-[#F3E8FF] text-[#5B21B6] text-[10px] font-mono font-bold px-2 py-0.5 rounded border border-[#E9D5FF]">
+                    Self-Healing
+                </span>
+            </div>
         </div>
-        <a href="{{ $article->url }}" class="focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded">
-            <h4 class="font-serif text-base font-bold text-[var(--text-heading)] group-hover:text-[#6D28D9] transition-colors leading-snug">
-                {{ $article->title }}
-            </h4>
-        </a>
-        <div class="mt-2 flex items-center justify-between text-xs text-[var(--text-muted)] font-mono">
-            <span>By {{ $article->author->name }}</span>
-            <span>{{ $article->reading_time }}m read</span>
+
+        <div class="mt-6 pt-4 border-t border-[#E9D5FF] flex items-center justify-between text-xs text-[#6B7280] font-mono">
+            <div class="flex items-center gap-2">
+                <span class="text-[#1E1B4B] font-sans font-bold text-xs">By {{ $article->author->name }}</span>
+            </div>
+            <a href="{{ $article->url }}" class="text-[#6D28D9] font-bold hover:underline flex items-center gap-1">
+                <span>View Workflow</span>
+                <span>→</span>
+            </a>
         </div>
     </article>
+
+@elseif($layout === 'mcp')
+    <!-- MCP Directory Tool Card Layout -->
+    <article class="editorial-card group bg-[#FAF5FF]/60 border border-[#E9D5FF] hover:border-[#7C3AED] rounded-2xl p-6 flex flex-col justify-between transition-all duration-300 hover:shadow-lg hover:-translate-y-1 relative overflow-hidden h-full">
+        <!-- Developer Command Header -->
+        <div class="space-y-4">
+            <div class="flex items-center justify-between gap-2 font-mono text-xs">
+                <span class="bg-[#1E1B4B] text-white px-2.5 py-1 rounded-md font-mono font-bold text-[10px] flex items-center gap-1.5 shadow-xs">
+                    <span class="text-[#A78BFA] font-bold">MCP</span> Server
+                </span>
+                <div class="flex items-center gap-1.5">
+                    <span class="bg-purple-100 text-[#6D28D9] text-[10px] font-mono font-bold px-2 py-0.5 rounded">Cursor</span>
+                    <span class="bg-purple-100 text-[#6D28D9] text-[10px] font-mono font-bold px-2 py-0.5 rounded">Claude</span>
+                </div>
+            </div>
+
+            <a href="{{ $article->url }}" class="block focus:outline-none focus:ring-2 focus:ring-[#7C3AED] rounded">
+                <h3 class="font-serif text-xl font-bold text-[#1E1B4B] group-hover:text-[#7C3AED] transition-colors leading-snug line-clamp-2">
+                    {{ $article->title }}
+                </h3>
+            </a>
+
+            @if($article->deck ?? $article->excerpt)
+                <p class="text-xs sm:text-sm text-[#374151] line-clamp-2 leading-relaxed font-sans">
+                    {{ $article->deck ?? $article->excerpt }}
+                </p>
+            @endif
+
+            <!-- Code CLI Quick Copy Bar -->
+            <div class="bg-[#1E1B4B] text-purple-200 rounded-lg p-2.5 font-mono text-[11px] flex items-center justify-between border border-purple-900 shadow-inner">
+                <span class="truncate text-purple-300 font-bold">$ npx @mcp/server</span>
+                <span class="text-[10px] bg-purple-900/60 text-purple-200 px-1.5 py-0.5 rounded font-mono shrink-0">v3.0</span>
+            </div>
+        </div>
+
+        <div class="mt-6 pt-4 border-t border-[#E9D5FF] flex items-center justify-between text-xs text-[#6B7280] font-mono">
+            <div class="flex items-center gap-2">
+                <span class="text-[#1E1B4B] font-sans font-bold text-xs">By {{ $article->author->name }}</span>
+            </div>
+            <a href="{{ $article->url }}" class="text-[#7C3AED] font-bold hover:underline flex items-center gap-1">
+                <span>Tool Guide</span>
+                <span>→</span>
+            </a>
+        </div>
+    </article>
+
 @else
     <!-- Standard Editorial Card -->
     <article class="editorial-card group bg-[var(--bg-card)] border border-[var(--border-subtle)] hover:border-[#6D28D9] rounded-xl overflow-hidden flex flex-col justify-between transition-all duration-300 hover:shadow-md h-full">
