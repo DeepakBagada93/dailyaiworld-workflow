@@ -216,4 +216,85 @@ class Article extends Model
 
         return route('articles.show', ['categorySlug' => $categorySlug, 'slug' => $this->slug]);
     }
+
+    /**
+     * Dynamically parse Table of Contents items from H2 headings & FAQs.
+     */
+    public function getTocAttribute(): array
+    {
+        $toc = [];
+        // Normalize literal '\n' string escapes to actual newlines
+        $content = str_replace(["\r\n", '\r\n', '\n'], "\n", $this->content ?? '');
+
+        // 1. Extract markdown H2 headings (lines starting with ## )
+        preg_match_all('/^##\s+(.+)$/m', $content, $matches);
+
+        if (!empty($matches[1])) {
+            foreach ($matches[1] as $headingText) {
+                // Remove inline markdown syntax, HTML tags, and trailing colons/hashes
+                $cleanTitle = trim(strip_tags(preg_replace('/[*_`#]/', '', $headingText)));
+                $cleanTitle = rtrim($cleanTitle, ':');
+                
+                if (!empty($cleanTitle) && strlen($cleanTitle) < 150) {
+                    $toc[] = [
+                        'number' => count($toc) + 1,
+                        'title' => $cleanTitle,
+                        'id' => Str::slug($cleanTitle),
+                    ];
+                }
+            }
+        }
+
+        // 2. Fallback: Parse rendered HTML <h2> tags if no markdown ## headings were found
+        if (empty($toc)) {
+            $html = Str::markdown($content);
+            preg_match_all('/<h2[^>]*>(.*?)<\/h2>/i', $html, $htmlMatches);
+            if (!empty($htmlMatches[1])) {
+                foreach ($htmlMatches[1] as $headingText) {
+                    $cleanTitle = trim(strip_tags($headingText));
+                    if (!empty($cleanTitle) && strlen($cleanTitle) < 150) {
+                        $toc[] = [
+                            'number' => count($toc) + 1,
+                            'title' => $cleanTitle,
+                            'id' => Str::slug($cleanTitle),
+                        ];
+                    }
+                }
+            }
+        }
+
+        // 3. Append FAQs if present
+        if (!empty($this->faqs) && is_array($this->faqs)) {
+            $toc[] = [
+                'number' => count($toc) + 1,
+                'title' => 'FAQs',
+                'id' => 'faqs',
+            ];
+        }
+
+        return $toc;
+    }
+
+    /**
+     * Render Markdown content to HTML and inject ID attributes into H2 headings for TOC anchors.
+     */
+    public function getFormattedContentAttribute(): string
+    {
+        $content = str_replace(["\r\n", '\r\n', '\n'], "\n", $this->content ?? '');
+        $html = Str::markdown($content);
+
+        // Inject id="heading-slug" and scroll-mt-24 into every <h2> tag
+        return preg_replace_callback('/<h2([^>]*)>(.*?)<\/h2>/i', function ($matches) {
+            $attrs = $matches[1];
+            $title = trim(strip_tags($matches[2]));
+            $slug = Str::slug($title);
+
+            // Avoid duplicate id attribute
+            if (str_contains($attrs, 'id=')) {
+                return "<h2{$attrs}>{$matches[2]}</h2>";
+            }
+
+            return "<h2 id=\"{$slug}\" class=\"scroll-mt-24\"{$attrs}>{$matches[2]}</h2>";
+        }, $html);
+    }
 }

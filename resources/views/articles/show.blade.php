@@ -242,7 +242,7 @@
 
                 <!-- ARTICLE PROSE CONTENT (760PX MAX WIDTH, COMFORTABLE LINE HEIGHT, INTERNAL LINKS, QUOTES, CODE BLOCKS, TABLES) -->
                 <div class="prose-editorial">
-                    {!! Str::markdown($article->content) !!}
+                    {!! $article->formatted_content !!}
                 </div>
 
                 <!-- AFFILIATE LINKS DISCLOSURE -->
@@ -277,7 +277,7 @@
 
                 <!-- FREQUENTLY ASKED QUESTIONS (FAQ SECTION & SCHEMA READY) -->
                 @if(!empty($article->faqs))
-                    <section class="my-12 border-t border-[var(--border-subtle)] pt-10">
+                    <section id="faqs" class="my-12 border-t border-[var(--border-subtle)] pt-10 scroll-mt-24">
                         <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#6D28D9] font-bold mb-6">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <span>Frequently Asked Questions</span>
@@ -362,19 +362,29 @@
 
             </div>
 
-            <!-- RIGHT STICKY SIDEBAR: TABLE OF CONTENTS (2 COLS DESKTOP) -->
-            <aside class="hidden lg:block lg:col-span-2 sticky top-28 space-y-6 pt-4">
-                <div class="border-l border-[var(--border-subtle)] pl-6 text-xs font-mono text-[var(--text-muted)] space-y-3">
-                    <span class="text-[10px] uppercase tracking-widest text-[#6D28D9] font-bold block mb-2">In This Article</span>
-                    <ul class="space-y-2 text-[11px]">
-                        <li><a href="#" class="hover:text-[#6D28D9] block text-[var(--text-heading)] font-semibold">1. Executive Summary</a></li>
-                        <li><a href="#" class="hover:text-[#6D28D9] block">2. Scaling Hypothesis Limits</a></li>
-                        <li><a href="#" class="hover:text-[#6D28D9] block">3. Capital Allocation</a></li>
-                        <li><a href="#" class="hover:text-[#6D28D9] block">4. Model Benchmarking</a></li>
-                        <li><a href="#" class="hover:text-[#6D28D9] block">5. FAQs</a></li>
-                    </ul>
-                </div>
-            </aside>
+            <!-- RIGHT STICKY SIDEBAR: DYNAMIC TABLE OF CONTENTS (2 COLS DESKTOP) -->
+            @if(!empty($article->toc))
+                <aside class="hidden lg:block lg:col-span-2 sticky top-28 space-y-6 pt-4">
+                    <div class="border-l-2 border-[#E9D5FF] pl-5 text-xs font-mono text-[var(--text-muted)] space-y-3">
+                        <span class="text-[10px] uppercase tracking-widest text-[#6D28D9] font-bold block mb-3">In This Article</span>
+                        <ul class="space-y-2.5 text-[11px] font-sans">
+                            @foreach($article->toc as $tocItem)
+                                <li>
+                                    <a href="#{{ $tocItem['id'] }}" 
+                                       class="hover:text-[#6D28D9] text-[#374151] hover:font-bold transition-all block leading-snug line-clamp-2">
+                                        <span class="font-mono text-[#6D28D9] font-bold mr-1">{{ $tocItem['number'] }}.</span>
+                                        <span>{{ $tocItem['title'] }}</span>
+                                    </a>
+                                </li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </aside>
+            @endif
+
+        </div>
+    </div>
+</article>
 
         </div>
     </div>
