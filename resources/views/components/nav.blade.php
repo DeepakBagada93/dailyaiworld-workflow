@@ -60,7 +60,6 @@
             <!-- Executive Pass Button -->
             <a href="{{ route('subscribe') }}#executive-tier" 
                class="bg-gradient-to-r from-[#6D28D9] to-[#7C3AED] hover:from-[#5B21B6] hover:to-[#6D28D9] text-white px-3.5 py-2 rounded-xl transition-all duration-300 text-xs font-extrabold tracking-wide uppercase shadow-sm hover:shadow-md hover:shadow-purple-500/20 flex items-center gap-1.5">
-                <svg class="w-3.5 h-3.5 text-purple-200" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"/></svg>
                 <span class="hidden sm:inline">Executive Pass</span>
                 <span class="sm:hidden">Pass</span>
             </a>
