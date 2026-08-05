@@ -202,10 +202,18 @@ class Article extends Model
 
     public function getUrlAttribute(): string
     {
-        // Match production URL structure indexed in Google Search Console
+        // Match production parent category URL structure
         // AI Workflows (category_id=1) → /workflow/{slug}
+        // AI Tools / MCP (category_id=5) → /mcp-directory/{slug}
         // All other categories → /blogs/{slug}
-        $categorySlug = ($this->category_id == 1) ? 'workflow' : 'blogs';
+        if ($this->category_id == 1) {
+            $categorySlug = 'workflow';
+        } elseif ($this->category_id == 5) {
+            $categorySlug = 'mcp-directory';
+        } else {
+            $categorySlug = 'blogs';
+        }
+
         return route('articles.show', ['categorySlug' => $categorySlug, 'slug' => $this->slug]);
     }
 }

@@ -20,8 +20,10 @@ class ArticleController extends Controller
 
         if ($categorySlug === 'workflow') {
             $query->where('category_id', 1);
+        } elseif ($categorySlug === 'mcp-directory' || $categorySlug === 'mcp') {
+            $query->where('category_id', 5);
         } elseif ($categorySlug === 'blogs') {
-            $query->where('category_id', '!=', 1);
+            $query->whereNotIn('category_id', [1, 5]);
         } else {
             abort(404);
         }

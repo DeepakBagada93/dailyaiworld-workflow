@@ -103,9 +103,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-// Category-prefixed Article Routes (must be last — only matches /workflow/ and /blogs/)
+// Category-prefixed Article Routes (must be last — matches /workflow/, /blogs/, /mcp-directory/, and /mcp/)
 Route::get('/{categorySlug}/{slug}', [ArticleController::class, 'show'])
     ->name('articles.show')
-    ->where('categorySlug', 'workflow|blogs');
+    ->where('categorySlug', 'workflow|blogs|mcp-directory|mcp');
 
 require __DIR__.'/auth.php';
