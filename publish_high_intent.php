@@ -60,7 +60,8 @@ $remoteCount = 0;
 
 foreach ($dispatches as $index => $data) {
     $num = $index + 1;
-    echo "[$num/" . count($dispatches) . "] Publishing: {$data['title']}\n";
+    $wordCount = str_word_count(strip_tags($data['content'] ?? ''));
+    echo "[$num/" . count($dispatches) . "] Publishing ({$wordCount} words): {$data['title']}\n";
 
     try {
         // 1. Local Database Insert (triggers Article boot SEO slug generation)
