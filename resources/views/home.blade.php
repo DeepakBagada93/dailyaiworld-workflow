@@ -201,8 +201,8 @@
                                     <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6D28D9] opacity-75"></span>
                                     <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#6D28D9]"></span>
                                 </span>
-                                <span class="font-mono text-xs font-bold text-[#6D28D9] uppercase tracking-widest flex items-center gap-1.5">
-                                    <span>3D Intel Deck</span>
+                                <span class="font-mono text-xs font-bold text-[#6D28D9] uppercase tracking-widest">
+                                    <span>Latest Intel</span>
                                 </span>
                             </div>
 
