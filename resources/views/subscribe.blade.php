@@ -170,9 +170,9 @@
                         <span>Email Us at connect@saasnext.in →</span>
                     </a>
 
-                    <a href="#contact-inquiry" 
+                    <a href="mailto:connect@saasnext.in?subject=Team%20Access%20Inquiry" 
                        class="w-full sm:w-auto border border-[#E9D5FF] hover:border-[#6D28D9] bg-[#FAF5FF] hover:bg-[#F3E8FF] text-[#6D28D9] text-center font-semibold py-3.5 px-6 rounded-xl text-sm transition-all">
-                        Request Team Access Form
+                        Direct Email Contact
                     </a>
                 </div>
             </div>
@@ -306,80 +306,41 @@
             </div>
         </section>
 
-        <!-- SECTION 3: DIRECT INQUIRY & CONTACT FORM -->
+        <!-- SECTION 3: DIRECT EMAIL CONTACT -->
         <section id="contact-inquiry" class="scroll-mt-24 border-t border-[#E9D5FF] pt-16">
-            <div class="max-w-3xl mx-auto bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-8 sm:p-10 shadow-md">
+            <div class="max-w-3xl mx-auto bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-8 sm:p-12 shadow-md text-center space-y-6">
 
-                @if(session('success'))
-                    <div class="mb-6 p-4 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-xl font-sans text-sm font-medium">
-                        {{ session('success') }}
-                    </div>
-                @endif
+                <div class="inline-flex items-center gap-2 bg-[#6D28D9] text-white px-4 py-1.5 rounded-full text-xs font-mono font-bold uppercase tracking-wider">
+                    <span>📩 Direct Executive Contact</span>
+                </div>
 
-                <!-- Direct Email Box Banner -->
-                <div class="bg-white border border-[#E9D5FF] rounded-xl p-5 mb-8 text-center shadow-2xs">
-                    <span class="text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold block mb-1">
-                        📩 DIRECT EMAIL CONTACT
+                <h3 class="font-serif text-3xl font-extrabold text-[#1E1B4B]">
+                    Get in Touch with Our Team
+                </h3>
+
+                <p class="text-base text-gray-600 font-sans max-w-xl mx-auto leading-relaxed">
+                    For Executive Membership Pass access, brand partnership media kits, or custom editorial dispatches, reach out directly to Deepak Bagada & the SaaSNext team:
+                </p>
+
+                <div class="bg-white border-2 border-[#6D28D9] rounded-2xl p-6 sm:p-8 max-w-lg mx-auto shadow-sm">
+                    <span class="text-xs font-mono uppercase tracking-widest text-[#6B7280] font-bold block mb-2">
+                        OFFICIAL EMAIL ADDRESS
                     </span>
-                    <p class="text-base text-gray-700 font-sans">
-                        Reach out directly to Deepak Bagada & the SaaSNext team at:
-                    </p>
-                    <a href="mailto:connect@saasnext.in" class="mt-2 inline-flex items-center gap-2 font-mono text-xl sm:text-2xl font-extrabold text-[#6D28D9] hover:text-[#5B21B6] underline decoration-[#E9D5FF] hover:decoration-[#6D28D9] transition-all">
+                    <a href="mailto:connect@saasnext.in?subject=Executive%20Pass%20%26%20Partnership%20Inquiry" 
+                       class="inline-flex items-center gap-2 font-mono text-2xl sm:text-3xl font-extrabold text-[#6D28D9] hover:text-[#5B21B6] transition-all">
                         <span>connect@saasnext.in</span>
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
                     </a>
-                    <p class="text-xs text-[#6B7280] font-mono mt-2">
-                        All inquiries responded to within 24 hours.
-                    </p>
+                    <span class="block text-xs text-[#6B7280] font-mono mt-3">
+                        ⚡ 24-Hour Guaranteed Executive Response Time
+                    </span>
                 </div>
 
-                <div class="text-center mb-8">
-                    <h3 class="font-serif text-2xl font-bold text-[#1E1B4B]">Send an Online Inquiry</h3>
-                    <p class="text-sm text-gray-600 mt-1 font-sans">Fill out the quick details below and our team will be in touch with media kits & access details.</p>
+                <div class="pt-4 flex flex-wrap items-center justify-center gap-4 text-xs font-mono text-gray-500">
+                    <span>• Media Kits Available</span>
+                    <span>• Enterprise Team Licences</span>
+                    <span>• Custom Co-Authored Dispatches</span>
                 </div>
-
-                <form action="{{ route('advertise.lead') }}" method="POST" class="space-y-5 font-sans">
-                    @csrf
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-xs font-mono font-semibold text-gray-700 uppercase mb-2">Full Name</label>
-                            <input type="text" name="name" required placeholder="Deepak Bagada" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] text-sm bg-white">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-mono font-semibold text-gray-700 uppercase mb-2">Company / Organization</label>
-                            <input type="text" name="company" required placeholder="SaaSNext, Anthropic, etc." class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] text-sm bg-white">
-                        </div>
-                    </div>
-
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                        <div>
-                            <label class="block text-xs font-mono font-semibold text-gray-700 uppercase mb-2">Work Email</label>
-                            <input type="email" name="email" required placeholder="you@company.com" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] text-sm bg-white">
-                        </div>
-
-                        <div>
-                            <label class="block text-xs font-mono font-semibold text-gray-700 uppercase mb-2">Inquiry Type</label>
-                            <select name="placement_interest" class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] text-sm bg-white">
-                                <option value="Executive Membership Pass (Reader Access)">Executive Membership Pass (Reader Access)</option>
-                                <option value="Executive Newsletter Sponsorship">Executive Newsletter Sponsorship</option>
-                                <option value="Co-Authored Sponsored Dispatch">Co-Authored Sponsored Dispatch</option>
-                                <option value="Desk Partner Rail Sponsorship">Desk Partner Rail Sponsorship</option>
-                                <option value="Custom Multi-Channel Campaign">Custom Multi-Channel Campaign</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div>
-                        <label class="block text-xs font-mono font-semibold text-gray-700 uppercase mb-2">Notes & Inquiry Details</label>
-                        <textarea name="message" rows="4" placeholder="Tell us about your team size, product goals, or sponsorship timeline..." class="w-full px-4 py-2.5 rounded-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] text-sm bg-white"></textarea>
-                    </div>
-
-                    <button type="submit" class="w-full bg-[#6D28D9] hover:bg-[#5B21B6] text-white font-semibold py-3.5 rounded-xl text-sm transition-all shadow-md flex items-center justify-center gap-2">
-                        <span>Submit Inquiry to connect@saasnext.in →</span>
-                    </button>
-                </form>
             </div>
         </section>
 
