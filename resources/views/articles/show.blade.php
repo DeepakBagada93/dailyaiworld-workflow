@@ -241,35 +241,9 @@
                 @endif
 
                 <!-- ARTICLE PROSE CONTENT (760PX MAX WIDTH, COMFORTABLE LINE HEIGHT, INTERNAL LINKS, QUOTES, CODE BLOCKS, TABLES) -->
-                @if(($article->tier === 'Briefing' || $article->tier === 'Research Breakdown') && !$isSubscribed)
-                    <div class="prose-editorial relative">
-                        {!! Str::markdown(Str::limit($article->content, 600, '...')) !!}
-                        
-                        <!-- Fade Out Overlay & Paywall Box -->
-                        <div class="relative -mt-20 pt-24 bg-gradient-to-b from-transparent via-white/90 to-white text-center pb-8 border-b border-gray-200">
-                            <div class="bg-white border-2 border-[#6D28D9] rounded-2xl p-8 max-w-xl mx-auto shadow-2xl space-y-4">
-                                <div class="inline-block px-3 py-1 bg-purple-100 text-purple-800 rounded-full text-xs font-mono font-bold">
-                                    EXECUTIVE MEMBERSHIP REQUIRED
-                                </div>
-                                <h3 class="font-serif text-2xl font-bold text-gray-900">
-                                    Unlock the Full {{ $article->tier }} Digest
-                                </h3>
-                                <p class="text-xs sm:text-sm text-gray-600 font-sans leading-relaxed">
-                                    This deep-dive architectural analysis is reserved for Daily AI World Executive Subscribers. Join founders, ML engineers, and CTOs accessing our complete research repository.
-                                </p>
-                                <div class="pt-2 flex flex-col sm:flex-row items-center justify-center gap-4">
-                                    <a href="{{ route('subscribe') }}" class="w-full sm:w-auto bg-[#6D28D9] hover:bg-[#5B21B6] text-white px-6 py-3 rounded-lg text-sm font-bold shadow-md transition-all">
-                                        Unlock Full Research ($19/mo) →
-                                    </a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @else
-                    <div class="prose-editorial">
-                        {!! Str::markdown($article->content) !!}
-                    </div>
-                @endif
+                <div class="prose-editorial">
+                    {!! Str::markdown($article->content) !!}
+                </div>
 
                 <!-- AFFILIATE LINKS DISCLOSURE -->
                 @if($article->affiliateLinks && $article->affiliateLinks->count())
