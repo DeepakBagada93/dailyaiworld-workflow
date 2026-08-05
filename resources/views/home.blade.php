@@ -151,53 +151,128 @@
                     </div>
                 </div>
 
-                <!-- Right 4 Cols: Animated SVG Interactive Neural Graphic Box -->
-                <div class="lg:col-span-4 flex">
-                    <div class="w-full bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 shadow-xs hover:border-[#6D28D9]/50 hover:shadow-md transition-all duration-300 group relative overflow-hidden">
+                <!-- Right 4 Cols: Auto-Playing Interactive Card Shuffler / Carousel -->
+                <div class="lg:col-span-4 flex"
+                     x-data="{ 
+                         activeTab: 0,
+                         totalTabs: {{ isset($latestNews) && $latestNews->count() > 0 ? $latestNews->count() : 3 }},
+                         autoInterval: null,
+                         isHovered: false,
+                         initCarousel() {
+                             this.startAutoPlay();
+                         },
+                         startAutoPlay() {
+                             if (this.autoInterval) clearInterval(this.autoInterval);
+                             this.autoInterval = setInterval(() => {
+                                 if (!this.isHovered) {
+                                     this.activeTab = (this.activeTab + 1) % this.totalTabs;
+                                 }
+                             }, 4000);
+                         },
+                         nextTab() {
+                             this.activeTab = (this.activeTab + 1) % this.totalTabs;
+                         },
+                         prevTab() {
+                             this.activeTab = (this.activeTab - 1 + this.totalTabs) % this.totalTabs;
+                         }
+                     }"
+                     x-init="initCarousel()"
+                     @mouseenter="isHovered = true"
+                     @mouseleave="isHovered = false">
+                    
+                    <div class="w-full bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-6 flex flex-col justify-between space-y-5 shadow-xs hover:border-[#6D28D9]/50 transition-all duration-300 relative overflow-hidden h-full">
                         
-                        <!-- SVG Motion Graphic Artwork -->
-                        <div class="relative w-full h-44 flex items-center justify-center bg-white rounded-xl border border-[#E9D5FF] p-4 shadow-inner">
-                            <svg viewBox="0 0 300 120" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
-                                <defs>
-                                    <linearGradient id="purpleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                                        <stop offset="0%" stop-color="#6D28D9" />
-                                        <stop offset="100%" stop-color="#A78BFA" />
-                                    </linearGradient>
-                                </defs>
-                                <!-- Connecting Neural Paths -->
-                                <path d="M 20 60 Q 75 10 150 60 T 280 60" fill="none" stroke="url(#purpleGrad)" stroke-width="2.5" class="animate-svg-dash"/>
-                                <path d="M 20 60 Q 75 110 150 60 T 280 60" fill="none" stroke="#E9D5FF" stroke-width="1.5"/>
+                        <!-- Header with Controls & Auto-Shuffle Status Indicator -->
+                        <div class="flex items-center justify-between border-b border-[#E9D5FF] pb-3">
+                            <div class="flex items-center gap-2">
+                                <span class="relative flex h-2 w-2">
+                                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6D28D9] opacity-75"></span>
+                                    <span class="relative inline-flex rounded-full h-2 w-2 bg-[#6D28D9]"></span>
+                                </span>
+                                <span class="font-mono text-xs font-bold text-[#6D28D9] uppercase tracking-widest">
+                                    Live Intel Feed
+                                </span>
+                            </div>
 
-                                <!-- Nodes -->
-                                <circle cx="20" cy="60" r="6" fill="#5B21B6"/>
-                                <circle cx="85" cy="35" r="5" fill="#6D28D9"/>
-                                <circle cx="150" cy="60" r="8" fill="url(#purpleGrad)"/>
-                                <circle cx="215" cy="85" r="5" fill="#7C3AED"/>
-                                <circle cx="280" cy="60" r="6" fill="#5B21B6"/>
-                            </svg>
-                            <span class="absolute bottom-2.5 right-3 font-mono text-[9px] text-[#6D28D9] uppercase font-bold tracking-widest bg-[#FAF5FF] px-2 py-0.5 rounded border border-[#E9D5FF]">
-                                AI Intelligence Network
-                            </span>
+                            <!-- Manual Arrow Nav Controls -->
+                            <div class="flex items-center gap-1.5">
+                                <button @click="prevTab()" 
+                                        class="w-7 h-7 rounded-lg bg-white border border-[#E9D5FF] text-[#6D28D9] hover:bg-[#6D28D9] hover:text-white transition-all flex items-center justify-center text-xs font-bold shadow-2xs focus:outline-none"
+                                        aria-label="Previous story">
+                                    ←
+                                </button>
+                                <span class="font-mono text-[11px] font-bold text-[#6B7280] px-1" x-text="(activeTab + 1) + '/' + totalTabs">1/5</span>
+                                <button @click="nextTab()" 
+                                        class="w-7 h-7 rounded-lg bg-white border border-[#E9D5FF] text-[#6D28D9] hover:bg-[#6D28D9] hover:text-white transition-all flex items-center justify-center text-xs font-bold shadow-2xs focus:outline-none"
+                                        aria-label="Next story">
+                                    →
+                                </button>
+                            </div>
                         </div>
 
-                        <div>
-                            <div class="flex items-center justify-between font-mono text-[10px] uppercase tracking-widest text-[#6D28D9] font-bold mb-3 border-b border-[#E9D5FF] pb-2">
-                                <span>Cover Feature</span>
-                                <span class="bg-[#6D28D9] text-white px-2 py-0.5 rounded-full text-[9px]">ESSENTIAL</span>
-                            </div>
-                            <h3 class="font-sans text-xl font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug mb-3 line-clamp-2">
-                                {{ $heroArticle->title }}
-                            </h3>
-                            @if($heroArticle->excerpt)
-                                <p class="text-xs text-[#374151] leading-relaxed font-sans line-clamp-3">
-                                    {{ $heroArticle->excerpt }}
-                                </p>
+                        <!-- Card Shuffler Content Stack -->
+                        <div class="relative flex-grow flex flex-col justify-between py-2">
+                            @if(isset($latestNews) && $latestNews->count() > 0)
+                                @foreach($latestNews as $idx => $newsItem)
+                                    <div x-show="activeTab === {{ $idx }}" 
+                                         x-cloak
+                                         x-transition:enter="transition ease-out duration-300"
+                                         x-transition:enter-start="opacity-0 translate-x-4 scale-98"
+                                         x-transition:enter-end="opacity-100 translate-x-0 scale-100"
+                                         x-transition:leave="transition ease-in duration-200"
+                                         x-transition:leave-start="opacity-100 translate-x-0 scale-100"
+                                         x-transition:leave-end="opacity-0 -translate-x-4 scale-98"
+                                         class="space-y-3">
+                                        
+                                        <div class="flex items-center justify-between text-xs font-mono">
+                                            <span class="bg-white text-[#6D28D9] px-2.5 py-0.5 rounded-md font-bold border border-[#E9D5FF] text-[10px] uppercase">
+                                                {{ $newsItem->category->name }}
+                                            </span>
+                                            <span class="text-[#6B7280] text-[11px]">{{ $newsItem->reading_time }}m read</span>
+                                        </div>
+
+                                        <a href="{{ $newsItem->url }}" class="block group">
+                                            <h3 class="font-sans text-lg sm:text-xl font-bold text-[#1E1B4B] group-hover:text-[#6D28D9] transition-colors leading-snug line-clamp-3">
+                                                {{ $newsItem->title }}
+                                            </h3>
+                                        </a>
+
+                                        @if($newsItem->deck ?? $newsItem->excerpt)
+                                            <p class="text-xs text-[#374151] leading-relaxed font-sans line-clamp-3">
+                                                {{ $newsItem->deck ?? $newsItem->excerpt }}
+                                            </p>
+                                        @endif
+                                    </div>
+                                @endforeach
                             @endif
                         </div>
 
-                        <a href="{{ $heroArticle->url }}" class="w-full bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-xs font-bold font-mono py-3 px-4 rounded-xl text-center block transition-all shadow-xs group-hover:shadow-md">
-                            Read Full Blueprint →
-                        </a>
+                        <!-- Footer CTA & Dot Indicators -->
+                        <div class="space-y-3 pt-3 border-t border-[#E9D5FF]">
+                            <!-- Dot indicators -->
+                            <div class="flex items-center justify-center gap-1.5">
+                                @if(isset($latestNews) && $latestNews->count() > 0)
+                                    @foreach($latestNews as $idx => $n)
+                                        <button @click="activeTab = {{ $idx }}" 
+                                                class="h-1.5 rounded-full transition-all duration-300"
+                                                :class="activeTab === {{ $idx }} ? 'w-6 bg-[#6D28D9]' : 'w-1.5 bg-[#E9D5FF] hover:bg-[#A78BFA]'"
+                                                aria-label="Go to slide {{ $idx + 1 }}">
+                                        </button>
+                                    @endforeach
+                                @endif
+                            </div>
+
+                            @if(isset($latestNews) && $latestNews->count() > 0)
+                                <template x-for="(item, index) in {{ json_encode($latestNews->map(fn($item) => ['url' => $item->url, 'title' => $item->title])) }}" :key="index">
+                                    <div x-show="activeTab === index">
+                                        <a :href="item.url" class="w-full bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-xs font-bold font-mono py-2.5 px-4 rounded-xl text-center block transition-all shadow-2xs hover:shadow-sm">
+                                            Read Dispatch →
+                                        </a>
+                                    </div>
+                                </template>
+                            @endif
+                        </div>
+
                     </div>
                 </div>
             </div>
