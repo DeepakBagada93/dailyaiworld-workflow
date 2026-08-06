@@ -78,6 +78,9 @@ $takeawaysJson = isset($data['key_takeaways']) ? json_encode($data['key_takeaway
 $faqsJson      = isset($data['faqs']) ? json_encode($data['faqs']) : json_encode([]);
 $type          = $data['type'] ?? 'blog';
 
+$publishedAt = isset($data['published_at']) ? date('Y-m-d H:i:s', strtotime($data['published_at'])) : date('Y-m-d H:i:s');
+$status = $data['status'] ?? (strtotime($publishedAt) > time() ? 'scheduled' : 'published');
+
 $row = [
     'category_id'    => (int) ($data['category_id'] ?? 1),
     'author_id'      => (int) ($data['author_id'] ?? 1),
@@ -95,8 +98,8 @@ $row = [
     'tier'           => $data['tier'] ?? 'Deep Dive',
     'is_hero'        => 0,
     'is_featured'    => 0,
-    'status'         => 'published',
-    'published_at'   => date('Y-m-d H:i:s'),
+    'status'         => $status,
+    'published_at'   => $publishedAt,
     'updated_date'   => date('Y-m-d H:i:s'),
     'view_count'     => 0,
     'trending_score' => 85.0,

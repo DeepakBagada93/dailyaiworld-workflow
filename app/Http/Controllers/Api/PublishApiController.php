@@ -33,6 +33,8 @@ class PublishApiController extends Controller
             'tier'           => 'nullable|string',
             'featured_image' => 'nullable|string|url',
             'reading_time'   => 'nullable|integer',
+            'published_at'   => 'nullable|date',
+            'status'         => 'nullable|string|in:published,draft,scheduled',
             'key_takeaways'  => 'nullable|array',
             'faqs'           => 'nullable|array',
             'ai_summary'     => 'nullable|string',

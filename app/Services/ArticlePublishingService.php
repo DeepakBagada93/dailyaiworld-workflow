@@ -27,6 +27,9 @@ class ArticlePublishingService
             ? (is_array($data['faqs']) ? json_encode($data['faqs']) : $data['faqs'])
             : json_encode([]);
 
+        $publishedAt = isset($data['published_at']) ? \Carbon\Carbon::parse($data['published_at']) : now();
+        $status = $data['status'] ?? ($publishedAt->isFuture() ? 'scheduled' : 'published');
+
         $row = [
             'category_id'    => (int) ($data['category_id'] ?? 1),
             'author_id'      => (int) ($data['author_id'] ?? 1),
@@ -44,8 +47,8 @@ class ArticlePublishingService
             'tier'           => $data['tier'] ?? 'Deep Dive',
             'is_hero'        => (int) ($data['is_hero'] ?? 0),
             'is_featured'    => (int) ($data['is_featured'] ?? 0),
-            'status'         => $data['status'] ?? 'published',
-            'published_at'   => now(),
+            'status'         => $status,
+            'published_at'   => $publishedAt,
             'updated_date'   => now(),
             'view_count'     => 0,
             'trending_score' => (float) ($data['trending_score'] ?? 85.0),
