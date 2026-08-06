@@ -16,8 +16,13 @@ Route::prefix('v1')->group(function () {
     Route::post('/newsletter/subscribe', [NewsletterApiController::class, 'subscribe'])->name('api.newsletter.subscribe');
     Route::get('/sponsors', [SponsorApiController::class, 'index'])->name('api.sponsors.index');
     Route::post('/subscriptions/webhook', [StripeWebhookController::class, 'handle'])->name('api.subscriptions.webhook');
+
+    Route::middleware('auth:sanctum')->group(function () {
+        Route::post('/articles/publish', [\App\Http\Controllers\Api\PublishApiController::class, 'store'])->name('api.articles.publish');
+    });
 });
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
+

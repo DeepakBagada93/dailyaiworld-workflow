@@ -3,7 +3,7 @@
 **Project Location**: `/Users/deepakbagada/personal/Daily AI world`  
 **Live Production Hostinger DB**: `193.203.184.64` (`u775719140_dailyai`)  
 **Local MySQL DB**: `daily_ai_world`  
-**Last Updated**: 2026-08-05  
+**Last Updated**: 2026-08-06  
 
 ---
 
@@ -65,7 +65,27 @@
 
 ---
 
+### 6. Remote REST API & Universal CLI Content Publishing System (Completed)
+- **Laravel Sanctum REST Endpoint (`POST /api/v1/articles/publish`)**:
+  - Secure API route in `routes/api.php` protected by Laravel Sanctum token auth.
+  - Interacts with `ArticlePublishingService` to insert articles into both Local MySQL and Remote Hostinger Live MySQL (`193.203.184.64:3306`).
+- **Hostinger Shared Hosting Standalone Bridge (`public/api_publish.php`)**:
+  - Standalone PHP REST API endpoint enabling direct remote article publishing on Hostinger public_html shared web hosting via secret Bearer token header (`DailyAI_Publish_Secret_2026_Secure_Token_X98`).
+- **Artisan Token Generator**:
+  - Added `php artisan make:api-token {name}` to instantly generate Sanctum Bearer tokens for external tools.
+- **Universal CLI & Client Scripts**:
+  - Included `publish_remote_article.py` Python script to publish articles from any remote machine, Antigravity, OpenCode, or Codex CLI.
+- **Published 8 New Viral 2026 AI Dispatches**:
+  - 3 AI Workflows (DeepSeek-R2 LangGraph, Claude 3.7 FastMCP Self-Healing, Gemini 2.5 Qdrant Vision RAG).
+  - 2 MCP Tools (GitHub Enterprise MCP, Brave Search Financial MCP).
+  - 3 AI Technical Blogs (Open-Weight Reasoning Benchmarks, Agentic Token Economics, Supabase Hybrid Vector Search).
+
+---
+
 ## 📌 Deployment Status
 - **Local Dev Server**: `http://localhost:8000/` (HTTP Status **200 OK**).
+- **Live Production Website**: `https://dailyaiworld.tech` (HTTP Status **200 OK**).
 - **Git Branch**: `main` (All changes committed & pushed to GitHub).
-- **Latest Commit**: `acdc82f` — *feat: replace hardcoded static TOC with dynamic H2 and FAQ anchor parser for existing and future content*.
+- **Latest Live Dispatch Count**: **834 Articles** published on Hostinger DB.
+
+

@@ -64,6 +64,19 @@ return [
             ]) : [],
         ],
 
+        'hostinger' => [
+            'driver' => 'mysql',
+            'host' => env('HOSTINGER_DB_HOST', '193.203.184.64'),
+            'port' => env('HOSTINGER_DB_PORT', '3306'),
+            'database' => env('HOSTINGER_DB_DATABASE', 'u775719140_dailyai'),
+            'username' => env('HOSTINGER_DB_USERNAME', 'u775719140_admin'),
+            'password' => env('HOSTINGER_DB_PASSWORD', 'Dailyaiworld@3093'),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'strict' => false,
+        ],
+
         'mariadb' => [
             'driver' => 'mariadb',
             'url' => env('DB_URL'),
