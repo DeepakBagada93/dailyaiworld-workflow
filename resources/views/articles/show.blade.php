@@ -91,7 +91,7 @@
 @endpush
 
 @section('content')
-<article class="py-10">
+<article class="future-newsroom article-newsroom py-10">
     
     <!-- 1. SCROLL READING PROGRESS BAR -->
     <div x-data="{ progress: 0 }" 

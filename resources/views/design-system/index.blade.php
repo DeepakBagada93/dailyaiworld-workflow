@@ -3,7 +3,7 @@
 @section('title', 'Global Design System & Token Specifications — Daily AI World')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
+<div class="future-newsroom newsroom-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">
     
     <!-- Hero Header -->
     <header class="border-b border-[var(--border-subtle)] pb-10">

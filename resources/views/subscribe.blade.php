@@ -4,7 +4,7 @@
 @section('meta_description', 'Join Daily AI World Executive Tier or partner with us to reach 42,000+ AI founders, CTOs, and tech leaders. Contact connect@saasnext.in for executive access & sponsorship packages.')
 
 @section('content')
-<div class="min-h-screen bg-[#FFFFFF] text-[#111111] antialiased font-sans">
+<div class="future-newsroom subscription-page min-h-screen bg-[#FFFFFF] text-[#111111] antialiased font-sans">
 
     <!-- Hero Header Banner -->
     <section class="border-b border-[#E9D5FF] bg-[#FAF5FF] py-16 px-4 sm:px-6 lg:px-8 text-center">

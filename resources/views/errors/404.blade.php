@@ -3,7 +3,7 @@
 @section('title', '404 Page Not Found — Daily AI World')
 
 @section('content')
-<div class="max-w-4xl mx-auto px-4 sm:px-6 py-24 text-center space-y-8">
+<div class="future-newsroom newsroom-page max-w-4xl mx-auto px-4 sm:px-6 py-24 text-center space-y-8">
     <div class="inline-block px-3 py-1 bg-[var(--bg-muted)] border border-purple-200 dark:border-purple-900 rounded-full text-xs font-mono text-[#6D28D9] font-bold uppercase tracking-widest">
         Error 404 • Dispatch Missing
     </div>

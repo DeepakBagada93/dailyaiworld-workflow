@@ -3,7 +3,7 @@
 @section('title', 'Search Archive — Daily AI World')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
+<div class="future-newsroom newsroom-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-10">
     <div class="border-b border-[var(--border-subtle)] pb-8">
         <span class="font-mono text-xs uppercase tracking-widest text-[#6D28D9] font-bold">Search Archive</span>
         <h1 class="font-serif text-3xl sm:text-4xl font-extrabold text-[var(--text-heading)] mt-1">

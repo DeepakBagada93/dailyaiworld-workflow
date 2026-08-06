@@ -29,6 +29,15 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9SPTJHSQ5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-W9SPTJHSQ5');
+    </script>
+
     <!-- Scripts & CSS via Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

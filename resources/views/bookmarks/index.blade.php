@@ -3,7 +3,7 @@
 @section('title', 'Saved Reading List — Daily AI World')
 
 @section('content')
-<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
+<div class="future-newsroom newsroom-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">
     <div class="border-b border-[var(--border-subtle)] pb-8 flex items-center justify-between">
         <div>
             <span class="font-mono text-xs uppercase tracking-widest text-[#6D28D9] font-bold">Personal Library</span>
