@@ -97,7 +97,22 @@
         <section class="newsletter-panel" aria-labelledby="newsletter-title"><div><span>Daily briefing</span><h2 id="newsletter-title">The signal, before the noise.</h2><p>One sharply edited email for people building with AI. No spam, no recycled headlines.</p></div><form action="{{ route('newsletter.subscribe') }}" method="POST" class="newsletter-form">@csrf<label class="sr-only" for="homepage-email">Email address</label><input id="homepage-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email"><button type="submit">Get the briefing <span aria-hidden="true">→</span></button></form></section>
 
         @if($latestArticles->count())
-            <section aria-labelledby="archive-title"><div class="section-heading"><div><span>From the archive</span><h2 id="archive-title">More to explore</h2></div></div><div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">@foreach($latestArticles as $article)<x-article-card :article="$article" :showImage="false" />@endforeach</div><div class="mt-10">{{ $latestArticles->onEachSide(1)->links() }}</div></section>
+            <section id="archive-section" class="scroll-mt-10" aria-labelledby="archive-title">
+                <div class="section-heading"><div><span>From the archive</span><h2 id="archive-title">More to explore</h2></div></div>
+                <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">@foreach($latestArticles as $article)<x-article-card :article="$article" :showImage="false" />@endforeach</div>
+                <div class="mt-10">{{ $latestArticles->onEachSide(1)->links() }}</div>
+            </section>
+
+            @if(request()->has('page'))
+                <script>
+                    document.addEventListener('DOMContentLoaded', function() {
+                        const target = document.getElementById('archive-section');
+                        if (target) {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    });
+                </script>
+            @endif
         @endif
     </div>
 </div>
