@@ -3,9 +3,11 @@ name: dailyaiworld
 description: >
   Researches high-intent, viral, and trending AI topics to publish 1,200+ to 3,500+ word AI Workflows,
   MCP Tool Guides, and AI Technical Blogs for Daily AI World using 3 concurrent subagents.
-  Generates 3 AI Workflows, 2 MCP Directory Tools, and 6 AI Blogs (11 total dispatches) with contextual internal links,
-  Google-compliant rel="nofollow noopener noreferrer" external links, multi-file code blueprints, ASCII/Mermaid flow diagrams,
-  and AEO/GEO FAQ sections. Publishes directly into both local MySQL and live Hostinger Remote MySQL databases.
+  Generates 3 AI Workflows, 2 MCP Directory Tools, and 6 AI Blogs (11 total dispatches per execution) with full SEO meta tags
+  (SEO Title, Meta Description, SEO Keywords, OpenGraph Image, Author Byline with X Profile),
+  contextual internal links to https://dailyaiworld.com/, Google-compliant rel="nofollow noopener noreferrer" external links,
+  multi-file code blueprints, ASCII/Mermaid flow diagrams, and AEO/GEO FAQ sections.
+  Publishes directly into both local MySQL and live Hostinger Remote MySQL databases.
   Activate when the user asks to generate high-intent articles, publish workflows, add MCP tools,
   run daily content dispatches, or publish viral tech content for Daily AI World.
 ---
@@ -13,19 +15,34 @@ description: >
 # Daily AI World — Master High-Intent Content & Dual-DB Publishing Skill
 
 ## Overview
-This skill automates high-intent trend research, high-CTR title/deck framing, **in-depth 1,200+ word technical dispatches**, internal/external link optimization, and direct dual-database publishing (Local MySQL + Live Hostinger Remote MySQL) using a **3-Subagent Parallel Architecture**.
+This skill automates high-intent trend research, high-CTR title/deck framing, **in-depth 1,200+ word technical dispatches**, internal/external link optimization, full SEO metadata generation (SEO Title, Meta Description, Keywords, Social OpenGraph tags), anti-duplication tracking via `memory.md`, and direct dual-database publishing (Local MySQL + Live Hostinger Remote MySQL) using a **3-Subagent Parallel Architecture**.
 
 ---
 
-## 🎯 Target Dispatch Mix (8 Total per Execution)
+## 🎯 Target Dispatch Mix (11 Total per Execution)
 
-Every execution produces **8 fresh dispatches**:
+Every execution produces **11 fresh dispatches**:
 
-| Dispatch Type | Subagent Name | Quantity | Target Category | URL Prefix | Minimum Word Count | Mandatory Features |
+| Dispatch Type | Subagent Name | Quantity | Target Category | URL Prefix | Minimum Word Count | Mandatory Features & Mandatory SEO Metadata |
 |---|---|---|---|---|---|---|
-| **AI Workflows & Blueprints** | `workflow-writer` | 3 | `AI Workflows` (ID `1`) | `/workflow/{slug}` | **1,200+ to 3,500+ words** | ASCII/Mermaid Architecture Diagram, Multi-File Code Blocks (`.env`, `schemas.py`, `tools.py`, `graph.py`, `main.py`), Retry & Resilience Rules, Internal Links, AEO FAQs |
-| **MCP Directory Tools** | `mcp-writer` | 2 | `AI Tools` (ID `5`) | `/mcp-directory/{slug}` | **1,200+ words** | Full TypeScript/Python SDK Server Code, `inputSchema` Zod/JSON Definitions, `mcpServers` Config for Cursor/Claude Desktop, OAuth 2.0 Security Guide, Internal Links, AEO FAQs |
-| **AI Blogs & Technical Insights** | `blog-writer` | 3 | `Coding` (ID `3`) / `LLMs` (ID `10`) | `/blogs/{slug}` | **1,200+ words** | Benchmark Comparison Tables, Financial ROI / Unit Economics, E-E-A-T Byline ("By Deepak Bagada, CEO at SaaSNext"), Code Snippets, Internal Links, AEO FAQs |
+| **AI Workflows & Blueprints** | `workflow-writer` | 3 | `AI Workflows` (ID `1`) | `/workflow/{slug}` | **1,200+ to 3,500+ words** | ASCII/Mermaid Architecture Diagram, Multi-File Code Blocks (`.env`, `schemas.py`, `tools.py`, `graph.py`, `main.py`), Retry & Resilience Rules, Internal Links to https://dailyaiworld.com/, AEO FAQs + **SEO Meta Info** (SEO Title, Meta Description, Focus Keywords, OG Image, Author X Byline) |
+| **MCP Directory Tools** | `mcp-writer` | 2 | `AI Tools` (ID `5`) | `/mcp-directory/{slug}` | **1,200+ words** | Full TypeScript/Python SDK Server Code, `inputSchema` Zod/JSON Definitions, `mcpServers` Config for Cursor/Claude Desktop, OAuth 2.0 Security Guide, Internal Links to https://dailyaiworld.com/, AEO FAQs + **SEO Meta Info** (SEO Title, Meta Description, Focus Keywords, OG Image, Author X Byline) |
+| **AI Blogs & Technical Insights** | `blog-writer` | 6 | `Coding` (ID `3`) / `LLMs` (ID `10`) | `/blogs/{slug}` | **1,200+ words** | Benchmark Comparison Tables, Financial ROI / Unit Economics, E-E-A-T Byline ("By Deepak Bagada, CEO at SaaSNext"), Code Snippets, Internal Links to https://dailyaiworld.com/, AEO FAQs + **SEO Meta Info** (SEO Title, Meta Description, Focus Keywords, OG Image, Author X Byline) |
+
+---
+
+## 🏷️ Mandatory SEO & Meta Information Standard
+
+Every generated dispatch object MUST contain complete, optimized SEO meta attributes:
+
+1. **`title`**: Catchy, high-CTR article headline (50-65 chars).
+2. **`seo_title`**: SEO-optimized meta title ending with `| Daily AI World`.
+3. **`meta_description`**: Compelling, keyword-rich summary (140-160 chars) designed for maximum Search Engine CTR.
+4. **`seo_keywords`**: Comma-separated list of 5-8 primary & LSI search keywords.
+5. **`deck` / `ai_summary` / `excerpt`**: Concise executive briefing for card feeds and AI search engines.
+6. **`featured_image` / `og_image`**: High-quality 1200x630 visual asset URL (`https://dailyaiworld.com/images/...` or Unsplash tech visual).
+7. **`author_byline`**: Explicit linked author attribution:
+   `By <a href="https://x.com/deeepakbagada" rel="nofollow noopener noreferrer">Deepak Bagada</a>, CEO at SaaSNext & Principal AI Architect.`
 
 ---
 
@@ -65,10 +82,10 @@ Before generating any content:
 When invoked, the agent MUST follow these 4 steps:
 
 ### Step 1: Check `memory.md` & Research August 2026 Trending Topics
-First inspect `memory.md` to avoid duplicate coverage. Then identify 8 fresh, high-intent, viral topics currently trending in AI:
+First inspect `memory.md` to avoid duplicate coverage. Then identify 11 fresh, high-intent, viral topics currently trending in AI:
 - **3 Workflows**: Agentic orchestration (LangGraph, AutoGen, CrewAI, n8n, Qdrant, LlamaIndex, AutoGPT).
 - **2 MCP Tools**: FastMCP TypeScript SDK, Supabase Vector, PostgreSQL, GitHub MCP, Brave Search MCP, Custom MCP tools for Cursor & Claude Desktop.
-- **3 AI Blogs**: Open-weight reasoning models (DeepSeek-R2, Claude 3.7, Gemini 2.5), AI SaaS pricing models, token unit economics.
+- **6 AI Blogs**: Open-weight reasoning models (DeepSeek-R2, Claude 3.7, Gemini 2.5), AI SaaS pricing models, token unit economics, AI Agent SLA governance, inference optimization, vector DB benchmarks.
 
 ### Step 2: Launch 3 Parallel Subagents via `invoke_subagent`
 
@@ -79,7 +96,7 @@ Spawn 3 subagents concurrently:
      "TypeName": "self",
      "Role": "AI Workflows Writer",
      "Model": "pro",
-     "Prompt": "Check memory.md to ensure zero repeated topics. Write 3 IN-DEPTH AI Workflows (Minimum 1,200+ words each). Include ASCII diagrams, 5 multi-file code blocks (.env, schemas.py, tools.py, graph.py, main.py), retry strategies, internal links using live domain https://dailyaiworld.com/ (/workflows and /mcp-directory), and 3 AEO Q&A pairs."
+     "Prompt": "Check memory.md to ensure zero repeated topics. Write 3 IN-DEPTH AI Workflows (Minimum 1,200+ words each). For each workflow include complete SEO metadata (title, seo_title, meta_description, seo_keywords, featured_image), ASCII diagrams, 5 multi-file code blocks (.env, schemas.py, tools.py, graph.py, main.py), retry strategies, internal links using live domain https://dailyaiworld.com/ (/workflows and /mcp-directory), linked author byline with X profile https://x.com/deeepakbagada, and 3 AEO Q&A pairs."
    }
    ```
 2. `mcp-writer`:
@@ -88,7 +105,7 @@ Spawn 3 subagents concurrently:
      "TypeName": "self",
      "Role": "MCP Tools Writer",
      "Model": "pro",
-     "Prompt": "Check memory.md to ensure zero repeated topics. Write 2 IN-DEPTH MCP Directory Tool Guides (Minimum 1,200+ words each). Include full TypeScript/Python server code, inputSchema JSON definitions, mcpServers config block, OAuth security guide, internal links using live domain https://dailyaiworld.com/ (/mcp-directory and /workflows), and 3 AEO Q&A pairs."
+     "Prompt": "Check memory.md to ensure zero repeated topics. Write 2 IN-DEPTH MCP Directory Tool Guides (Minimum 1,200+ words each). For each guide include complete SEO metadata (title, seo_title, meta_description, seo_keywords, featured_image), full TypeScript/Python server code, inputSchema JSON definitions, mcpServers config block, OAuth security guide, internal links using live domain https://dailyaiworld.com/ (/mcp-directory and /workflows), linked author byline with X profile https://x.com/deeepakbagada, and 3 AEO Q&A pairs."
    }
    ```
 3. `blog-writer`:
@@ -97,37 +114,34 @@ Spawn 3 subagents concurrently:
      "TypeName": "self",
      "Role": "AI Blogs Writer",
      "Model": "pro",
-     "Prompt": "Check memory.md to ensure zero repeated topics. Write 3 IN-DEPTH AI Technical Blogs (Minimum 1,200+ words each). Include benchmark comparison tables, E-E-A-T byline ('By Deepak Bagada, CEO at SaaSNext'), code snippets, internal links using live domain https://dailyaiworld.com/ (/latest-ai-news and /workflows), and 3 AEO Q&A pairs."
+     "Prompt": "Check memory.md to ensure zero repeated topics. Write 6 IN-DEPTH AI Technical Blogs (Minimum 1,200+ words each). For each blog include complete SEO metadata (title, seo_title, meta_description, seo_keywords, featured_image), benchmark comparison tables, E-E-A-T byline with author X profile ('By <a href=\"https://x.com/deeepakbagada\" rel=\"nofollow noopener noreferrer\">Deepak Bagada</a>, CEO at SaaSNext'), code snippets, internal links using live domain https://dailyaiworld.com/ (/latest-ai-news and /workflows), and 3 AEO Q&A pairs."
    }
    ```
 
 ### Step 3: Combine Outputs & Update `memory.md`
-1. Merge the 8 JSON dispatch objects returned by the subagents into `dispatches_payload.json` in the root workspace directory.
+1. Merge the 11 JSON dispatch objects returned by the subagents into `dispatches_payload.json` in the root workspace directory. Ensure all 11 dispatches carry complete `seo_title`, `meta_description`, `seo_keywords`, and `featured_image` metadata fields.
 2. Append newly generated dispatches to `memory.md`.
 
-### Step 4: Run Dual-DB Publisher Script / Trigger Remote REST API
+### Step 4: Run Dual-DB Publisher Script
 Execute the dual database publisher script:
 
 ```bash
 php publish_dual_db.php
 ```
 
-Or trigger the public remote API:
-```bash
-curl -X POST https://dailyaiworld.tech/api_publish.php \
-  -H "Authorization: Bearer DailyAI_Publish_Secret_2026_Secure_Token_X98" \
-  -H "Content-Type: application/json" \
-  -d @dispatches_payload.json
-```
+This script will:
+1. Generate unique SEO/AEO-optimized slugs (`Article::generateSeoSlug()`).
+2. Insert/Update all 11 articles in the **Local MySQL Database** (`daily_ai_world`).
+3. Push all 11 articles directly into the **Live Hostinger Remote MySQL Database** (`193.203.184.64:3306`, DB: `u775719140_dailyai`).
+4. Clear compiled view caches (`php artisan view:clear`) for immediate live visibility.
 
 ---
 
-## 🔐 Database & API Secret Credentials Reference
+## 🔐 Database Credentials Reference (Hostinger Live DB)
 
-- **Hostinger Server IP**: `193.203.184.64` / `srv1334.hstgr.io`
+- **Host IP / Server**: `193.203.184.64` / `srv1334.hstgr.io`
 - **Port**: `3306`
 - **Database**: `u775719140_dailyai`
 - **Username**: `u775719140_admin`
 - **Password**: `Dailyaiworld@3093`
-- **Public HTML API Token**: `DailyAI_Publish_Secret_2026_Secure_Token_X98`
-- **Sanctum API Token**: `1|LTcQEU0WkzEC45K6MIpQPMZUXAwU4IofapUyS1oEe8f25ca4`
+- **Valid `tier` Enum Values**: `'Breaking'`, `'Deep Dive'`, `'Founder Story'`, `'Research Breakdown'`, `'Briefing'` (Default: `'Deep Dive'`).

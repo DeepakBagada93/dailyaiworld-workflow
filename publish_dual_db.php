@@ -24,9 +24,10 @@ config([
 ]);
 
 $dispatches = json_decode(file_get_contents(__DIR__ . '/dispatches_payload.json'), true);
+$total = count($dispatches);
 
 echo "========================================\n";
-echo "PUBLISHING 8 SUBAGENT DISPATCHES TO DUAL DB\n";
+echo "PUBLISHING $total SUBAGENT DISPATCHES TO DUAL DB\n";
 echo "========================================\n";
 
 $publishedCount = 0;
@@ -34,7 +35,7 @@ $publishedCount = 0;
 foreach ($dispatches as $index => $data) {
     $num = $index + 1;
     $wordCount = str_word_count(strip_tags($data['content'] ?? ''));
-    echo "[$num/8] {$data['title']} ($wordCount words)\n";
+    echo "[$num/$total] {$data['title']} ($wordCount words)\n";
 
     try {
         $slug = Article::generateSeoSlug($data['title']);
@@ -84,5 +85,5 @@ foreach ($dispatches as $index => $data) {
 }
 
 echo "========================================\n";
-echo "SUCCESSFULLY PUBLISHED $publishedCount / 8 DISPATCHES TO DUAL DB\n";
+echo "SUCCESSFULLY PUBLISHED $publishedCount / $total DISPATCHES TO DUAL DB\n";
 echo "========================================\n";
