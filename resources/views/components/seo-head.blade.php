@@ -36,6 +36,8 @@
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@deeepakbagada">
+<meta name="twitter:creator" content="@deeepakbagada">
 <meta name="twitter:url" content="{{ url()->current() }}">
 <meta name="twitter:title" content="{{ $title }}">
 <meta name="twitter:description" content="{{ $description }}">
@@ -86,7 +88,11 @@
                 "@@type": "Person",
                 "name": "Deepak Bagada",
                 "jobTitle": "CEO, SaaSNext",
-                "url": "https://github.com/DeepakBagada93"
+                "sameAs": [
+                    "https://x.com/deeepakbagada",
+                    "https://github.com/DeepakBagada93"
+                ],
+                "url": "https://x.com/deeepakbagada"
             }
         }
     ]
