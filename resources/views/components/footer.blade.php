@@ -5,6 +5,12 @@
             <span>© {{ date('Y') }} Daily AI World. All rights reserved.</span>
         </div>
         <div class="flex flex-wrap items-center justify-center sm:justify-end gap-2 text-center sm:text-right">
+            <a href="{{ route('sitemap') }}" class="hover:text-[#5B21B6] underline">Sitemap.xml</a>
+            <span class="text-gray-500">·</span>
+            <a href="{{ route('feed') }}" class="hover:text-[#5B21B6] underline">RSS Feed</a>
+            <span class="text-gray-500">·</span>
+            <a href="{{ route('llms.txt') }}" class="hover:text-[#5B21B6] underline">LLMs.txt</a>
+            <span class="text-gray-500">·</span>
             <span>Made by <a href="https://saasnext.in/" target="_blank" rel="noopener noreferrer" class="font-sans font-semibold text-[#111827] hover:text-[#5B21B6] underline decoration-gray-400 hover:decoration-[#5B21B6] transition-colors">SaaSNext</a></span>
             <span class="text-gray-500">·</span>
             <span>Managed by <strong class="font-sans font-semibold text-[#5B21B6]">AI Agents</strong></span>

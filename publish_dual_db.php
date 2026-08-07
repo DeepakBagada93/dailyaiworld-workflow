@@ -23,11 +23,36 @@ config([
     ]
 ]);
 
-$dispatches = json_decode(file_get_contents(__DIR__ . '/dispatches_payload.json'), true);
+$payloadFile = __DIR__ . '/dispatches_payload.json';
+if (!file_exists($payloadFile)) {
+    die("ERROR: dispatches_payload.json not found!\n");
+}
+
+// 1. RUN QUALITY AUDIT GATE
+echo "========================================\n";
+echo "RUNNING SEO / AEO / HEO QUALITY AUDIT GATE\n";
+echo "========================================\n";
+
+$auditOutput = [];
+$auditReturnCode = 0;
+exec("python3 " . escapeshellarg(__DIR__ . "/audit_dispatches.py") . " " . escapeshellarg($payloadFile), $auditOutput, $auditReturnCode);
+
+echo implode("\n", $auditOutput) . "\n";
+
+if ($auditReturnCode !== 0) {
+    echo "========================================\n";
+    echo "❌ PUBLISHING ABORTED! DISPATCHES FAILED AUDIT.\n";
+    echo "Please rewrite rejected articles before pushing to DB.\n";
+    echo "========================================\n";
+    exit(1);
+}
+
+// 2. PUSH TO LOCAL & REMOTE DB
+$dispatches = json_decode(file_get_contents($payloadFile), true);
 $total = count($dispatches);
 
 echo "========================================\n";
-echo "PUBLISHING $total SUBAGENT DISPATCHES TO DUAL DB\n";
+echo "AUDIT PASSED! PUBLISHING $total DISPATCHES TO DUAL DB\n";
 echo "========================================\n";
 
 $publishedCount = 0;
@@ -41,8 +66,19 @@ foreach ($dispatches as $index => $data) {
         $slug = Article::generateSeoSlug($data['title']);
         $slug = Article::ensureUniqueSlug($slug);
 
-        $takeawaysJson = json_encode($data['key_takeaways']);
-        $faqsJson = json_encode($data['faqs']);
+        // Normalize FAQs
+        $faqs = $data['faqs'] ?? [];
+        $normalizedFaqs = [];
+        if (is_array($faqs)) {
+            foreach ($faqs as $f) {
+                if (is_array($f)) {
+                    $normalizedFaqs[] = [
+                        'question' => $f['question'] ?? $f['q'] ?? '',
+                        'answer' => $f['answer'] ?? $f['a'] ?? ''
+                    ];
+                }
+            }
+        }
 
         $row = [
             'category_id'    => (int) $data['category_id'],
@@ -56,9 +92,9 @@ foreach ($dispatches as $index => $data) {
             'featured_image' => $data['featured_image'] ?? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
             'reading_time'   => (int) ($data['reading_time'] ?? 8),
             'audio_url'      => null,
-            'key_takeaways'  => $takeawaysJson,
-            'faqs'           => $faqsJson,
-            'tier'           => 'Deep Dive', // Valid enum value
+            'key_takeaways'  => json_encode($data['key_takeaways'] ?? []),
+            'faqs'           => json_encode($normalizedFaqs),
+            'tier'           => 'Deep Dive',
             'is_hero'        => 0,
             'is_featured'    => 0,
             'status'         => 'published',
@@ -70,13 +106,13 @@ foreach ($dispatches as $index => $data) {
             'updated_at'     => now(),
         ];
 
-        // 1. Local Insert
+        // Local DB
         $localId = DB::table('articles')->insertGetId($row);
         echo "  [LOCAL DB] Success -> ID: $localId | Slug: $slug\n";
 
-        // 2. Remote Hostinger Live Insert
+        // Remote Hostinger DB
         DB::connection('hostinger')->table('articles')->insert($row);
-        echo "  [HOSTINGER DB] Success -> Direct Remote Push Complete!\n";
+        echo "  [HOSTINGER DB] Success -> Remote Push Complete!\n";
 
         $publishedCount++;
     } catch (\Exception $e) {
@@ -85,5 +121,5 @@ foreach ($dispatches as $index => $data) {
 }
 
 echo "========================================\n";
-echo "SUCCESSFULLY PUBLISHED $publishedCount / $total DISPATCHES TO DUAL DB\n";
+echo "SUCCESSFULLY PUBLISHED $publishedCount / $total AUDITED DISPATCHES TO DUAL DB\n";
 echo "========================================\n";

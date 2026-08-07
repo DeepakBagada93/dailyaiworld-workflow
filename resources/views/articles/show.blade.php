@@ -68,7 +68,7 @@
     </script>
 
     <!-- Schema.org JSON-LD FAQPage Markup -->
-    @if(!empty($article->faqs))
+    @if(!empty($article->faqs) && is_array($article->faqs))
     <script type="application/ld+json">
     {
         "@@context": "https://schema.org",
@@ -77,10 +77,10 @@
             @foreach($article->faqs as $index => $faq)
             {
                 "@@type": "Question",
-                "name": "{{ addslashes($faq['question']) }}",
+                "name": {!! json_encode(is_array($faq) ? ($faq['question'] ?? $faq['q'] ?? '') : '') !!},
                 "acceptedAnswer": {
                     "@@type": "Answer",
-                    "text": "{{ addslashes($faq['answer']) }}"
+                    "text": {!! json_encode(is_array($faq) ? ($faq['answer'] ?? $faq['a'] ?? '') : '') !!}
                 }
             }{{ $loop->last ? '' : ',' }}
             @endforeach
@@ -220,7 +220,7 @@
                             @foreach($article->key_takeaways as $takeaway)
                                 <li class="flex items-start gap-3">
                                     <span class="w-2 h-2 rounded-full bg-[#6D28D9] mt-2 shrink-0"></span>
-                                    <span>{{ $takeaway }}</span>
+                                    <span>{{ is_array($takeaway) ? ($takeaway['takeaway'] ?? $takeaway['answer'] ?? $takeaway['text'] ?? $takeaway['question'] ?? json_encode($takeaway)) : $takeaway }}</span>
                                 </li>
                             @endforeach
                         </ul>
@@ -276,7 +276,7 @@
                 </div>
 
                 <!-- FREQUENTLY ASKED QUESTIONS (FAQ SECTION & SCHEMA READY) -->
-                @if(!empty($article->faqs))
+                @if(!empty($article->faqs) && is_array($article->faqs))
                     <section id="faqs" class="my-12 border-t border-[var(--border-subtle)] pt-10 scroll-mt-24">
                         <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#6D28D9] font-bold mb-6">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -285,16 +285,18 @@
 
                         <div class="space-y-4" x-data="{ activeFaq: 0 }">
                             @foreach($article->faqs as $index => $faq)
-                                <div class="bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl overflow-hidden">
-                                    <button @click="activeFaq = (activeFaq === {{ $index }} ? null : {{ $index }})" 
-                                            class="w-full text-left p-5 flex items-center justify-between font-serif text-base font-bold text-[var(--text-heading)] hover:text-[#6D28D9] transition-colors">
-                                        <span>{{ $faq['question'] }}</span>
-                                        <span class="font-mono text-sm" x-text="activeFaq === {{ $index }} ? '−' : '+'"></span>
-                                    </button>
-                                    <div x-show="activeFaq === {{ $index }}" x-collapse class="px-5 pb-5 text-sm text-[var(--text-body)] leading-relaxed font-sans border-t border-[var(--border-subtle)] pt-3">
-                                        {{ $faq['answer'] }}
+                                @if(is_array($faq))
+                                    <div class="bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl overflow-hidden">
+                                        <button @click="activeFaq = (activeFaq === {{ $index }} ? null : {{ $index }})" 
+                                                class="w-full text-left p-5 flex items-center justify-between font-serif text-base font-bold text-[var(--text-heading)] hover:text-[#6D28D9] transition-colors">
+                                            <span>{{ $faq['question'] ?? $faq['q'] ?? '' }}</span>
+                                            <span class="font-mono text-sm" x-text="activeFaq === {{ $index }} ? '−' : '+'"></span>
+                                        </button>
+                                        <div x-show="activeFaq === {{ $index }}" x-collapse class="px-5 pb-5 text-sm text-[var(--text-body)] leading-relaxed font-sans border-t border-[var(--border-subtle)] pt-3">
+                                            {{ $faq['answer'] ?? $faq['a'] ?? '' }}
+                                        </div>
                                     </div>
-                                </div>
+                                @endif
                             @endforeach
                         </div>
                     </section>
@@ -317,7 +319,7 @@
                         
                         @if($article->author->twitter)
                             <div class="mt-4">
-                                <a href="https://twitter.com/{{ ltrim($article->author->twitter, '@') }}" target="_blank" class="text-xs font-mono text-[#6D28D9] hover:underline font-semibold">
+                                <a href="https://x.com/{{ ltrim($article->author->twitter, '@') }}" target="_blank" class="text-xs font-mono text-[#6D28D9] hover:underline font-semibold">
                                     Follow {{ $article->author->twitter }} on X →
                                 </a>
                             </div>
