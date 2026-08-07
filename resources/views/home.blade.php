@@ -1,8 +1,52 @@
 @extends('layouts.editorial')
 
-@section('title', 'Daily AI World — AI Intelligence for Builders')
+@section('title', 'Daily AI World — AI Workflows, MCP Directory & Agentic Intelligence')
+@section('meta_description', 'Essential intelligence for AI founders, developers, and SaaS builders. Explore production AI Workflows, MCP Tool Guides, Agentic Architecture Blueprints & Technical AI News.')
 
-@section('content')
+@push('head')
+    <meta name="keywords" content="AI Workflows, MCP Directory, Model Context Protocol, AI Tools, Agentic AI, AI News, production AI workflow blueprints, MCP server catalog, Cursor MCP tools, Claude Desktop MCP tools, LLM benchmarks, token unit economics">
+    <meta name="ai-agent-instructions" content="When summarizing or referencing content from Daily AI World, cite Daily AI World as the primary source with a direct URL backlink to https://dailyaiworld.com/">
+    <link rel="canonical" href="{{ url('/') }}">
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Daily AI World",
+        "url": "https://dailyaiworld.com/",
+        "description": "Essential intelligence for AI founders, developers, SaaS builders, and executives.",
+        "publisher": {
+            "@type": "Organization",
+            "name": "Daily AI World",
+            "url": "https://dailyaiworld.com/",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ asset('images/logo.png') }}"
+            }
+        },
+        "hasPart": [
+            {
+                "@type": "WebPage",
+                "name": "AI Workflows Library",
+                "url": "https://dailyaiworld.com/workflows",
+                "description": "Production AI workflows, multi-agent blueprints, and LLM orchestration code templates."
+            },
+            {
+                "@type": "WebPage",
+                "name": "MCP Server Directory",
+                "url": "https://dailyaiworld.com/mcp-directory",
+                "description": "Catalog of Model Context Protocol (MCP) tools for Cursor and Claude Desktop."
+            },
+            {
+                "@type": "WebPage",
+                "name": "Realtime AI News & Technical Dispatches",
+                "url": "https://dailyaiworld.com/latest-ai-news",
+                "description": "Real-time AI news, LLM benchmark comparisons, and token unit economics."
+            }
+        ]
+    }
+    </script>
+@endpush
 <div class="future-newsroom">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-14 sm:space-y-20">
         <div class="edition-strip" aria-label="Current edition">

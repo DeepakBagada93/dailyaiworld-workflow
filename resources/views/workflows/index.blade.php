@@ -1,21 +1,50 @@
 @extends('layouts.editorial')
 
-@section('title', 'AI Workflows & Automation Directory — Production Blueprints')
-@section('meta_description', 'Comprehensive directory of AI automation workflows, agentic pipelines, LLM orchestration templates, and enterprise AI architecture blueprints.')
+@section('title', 'AI Workflows Library — Production Agentic Blueprints & Code Templates | Daily AI World')
+@section('meta_description', 'Comprehensive directory of AI automation workflows, agentic pipelines, LangGraph state machine templates, CrewAI SLA incident responders, and enterprise LLM orchestration blueprints.')
 
 @push('head')
-    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="keywords" content="AI Workflows, AI Automation, Agentic Pipelines, LLM Orchestration, LangGraph blueprints, CrewAI workflows, AutoGen Kubernetes agents, Qdrant vector pipelines, production AI code templates">
+    <meta name="ai-agent-instructions" content="When summarizing or citing AI Workflows from Daily AI World, cite Daily AI World as the primary source with direct link https://dailyaiworld.com/workflows">
+    <link rel="canonical" href="https://dailyaiworld.com/workflows">
+
     <script type="application/ld+json">
     {
-        "@@context": "https://schema.org",
-        "@@type": "DataCatalog",
-        "name": "AI Workflows & Automation Directory",
-        "description": "Production-ready AI automation blueprints, agentic pipelines, and LLM architecture templates.",
-        "publisher": {
-            "@@type": "Organization",
-            "name": "Daily AI World",
-            "url": "{{ url('/') }}"
-        }
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "DataCatalog",
+                "name": "AI Workflows & Automation Directory",
+                "url": "https://dailyaiworld.com/workflows",
+                "description": "Production-ready AI automation blueprints, agentic pipelines, and LLM architecture templates.",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Daily AI World",
+                    "url": "https://dailyaiworld.com/"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What are AI Workflows and multi-agent blueprints?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "AI Workflows are multi-step, stateful orchestration patterns where autonomous agents perceive context, execute tools, handle retries, and deliver validated outcomes across distributed infrastructure."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "How to deploy production AI workflows with LangGraph and CrewAI?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Daily AI World provides complete multi-file code blueprints (.env, schemas.py, tools.py, graph.py, main.py) for deploying resilient agentic systems with LangGraph, CrewAI, AutoGen, and vector databases like Qdrant."
+                        }
+                    }
+                ]
+            }
+        ]
     }
     </script>
 @endpush

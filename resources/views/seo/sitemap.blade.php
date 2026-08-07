@@ -58,13 +58,27 @@
         </url>
     @endforeach
 
-    <!-- Articles (All 800+ Dispatches) -->
+    <!-- Articles (All 800+ Dispatches with Google News & Image Extensions) -->
     @foreach($articles as $article)
         <url>
             <loc>{{ $article->url }}</loc>
             <lastmod>{{ $article->updated_at->toAtomString() }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.80</priority>
+            <news:news>
+                <news:publication>
+                    <news:name>Daily AI World</news:name>
+                    <news:language>en</news:language>
+                </news:publication>
+                <news:publication_date>{{ $article->published_at ? $article->published_at->toAtomString() : $article->created_at->toAtomString() }}</news:publication_date>
+                <news:title><![CDATA[{{ $article->title }}]]></news:title>
+            </news:news>
+            @if($article->featured_image)
+                <image:image>
+                    <image:loc>{{ $article->featured_image }}</image:loc>
+                    <image:title><![CDATA[{{ $article->title }}]]></image:title>
+                </image:image>
+            @endif
         </url>
     @endforeach
 

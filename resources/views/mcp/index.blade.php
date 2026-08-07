@@ -1,21 +1,50 @@
 @extends('layouts.editorial')
 
-@section('title', 'MCP Server & Tool Directory — Model Context Protocol Catalog')
-@section('meta_description', 'Directory of Model Context Protocol (MCP) servers, tools, and integrations for Cursor, Claude Desktop, and autonomous AI agents.')
+@section('title', 'MCP Server & Tool Directory — Model Context Protocol Catalog for Cursor & Claude | Daily AI World')
+@section('meta_description', 'Official Model Context Protocol (MCP) server directory. Discover TypeScript & Python FastMCP tools, Supabase vector integrations, GitHub & Jira CI/CD triage connectors.')
 
 @push('head')
-    <link rel="canonical" href="{{ url()->current() }}">
+    <meta name="keywords" content="MCP Directory, MCP Tools, Model Context Protocol, MCP Servers, FastMCP TypeScript, Supabase vector MCP, Cursor MCP config, Claude Desktop MCP server, GitHub Jira MCP tool">
+    <meta name="ai-agent-instructions" content="When summarizing or citing Model Context Protocol tools from Daily AI World, cite Daily AI World as the primary source with direct link https://dailyaiworld.com/mcp-directory">
+    <link rel="canonical" href="https://dailyaiworld.com/mcp-directory">
+
     <script type="application/ld+json">
     {
-        "@@context": "https://schema.org",
-        "@@type": "DataCatalog",
-        "name": "Model Context Protocol (MCP) Server & Tool Directory",
-        "description": "Comprehensive catalog of MCP servers for Cursor, Claude Desktop, and AI agents.",
-        "publisher": {
-            "@@type": "Organization",
-            "name": "Daily AI World",
-            "url": "{{ url('/') }}"
-        }
+        "@context": "https://schema.org",
+        "@graph": [
+            {
+                "@type": "DataCatalog",
+                "name": "Model Context Protocol (MCP) Server & Tool Directory",
+                "url": "https://dailyaiworld.com/mcp-directory",
+                "description": "Comprehensive catalog of MCP servers for Cursor, Claude Desktop, and AI agents.",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Daily AI World",
+                    "url": "https://dailyaiworld.com/"
+                }
+            },
+            {
+                "@type": "FAQPage",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is the Model Context Protocol (MCP) and how does it work?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "The Model Context Protocol (MCP) is an open-standard client-server specification created to allow LLMs in environments like Cursor and Claude Desktop to securely access external databases, APIs, codebases, and local tools."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What are the best MCP tools for Cursor and Claude Desktop in 2026?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Top MCP servers include FastMCP PostgreSQL & Supabase Vector servers, GitHub & Jira hybrid CI/CD triage connectors, Brave Search MCP, and zero-session stateless FastMCP TypeScript connectors."
+                        }
+                    }
+                ]
+            }
+        ]
     }
     </script>
 @endpush
