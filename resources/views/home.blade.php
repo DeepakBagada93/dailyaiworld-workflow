@@ -47,6 +47,8 @@
     }
     </script>
 @endpush
+
+@section('content')
 <div class="future-newsroom">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-10 space-y-14 sm:space-y-20">
         <div class="edition-strip" aria-label="Current edition">
