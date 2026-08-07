@@ -3,7 +3,7 @@ name: dailyaiworld
 description: >
   Researches high-intent, viral, and trending AI topics to publish 1,200+ to 3,500+ word AI Workflows,
   MCP Tool Guides, and AI Technical Blogs for Daily AI World using 3 concurrent subagents.
-  Generates 3 AI Workflows, 2 MCP Directory Tools, and 3 AI Blogs (8 total dispatches) with contextual internal links,
+  Generates 3 AI Workflows, 2 MCP Directory Tools, and 6 AI Blogs (11 total dispatches) with contextual internal links,
   Google-compliant rel="nofollow noopener noreferrer" external links, multi-file code blueprints, ASCII/Mermaid flow diagrams,
   and AEO/GEO FAQ sections. Publishes directly into both local MySQL and live Hostinger Remote MySQL databases.
   Activate when the user asks to generate high-intent articles, publish workflows, add MCP tools,
@@ -43,10 +43,10 @@ Google rewards **Experience, Expertise, Authoritativeness, and Trustworthiness (
 ### 2. Practitioner Byline & Internal Links:
 - Include byline: *"By Deepak Bagada, CEO at SaaSNext & Principal AI Architect."*
 - Include real production metrics (e.g., sub-100ms latency, 65% API cost reduction, 99.4% SLA uptime).
-- Add contextual internal links:
-  - `<a href="http://localhost:8000/workflows">AI Workflows Library</a>`
-  - `<a href="http://localhost:8000/mcp-directory">MCP Tools Directory</a>`
-  - `<a href="http://localhost:8000/latest-ai-news">Latest AI News</a>`
+- Add contextual live internal links using domain `https://dailyaiworld.com/` (NEVER use `localhost` or local IPs):
+  - `<a href="https://dailyaiworld.com/workflows">AI Workflows Library</a>`
+  - `<a href="https://dailyaiworld.com/mcp-directory">MCP Tools Directory</a>`
+  - `<a href="https://dailyaiworld.com/latest-ai-news">Latest AI News</a>`
 - Add external citations with `<a href="..." rel="nofollow noopener noreferrer">`.
 
 ---

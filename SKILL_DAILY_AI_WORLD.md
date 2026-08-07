@@ -3,7 +3,7 @@ name: dailyaiworld
 description: >
   Researches high-intent, viral, and trending AI topics to publish 1,200+ to 3,500+ word AI Workflows,
   MCP Tool Guides, and AI Technical Blogs for Daily AI World using 3 concurrent subagents.
-  Generates 3 AI Workflows, 2 MCP Directory Tools, and 3 AI Blogs (8 total dispatches) with contextual internal links,
+  Generates 3 AI Workflows, 2 MCP Directory Tools, and 6 AI Blogs (11 total dispatches) with contextual internal links,
   Google-compliant rel="nofollow noopener noreferrer" external links, multi-file code blueprints, ASCII/Mermaid flow diagrams,
   and AEO/GEO FAQ sections. Publishes directly into both local MySQL and live Hostinger Remote MySQL databases.
   Activate when the user asks to generate high-intent articles, publish workflows, add MCP tools,
@@ -41,13 +41,22 @@ Google rewards **Experience, Expertise, Authoritativeness, and Trustworthiness (
 - `<h5>` & `<h6>`: Advanced Edge Cases / Debugging Notes
 
 ### 2. Practitioner Byline & Internal Links:
-- Include byline: *"By Deepak Bagada, CEO at SaaSNext & Principal AI Architect."*
+- Include linked byline: *"By <a href="https://x.com/deeepakbagada" rel="nofollow noopener noreferrer">Deepak Bagada</a>, CEO at SaaSNext & Principal AI Architect."*
 - Include real production metrics (e.g., sub-100ms latency, 65% API cost reduction, 99.4% SLA uptime).
-- Add contextual internal links:
-  - `<a href="https://dailyaiworld.tech/workflows">AI Workflows Library</a>`
-  - `<a href="https://dailyaiworld.tech/mcp-directory">MCP Tools Directory</a>`
-  - `<a href="https://dailyaiworld.tech/latest-ai-news">Latest AI News</a>`
+- Add contextual live internal links using domain `https://dailyaiworld.com/` (NEVER use `localhost` or local IPs):
+  - `<a href="https://dailyaiworld.com/workflows">AI Workflows Library</a>`
+  - `<a href="https://dailyaiworld.com/mcp-directory">MCP Tools Directory</a>`
+  - `<a href="https://dailyaiworld.com/latest-ai-news">Latest AI News</a>`
 - Add external citations with `<a href="..." rel="nofollow noopener noreferrer">`.
+
+---
+
+## 🧠 Anti-Duplication Memory System (`memory.md`)
+
+Before generating any content:
+1. **Check `memory.md`**: Read `memory.md` in the skill folder (`/Users/deepakbagada/.gemini/config/skills/dailyaiworld/memory.md`) or root workspace (`/Users/deepakbagada/personal/Daily AI world/memory.md`).
+2. **Ensure Topic Uniqueness**: Compare target titles, slugs, and technical topics against past published dispatches in `memory.md`. **DO NOT repeat any topic or slug.**
+3. **Log New Dispatches**: After publishing, append newly generated dispatches into `memory.md` with date, category, type, title, slug, and core tech.
 
 ---
 
@@ -55,8 +64,8 @@ Google rewards **Experience, Expertise, Authoritativeness, and Trustworthiness (
 
 When invoked, the agent MUST follow these 4 steps:
 
-### Step 1: Research August 2026 Trending Topics
-Identify 8 high-intent, viral topics currently trending in AI:
+### Step 1: Check `memory.md` & Research August 2026 Trending Topics
+First inspect `memory.md` to avoid duplicate coverage. Then identify 8 fresh, high-intent, viral topics currently trending in AI:
 - **3 Workflows**: Agentic orchestration (LangGraph, AutoGen, CrewAI, n8n, Qdrant, LlamaIndex, AutoGPT).
 - **2 MCP Tools**: FastMCP TypeScript SDK, Supabase Vector, PostgreSQL, GitHub MCP, Brave Search MCP, Custom MCP tools for Cursor & Claude Desktop.
 - **3 AI Blogs**: Open-weight reasoning models (DeepSeek-R2, Claude 3.7, Gemini 2.5), AI SaaS pricing models, token unit economics.
@@ -70,7 +79,7 @@ Spawn 3 subagents concurrently:
      "TypeName": "self",
      "Role": "AI Workflows Writer",
      "Model": "pro",
-     "Prompt": "Write 3 IN-DEPTH AI Workflows (Minimum 1,200+ words each). Include ASCII diagrams, 5 multi-file code blocks (.env, schemas.py, tools.py, graph.py, main.py), retry strategies, internal links to /workflows and /mcp-directory, and 3 AEO Q&A pairs."
+     "Prompt": "Check memory.md to ensure zero repeated topics. Write 3 IN-DEPTH AI Workflows (Minimum 1,200+ words each). Include ASCII diagrams, 5 multi-file code blocks (.env, schemas.py, tools.py, graph.py, main.py), retry strategies, internal links using live domain https://dailyaiworld.com/ (/workflows and /mcp-directory), and 3 AEO Q&A pairs."
    }
    ```
 2. `mcp-writer`:
@@ -79,7 +88,7 @@ Spawn 3 subagents concurrently:
      "TypeName": "self",
      "Role": "MCP Tools Writer",
      "Model": "pro",
-     "Prompt": "Write 2 IN-DEPTH MCP Directory Tool Guides (Minimum 1,200+ words each). Include full TypeScript/Python server code, inputSchema JSON definitions, mcpServers config block, OAuth security guide, internal links to /mcp-directory and /workflows, and 3 AEO Q&A pairs."
+     "Prompt": "Check memory.md to ensure zero repeated topics. Write 2 IN-DEPTH MCP Directory Tool Guides (Minimum 1,200+ words each). Include full TypeScript/Python server code, inputSchema JSON definitions, mcpServers config block, OAuth security guide, internal links using live domain https://dailyaiworld.com/ (/mcp-directory and /workflows), and 3 AEO Q&A pairs."
    }
    ```
 3. `blog-writer`:
@@ -88,12 +97,13 @@ Spawn 3 subagents concurrently:
      "TypeName": "self",
      "Role": "AI Blogs Writer",
      "Model": "pro",
-     "Prompt": "Write 3 IN-DEPTH AI Technical Blogs (Minimum 1,200+ words each). Include benchmark comparison tables, E-E-A-T byline ('By Deepak Bagada, CEO at SaaSNext'), code snippets, internal links to /latest-ai-news and /workflows, and 3 AEO Q&A pairs."
+     "Prompt": "Check memory.md to ensure zero repeated topics. Write 3 IN-DEPTH AI Technical Blogs (Minimum 1,200+ words each). Include benchmark comparison tables, E-E-A-T byline ('By Deepak Bagada, CEO at SaaSNext'), code snippets, internal links using live domain https://dailyaiworld.com/ (/latest-ai-news and /workflows), and 3 AEO Q&A pairs."
    }
    ```
 
-### Step 3: Combine Outputs into `dispatches_payload.json`
-Merge the 8 JSON dispatch objects returned by the subagents into `dispatches_payload.json` in the root workspace directory.
+### Step 3: Combine Outputs & Update `memory.md`
+1. Merge the 8 JSON dispatch objects returned by the subagents into `dispatches_payload.json` in the root workspace directory.
+2. Append newly generated dispatches to `memory.md`.
 
 ### Step 4: Run Dual-DB Publisher Script / Trigger Remote REST API
 Execute the dual database publisher script:
