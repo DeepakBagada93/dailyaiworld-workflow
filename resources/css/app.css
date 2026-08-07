@@ -36,8 +36,8 @@
   --border-subtle: #E9D5FF;
   --text-heading: #1E1B4B;
   --text-body: #374151;
-  --text-muted: #6B7280;
-  --focus-ring: #6D28D9;
+  --text-muted: #475569;
+  --focus-ring: #5B21B6;
 }
 
 /* Fallback for high accessibility */
@@ -52,8 +52,8 @@
   --border-subtle: #E9D5FF;
   --text-heading: #1E1B4B;
   --text-body: #374151;
-  --text-muted: #6B7280;
-  --focus-ring: #6D28D9;
+  --text-muted: #475569;
+  --focus-ring: #5B21B6;
 }
 
 /* High Contrast Accessibility Override Mode */

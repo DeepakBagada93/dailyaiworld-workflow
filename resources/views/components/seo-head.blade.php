@@ -5,6 +5,9 @@
     'type' => 'website'
 ])
 
+<!-- Page Title -->
+<title>{{ $title }}</title>
+
 <!-- Primary Meta Tags -->
 <meta name="title" content="{{ $title }}">
 <meta name="description" content="{{ $description }}">

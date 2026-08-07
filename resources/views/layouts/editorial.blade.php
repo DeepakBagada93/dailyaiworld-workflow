@@ -17,6 +17,8 @@
         @php $pageDescription = 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.'; @endphp
     @endif
 
+    <title>{{ $pageTitle }}</title>
+
     <!-- Global SEO, AEO, and GEO Optimization Head Component -->
     <x-seo-head :title="$pageTitle" :description="$pageDescription" />
 
