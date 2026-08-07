@@ -30,6 +30,11 @@ class ArticlePublishingService
         $publishedAt = isset($data['published_at']) ? \Carbon\Carbon::parse($data['published_at']) : now();
         $status = $data['status'] ?? ($publishedAt->isFuture() ? 'scheduled' : 'published');
 
+        $featuredImage = $data['featured_image'] ?? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80';
+        if (!empty($featuredImage) && !str_starts_with($featuredImage, 'http://') && !str_starts_with($featuredImage, 'https://')) {
+            $featuredImage = url('/' . ltrim($featuredImage, '/'));
+        }
+
         $row = [
             'category_id'    => (int) ($data['category_id'] ?? 1),
             'author_id'      => (int) ($data['author_id'] ?? 1),
@@ -39,7 +44,7 @@ class ArticlePublishingService
             'ai_summary'     => $data['ai_summary'] ?? ($data['deck'] ?? ''),
             'content'        => $data['content'],
             'excerpt'        => $data['excerpt'] ?? ($data['deck'] ?? ''),
-            'featured_image' => $data['featured_image'] ?? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+            'featured_image' => $featuredImage,
             'reading_time'   => (int) ($data['reading_time'] ?? 8),
             'audio_url'      => $data['audio_url'] ?? null,
             'key_takeaways'  => $takeawaysJson,

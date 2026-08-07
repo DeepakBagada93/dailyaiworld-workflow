@@ -55,7 +55,7 @@ Every generated dispatch object MUST contain complete, optimized SEO meta attrib
 3. **`meta_description`**: Compelling, keyword-rich summary (140-160 chars) designed for maximum Search Engine CTR.
 4. **`seo_keywords`**: Comma-separated list of 5-8 primary & LSI search keywords.
 5. **`deck` / `ai_summary` / `excerpt`**: Concise executive briefing for card feeds and AI search engines.
-6. **`featured_image` / `og_image`**: High-quality 1200x630 visual asset URL (`https://dailyaiworld.com/images/...` or Unsplash tech visual).
+6. **`featured_image` / `og_image`**: High-quality 1200x630 visual asset URL (`https://dailyaiworld.com/images/...` or Unsplash tech visual). MUST be a fully qualified, valid URL starting with `https://` (never use relative filenames or relative paths).
 
 ---
 

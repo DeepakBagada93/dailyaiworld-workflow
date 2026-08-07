@@ -74,10 +74,19 @@
                 <news:title><![CDATA[{{ $article->title }}]]></news:title>
             </news:news>
             @if($article->featured_image)
-                <image:image>
-                    <image:loc>{{ $article->featured_image }}</image:loc>
-                    <image:title><![CDATA[{{ $article->title }}]]></image:title>
-                </image:image>
+                @php
+                    $imgUrl = $article->featured_image;
+                    if ($imgUrl && !str_starts_with($imgUrl, 'http://') && !str_starts_with($imgUrl, 'https://')) {
+                        $imgUrl = url('/' . ltrim($imgUrl, '/'));
+                    }
+                    $isValidImgUrl = $imgUrl && filter_var($imgUrl, FILTER_VALIDATE_URL);
+                @endphp
+                @if($isValidImgUrl)
+                    <image:image>
+                        <image:loc>{{ $imgUrl }}</image:loc>
+                        <image:title><![CDATA[{{ $article->title }}]]></image:title>
+                    </image:image>
+                @endif
             @endif
         </url>
     @endforeach

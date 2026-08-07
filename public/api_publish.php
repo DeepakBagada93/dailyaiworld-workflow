@@ -81,6 +81,11 @@ $type          = $data['type'] ?? 'blog';
 $publishedAt = isset($data['published_at']) ? date('Y-m-d H:i:s', strtotime($data['published_at'])) : date('Y-m-d H:i:s');
 $status = $data['status'] ?? (strtotime($publishedAt) > time() ? 'scheduled' : 'published');
 
+$featuredImage = $data['featured_image'] ?? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80';
+if (!empty($featuredImage) && !str_starts_with($featuredImage, 'http://') && !str_starts_with($featuredImage, 'https://')) {
+    $featuredImage = 'https://dailyaiworld.com/' . ltrim($featuredImage, '/');
+}
+
 $row = [
     'category_id'    => (int) ($data['category_id'] ?? 1),
     'author_id'      => (int) ($data['author_id'] ?? 1),
@@ -90,7 +95,7 @@ $row = [
     'ai_summary'     => $data['ai_summary'] ?? ($data['deck'] ?? ''),
     'content'        => $data['content'],
     'excerpt'        => $data['excerpt'] ?? ($data['deck'] ?? ''),
-    'featured_image' => $data['featured_image'] ?? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
+    'featured_image' => $featuredImage,
     'reading_time'   => (int) ($data['reading_time'] ?? 8),
     'audio_url'      => null,
     'key_takeaways'  => $takeawaysJson,

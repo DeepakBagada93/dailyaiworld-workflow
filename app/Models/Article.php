@@ -180,6 +180,28 @@ class Article extends Model
         return $query->published()->orderBy('trending_score', 'desc');
     }
 
+    public function getFeaturedImageAttribute(?string $value): ?string
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        $image = trim($value);
+
+        if (Str::startsWith($image, ['http://', 'https://'])) {
+            return filter_var($image, FILTER_VALIDATE_URL) ? $image : null;
+        }
+
+        $fullUrl = url('/' . ltrim($image, '/'));
+
+        return filter_var($fullUrl, FILTER_VALIDATE_URL) ? $fullUrl : null;
+    }
+
+    public function getFeaturedImageUrlAttribute(): ?string
+    {
+        return $this->featured_image;
+    }
+
     public function getFormattedDateAttribute(): string
     {
         return $this->published_at ? $this->published_at->format('M d, Y') : '';
