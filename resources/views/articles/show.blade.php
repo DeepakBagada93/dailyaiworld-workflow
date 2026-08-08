@@ -410,11 +410,6 @@
                 </aside>
             @endif
 
-        </div>
-    </div>
-</article>
-
-        </div>
-    </div>
 </article>
 @endsection
+
