@@ -80,26 +80,138 @@
         @endif
 
         <section class="grid gap-6 lg:grid-cols-12" aria-labelledby="latest-title">
-            <div class="lg:col-span-8"><div class="section-heading"><div><span>Now reading</span><h2 id="latest-title">The latest dispatches</h2></div><a href="{{ route('news.index') }}">All news <span aria-hidden="true">→</span></a></div>
-                <div class="dispatch-list">@foreach($latestNews as $index => $news)<article class="dispatch-item group"><span class="dispatch-number">0{{ $index + 1 }}</span><div><div class="mb-2 flex flex-wrap items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-violet-700"><span>{{ $news->category->name }}</span><span class="text-slate-300">/</span><span class="text-slate-500">{{ $news->reading_time }} min</span></div><a href="{{ $news->url }}"><h3>{{ $news->title }}</h3></a>@if($news->deck ?? $news->excerpt)<p>{{ $news->deck ?? $news->excerpt }}</p>@endif</div><a href="{{ $news->url }}" class="dispatch-arrow" aria-label="Read {{ $news->title }}">↗</a></article>@endforeach</div>
+            <div class="lg:col-span-8">
+                <div class="section-heading">
+                    <div>
+                        <span>Now reading</span>
+                        <h2 id="latest-title">The latest dispatches</h2>
+                    </div>
+                    <a href="{{ route('news.index') }}">All news <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="dispatch-list">
+                    @foreach($latestNews as $index => $news)
+                        <article class="dispatch-item group">
+                            <span class="dispatch-number">0{{ $index + 1 }}</span>
+                            <div>
+                                <div class="mb-2 flex flex-wrap items-center gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-violet-700">
+                                    <span>{{ $news->category->name }}</span>
+                                    <span class="text-slate-300">/</span>
+                                    <span class="text-slate-500">{{ $news->reading_time }} min</span>
+                                </div>
+                                <a href="{{ $news->url }}">
+                                    <h3>{{ $news->title }}</h3>
+                                </a>
+                                @if($news->deck ?? $news->excerpt)
+                                    <p>{{ $news->deck ?? $news->excerpt }}</p>
+                                @endif
+                            </div>
+                            <a href="{{ $news->url }}" class="dispatch-arrow" aria-label="Read {{ $news->title }}">↗</a>
+                        </article>
+                    @endforeach
+                </div>
             </div>
-            <aside class="lg:col-span-4 trend-card" aria-labelledby="trending-title"><div class="section-heading section-heading-dark"><div><span>Reader signal</span><h2 id="trending-title">Trending now</h2></div></div><ol>@forelse($trendingArticles as $index => $trend)<li><span>0{{ $index + 1 }}</span><a href="{{ $trend->url }}"><strong>{{ $trend->title }}</strong><small>{{ $trend->category->name }} · {{ $trend->reading_time }} min</small></a></li>@empty<li class="text-sm text-slate-400">Trending stories will appear here.</li>@endforelse</ol></aside>
+            <aside class="lg:col-span-4 trend-card" aria-labelledby="trending-title">
+                <div class="section-heading section-heading-dark">
+                    <div>
+                        <span>Reader signal</span>
+                        <h2 id="trending-title">Trending now</h2>
+                    </div>
+                </div>
+                <ol>
+                    @forelse($trendingArticles as $index => $trend)
+                        <li>
+                            <span>0{{ $index + 1 }}</span>
+                            <a href="{{ $trend->url }}">
+                                <strong>{{ $trend->title }}</strong>
+                                <small>{{ $trend->category->name }} · {{ $trend->reading_time }} min</small>
+                            </a>
+                        </li>
+                    @empty
+                        <li class="text-sm text-slate-400">Trending stories will appear here.</li>
+                    @endforelse
+                </ol>
+            </aside>
         </section>
 
         @if($editorsPicks->count())
-            <section aria-labelledby="picks-title"><div class="section-heading"><div><span>Selected by the desk</span><h2 id="picks-title">Worth your attention</h2></div></div><div class="bento-grid">@foreach($editorsPicks as $index => $pick)<article class="bento-card {{ $index === 0 ? 'bento-card-featured' : '' }} group"><div class="flex items-center justify-between gap-3 font-mono text-[10px] font-bold uppercase tracking-widest text-violet-700"><span>{{ $pick->category->name }}</span><span class="text-slate-400">{{ $pick->reading_time }} min</span></div><a href="{{ $pick->url }}"><h3>{{ $pick->title }}</h3></a>@if($pick->deck ?? $pick->excerpt)<p>{{ $pick->deck ?? $pick->excerpt }}</p>@endif<div class="mt-auto flex items-center justify-between border-t border-slate-200 pt-4 text-xs text-slate-500"><span>{{ $pick->author->name }}</span><a href="{{ $pick->url }}" class="font-bold text-slate-950">Read →</a></div></article>@endforeach</div></section>
+            <section aria-labelledby="picks-title">
+                <div class="section-heading">
+                    <div>
+                        <span>Selected by the desk</span>
+                        <h2 id="picks-title">Worth your attention</h2>
+                    </div>
+                </div>
+                <div class="bento-grid">
+                    @foreach($editorsPicks as $index => $pick)
+                        <article class="bento-card {{ $index === 0 ? 'bento-card-featured' : '' }} group">
+                            <div class="flex items-center justify-between gap-3 font-mono text-[10px] font-bold uppercase tracking-widest text-violet-700">
+                                <span>{{ $pick->category->name }}</span>
+                                <span class="text-slate-400">{{ $pick->reading_time }} min</span>
+                            </div>
+                            <a href="{{ $pick->url }}">
+                                <h3>{{ $pick->title }}</h3>
+                            </a>
+                            @if($pick->deck ?? $pick->excerpt)
+                                <p>{{ $pick->deck ?? $pick->excerpt }}</p>
+                            @endif
+                            <div class="mt-auto flex items-center justify-between border-t border-slate-200 pt-4 text-xs text-slate-500">
+                                <span>{{ $pick->author->name }}</span>
+                                <a href="{{ $pick->url }}" class="font-bold text-slate-950">Read →</a>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
         @endif
 
         <section class="desk-grid" aria-label="Explore Daily AI World desks">
-            <a href="{{ route('workflows.index') }}" class="desk-link desk-link-violet"><span>01 / BUILD</span><strong>AI Workflows</strong><small>Blueprints for moving from idea to automation.</small><b>Explore ↗</b></a><a href="{{ route('mcp.index') }}" class="desk-link desk-link-ink"><span>02 / CONNECT</span><strong>MCP Directory</strong><small>Tools and server guides for capable agents.</small><b>Browse ↗</b></a><a href="{{ route('news.index') }}" class="desk-link desk-link-lime"><span>03 / KNOW</span><strong>AI News</strong><small>What changed, why it matters, and what to do next.</small><b>Catch up ↗</b></a>
+            <a href="{{ route('workflows.index') }}" class="desk-link desk-link-violet">
+                <span>01 / BUILD</span>
+                <strong>AI Workflows</strong>
+                <small>Blueprints for moving from idea to automation.</small>
+                <b>Explore ↗</b>
+            </a>
+            <a href="{{ route('mcp.index') }}" class="desk-link desk-link-ink">
+                <span>02 / CONNECT</span>
+                <strong>MCP Directory</strong>
+                <small>Tools and server guides for capable agents.</small>
+                <b>Browse ↗</b>
+            </a>
+            <a href="{{ route('news.index') }}" class="desk-link desk-link-lime">
+                <span>03 / KNOW</span>
+                <strong>AI News</strong>
+                <small>What changed, why it matters, and what to do next.</small>
+                <b>Catch up ↗</b>
+            </a>
         </section>
 
-        <section class="newsletter-panel" aria-labelledby="newsletter-title"><div><span>Daily briefing</span><h2 id="newsletter-title">The signal, before the noise.</h2><p>One sharply edited email for people building with AI. No spam, no recycled headlines.</p></div><form action="{{ route('newsletter.subscribe') }}" method="POST" class="newsletter-form">@csrf<label class="sr-only" for="homepage-email">Email address</label><input id="homepage-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email"><button type="submit">Get the briefing <span aria-hidden="true">→</span></button></form></section>
+        <section class="newsletter-panel" aria-labelledby="newsletter-title">
+            <div>
+                <span>Daily briefing</span>
+                <h2 id="newsletter-title">The signal, before the noise.</h2>
+                <p>One sharply edited email for people building with AI. No spam, no recycled headlines.</p>
+            </div>
+            <form action="{{ route('newsletter.subscribe') }}" method="POST" class="newsletter-form">
+                @csrf
+                <label class="sr-only" for="homepage-email">Email address</label>
+                <input id="homepage-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
+                <button type="submit">Get the briefing <span aria-hidden="true">→</span></button>
+            </form>
+        </section>
 
         @if($latestArticles->count())
             <section id="archive-section" class="scroll-mt-10" aria-labelledby="archive-title">
-                <div class="section-heading"><div><span>From the archive</span><h2 id="archive-title">More to explore</h2></div></div>
-                <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">@foreach($latestArticles as $article)<x-article-card :article="$article" :showImage="false" />@endforeach</div>
+                <div class="section-heading">
+                    <div>
+                        <span>From the archive</span>
+                        <h2 id="archive-title">More to explore</h2>
+                    </div>
+                </div>
+                <div class="mt-5 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    @foreach($latestArticles as $article)
+                        <x-article-card :article="$article" :showImage="false" />
+                    @endforeach
+                </div>
                 <div class="mt-10">{{ $latestArticles->onEachSide(1)->links() }}</div>
             </section>
 
