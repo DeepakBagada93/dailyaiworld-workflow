@@ -51,12 +51,12 @@
                     @foreach($article->faqs as $index => $faq)
                     {
                         "@type": "Question",
-                        "name": "{{ addslashes($faq['question'] ?? '') }}",
+                        "name": {!! json_encode(is_array($faq) ? ($faq['question'] ?? $faq['q'] ?? '') : '') !!},
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "{{ addslashes($faq['answer'] ?? '') }}"
+                            "text": {!! json_encode(is_array($faq) ? ($faq['answer'] ?? $faq['a'] ?? '') : '') !!}
                         }
-                    }@if(!$loop->last),@endif
+                    }{{ $loop->last ? '' : ',' }}
                     @endforeach
                 ]
             }
@@ -409,7 +409,7 @@
                     </div>
                 </aside>
             @endif
-
+        </div>
+    </div>
 </article>
 @endsection
-
