@@ -68,23 +68,23 @@
     <!-- Schema.org JSON-LD BreadcrumbList Markup -->
     <script type="application/ld+json">
     {
-        "@@context": "https://schema.org",
-        "@@type": "BreadcrumbList",
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
         "itemListElement": [
             {
-                "@@type": "ListItem",
+                "@type": "ListItem",
                 "position": 1,
                 "name": "Home",
                 "item": "{{ url('/') }}"
             },
             {
-                "@@type": "ListItem",
+                "@type": "ListItem",
                 "position": 2,
                 "name": "{{ addslashes($article->category->name) }}",
                 "item": "{{ route('categories.show', $article->category->slug) }}"
             },
             {
-                "@@type": "ListItem",
+                "@type": "ListItem",
                 "position": 3,
                 "name": "{{ addslashes($article->title) }}",
                 "item": "{{ url()->current() }}"
@@ -92,28 +92,6 @@
         ]
     }
     </script>
-
-    <!-- Schema.org JSON-LD FAQPage Markup -->
-    @if(!empty($article->faqs) && is_array($article->faqs))
-    <script type="application/ld+json">
-    {
-        "@@context": "https://schema.org",
-        "@@type": "FAQPage",
-        "mainEntity": [
-            @foreach($article->faqs as $index => $faq)
-            {
-                "@@type": "Question",
-                "name": {!! json_encode(is_array($faq) ? ($faq['question'] ?? $faq['q'] ?? '') : '') !!},
-                "acceptedAnswer": {
-                    "@@type": "Answer",
-                    "text": {!! json_encode(is_array($faq) ? ($faq['answer'] ?? $faq['a'] ?? '') : '') !!}
-                }
-            }{{ $loop->last ? '' : ',' }}
-            @endforeach
-        ]
-    }
-    </script>
-    @endif
 @endpush
 
 @section('content')
