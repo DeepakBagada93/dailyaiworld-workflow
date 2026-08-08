@@ -80,6 +80,14 @@ foreach ($dispatches as $index => $data) {
             }
         }
 
+        // Calculate staggered publication time: starts tomorrow at 3:00 AM (or payload published_at) + 1.5 hours per article
+        $baseStartTime = isset($data['published_at']) 
+            ? \Carbon\Carbon::parse($data['published_at']) 
+            : \Carbon\Carbon::tomorrow()->setHour(3)->setMinute(0)->setSecond(0);
+
+        $articlePublishedAt = (clone $baseStartTime)->addMinutes($index * 90);
+        $isLive = $articlePublishedAt->isPast();
+
         $row = [
             'category_id'    => (int) $data['category_id'],
             'author_id'      => 1,
@@ -97,9 +105,9 @@ foreach ($dispatches as $index => $data) {
             'tier'           => 'Deep Dive',
             'is_hero'        => 0,
             'is_featured'    => 0,
-            'status'         => 'published',
-            'published_at'   => now(),
-            'updated_date'   => now(),
+            'status'         => $isLive ? 'published' : 'scheduled',
+            'published_at'   => $articlePublishedAt->toDateTimeString(),
+            'updated_date'   => $articlePublishedAt->toDateTimeString(),
             'view_count'     => 0,
             'trending_score' => 85.0,
             'created_at'     => now(),
@@ -116,7 +124,7 @@ foreach ($dispatches as $index => $data) {
 
         $publishedCount++;
     } catch (\Exception $e) {
-        echo "  [ERROR] Failed: {$e->getMessage()}\n";
+        echo "  [ERROR] Failed: " . $e->getMessage() . "\n";
     }
 }
 
