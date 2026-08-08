@@ -3,5 +3,27 @@ Allow: /
 Disallow: /cms/
 Disallow: /dashboard
 
+User-agent: GPTBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
 Sitemap: https://dailyaiworld.com/sitemap.xml
 LLMs-Txt: https://dailyaiworld.com/llms.txt
+

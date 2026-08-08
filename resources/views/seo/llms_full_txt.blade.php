@@ -4,11 +4,14 @@
 
 @foreach($articles as $art)
 ---
-### {{ $art->title }}
+# {{ $art->title }}
 - **URL**: {{ $art->url }}
 - **Category**: {{ $art->category->name }}
 - **Author**: {{ $art->author->name }} ({{ $art->author->title }})
 - **Published**: {{ $art->published_at ? $art->published_at->format('F d, Y') : '' }}
 - **Summary**: {{ $art->deck ?? $art->excerpt }}
 
+{{ $art->content }}
+
 @endforeach
+
