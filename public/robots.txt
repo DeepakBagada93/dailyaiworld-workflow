@@ -1,2 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /cms/
+Disallow: /dashboard
+
+Sitemap: https://dailyaiworld.com/sitemap.xml
+LLMs-Txt: https://dailyaiworld.com/llms.txt
