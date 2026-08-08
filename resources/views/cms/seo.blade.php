@@ -21,7 +21,7 @@
             <div>
                 <label class="block text-gray-400 font-semibold mb-1">Publisher Organization Schema</label>
                 <textarea rows="4" class="w-full bg-[#0E0E14] border border-[#272738] text-purple-300 rounded-md px-3.5 py-2">{
-  "@context": "https://schema.org",
+  "@@context": "https://schema.org",
   "@type": "NewsMediaOrganization",
   "name": "Daily AI World",
   "publishingPrinciples": "https://dailyaiworld.com/design-system"
