@@ -5,7 +5,8 @@
     if (auth()->check()) {
         $isBookmarked = \App\Models\Bookmark::where('user_id', auth()->id())->where('article_id', $article->id)->exists();
     } else {
-        $isBookmarked = in_array($article->id, session()->get('bookmarks', []));
+        $bookmarks = session()->get('bookmarks', []);
+        $isBookmarked = is_array($bookmarks) && in_array($article->id, $bookmarks);
     }
 @endphp
 
