@@ -10,7 +10,7 @@
 
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@@context": "https://schema.org",
         "@type": "WebSite",
         "name": "Daily AI World",
         "url": "https://dailyaiworld.com/",

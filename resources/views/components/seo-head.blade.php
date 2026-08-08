@@ -52,7 +52,7 @@
 <!-- Global JSON-LD Schema.org for WebSite, SearchAction, Organization & Person -->
 <script type="application/ld+json">
 {
-    "@context": "https://schema.org",
+    "@@context": "https://schema.org",
     "@graph": [
         {
             "@type": "WebSite",

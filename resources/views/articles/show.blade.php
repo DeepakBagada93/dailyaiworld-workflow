@@ -11,7 +11,7 @@
     <!-- Schema.org JSON-LD TechArticle Markup for AI Engines (GEO / AEO) -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@@context": "https://schema.org",
         "@type": "TechArticle",
         "@id": "{{ url()->current() }}#techarticle",
         "headline": {!! json_encode($article->title) !!},
@@ -45,7 +45,7 @@
     <!-- Schema.org JSON-LD BreadcrumbList Markup -->
     <script type="application/ld+json">
     {
-        "@context": "https://schema.org",
+        "@@context": "https://schema.org",
         "@type": "BreadcrumbList",
         "itemListElement": [
             {
