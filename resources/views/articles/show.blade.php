@@ -8,60 +8,37 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="{{ url()->current() }}">
 
-    <!-- Schema.org JSON-LD TechArticle & FAQPage Markup for AI Engines (GEO / AEO) -->
+    <!-- Schema.org JSON-LD TechArticle Markup for AI Engines (GEO / AEO) -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "TechArticle",
-                "@id": "{{ url()->current() }}#techarticle",
-                "headline": "{{ addslashes($article->title) }}",
-                "description": "{{ addslashes($article->deck ?? $article->excerpt) }}",
-                "image": ["{{ $article->featured_image }}"],
-                "datePublished": "{{ $article->iso_date }}",
-                "dateModified": "{{ $article->iso_updated_date }}",
-                "proficiencyLevel": "Expert",
-                "author": {
-                    "@type": "Person",
-                    "name": "{{ addslashes($article->author->name) }}",
-                    "jobTitle": "{{ addslashes($article->author->title) }}",
-                    "sameAs": "https://x.com/deeepakbagada"
-                },
-                "publisher": {
-                    "@type": "Organization",
-                    "name": "Daily AI World",
-                    "url": "{{ url('/') }}",
-                    "logo": {
-                        "@type": "ImageObject",
-                        "url": "{{ asset('images/logo.png') }}"
-                    }
-                },
-                "mainEntityOfPage": {
-                    "@type": "WebPage",
-                    "@id": "{{ url()->current() }}"
-                }
+        "@type": "TechArticle",
+        "@id": "{{ url()->current() }}#techarticle",
+        "headline": {!! json_encode($article->title) !!},
+        "description": {!! json_encode($article->deck ?? $article->excerpt ?? '') !!},
+        "image": ["{{ $article->featured_image }}"],
+        "datePublished": "{{ $article->iso_date }}",
+        "dateModified": "{{ $article->iso_updated_date }}",
+        "proficiencyLevel": "Expert",
+        "author": {
+            "@type": "Person",
+            "name": {!! json_encode($article->author->name ?? '') !!},
+            "jobTitle": {!! json_encode($article->author->title ?? '') !!},
+            "sameAs": "https://x.com/deeepakbagada"
+        },
+        "publisher": {
+            "@type": "Organization",
+            "name": "Daily AI World",
+            "url": "{{ url('/') }}",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "{{ asset('images/logo.png') }}"
             }
-            @if(!empty($article->faqs) && is_array($article->faqs))
-            ,
-            {
-                "@type": "FAQPage",
-                "@id": "{{ url()->current() }}#faq",
-                "mainEntity": [
-                    @foreach($article->faqs as $index => $faq)
-                    {
-                        "@type": "Question",
-                        "name": {!! json_encode(is_array($faq) ? ($faq['question'] ?? $faq['q'] ?? '') : '') !!},
-                        "acceptedAnswer": {
-                            "@type": "Answer",
-                            "text": {!! json_encode(is_array($faq) ? ($faq['answer'] ?? $faq['a'] ?? '') : '') !!}
-                        }
-                    }{{ $loop->last ? '' : ',' }}
-                    @endforeach
-                ]
-            }
-            @endif
-        ]
+        },
+        "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "{{ url()->current() }}"
+        }
     }
     </script>
 
