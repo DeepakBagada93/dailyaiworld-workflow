@@ -30,6 +30,11 @@ class ArticleController extends Controller
 
         $article = $query->firstOrFail();
 
+        // 301 redirect /mcp/{slug} to canonical /mcp-directory/{slug} to prevent duplicate indexing
+        if ($categorySlug === 'mcp') {
+            return redirect($article->url, 301);
+        }
+
         // Increment view count
         $article->increment('view_count');
 

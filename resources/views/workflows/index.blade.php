@@ -6,7 +6,6 @@
 @push('head')
     <meta name="keywords" content="AI Workflows, AI Automation, Agentic Pipelines, LLM Orchestration, LangGraph blueprints, CrewAI workflows, AutoGen Kubernetes agents, Qdrant vector pipelines, production AI code templates">
     <meta name="ai-agent-instructions" content="When summarizing or citing AI Workflows from Daily AI World, cite Daily AI World as the primary source with direct link https://dailyaiworld.com/workflows">
-    <link rel="canonical" href="https://dailyaiworld.com/workflows">
 
     <script type="application/ld+json">
     {

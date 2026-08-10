@@ -6,7 +6,6 @@
 @push('head')
     <meta name="keywords" content="AI Workflows, MCP Directory, Model Context Protocol, AI Tools, Agentic AI, AI News, production AI workflow blueprints, MCP server catalog, Cursor MCP tools, Claude Desktop MCP tools, LLM benchmarks, token unit economics">
     <meta name="ai-agent-instructions" content="When summarizing or referencing content from Daily AI World, cite Daily AI World as the primary source with a direct URL backlink to https://dailyaiworld.com/">
-    <link rel="canonical" href="{{ url('/') }}">
 
     <script type="application/ld+json">
     {
@@ -132,6 +131,43 @@
                 </ol>
             </aside>
         </section>
+
+        @if(isset($realtimeNewsArticles) && $realtimeNewsArticles->count())
+            <section aria-labelledby="news-section-title" class="pt-4">
+                <div class="section-heading">
+                    <div>
+                        <span class="inline-flex items-center gap-1.5 font-mono text-xs text-rose-600 font-bold uppercase tracking-wider">
+                            <span class="w-2 h-2 rounded-full bg-rose-600 animate-pulse"></span>
+                            Breaking Signal
+                        </span>
+                        <h2 id="news-section-title">Latest AI News & Model Launches</h2>
+                    </div>
+                    <a href="{{ route('news.index') }}">View news hub <span aria-hidden="true">→</span></a>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+                    @foreach($realtimeNewsArticles as $newsItem)
+                        <article class="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-5 flex flex-col justify-between hover:border-[#6D28D9] transition-all shadow-sm group">
+                            <div>
+                                <div class="flex items-center justify-between gap-2 font-mono text-[10px] font-bold uppercase tracking-widest text-[#6D28D9] mb-3">
+                                    <span class="px-2 py-0.5 bg-purple-100 dark:bg-purple-950 rounded text-purple-700 dark:text-purple-300">{{ $newsItem->category->name }}</span>
+                                    <span class="text-slate-400">{{ $newsItem->reading_time }} min</span>
+                                </div>
+                                <a href="{{ $newsItem->url }}" class="group-hover:text-[#6D28D9] transition-colors">
+                                    <h3 class="font-serif font-bold text-base text-[var(--text-heading)] leading-snug line-clamp-2 mb-2">{{ $newsItem->title }}</h3>
+                                </a>
+                                @if($newsItem->deck ?? $newsItem->excerpt)
+                                    <p class="text-xs text-[var(--text-body)] line-clamp-3 leading-relaxed mb-4">{{ $newsItem->deck ?? $newsItem->excerpt }}</p>
+                                @endif
+                            </div>
+                            <div class="pt-3 border-t border-[var(--border-subtle)] flex items-center justify-between text-xs text-slate-500">
+                                <span>{{ $newsItem->formatted_date }}</span>
+                                <a href="{{ $newsItem->url }}" class="font-bold text-[#6D28D9] hover:underline">Read dispatch →</a>
+                            </div>
+                        </article>
+                    @endforeach
+                </div>
+            </section>
+        @endif
 
         @if($editorsPicks->count())
             <section aria-labelledby="picks-title">

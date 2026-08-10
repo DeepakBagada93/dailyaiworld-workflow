@@ -31,7 +31,7 @@ class MakeApiToken extends Command
         if (!$user) {
             $user = User::create([
                 'name' => 'API Admin',
-                'email' => 'admin@dailyaiworld.tech',
+                'email' => 'admin@dailyaiworld.com',
                 'password' => bcrypt(str_random(16)),
             ]);
         }

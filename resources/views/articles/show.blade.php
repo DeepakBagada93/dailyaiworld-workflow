@@ -5,9 +5,6 @@
 @section('og_image', $article->featured_image)
 
 @push('head')
-    <!-- Canonical URL -->
-    <link rel="canonical" href="{{ url()->current() }}">
-
     <!-- Schema.org JSON-LD TechArticle Markup for AI Engines (GEO / AEO) -->
     <script type="application/ld+json">
     {
@@ -191,14 +188,24 @@
                 </div>
 
                 <!-- KEY TAKEAWAYS BOX -->
-                @if(!empty($article->key_takeaways))
+                @php
+                    $takeaways = $article->key_takeaways;
+                    if (is_string($takeaways)) {
+                        $decoded = json_decode($takeaways, true);
+                        $takeaways = is_array($decoded) ? $decoded : array_filter(array_map('trim', explode("\n", $takeaways)));
+                    }
+                    if (!is_array($takeaways) && !is_object($takeaways)) {
+                        $takeaways = [];
+                    }
+                @endphp
+                @if(!empty($takeaways))
                     <div class="bg-[var(--bg-muted)] border-l-4 border-[#6D28D9] rounded-r-xl p-6 mb-10">
                         <div class="flex items-center gap-2 text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold mb-3">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             <span>Core Takeaways for Founders & Builders</span>
                         </div>
                         <ul class="space-y-3 text-sm sm:text-base text-[var(--text-heading)] font-sans">
-                            @foreach($article->key_takeaways as $takeaway)
+                            @foreach($takeaways as $takeaway)
                                 <li class="flex items-start gap-3">
                                     <span class="w-2 h-2 rounded-full bg-[#6D28D9] mt-2 shrink-0"></span>
                                     <span>{{ is_array($takeaway) ? ($takeaway['takeaway'] ?? $takeaway['answer'] ?? $takeaway['text'] ?? $takeaway['question'] ?? json_encode($takeaway)) : $takeaway }}</span>
@@ -257,7 +264,17 @@
                 </div>
 
                 <!-- FREQUENTLY ASKED QUESTIONS (FAQ SECTION & SCHEMA READY) -->
-                @if(!empty($article->faqs) && is_array($article->faqs))
+                @php
+                    $faqsList = $article->faqs;
+                    if (is_string($faqsList)) {
+                        $decodedFaqs = json_decode($faqsList, true);
+                        $faqsList = is_array($decodedFaqs) ? $decodedFaqs : [];
+                    }
+                    if (!is_array($faqsList) && !is_object($faqsList)) {
+                        $faqsList = [];
+                    }
+                @endphp
+                @if(!empty($faqsList))
                     <section id="faqs" class="my-12 border-t border-[var(--border-subtle)] pt-10 scroll-mt-24">
                         <div class="flex items-center gap-2 font-mono text-xs uppercase tracking-widest text-[#6D28D9] font-bold mb-6">
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
@@ -265,7 +282,7 @@
                         </div>
 
                         <div class="space-y-4" x-data="{ activeFaq: 0 }">
-                            @foreach($article->faqs as $index => $faq)
+                            @foreach($faqsList as $index => $faq)
                                 @if(is_array($faq))
                                     <div class="bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl overflow-hidden">
                                         <button @click="activeFaq = (activeFaq === {{ $index }} ? null : {{ $index }})" 
@@ -346,12 +363,18 @@
             </div>
 
             <!-- RIGHT STICKY SIDEBAR: DYNAMIC TABLE OF CONTENTS (2 COLS DESKTOP) -->
-            @if(!empty($article->toc))
+            @php
+                $tocList = $article->toc;
+                if (!is_array($tocList) && !is_object($tocList)) {
+                    $tocList = [];
+                }
+            @endphp
+            @if(!empty($tocList))
                 <aside class="hidden lg:block lg:col-span-2 sticky top-28 space-y-6 pt-4">
                     <div class="border-l-2 border-[#E9D5FF] pl-5 text-xs font-mono text-[var(--text-muted)] space-y-3">
                         <span class="text-[10px] uppercase tracking-widest text-[#6D28D9] font-bold block mb-3">In This Article</span>
                         <ul class="space-y-2.5 text-[11px] font-sans">
-                            @foreach($article->toc as $tocItem)
+                            @foreach($tocList as $tocItem)
                                 <li>
                                     <a href="#{{ $tocItem['id'] }}" 
                                        class="hover:text-[#6D28D9] text-[#374151] hover:font-bold transition-all block leading-snug line-clamp-2">

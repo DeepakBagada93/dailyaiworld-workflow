@@ -66,15 +66,15 @@ class ArticlePublishingService
             'local_status' => false,
             'remote_status' => false,
             'local_id' => null,
-            'live_url' => "https://dailyaiworld.tech/blogs/{$slug}",
+            'live_url' => "https://dailyaiworld.com/blogs/{$slug}",
         ];
 
         // Adjust live URL path based on type if passed
         if (isset($data['type'])) {
             if ($data['type'] === 'workflow') {
-                $results['live_url'] = "https://dailyaiworld.tech/workflow/{$slug}";
+                $results['live_url'] = "https://dailyaiworld.com/workflow/{$slug}";
             } elseif ($data['type'] === 'mcp') {
-                $results['live_url'] = "https://dailyaiworld.tech/mcp-directory/{$slug}";
+                $results['live_url'] = "https://dailyaiworld.com/mcp-directory/{$slug}";
             }
         }
 

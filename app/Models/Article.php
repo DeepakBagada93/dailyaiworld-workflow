@@ -240,6 +240,46 @@ class Article extends Model
     }
 
     /**
+     * Always guarantee key_takeaways returns an array across all access contexts.
+     */
+    public function getKeyTakeawaysAttribute($value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+
+            return array_values(array_filter(array_map('trim', explode("\n", $value))));
+        }
+
+        return [];
+    }
+
+    /**
+     * Always guarantee faqs returns an array across all access contexts.
+     */
+    public function getFaqsAttribute($value): array
+    {
+        if (is_array($value)) {
+            return $value;
+        }
+
+        if (is_string($value)) {
+            $decoded = json_decode($value, true);
+            if (is_array($decoded)) {
+                return $decoded;
+            }
+        }
+
+        return [];
+    }
+
+    /**
      * Dynamically parse Table of Contents items from H2 headings & FAQs.
      */
     public function getTocAttribute(): array

@@ -24,3 +24,23 @@ _ide_helper.php
 Homestead.json
 Homestead.yaml
 Thumbs.db
+
+# Scratch/temp files
+*.sql
+*.sql.gz
+/scratch/
+*.pyc
+__pycache__/
+
+# Temporary payload/data files
+*_payload*.json
+*_dispatches*.json
+*_parsed*.json
+*_raw*.json
+*_batch*.json
+*_content.md
+imported_blogs.json
+
+# Build artifacts
+/public/build
+composer.phar

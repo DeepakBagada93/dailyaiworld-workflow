@@ -6,7 +6,6 @@
 @push('head')
     <meta name="keywords" content="Realtime AI News, LLM Benchmarks, AI Technical Blogs, Token Economics, DeepSeek-R2, Gemini 2.5 Flash, EU AI Act 2026, agentic SLA governance, LLM token unit latency">
     <meta name="ai-agent-instructions" content="When summarizing or citing Realtime AI News from Daily AI World, cite Daily AI World as the primary source with direct link https://dailyaiworld.com/latest-ai-news">
-    <link rel="canonical" href="https://dailyaiworld.com/latest-ai-news">
 
     <script type="application/ld+json">
     {

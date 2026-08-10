@@ -58,10 +58,21 @@ class HomeController extends Controller
 
         $realtimeNewsArticles = Article::with(['category', 'author'])
             ->published()
-            ->whereIn('category_id', [2, 3, 10, 11])
+            ->where('category_id', 11)
             ->latest('published_at')
             ->take(4)
             ->get();
+
+        if ($realtimeNewsArticles->count() < 4) {
+            $fallbackNews = Article::with(['category', 'author'])
+                ->published()
+                ->whereIn('category_id', [2, 3, 10])
+                ->whereNotIn('id', $realtimeNewsArticles->pluck('id'))
+                ->latest('published_at')
+                ->take(4 - $realtimeNewsArticles->count())
+                ->get();
+            $realtimeNewsArticles = $realtimeNewsArticles->merge($fallbackNews);
+        }
 
         // 6. Popular Stories (Highest view count)
         $popularArticles = Article::with(['category', 'author'])
