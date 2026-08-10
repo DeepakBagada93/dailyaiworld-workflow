@@ -148,3 +148,15 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 | 2026-08-09 | AI News | News | Meta Llama 4 500B Open-Sourced: Breaking AI News | `meta-llama-500b-open-sourced-breaking-ai-news` | Meta, Llama 4, Open Source |
 | 2026-08-09 | AI News | News | Google Unveils Gemini 3.0 Pro: First Native Agentic AI | `google-unveils-gemini-30-pro-first-native-agentic-ai` | Google, Gemini 3.0, Agentic AI |
 | 2026-08-09 | AI News | News | Anthropic Launches Claude 3.5 Opus with 2M Context | `anthropic-launches-claude-35-opus-2m-context` | Anthropic, Claude 3.5 Opus |
+| 2026-08-10 | AI Workflows | Workflow | Autonomous AI-Powered Database Migration & Schema Evolution Pipeline | `autonomous-ai-powered-database-migration-schema-evolution` | LangGraph 2.0, Alembic, Shadow DB |
+| 2026-08-10 | AI Workflows | Workflow | Multi-Agent AI Tax Filing & Compliance Automation Workflow | `multi-agent-ai-tax-filing-compliance-automation-workflow` | CrewAI, Plaid API, IRS Compliance |
+| 2026-08-10 | AI Workflows | Workflow | Real-Time AI Content Moderation & Trust & Safety Pipeline | `real-time-ai-content-moderation-trust-safety-pipeline` | PydanticAI, Hive Moderation API |
+| 2026-08-10 | AI Tools | MCP Tool | Dimensions Research Database MCP Server: Agentic Science | `dimensions-research-database-mcp-server-agentic-science` | Dimensions API, TypeScript, MCP |
+| 2026-08-10 | AI Tools | MCP Tool | GitHub Copilot Enterprise MCP Allowlist Server Guide | `github-copilot-enterprise-mcp-allowlist-server-guide` | GitHub Enterprise, MCP Allowlists |
+| 2026-08-10 | AI Blogs | Blog | Inference Spending Overtakes Training in 2026 | `inference-spending-overtakes-training-2026` | Inference Economics, Gartner |
+| 2026-08-10 | AI Blogs | Blog | PRISM2: AI Co-Doctors and Clinical Pathology in 2026 | `prism2-ai-co-doctors-clinical-pathology-2026` | PRISM2, Clinical AI, Pathology |
+| 2026-08-10 | AI Blogs | Blog | India's AI Patent Guidelines 2026: What Builders Must Know | `indias-ai-patent-guidelines-2026-builders-must-know` | India IP Office, AI Patents |
+| 2026-08-10 | AI Blogs | Blog | MCP SDK v2.0: Migrating to Stateless Architecture | `mcp-sdk-v20-migrating-stateless-architecture` | MCP SDK v2.0, Stateless Migration |
+| 2026-08-10 | AI News | News | Inference Spending Surpasses Training for First Time | `inference-spending-surpasses-training-first-time` | Gartner, GPU Markets, NVIDIA |
+| 2026-08-10 | AI News | News | GitHub Enterprise Rolls Out Strict MCP Allowlists | `github-enterprise-rolls-out-strict-mcp-allowlists` | GitHub, MCP Allowlists, Copilot |
+| 2026-08-10 | AI News | News | Dimensions MCP Servers Unlock 150M+ Scientific Papers | `dimensions-mcp-servers-unlock-150m-scientific-papers` | Dimensions, MCP, Research |
