@@ -31,14 +31,16 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-W9SPTJHSQ5"></script>
+    <!-- Google Analytics (GA4) -->
+    @if(config('services.google.analytics_id'))
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ config('services.google.analytics_id') }}"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-W9SPTJHSQ5');
+        gtag('config', '{{ config('services.google.analytics_id') }}');
     </script>
+    @endif
 
     <!-- Scripts & CSS via Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])

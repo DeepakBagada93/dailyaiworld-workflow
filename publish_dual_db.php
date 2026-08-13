@@ -72,8 +72,6 @@ foreach ($dispatches as $index => $data) {
             : \Carbon\Carbon::tomorrow()->setHour(3)->setMinute(0)->setSecond(0);
 
         $articlePublishedAt = (clone $baseStartTime)->addMinutes($index * 90);
-        $isLive = $articlePublishedAt->isPast();
-
         $row = [
             'category_id'    => (int) $data['category_id'],
             'author_id'      => 1,
@@ -91,7 +89,7 @@ foreach ($dispatches as $index => $data) {
             'tier'           => 'Deep Dive',
             'is_hero'        => 0,
             'is_featured'    => 0,
-            'status'         => $isLive ? 'published' : 'scheduled',
+            'status'         => 'published',
             'published_at'   => $articlePublishedAt->toDateTimeString(),
             'updated_date'   => $articlePublishedAt->toDateTimeString(),
             'view_count'     => 0,

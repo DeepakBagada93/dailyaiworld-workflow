@@ -12,6 +12,11 @@
 <meta name="author" content="Deepak Bagada · CEO, SaaSNext">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
+@if(config('services.google.site_verification'))
+<!-- Google Search Console Verification -->
+<meta name="google-site-verification" content="{{ config('services.google.site_verification') }}" />
+@endif
+
 <!-- AI Chatbot & Search Engine Citation Meta Tags -->
 <meta name="citation_title" content="{{ $title }}">
 <meta name="citation_author" content="Deepak Bagada">

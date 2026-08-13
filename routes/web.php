@@ -36,10 +36,30 @@ Route::get('/latest-ai-news', [NewsDirectoryController::class, 'index'])->name('
 // Public Editorial Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// 301 redirect from old /article/{slug} URLs to preserve Google SEO juice
+// Legacy SEO 301 Redirects (Fix Google Search Console 404 Not Found errors)
 Route::get('/article/{slug}', function (string $slug) {
-    $article = \App\Models\Article::where('slug', $slug)->published()->firstOrFail();
-    return redirect($article->url, 301);
+    $article = \App\Models\Article::where('slug', $slug)->published()->first();
+    return $article ? redirect($article->url, 301) : redirect('/', 301);
+});
+
+Route::get('/post/{slug}', function (string $slug) {
+    $article = \App\Models\Article::where('slug', $slug)->published()->first();
+    return $article ? redirect($article->url, 301) : redirect('/', 301);
+});
+
+Route::get('/workflows/{slug}', function (string $slug) {
+    $article = \App\Models\Article::where('slug', $slug)->published()->first();
+    return $article ? redirect($article->url, 301) : redirect('/workflows', 301);
+});
+
+Route::get('/blog/{slug}', function (string $slug) {
+    $article = \App\Models\Article::where('slug', $slug)->published()->first();
+    return $article ? redirect($article->url, 301) : redirect('/latest-ai-news', 301);
+});
+
+Route::get('/reports/{slug}', function (string $slug) {
+    $article = \App\Models\Article::where('slug', $slug)->published()->first();
+    return $article ? redirect($article->url, 301) : redirect('/', 301);
 });
 
 Route::post('/article/{article}/comments', [ArticleController::class, 'storeComment'])->name('articles.comments.store');
