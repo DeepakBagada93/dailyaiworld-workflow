@@ -10,9 +10,13 @@ class ArticleRepository implements ArticleRepositoryInterface
 {
     public function getPublishedHero(): ?Article
     {
+        // A manually pinned hero (is_hero) is honored only while fresh (last 24h);
+        // otherwise the hero always advances to the latest published dispatch so the
+        // hero never goes stale behind a pinned story.
         return Article::with(['category', 'author'])
             ->published()
             ->where('is_hero', true)
+            ->where('published_at', '>=', now()->subHours(24))
             ->first() ?? Article::with(['category', 'author'])->published()->latest('published_at')->first();
     }
 

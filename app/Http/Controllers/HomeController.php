@@ -14,9 +14,13 @@ class HomeController extends Controller
         $marketIndices = MarketIndex::all();
 
         // 1. Hero Featured Story (Primary text-hero)
+        // A manually pinned hero (is_hero) is honored only while fresh (last 24h);
+        // otherwise the hero always advances to the latest published dispatch so the
+        // hero never goes stale behind a pinned story.
         $heroArticle = Article::with(['category', 'author'])
             ->published()
             ->where('is_hero', true)
+            ->where('published_at', '>=', now()->subHours(24))
             ->first() ?? Article::with(['category', 'author'])->published()->latest('published_at')->first();
 
         // 2. Latest News (Fast chronological dispatches feed)
@@ -56,9 +60,13 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
+        // 5b. Latest AI News & Model Launches (homepage breaking-signal desk)
+        // Pull the freshest news-relevant content across the news desks (Agentic AI,
+        // Coding, LLMs, AI News) so the section always advances with new dispatches,
+        // with a fallback to any latest published article when a desk is quiet.
         $realtimeNewsArticles = Article::with(['category', 'author'])
             ->published()
-            ->where('category_id', 11)
+            ->whereIn('category_id', [2, 3, 10, 11])
             ->latest('published_at')
             ->take(4)
             ->get();
@@ -66,7 +74,6 @@ class HomeController extends Controller
         if ($realtimeNewsArticles->count() < 4) {
             $fallbackNews = Article::with(['category', 'author'])
                 ->published()
-                ->whereIn('category_id', [2, 3, 10])
                 ->whereNotIn('id', $realtimeNewsArticles->pluck('id'))
                 ->latest('published_at')
                 ->take(4 - $realtimeNewsArticles->count())
