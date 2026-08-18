@@ -87,7 +87,20 @@ class SeoController extends Controller
         $txt .= "Allow: /\n";
         $txt .= "Disallow: /cms/\n";
         $txt .= "Disallow: /dashboard\n";
-        $txt .= "Disallow: /profile\n\n";
+        $txt .= "Disallow: /profile\n";
+        $txt .= "Disallow: /admin\n";
+        $txt .= "Disallow: /checkout\n";
+        $txt .= "Disallow: /orders\n";
+        $txt .= "Disallow: /users\n";
+        $txt .= "Disallow: /chat\n";
+        $txt .= "Disallow: /scrape\n";
+        $txt .= "Disallow: /workspace\n";
+        $txt .= "Disallow: /tickets\n";
+        $txt .= "Disallow: /contact\n";
+        $txt .= "Disallow: /path/to/\n";
+        $txt .= "Disallow: /*.app$\n";
+        $txt .= "Disallow: /*.db$\n";
+        $txt .= "Disallow: /*.woff2$\n\n";
         $txt .= "Sitemap: {$domain}/sitemap.xml\n";
         $txt .= "LLMs-Txt: {$domain}/llms.txt\n";
 

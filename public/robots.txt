@@ -2,6 +2,20 @@ User-agent: *
 Allow: /
 Disallow: /cms/
 Disallow: /dashboard
+Disallow: /admin
+Disallow: /checkout
+Disallow: /orders
+Disallow: /users
+Disallow: /chat
+Disallow: /scrape
+Disallow: /workspace
+Disallow: /tickets
+Disallow: /contact
+Disallow: /path/to/
+Disallow: /*.app$
+Disallow: /*.db$
+Disallow: /*.woff2$
+
 
 User-agent: GPTBot
 Allow: /
