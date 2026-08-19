@@ -11,27 +11,33 @@ class ArticleController extends Controller
 {
     public function show(Request $request, string $categorySlug, string $slug)
     {
-        // Map URL prefix to category constraint
-        // /workflow/{slug} → AI Workflows (category_id=1)
-        // /blogs/{slug} → all other categories
-        $query = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
+        // Resolve the published article by slug first, then enforce the canonical
+        // category prefix. A wrong-prefix URL (e.g. /blogs/{workflow-slug}, or an old
+        // /mcp/{slug} for a non-MCP article) is 301-redirected to the canonical URL
+        // so Google never sees a 404 for a live article.
+        $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
             ->where('slug', $slug)
-            ->published();
+            ->published()
+            ->first();
 
-        if ($categorySlug === 'workflow') {
-            $query->where('category_id', 1);
-        } elseif ($categorySlug === 'mcp-directory' || $categorySlug === 'mcp') {
-            $query->where('category_id', 5);
-        } elseif ($categorySlug === 'blogs') {
-            $query->whereNotIn('category_id', [1, 5]);
-        } else {
+        if (!$article) {
             abort(404);
         }
 
-        $article = $query->firstOrFail();
+        // Canonical prefix per category — must mirror Article::getUrlAttribute()
+        if ($article->category_id == 1) {
+            $canonicalPrefix = 'workflow';
+        } elseif ($article->category_id == 5) {
+            $canonicalPrefix = 'mcp-directory';
+        } else {
+            $canonicalPrefix = 'blogs';
+        }
 
-        // 301 redirect /mcp/{slug} to canonical /mcp-directory/{slug} to prevent duplicate indexing
-        if ($categorySlug === 'mcp') {
+        // /mcp/{slug} is a legacy alias for /mcp-directory/{slug}
+        $requestedPrefix = $categorySlug === 'mcp' ? 'mcp-directory' : $categorySlug;
+
+        // Wrong category prefix → 301 to the single canonical URL (prevents 404s and duplicate indexing)
+        if ($requestedPrefix !== $canonicalPrefix) {
             return redirect($article->url, 301);
         }
 

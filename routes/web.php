@@ -61,6 +61,12 @@ Route::get('/blog/{slug}', function (string $slug) {
     return $article ? redirect($article->url, 301) : redirect('/latest-ai-news', 301);
 });
 
+Route::get('/latest-ai-news/{slug}', function (string $slug) {
+    $cleanSlug = rtrim($slug, '*&$');
+    $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
+    return $article ? redirect($article->url, 301) : redirect('/latest-ai-news', 301);
+});
+
 Route::get('/reports/{slug}', function (string $slug) {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
