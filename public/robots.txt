@@ -39,5 +39,7 @@ User-agent: Amazonbot
 Allow: /
 
 Sitemap: https://dailyaiworld.com/sitemap.xml
-LLMs-Txt: https://dailyaiworld.com/llms.txt
+# LLMs.txt: https://dailyaiworld.com/llms.txt
+# LLMs-full.txt: https://dailyaiworld.com/llms-full.txt
+
 

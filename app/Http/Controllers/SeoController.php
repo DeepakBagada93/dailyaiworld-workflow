@@ -100,9 +100,16 @@ class SeoController extends Controller
         $txt .= "Disallow: /path/to/\n";
         $txt .= "Disallow: /*.app$\n";
         $txt .= "Disallow: /*.db$\n";
-        $txt .= "Disallow: /*.woff2$\n\n";
+        $txt .= "User-agent: GPTBot\nAllow: /\n\n";
+        $txt .= "User-agent: PerplexityBot\nAllow: /\n\n";
+        $txt .= "User-agent: ClaudeBot\nAllow: /\n\n";
+        $txt .= "User-agent: Claude-Web\nAllow: /\n\n";
+        $txt .= "User-agent: Google-Extended\nAllow: /\n\n";
+        $txt .= "User-agent: Bytespider\nAllow: /\n\n";
+        $txt .= "User-agent: Amazonbot\nAllow: /\n\n";
         $txt .= "Sitemap: {$domain}/sitemap.xml\n";
-        $txt .= "LLMs-Txt: {$domain}/llms.txt\n";
+        $txt .= "# LLMs.txt: {$domain}/llms.txt\n";
+        $txt .= "# LLMs-full.txt: {$domain}/llms-full.txt\n";
 
         return response($txt, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
