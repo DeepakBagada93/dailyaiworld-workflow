@@ -5,22 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    @hasSection('title')
-        @php $pageTitle = View::getSection('title'); @endphp
-    @else
-        @php $pageTitle = 'Daily AI World — Ultra-Premium Artificial Intelligence Journal'; @endphp
-    @endif
-
-    @hasSection('meta_description')
-        @php $pageDescription = View::getSection('meta_description'); @endphp
-    @else
-        @php $pageDescription = 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.'; @endphp
-    @endif
+    @php
+        $pageTitle = View::hasSection('title') ? View::getSection('title') : 'Daily AI World — Ultra-Premium Artificial Intelligence Journal';
+        $pageDescription = View::hasSection('meta_description') ? View::getSection('meta_description') : 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.';
+        $pageImage = View::hasSection('og_image') ? View::getSection('og_image') : asset('images/logo.png');
+        $pageType = View::hasSection('og_type') ? View::getSection('og_type') : 'website';
+        $pagePublishedTime = View::hasSection('published_time') ? View::getSection('published_time') : null;
+        $pageModifiedTime = View::hasSection('modified_time') ? View::getSection('modified_time') : null;
+        $pageSection = View::hasSection('article_section') ? View::getSection('article_section') : null;
+        $pageKeywords = View::hasSection('meta_keywords') ? View::getSection('meta_keywords') : null;
+    @endphp
 
     <title>{{ $pageTitle }}</title>
 
     <!-- Global SEO, AEO, and GEO Optimization Head Component -->
-    <x-seo-head :title="$pageTitle" :description="$pageDescription" />
+    <x-seo-head 
+        :title="$pageTitle" 
+        :description="$pageDescription" 
+        :image="$pageImage" 
+        :type="$pageType"
+        :publishedTime="$pagePublishedTime"
+        :modifiedTime="$pageModifiedTime"
+        :section="$pageSection"
+        :keywords="$pageKeywords"
+    />
 
     <!-- Site Icon / Favicon -->
     <link rel="icon" type="image/png" href="{{ asset('images/logo.png') }}">

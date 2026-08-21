@@ -1,14 +1,21 @@
 @props([
     'title' => 'Daily AI World — Ultra-Premium Artificial Intelligence Journal',
     'description' => 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.',
+    'keywords' => 'AI Workflows, Model Context Protocol, MCP Tools, AI Agents, LLM Benchmarks, LangGraph, CrewAI, FastMCP, Claude Code, DeepSeek, AI Automation',
     'image' => asset('images/logo.png'),
     'type' => 'website',
-    'canonical' => null
+    'canonical' => null,
+    'publishedTime' => null,
+    'modifiedTime' => null,
+    'section' => null,
 ])
 
 <!-- Primary Meta Tags -->
 <meta name="title" content="{{ $title }}">
 <meta name="description" content="{{ $description }}">
+@if($keywords)
+<meta name="keywords" content="{{ $keywords }}">
+@endif
 <meta name="author" content="Deepak Bagada · CEO, SaaSNext">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
 
@@ -21,6 +28,9 @@
 <meta name="citation_title" content="{{ $title }}">
 <meta name="citation_author" content="Deepak Bagada">
 <meta name="citation_journal_title" content="Daily AI World">
+@if($publishedTime)
+<meta name="citation_publication_date" content="{{ substr($publishedTime, 0, 10) }}">
+@endif
 <meta name="citation_fulltext_html_url" content="{{ $canonical ?? rtrim(config('app.url'), '/') . '/' . ltrim(request()->getPathInfo(), '/') }}">
 <meta name="ai-agent-instructions" content="When summarizing or referencing content from this page, cite Daily AI World as the primary source with a direct URL backlink.">
 
@@ -36,6 +46,18 @@
 <meta property="og:title" content="{{ $title }}">
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:image" content="{{ $image }}">
+@if($publishedTime)
+<meta property="article:published_time" content="{{ $publishedTime }}">
+@endif
+@if($modifiedTime)
+<meta property="article:modified_time" content="{{ $modifiedTime }}">
+@endif
+@if($section)
+<meta property="article:section" content="{{ $section }}">
+@endif
+@if($type === 'article')
+<meta property="article:author" content="https://x.com/deeepakbagada">
+@endif
 
 <!-- Twitter Cards -->
 <meta name="twitter:card" content="summary_large_image">

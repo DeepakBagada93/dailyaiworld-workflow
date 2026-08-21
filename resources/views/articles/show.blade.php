@@ -3,6 +3,11 @@
 @section('title', $article->title . ' — Daily AI World')
 @section('meta_description', Str::limit($article->deck ?? $article->excerpt, 155))
 @section('og_image', $article->featured_image)
+@section('og_type', 'article')
+@section('published_time', $article->iso_date)
+@section('modified_time', $article->iso_updated_date)
+@section('article_section', $article->category->name ?? 'Artificial Intelligence')
+@section('meta_keywords', ($article->category->name ?? 'AI') . ', AI Workflows, Model Context Protocol, MCP Tools, AI Agents, LLM Benchmarks, ' . $article->title)
 
 @push('head')
     <!-- Schema.org JSON-LD TechArticle Markup for AI Engines (GEO / AEO) -->
@@ -17,10 +22,18 @@
         "datePublished": "{{ $article->iso_date }}",
         "dateModified": "{{ $article->iso_updated_date }}",
         "proficiencyLevel": "Expert",
+        "inLanguage": "en-US",
+        "wordCount": {{ $article->word_count }},
+        "articleSection": {!! json_encode($article->category->name ?? 'Artificial Intelligence') !!},
+        "keywords": {!! json_encode(($article->category->name ?? 'AI') . ', AI Agents, Model Context Protocol, MCP, LLM, ' . $article->title) !!},
+        "speakable": {
+            "@type": "SpeakableSpecification",
+            "cssSelector": ["h1", ".article-newsroom p"]
+        },
         "author": {
             "@type": "Person",
-            "name": {!! json_encode($article->author->name ?? '') !!},
-            "jobTitle": {!! json_encode($article->author->title ?? '') !!},
+            "name": {!! json_encode($article->author->name ?? 'Deepak Bagada') !!},
+            "jobTitle": {!! json_encode($article->author->title ?? 'CEO, SaaSNext & Principal AI Architect') !!},
             "sameAs": "https://x.com/deeepakbagada"
         },
         "publisher": {
@@ -54,8 +67,8 @@
             {
                 "@type": "ListItem",
                 "position": 2,
-                "name": "{{ addslashes($article->category->name) }}",
-                "item": "{{ route('categories.show', $article->category->slug) }}"
+                "name": "{{ addslashes($article->category->name ?? 'Articles') }}",
+                "item": "{{ route('categories.show', $article->category->slug ?? 'all') }}"
             },
             {
                 "@type": "ListItem",
@@ -66,6 +79,37 @@
         ]
     }
     </script>
+
+    @php
+        $headFaqs = $article->faqs;
+        if (is_string($headFaqs)) {
+            $decoded = json_decode($headFaqs, true);
+            $headFaqs = is_array($decoded) ? $decoded : [];
+        }
+        $validFaqs = is_array($headFaqs) ? array_filter($headFaqs, fn($f) => is_array($f) && !empty($f['question'] ?? $f['q'] ?? '')) : [];
+    @endphp
+
+    @if(!empty($validFaqs))
+    <!-- Schema.org JSON-LD FAQPage Markup for Google AI Overviews & Rich Snippets -->
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            @foreach($validFaqs as $index => $faq)
+            {
+                "@type": "Question",
+                "name": {!! json_encode($faq['question'] ?? $faq['q'] ?? '') !!},
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": {!! json_encode($faq['answer'] ?? $faq['a'] ?? '') !!}
+                }
+            }@if(!$loop->last),@endif
+            @endforeach
+        ]
+    }
+    </script>
+    @endif
 @endpush
 
 @section('content')

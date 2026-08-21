@@ -338,7 +338,15 @@ class Article extends Model
     }
 
     /**
-     * Render Markdown content to HTML and inject ID attributes into H2 headings for TOC anchors.
+     * Calculate clean word count for SEO & Schema.org.
+     */
+    public function getWordCountAttribute(): int
+    {
+        return str_word_count(strip_tags($this->content ?? ''));
+    }
+
+    /**
+     * Render Markdown content to HTML and inject ID attributes into H2 & H3 headings for TOC and Google Search jump anchors.
      */
     public function getFormattedContentAttribute(): string
     {
@@ -346,17 +354,31 @@ class Article extends Model
         $html = Str::markdown($content);
 
         // Inject id="heading-slug" and scroll-mt-24 into every <h2> tag
-        return preg_replace_callback('/<h2([^>]*)>(.*?)<\/h2>/i', function ($matches) {
+        $html = preg_replace_callback('/<h2([^>]*)>(.*?)<\/h2>/i', function ($matches) {
             $attrs = $matches[1];
             $title = trim(strip_tags($matches[2]));
             $slug = Str::slug($title);
 
-            // Avoid duplicate id attribute
             if (str_contains($attrs, 'id=')) {
                 return "<h2{$attrs}>{$matches[2]}</h2>";
             }
 
             return "<h2 id=\"{$slug}\" class=\"scroll-mt-24\"{$attrs}>{$matches[2]}</h2>";
         }, $html);
+
+        // Inject id="heading-slug" and scroll-mt-24 into every <h3> tag for long-tail search deep linking
+        $html = preg_replace_callback('/<h3([^>]*)>(.*?)<\/h3>/i', function ($matches) {
+            $attrs = $matches[1];
+            $title = trim(strip_tags($matches[2]));
+            $slug = Str::slug($title);
+
+            if (str_contains($attrs, 'id=')) {
+                return "<h3{$attrs}>{$matches[2]}</h3>";
+            }
+
+            return "<h3 id=\"{$slug}\" class=\"scroll-mt-24\"{$attrs}>{$matches[2]}</h3>";
+        }, $html);
+
+        return $html;
     }
 }
