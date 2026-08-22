@@ -291,7 +291,41 @@
                 @endif
 
                 <!-- MID-ARTICLE / END-ARTICLE NEWSLETTER CTA -->
-                <div class="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-8 my-12 shadow-sm">
+                <div class="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-8 my-12 shadow-sm"
+                     x-data="{
+                         email: '',
+                         loading: false,
+                         submitted: false,
+                         successMessage: '',
+                         errorMessage: '',
+                         async subscribe() {
+                             if (!this.email) return;
+                             this.loading = true;
+                             this.errorMessage = '';
+                             try {
+                                 const res = await fetch('{{ route('newsletter.subscribe') }}', {
+                                     method: 'POST',
+                                     headers: {
+                                         'Content-Type': 'application/json',
+                                         'Accept': 'application/json',
+                                         'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                     },
+                                     body: JSON.stringify({ email: this.email, edition: 'Daily Executive Briefing' })
+                                 });
+                                 const data = await res.json();
+                                 if (res.ok && (data.success || data.status === 'success')) {
+                                     this.submitted = true;
+                                     this.successMessage = data.message || 'Thank you for subscribing! Check your inbox for confirmation.';
+                                 } else {
+                                     this.errorMessage = data.message || (data.errors ? Object.values(data.errors).flat().join(' ') : 'Unable to subscribe. Please try again.');
+                                 }
+                             } catch (e) {
+                                 this.errorMessage = 'Something went wrong. Please try again.';
+                             } finally {
+                                 this.loading = false;
+                             }
+                         }
+                     }">
                     <span class="text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold">Executive Briefing</span>
                     <h3 class="font-serif text-2xl font-bold text-[var(--text-heading)] mt-2">
                         Enjoyed this breakdown? Get our morning dispatch in your inbox.
@@ -299,11 +333,31 @@
                     <p class="text-xs sm:text-sm text-[var(--text-body)] mt-2 leading-relaxed">
                         Curated breakdowns of frontier model architectures and compute markets delivered every weekday. Zero fluff.
                     </p>
-                    <form action="{{ route('newsletter.subscribe') }}" method="POST" class="mt-4 flex flex-col sm:flex-row gap-3">
+
+                    <!-- Success State -->
+                    <div x-show="submitted" x-cloak class="mt-4 p-5 bg-purple-50 dark:bg-purple-950/40 border border-[#6D28D9] rounded-xl text-[var(--text-heading)]">
+                        <div class="flex items-center gap-2 text-[#6D28D9] font-bold mb-1">
+                            <svg class="w-5 h-5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                            <span class="text-base font-serif">🎉 Thank You for Subscribing!</span>
+                        </div>
+                        <p class="text-xs sm:text-sm text-[var(--text-muted)]" x-text="successMessage"></p>
+                    </div>
+
+                    <!-- Form State -->
+                    <form x-show="!submitted" @submit.prevent="subscribe" action="{{ route('newsletter.subscribe') }}" method="POST" class="mt-4 flex flex-col sm:flex-row gap-3">
                         @csrf
-                        <input type="email" name="email" required placeholder="founder@company.com" 
-                               class="bg-[var(--bg-main)] border border-[var(--border-subtle)] text-[var(--text-heading)] text-sm rounded-md px-4 py-2.5 focus:outline-none focus:border-[#6D28D9] flex-grow">
-                        <button type="submit" class="btn-primary py-2.5 px-5 text-xs shrink-0">Subscribe Free</button>
+                        <div class="flex-grow flex flex-col gap-1">
+                            <input type="email" name="email" x-model="email" required placeholder="founder@company.com" :disabled="loading"
+                                   class="bg-[var(--bg-main)] border border-[var(--border-subtle)] text-[var(--text-heading)] text-sm rounded-md px-4 py-2.5 focus:outline-none focus:border-[#6D28D9] w-full">
+                            <p x-show="errorMessage" x-text="errorMessage" class="text-xs text-rose-600 font-medium"></p>
+                        </div>
+                        <button type="submit" :disabled="loading" class="btn-primary py-2.5 px-5 text-xs shrink-0 flex items-center justify-center gap-2">
+                            <span x-show="!loading">Subscribe Free</span>
+                            <span x-show="loading" class="flex items-center gap-1.5">
+                                <svg class="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                                <span>Subscribing...</span>
+                            </span>
+                        </button>
                     </form>
                 </div>
 

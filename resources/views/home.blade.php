@@ -221,18 +221,74 @@
             </a>
         </section>
 
-        <section class="newsletter-panel" aria-labelledby="newsletter-title">
+        <section class="newsletter-panel" aria-labelledby="newsletter-title"
+                 x-data="{
+                     email: '',
+                     loading: false,
+                     submitted: false,
+                     successMessage: '',
+                     errorMessage: '',
+                     async subscribe() {
+                         if (!this.email) return;
+                         this.loading = true;
+                         this.errorMessage = '';
+                         try {
+                             const res = await fetch('{{ route('newsletter.subscribe') }}', {
+                                 method: 'POST',
+                                 headers: {
+                                     'Content-Type': 'application/json',
+                                     'Accept': 'application/json',
+                                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                 },
+                                 body: JSON.stringify({ email: this.email, edition: 'Daily Executive Briefing' })
+                             });
+                             const data = await res.json();
+                             if (res.ok && (data.success || data.status === 'success')) {
+                                 this.submitted = true;
+                                 this.successMessage = data.message || 'Thank you for subscribing! Check your inbox for confirmation.';
+                             } else {
+                                 this.errorMessage = data.message || (data.errors ? Object.values(data.errors).flat().join(' ') : 'Unable to subscribe. Please try again.');
+                             }
+                         } catch (e) {
+                             this.errorMessage = 'Something went wrong. Please try again.';
+                         } finally {
+                             this.loading = false;
+                         }
+                     }
+                 }">
             <div>
                 <span>Daily briefing</span>
                 <h2 id="newsletter-title">The signal, before the noise.</h2>
                 <p>One sharply edited email for people building with AI. No spam, no recycled headlines.</p>
             </div>
-            <form action="{{ route('newsletter.subscribe') }}" method="POST" class="newsletter-form">
-                @csrf
-                <label class="sr-only" for="homepage-email">Email address</label>
-                <input id="homepage-email" type="email" name="email" required placeholder="you@company.com" autocomplete="email">
-                <button type="submit">Get the briefing <span aria-hidden="true">→</span></button>
-            </form>
+
+            <div class="self-end w-full">
+                <!-- Success State -->
+                <div x-show="submitted" x-cloak class="p-6 bg-[#fcfbf8] border-2 border-[#7047d7] rounded-xl text-[#111323] shadow-sm">
+                    <div class="flex items-center gap-2 text-[#7047d7] font-bold mb-1.5">
+                        <svg class="w-6 h-6 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>
+                        <span class="text-lg font-serif">🎉 Thank You for Subscribing!</span>
+                    </div>
+                    <p class="text-sm text-[#586174]" x-text="successMessage"></p>
+                </div>
+
+                <!-- Form State -->
+                <form x-show="!submitted" @submit.prevent="subscribe" action="{{ route('newsletter.subscribe') }}" method="POST" class="newsletter-form">
+                    @csrf
+                    <div class="w-full flex flex-col gap-1">
+                        <label class="sr-only" for="homepage-email">Email address</label>
+                        <input id="homepage-email" type="email" name="email" x-model="email" required placeholder="you@company.com" autocomplete="email" :disabled="loading">
+                        <p x-show="errorMessage" x-text="errorMessage" class="text-xs text-rose-600 font-medium mt-1"></p>
+                    </div>
+                    <button type="submit" :disabled="loading" class="flex items-center justify-center gap-2">
+                        <span x-show="!loading">Get the briefing <span aria-hidden="true">→</span></span>
+                        <span x-show="loading" class="flex items-center gap-2">
+                            <svg class="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                            <span>Subscribing...</span>
+                        </span>
+                    </button>
+                </form>
+            </div>
         </section>
 
         @if($latestArticles->count())
