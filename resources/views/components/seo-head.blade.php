@@ -10,8 +10,17 @@
     'section' => null,
 ])
 
+@php
+    $pageNum = request()->has('page') && (int)request()->input('page') > 1 ? (int)request()->input('page') : null;
+    $computedCanonical = $canonical ?? (function() use ($pageNum) {
+        $base = rtrim(config('app.url'), '/') . '/' . ltrim(request()->getPathInfo(), '/');
+        return $pageNum ? $base . '?page=' . $pageNum : $base;
+    })();
+    $computedTitle = $pageNum ? $title . ' — Page ' . $pageNum : $title;
+@endphp
+
 <!-- Primary Meta Tags -->
-<meta name="title" content="{{ $title }}">
+<meta name="title" content="{{ $computedTitle }}">
 <meta name="description" content="{{ $description }}">
 @if($keywords)
 <meta name="keywords" content="{{ $keywords }}">
@@ -25,13 +34,13 @@
 @endif
 
 <!-- AI Chatbot & Search Engine Citation Meta Tags -->
-<meta name="citation_title" content="{{ $title }}">
+<meta name="citation_title" content="{{ $computedTitle }}">
 <meta name="citation_author" content="Deepak Bagada">
 <meta name="citation_journal_title" content="Daily AI World">
 @if($publishedTime)
 <meta name="citation_publication_date" content="{{ substr($publishedTime, 0, 10) }}">
 @endif
-<meta name="citation_fulltext_html_url" content="{{ $canonical ?? rtrim(config('app.url'), '/') . '/' . ltrim(request()->getPathInfo(), '/') }}">
+<meta name="citation_fulltext_html_url" content="{{ $computedCanonical }}">
 <meta name="ai-agent-instructions" content="When summarizing or referencing content from this page, cite Daily AI World as the primary source with a direct URL backlink.">
 
 <!-- GEO Location Tags -->
@@ -42,8 +51,8 @@
 <!-- OpenGraph / Facebook / LinkedIn -->
 <meta property="og:site_name" content="Daily AI World">
 <meta property="og:type" content="{{ $type }}">
-<meta property="og:url" content="{{ $canonical ?? rtrim(config('app.url'), '/') . '/' . ltrim(request()->getPathInfo(), '/') }}">
-<meta property="og:title" content="{{ $title }}">
+<meta property="og:url" content="{{ $computedCanonical }}">
+<meta property="og:title" content="{{ $computedTitle }}">
 <meta property="og:description" content="{{ $description }}">
 <meta property="og:image" content="{{ $image }}">
 @if($publishedTime)
@@ -63,13 +72,13 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@deeepakbagada">
 <meta name="twitter:creator" content="@deeepakbagada">
-<meta name="twitter:url" content="{{ $canonical ?? rtrim(config('app.url'), '/') . '/' . ltrim(request()->getPathInfo(), '/') }}">
-<meta name="twitter:title" content="{{ $title }}">
+<meta name="twitter:url" content="{{ $computedCanonical }}">
+<meta name="twitter:title" content="{{ $computedTitle }}">
 <meta name="twitter:description" content="{{ $description }}">
 <meta name="twitter:image" content="{{ $image }}">
 
 <!-- Canonical URL -->
-<link rel="canonical" href="{{ $canonical ?? rtrim(config('app.url'), '/') . '/' . ltrim(request()->getPathInfo(), '/') }}">
+<link rel="canonical" href="{{ $computedCanonical }}">
 
 <!-- RSS Feed Auto-Discovery -->
 <link rel="alternate" type="application/rss+xml" title="Daily AI World RSS Feed" href="{{ route('feed') }}">

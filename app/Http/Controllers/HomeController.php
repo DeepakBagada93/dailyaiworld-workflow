@@ -88,12 +88,11 @@ class HomeController extends Controller
             ->take(4)
             ->get();
 
-        // 7. Latest Articles Feed with Pagination & Fragment Anchor (#archive-section)
+        // 7. Latest Articles Feed with Pagination
         $latestArticles = Article::with(['category', 'author'])
             ->published()
             ->latest('published_at')
-            ->paginate(9)
-            ->fragment('archive-section');
+            ->paginate(9);
 
         return view('home', compact(
             'marketIndices',
