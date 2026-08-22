@@ -111,8 +111,10 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
+        'address' => env('MAIL_FROM_ADDRESS', 'ceo@saasnext.in'),
+        'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Daily AI World')),
     ],
+
+    'admin_address' => env('ADMIN_EMAIL', 'ceo@saasnext.in'),
 
 ];
