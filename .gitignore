@@ -35,6 +35,7 @@ __pycache__/
 # Temporary payload/data files
 *_payload*.json
 *_dispatches*.json
+*_dispatch*.json
 *_parsed*.json
 *_raw*.json
 *_batch*.json

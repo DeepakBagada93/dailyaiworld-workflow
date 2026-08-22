@@ -605,3 +605,19 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 | 2026-08-22 | LLMs | Blog | The 100K Token Trap: Why Longer Context Windows Often Hurt Agent Performance in 2026 | `100k-token-trap-longer-context-windows-often-hurt-agent` | Context Windows, Attention Dilution, Token Economics |
 | 2026-08-22 | LLMs | Blog | The Agent Memory Wars: Graph RAG vs Vector Stores vs Hybrid in 2026 | `agent-memory-wars-graph-rag-vs-vector-stores-vs-hybrid-2026` | Agent Memory, Graph RAG, Vector Store, Hybrid |
 | 2026-08-22 | LLMs | Blog | AI Safety Alignment in 2026: From RLHF to Constitutional AI to Sleeper Agents | `ai-safety-alignment-2026-rlhf-constitutional-ai-sleeper` | AI Safety, RLHF, Constitutional AI, Sleeper Agents |
+
+| 2026-08-22 | AI Workflows | Workflow | Build a Self-Correcting Multi-Agent Workflow with LangGraph Execution Traces in 2026 | `build-self-correcting-multi-agent-workflow-langgraph` | LangGraph, PydanticAI, Execution Traces, Self-Correction |
+| 2026-08-22 | AI Workflows | Workflow | Build a Real-Time Data Pipeline Self-Healing Workflow with LangGraph Anomaly Detection in 2026 | `build-real-time-data-pipeline-self-healing-workflow` | LangGraph, Anomaly Detection, Self-Healing, Data Pipeline |
+| 2026-08-22 | AI Workflows | Workflow | Build a Multi-Agent Financial Fraud Detection Workflow with Graph Neural Networks in 2026 | `build-multi-agent-financial-fraud-detection-workflow-graph` | GNN, Fraud Detection, Neo4j, PydanticAI |
+
+| 2026-08-22 | AI Tools | MCP Tool | Build a Real-Time Feature Store MCP Server for ML Feature Serving in 2026 | `build-real-time-feature-store-mcp-server-ml-feature-serving` | FastMCP, Feast, Redis, Feature Store |
+| 2026-08-22 | AI Tools | MCP Tool | Build a dbt Semantic Layer MCP Server for Agentic Data Transformation in 2026 | `build-dbt-semantic-layer-mcp-server-agentic-data` | FastMCP, dbt Cloud, Semantic Layer, Snowflake |
+| 2026-08-22 | AI Tools | MCP Tool | Build a Multi-Source Data Catalog MCP Server for Agent Metadata Discovery in 2026 | `build-multi-source-data-catalog-mcp-server-agent-metadata` | FastMCP, Snowflake, BigQuery, dbt, GitHub |
+
+| 2026-08-22 | LLMs | Blog | Compound AI Systems in 2026: When One Model Isn't Enough for Production Intelligence | `compound-ai-systems-2026-one-model-isnt-enough-production` | Compound AI, Multi-Model Routing, Cost Optimization |
+| 2026-08-22 | Coding | Blog | Cascading Failures in AI Agent Systems: A Production Failure Taxonomy for 2026 | `cascading-failures-ai-agent-systems-production-failure` | Agent Failures, Circuit Breakers, Production Reliability |
+| 2026-08-22 | LLMs | Blog | Inference Cost Modeling in 2026: The Three-Tier Model Economy and How to Budget for AI Agents | `inference-cost-modeling-2026-three-tier-model-economy` | Three-Tier Economy, Token Economics, Cost Optimization |
+
+| 2026-08-22 | AI News | News | Anthropic Launches Claude 5 Enterprise: 2M Context, Agent-Native Tools and the 2B Revenue Milestone | `anthropic-launches-claude-enterprise-2m-context-agent` | Claude 5 Enterprise, 2M Context, Anthropic |
+| 2026-08-22 | AI News | News | OpenAI Launches GPT-5.6 Turbo: 3x Faster, 50 Percent Cheaper, and the Speed-Smart Tradeoff Ends | `openai-launches-gpt-56-turbo-3x-faster-50-cheaper-speed` | GPT-5.6 Turbo, OpenAI, Inference Speed |
+| 2026-08-22 | AI News | News | NVIDIA Blackwell Ultra B300: 2x Inference Throughput and the End of the GPU Memory Wall | `nvidia-blackwell-ultra-b300-2x-inference-throughput-end-gpu` | NVIDIA B300, HBM4, GPU Memory Wall |
