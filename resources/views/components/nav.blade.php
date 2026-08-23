@@ -6,7 +6,12 @@
         <div class="flex items-center gap-4 shrink-0">
             <a href="{{ route('home') }}" class="group flex items-center gap-3 focus:outline-none focus:ring-2 focus:ring-[#6D28D9] rounded-xl p-1">
                 <div class="relative">
-                    <img src="{{ asset('images/logo.png') }}" alt="Daily AI World Logo" class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-cover ring-2 ring-[#6D28D9]/30 group-hover:ring-[#6D28D9] group-hover:scale-105 transition-all duration-300 shrink-0 shadow-sm author-avatar-img">
+                    <img src="{{ asset('images/logo.png') }}" 
+                         alt="Daily AI World Logo" 
+                         width="40" 
+                         height="40" 
+                         class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-cover ring-2 ring-[#6D28D9]/30 group-hover:ring-[#6D28D9] group-hover:scale-105 transition-all duration-300 shrink-0 shadow-sm author-avatar-img"
+                         style="max-width: 40px; max-height: 40px; object-fit: cover;">
                     <span class="absolute -top-0.5 -right-0.5 flex h-2.5 w-2.5">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#6D28D9] opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#6D28D9]"></span>
