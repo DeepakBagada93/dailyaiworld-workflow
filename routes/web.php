@@ -27,6 +27,9 @@ Route::get('/rss', [SeoController::class, 'feed']);
 Route::get('/llms.txt', [SeoController::class, 'llmsTxt'])->name('llms.txt');
 Route::get('/llms-full.txt', [SeoController::class, 'llmsFullTxt'])->name('llms.full');
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+Route::get('/8f3b2e7a1c9d40e5b6a7f8e9d0c1b2a3.txt', function () {
+    return response('8f3b2e7a1c9d40e5b6a7f8e9d0c1b2a3', 200, ['Content-Type' => 'text/plain; charset=utf-8']);
+});
 Route::get('/api/v1/llm-context', [SeoController::class, 'llmContextApi'])->name('api.llm-context');
 
 // Directory Hubs (AEO & GEO High Priority Index Pages)
