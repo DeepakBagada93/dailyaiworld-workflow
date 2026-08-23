@@ -132,6 +132,22 @@ try {
         }
     }
 
+    // 3. Fast Indexing Notification (IndexNow & Search Engines)
+    $indexingResult = null;
+    try {
+        if (class_exists(\App\Services\IndexingService::class)) {
+            $indexingResult = \App\Services\IndexingService::submitToIndexNow([
+                $liveUrl,
+                'https://dailyaiworld.com/',
+                'https://dailyaiworld.com/sitemap.xml',
+                'https://dailyaiworld.com/feed.xml',
+            ]);
+            \App\Services\IndexingService::pingSitemaps();
+        }
+    } catch (\Throwable $ie) {
+        // Fast indexing notification error is non-blocking
+    }
+
     $wordCount = str_word_count(strip_tags($data['content']));
 
     echo json_encode([
@@ -139,6 +155,7 @@ try {
         'local_id' => $localId,
         'remote_id' => $remoteId,
         'remote_error' => isset($remoteError) ? $remoteError : null,
+        'indexing_notified' => $indexingResult !== null,
         'title' => $data['title'],
         'slug' => $slug,
         'url' => $liveUrl,
