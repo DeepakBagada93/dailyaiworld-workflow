@@ -38,6 +38,7 @@ return [
     'google' => [
         'analytics_id' => env('GA_MEASUREMENT_ID', 'G-W9SPTJHSQ5'),
         'site_verification' => env('GOOGLE_SITE_VERIFICATION'),
+        'adsense_id' => env('GOOGLE_ADSENSE_ID'), // e.g. ca-pub-XXXXXXXXXXXXXXXX
     ],
 
 ];

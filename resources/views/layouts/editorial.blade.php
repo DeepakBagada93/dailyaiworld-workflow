@@ -50,6 +50,11 @@
     </script>
     @endif
 
+    <!-- Google AdSense Verification & Ad Engine -->
+    @if(config('services.google.adsense_id'))
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client={{ config('services.google.adsense_id') }}" crossorigin="anonymous"></script>
+    @endif
+
     <!-- Scripts & CSS via Vite -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 

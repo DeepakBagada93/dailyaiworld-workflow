@@ -17,6 +17,7 @@ use App\Http\Controllers\SeoController;
 use App\Http\Controllers\McpDirectoryController;
 use App\Http\Controllers\WorkflowDirectoryController;
 use App\Http\Controllers\NewsDirectoryController;
+use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 // SEO, AEO & GEO Optimization Engine Endpoints
@@ -91,6 +92,14 @@ Route::post('/bookmarks/{article}/toggle', [BookmarkController::class, 'toggle']
 
 // Newsletter
 Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
+// Company, Legal & Compliance Trust Routes (AdSense & Regulatory Compliance)
+Route::get('/about', [PageController::class, 'about'])->name('about');
+Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy');
+Route::get('/terms', [PageController::class, 'terms'])->name('terms');
+Route::get('/contact', [PageController::class, 'contact'])->name('contact');
+Route::post('/contact', [PageController::class, 'submitContact'])->name('contact.submit');
+Route::get('/disclaimer', [PageController::class, 'disclaimer'])->name('disclaimer');
 
 // Design System Showcase
 Route::get('/design-system', [DesignSystemController::class, 'index'])->name('design-system');
