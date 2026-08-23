@@ -42,8 +42,21 @@ class HomeController extends Controller
             ->published()
             ->where('is_featured', true)
             ->where('id', '!=', $heroArticle?->id)
+            ->latest('published_at')
             ->take(4)
             ->get();
+
+        if ($editorsPicks->count() < 4) {
+            $fallbackPicks = Article::with(['category', 'author'])
+                ->published()
+                ->where('id', '!=', $heroArticle?->id)
+                ->whereNotIn('id', $editorsPicks->pluck('id'))
+                ->orderBy('trending_score', 'desc')
+                ->latest('published_at')
+                ->take(4 - $editorsPicks->count())
+                ->get();
+            $editorsPicks = $editorsPicks->merge($fallbackPicks);
+        }
 
         // 5. Categorized Primary Content Desks (AI Workflows, MCP Directory, Realtime AI News)
         $workflowArticles = Article::with(['category', 'author'])

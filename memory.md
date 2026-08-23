@@ -701,3 +701,19 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 | 2026-08-23 | AI News | News | OpenAI Astra Preview: 10T Parameters and the Next Frontier Model Race in 2026 | `openai-astra-preview-10t-parameters-next-frontier-model` | OpenAI Astra, 10T Parameters, Frontier Model Race |
 | 2026-08-23 | AI News | News | AMD Bets $5B on Anthropic, NVIDIA Backs SSI: The Frontier Chip Investment Wave in 2026 | `amd-bets-5b-anthropic-nvidia-backs-ssi-frontier-chip` | AMD, Anthropic, NVIDIA, SSI, GPU Competition |
 | 2026-08-23 | AI News | News | Anthropic Signs 20-Year, $9.1B Compute Lease with CoreWeave: Enterprise AI Infrastructure Shifts in 2026 | `anthropic-signs-20-year-91b-compute-lease-coreweave` | Anthropic, CoreWeave, Compute Lease, AI Infrastructure |
+
+| 2026-08-24 | AI Workflows | Workflow | Cut 74% Agent Debug Time with OpenTelemetry GenAI Semantic Conventions & PydanticAI Budget Gates in 2026 | `cut-74-agent-debug-time-opentelemetry-genai-semantic` | OpenTelemetry, GenAI Semantic Conventions, PydanticAI, Budget Gates |
+| 2026-08-24 | AI Workflows | Workflow | Build a Synthetic Data Validation Pipeline That Catches 97% of Agent Training Drift in 2026 | `build-synthetic-data-validation-pipeline-catches-97-agent` | Synthetic Data Validation, SDV, PydanticAI, Drift Detection |
+| 2026-08-24 | AI Workflows | Workflow | Build an Agentic API Backpressure Workflow That Prevents Cascade Failures Across 200+ Agent Fleets in 2026 | `build-agentic-api-backpressure-workflow-prevents-cascade` | API Backpressure, Retry Budget, Cascade Failure, LangGraph |
+
+| 2026-08-24 | AI Tools | MCP Tool | Build a Temporal Durable Execution MCP Server for Agent Workflows That Survive Restarts in 2026 | `build-temporal-durable-execution-mcp-server-agent-workflows` | Temporal, Durable Execution, FastMCP, TypeScript |
+| 2026-08-24 | AI Tools | MCP Tool | Build an Apache Kafka Streams MCP Server for Real-Time Event-Driven Agent Pipelines in 2026 | `build-apache-kafka-streams-mcp-server-real-time-event` | Apache Kafka, Event-Driven, FastMCP, TypeScript |
+| 2026-08-24 | AI Tools | MCP Tool | Build a Vector DB Migration MCP Server That Moves Agent Memory Between Qdrant, Pinecone & Weaviate in 2026 | `build-vector-db-migration-mcp-server-moves-agent-memory` | Vector DB Migration, Qdrant, Pinecone, Weaviate |
+
+| 2026-08-24 | LLMs | Blog | The Agent Cache Coherence Problem: Why Multi-Agent Systems Corrupt Shared State in 2026 | `agent-cache-coherence-problem-multi-agent-systems-corrupt` | Cache Coherence, Multi-Agent State, CRDTs, Versioned State |
+| 2026-08-24 | LLMs | Blog | The 2026 Prompt Injection Taxonomy: 7 Attack Vectors Every Agent Builder Must Defend Against | `2026-prompt-injection-taxonomy-attack-vectors-every-agent` | Prompt Injection, Agent Security, Tool Description Injection, AISI |
+| 2026-08-24 | Coding | Blog | Token Budget Gating Economics: How 3 Enterprises Cut Agent Spend by 62% Without Quality Loss in 2026 | `token-budget-gating-economics-enterprises-cut-agent-spend` | Token Budget, Model Routing, Prompt Compression, Cost Optimization |
+
+| 2026-08-24 | AI News | News | OpenAI Pauses Astra After Critical Cyber Capability Evaluation: What the 10T-Model Safety Gate Means | `openai-pauses-astra-after-critical-cyber-capability` | OpenAI Astra, Cyber Capabilities, Safety Gate, Model Pause |
+| 2026-08-24 | AI News | News | Anthropic Ships Claude Code Skill & Plugin Security Scanning: The Supply Chain Defense Layer | `anthropic-ships-claude-code-skill-plugin-security-scanning` | Claude Code, Plugin Security, MCP Scanning, Supply Chain |
+| 2026-08-24 | AI News | News | OpenAI Sets August 26 Assistants API Sunset: The Migration to Responses API & MCP Is Now Urgent | `openai-sets-august-26-assistants-api-sunset-migration` | Assistants API Sunset, Responses API, MCP Migration |
