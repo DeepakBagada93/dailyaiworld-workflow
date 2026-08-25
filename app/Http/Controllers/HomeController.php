@@ -14,14 +14,11 @@ class HomeController extends Controller
         $marketIndices = MarketIndex::all();
 
         // 1. Hero Featured Story (Primary text-hero)
-        // A manually pinned hero (is_hero) is honored only while fresh (last 24h);
-        // otherwise the hero always advances to the latest published dispatch so the
-        // hero never goes stale behind a pinned story.
+        // Always display the latest published article in the hero section.
         $heroArticle = Article::with(['category', 'author'])
             ->published()
-            ->where('is_hero', true)
-            ->where('published_at', '>=', now()->subHours(24))
-            ->first() ?? Article::with(['category', 'author'])->published()->latest('published_at')->first();
+            ->latest('published_at')
+            ->first();
 
         // 2. Latest News (Fast chronological dispatches feed)
         $latestNews = Article::with(['category', 'author'])

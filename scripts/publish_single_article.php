@@ -59,7 +59,7 @@ config([
 ]);
 
 try {
-    $slug = Article::generateSeoSlug($data['title']);
+    $slug = !empty($data['slug']) ? Str::slug($data['slug']) : Article::generateSeoSlug($data['title']);
     $slug = Article::ensureUniqueSlug($slug);
 
     // Normalize FAQs
@@ -104,7 +104,7 @@ try {
         'key_takeaways'  => json_encode($data['key_takeaways'] ?? []),
         'faqs'           => json_encode($normalizedFaqs),
         'tier'           => $data['tier'] ?? 'Deep Dive',
-        'is_hero'        => 0,
+        'is_hero'        => 1,
         'is_featured'    => 0,
         'status'         => 'published',
         'published_at'   => $publishedAt,
@@ -115,17 +115,20 @@ try {
         'updated_at'     => now(),
     ];
 
-    // 1. Insert into Local Database
+    // 1. Reset previous heroes & Insert into Local Database
+    DB::table('articles')->update(['is_hero' => 0]);
     $localId = DB::table('articles')->insertGetId($row);
 
-    // 2. Insert into Remote Hostinger Database
+    // 2. Reset previous heroes & Insert into Remote Hostinger Database
     $remoteId = null;
     try {
+        DB::connection('hostinger')->table('articles')->update(['is_hero' => 0]);
         $remoteId = DB::connection('hostinger')->table('articles')->insertGetId($row);
     } catch (\Throwable $re) {
         // Retry remote insertion once
         try {
             DB::purge('hostinger');
+            DB::connection('hostinger')->table('articles')->update(['is_hero' => 0]);
             $remoteId = DB::connection('hostinger')->table('articles')->insertGetId($row);
         } catch (\Throwable $re2) {
             $remoteError = $re2->getMessage();
