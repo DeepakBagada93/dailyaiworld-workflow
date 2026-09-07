@@ -2,145 +2,236 @@
 name: dailyaiworld
 description: >
   Universal, production-grade autonomous content publishing skill for Daily AI World (dailyaiworld.com).
-  Produces 12 ultra-high-quality, high-CTR, high-E-E-A-T, and AEO-optimized technical dispatches across a
-  strict 4-cycle sequential architecture (3 AI Workflows + 3 MCP Tools + 3 AI Blogs + 3 AI News).
-  Strict word count constraint: 1,000 to 1,200 words per article (high density, zero fluff).
-  Features dynamic live HTTP 200 internal link verification, multi-file runnable code standards,
-  dual-database publishing (Local MySQL & Hostinger Live MySQL), and automated live URL validation.
-  Engineered to work seamlessly with ANY CLI coding tool (Antigravity, Claude Code, Cursor CLI, Roo Code, Aider, Codex).
+  Executes batch viral & trending SERP/AEO research first, followed by a strict sequential ONE-BY-ONE
+  write → pre-publish audit → DIRECT push to Hostinger Live MySQL (`srv1334.hstgr.io`) → live URL format & HTTP 200 audit
+  loop across 12 high-CTR, high-E-E-A-T dispatches (3 AI Workflows + 3 MCP Tools + 3 AI Blogs + 3 AI News).
+  Engineered for Rank #1 Google SERP, Google AI Overview (AEO/GEO) citations, and maximum viral dwell time.
+  Strict word count constraint: 1,200 to 1,500 words per article (high density, zero fluff, maximum dwell time) with fresh breaking analysis.
+  Zero git commits/pushes for content publishing to protect Google search indexing stability.
 ---
 
-# 🌐 Daily AI World — Autonomous Content Engine v3.0
+# 🌐 Daily AI World — Autonomous Content Engine v8.0 (Direct Live DB & Instant AEO Edition)
 
 > [!IMPORTANT]  
-> **CONTENT IS KING (1,000 – 1,200 WORDS)**: Daily AI World is an ultra-premium executive intelligence journal for AI founders, architects, and builders. Every article MUST be strictly between **1,000 and 1,200 words** of high-density engineering substance, runnable multi-file code, specific performance/cost metrics, and zero fluff.
+> **CORE ARCHITECTURE (SEARCH IN BATCH → WRITE ONE → AUDIT ONE → PUSH DIRECTLY TO LIVE DB → VERIFY LIVE URL → REPEAT)**:  
+> 1. **Batch Search & Topic Queue First**: Search and score all viral & trending topics up front across all cycles with real search demand, user search intent, viral momentum, and anti-duplication memory checks.
+> 2. **Sequential One-By-One Execution**: **NEVER batch push or write all in parallel**. For each approved topic in sequence:
+>    - **Step 1 — Write 1 dispatch**: (1,200 – 1,500 words, high dwell-time engineering substance, runnable multi-file code, AEO/GEO answer-first block, 3–5 verified internal links, **NO FAQ headings in content**).
+>    - **Step 2 — Pre-Publish Audit**: Run `php scripts/audit_dispatch_payload.php <dispatch.json>` to enforce word count, verify internal links, ensure zero duplicate FAQs, and check metadata.
+>    - **Step 3 — Direct Push to Live DB**: Run `php scripts/publish_single_article.php <dispatch.json>` which inserts directly into Hostinger Remote MySQL (`srv1334.hstgr.io`) as the primary database, ensuring immediate live availability.
+>    - **Step 4 — Live URL Quality Audit**: Run `php scripts/audit_live_url.php <url>` to verify HTTP 200, author byline, body content, interactive FAQs, and no duplicate FAQ blocks.
+>    - **Step 5 — Log to `memory.md`**: Record slug, title, category, and date in both local and skill config `memory.md`.
+>    - **Step 6 — Advance**: Proceed to the next topic ONLY after the current live URL is 100% verified.
 > 
-> **UNIVERSAL CLI COMPATIBILITY**: This skill works in any CLI coding environment. If subagents are supported (`invoke_subagent`), spawn specialized agents for each stage. If working in a single-agent or linear CLI environment (e.g. Claude Code, Cursor, Aider), execute the steps sequentially in your main context.
+> **STRICT NO GIT PUSH FOR CONTENT POLICY**:
+> - **NEVER run `git push` or deploy repository code when publishing content**.
+> - Articles live directly inside the MySQL database (`articles` table on `srv1334.hstgr.io`). Pushing code to GitHub triggers unnecessary rebuilds and deployments on the live host which disrupts active crawler sessions and harms Google search indexing latency.
+> 
+> **ZERO DUPLICATE FAQS GUARANTEE**:
+> The Laravel Blade template automatically renders both the interactive FAQ accordion section and the JSON-LD `FAQPage` schema from the `"faqs"` array in the JSON payload. **NEVER** write `## Frequently Asked Questions`, `### FAQ`, or any Q&A blocks inside the Markdown `content` body.
 
 ---
 
-## 1. 🚀 Executive Architecture & Sequential Pipeline
+## 1. 🚀 Executive Architecture & Sequential Execution Loop
 
-The pipeline produces **12 articles per run** organized into **4 strictly sequential cycles**:
+The pipeline produces **12 articles per run** organized into **4 content cycles** (3 AI Workflows + 3 MCP Tools + 3 AI Blogs + 3 AI News):
 
 ```
-Cycle 1: AI Workflows (3 Articles) ──► Research ──► Write ──► Audit ──► Publish ──► Live URL Audit ──► Log
-                                                                                                        │
-Cycle 2: MCP Tools (3 Articles)    ──► Research ──► Write ──► Audit ──► Publish ──► Live URL Audit ──► Log
-                                                                                                        │
-Cycle 3: AI Blogs (3 Articles)     ──► Research ──► Write ──► Audit ──► Publish ──► Live URL Audit ──► Log
-                                                                                                        │
-Cycle 4: AI News (3 Articles)      ──► Research ──► Write ──► Audit ──► Publish ──► Live URL Audit ──► Final Report
+STEP 1: Batch Viral & Trending Research & Scored Topic Queue (12 Scored Topics)
+        ├── Check memory.md (zero cannibalization)
+        ├── SERP Top-10 + People-Also-Ask + Viral Social Signals (X, Reddit, HN, GitHub)
+        ├── High-CTR & AI Overview (AEO/GEO) Traffic Scoring
+        └── Form Approved Queue (3 Workflows + 3 MCP Tools + 3 Blogs + 3 News)
+                                │
+                                ▼
+STEP 2: Sequential Execution Loop (ONE BY ONE — Strict 1-at-a-time pipeline)
+        ┌──► [Topic 1 of 12]
+        │     ├── 1. Fetch Verified Internal Links (`php scripts/get_verified_internal_links.php`)
+        │     ├── 2. Write Dispatch (1,200–1,500 words + runnable code + AEO answer-box + 3-5 verified links, NO FAQ in markdown)
+        │     ├── 3. Pre-Publish Audit (`php scripts/audit_dispatch_payload.php dispatch.json`)
+        │     ├── 4. Direct Push to Live DB (`php scripts/publish_single_article.php dispatch.json` -> srv1334.hstgr.io)
+        │     ├── 5. Live URL Audit (`php scripts/audit_live_url.php <live_url>`)
+        │     └── 6. Log to memory.md
+        ├──► [Topic 2 of 12] ──► Links ──► Write ──► Pre-Audit ──► Live Push ──► Live Audit ──► Log
+        ├──► ...
+        └──► [Topic 12 of 12] ──► Links ──► Write ──► Pre-Audit ──► Live Push ──► Live Audit ──► Log
+                                │
+                                ▼
+STEP 3: Final Run Verification Report (12/12 Live URLs verified)
 ```
 
 > [!CAUTION]  
-> **SEQUENTIAL RULE**: Never proceed to Cycle N+1 until Cycle N is 100% written, audited, published to Dual-DB, verified live with HTTP 200, and logged to `memory.md`.
+> **NO BATCH PUSHING & NO GIT PUSH**: Never write or push multiple articles at once. Never push to GitHub for publishing content. All posts must be inserted directly into the live Hostinger database (`srv1334.hstgr.io`). If any single post fails pre-publish audit, DB push, or live URL audit, fix the issue immediately before proceeding to the next topic.
 
 ---
 
 ## 2. 📊 Dispatch Mix & Category Routing
 
-| Cycle | Type | Category Name | Category ID | Canonical URL Route | Strict Word Count |
-|---|---|---|---|---|---|
-| **Cycle 1** | **AI Workflows** | AI Workflows | `1` | `https://dailyaiworld.com/workflow/{slug}` | **1,000 – 1,200 words** |
-| **Cycle 2** | **MCP Directory** | AI Tools | `5` | `https://dailyaiworld.com/mcp-directory/{slug}` | **1,000 – 1,200 words** |
-| **Cycle 3** | **AI Blogs** | Coding / LLMs | `3` or `10` | `https://dailyaiworld.com/blogs/{slug}` | **1,000 – 1,200 words** |
-| **Cycle 4** | **AI News** | AI News | `11` | `https://dailyaiworld.com/blogs/{slug}` | **1,000 – 1,200 words** |
+| Cycle | Type | Category Name | Category ID | Canonical URL Route | Strict Word Count | Dwell-Time Focus |
+|---|---|---|---|---|---|---|
+| **Cycle 1** | **AI Workflows** | AI Workflows | `1` | `https://dailyaiworld.com/workflow/{slug}` | **1,200 – 1,500 words** | Multi-file runnable architecture, DAG graphs, stateful agent loops, failure recovery |
+| **Cycle 2** | **MCP Directory** | AI Tools | `5` | `https://dailyaiworld.com/mcp-directory/{slug}` | **1,200 – 1,500 words** | FastMCP servers, custom tools, Zod schemas, Cursor/Claude/Windsurf integration |
+| **Cycle 3** | **AI Blogs** | Coding / LLMs | `3` or `10` | `https://dailyaiworld.com/blogs/{slug}` | **1,200 – 1,500 words** | Benchmark tables, token economics, latency profiling, production trade-offs |
+| **Cycle 4** | **AI News** | AI News | `11` | `https://dailyaiworld.com/blogs/{slug}` | **1,200 – 1,500 words** | Breaking model releases, enterprise architecture impact, migration playbooks |
 
 ---
 
-## 3. 🧠 MANDATORY STEP 0: Anti-Duplication Protocol (`memory.md`)
+## 3. 🧠 STAGE 0: High-CTR, Viral & Trending Topic Discovery (Traffic & Monetization Engine)
 
-Before generating ANY topic, the agent MUST read both memory files to prevent topic and slug cannibalization:
+To capture millions of organic search impressions, viral social sharing, and high-CPM programmatic ad & affiliate revenue, the topic discovery engine operates across 5 high-yield intent vectors:
+
+### Step 0.1 — Anti-Duplication Check (`memory.md`)
+Read both memory files:
 - Local Workspace: `/Users/deepakbagada/personal/Daily AI world/memory.md`
 - Gemini Config: `/Users/deepakbagada/.gemini/config/skills/dailyaiworld/memory.md`
 
-### Deduplication Rules:
-1. **Extract & Index**: Extract all previously published titles, slugs, and tech stacks.
-2. **Rejection Filter**: Immediately reject any topic that duplicates or closely mirrors past articles.
-3. **Post-Cycle Logging**: Immediately after publishing each cycle, append the new records to BOTH `memory.md` files.
+Extract all past titles, slugs, and tech stacks. Discard any candidate that cannibalizes past keywords.
+
+### Step 0.2 — High-Velocity Viral & High-CPM Discovery Vectors
+
+| Intent Vector | Search Query Archetypes | Target Audience & Monetization Hook |
+|---|---|---|
+| **Viral Social Heat & Breakthroughs** | `web_search "<model/framework> (site:x.com OR site:reddit.com/r/LocalLLaMA OR site:news.ycombinator.com OR site:github.com/trending)"` | Developers, founders, researchers. High viral share potential on Twitter/X, Reddit, Hacker News. |
+| **High CPC Enterprise Intent ($15–$50 CPM)** | `web_search "how to build enterprise <agent/RAG/fintech> production architecture 2026"` | CTOs, VP Engineering, AI Architects looking for high-value enterprise deployment patterns (premium ad CPMs & sponsored tool placements). |
+| **Zero-to-One Technical Pain Points & PAA** | `web_search "<tech> production error OR benchmark comparison OR latency bottleneck guide 2026"` | Direct Google SERP snatching via People-Also-Ask & featured snippets. Captures users actively debugging implementations. |
+| **Breaking Releases & Ecosystem Dominance** | `web_search "new AI model release OR MCP protocol update OR Anthropic Google OpenAI announcement 2026"` | Immediate news-cycle traffic surges (Google Discover, Google News, Flipboard). |
+| **ROI, Cost-Cutting & Token Economics** | `web_search "<model A> vs <model B> cost per 1M tokens enterprise benchmark 2026"` | High-intent buyers optimizing massive inference bills. Extreme dwell time on tables & charts. |
+
+### Step 0.3 — High-Yield Scored Topic Ranking (0–100)
+Score candidate topics before inclusion:
+```
+Organic Search Volume & PAA Demand (0-25) + Viral/Social Momentum (0-25) + Dwell-Time & Code Utility (0-25) + Commercial Value & High-CPM Intent (0-25) = /100
+```
+Only approve topics scoring **>= 85/100**.
 
 ---
 
-## 4. ✍️ Content Quality & Editorial Standards ("Content is King")
+## 4. 🎯 Rank #1 Google SERP, High-CTR & Revenue Meta Engineering
 
-Every single article MUST adhere to these non-negotiable quality rules:
+Every article must be engineered to stand out in Google Search results and social timelines to maximize Click-Through Rate (CTR):
 
-### A. High-CTR Title & SERP Engineering
-- **Formula**: `[Power Word] + [Specific Metric/Result] + [Curiosity Gap] + [Year 2026]`
-- **Examples**:
-  - ✅ `"5 LangGraph Memory Patterns That Slashed Multi-Agent Latency by 64% in 2026"`
-  - ✅ `"Building a Production OAuth2 FastMCP Server for Claude Code & Cursor [2026 Guide]"`
-  - ✅ `"DeepSeek-V3 vs Claude 3.7 Sonnet: Real-World Token Economics & TTFT Benchmarks"`
-  - ❌ `"Guide to AI Agents with LangGraph"` (REJECT: Generic, no metric, low CTR)
+### A. High-CTR Title Engineering (50–65 Characters)
+Titles must combine a strong primary keyword, a curiosity or breakthrough hook, concrete metrics, and year tags:
+- **Formula 1 (Breakthrough Benchmark)**: `[Primary Tech]: [Concrete Metric/Result] vs [Alternative] [2026]`
+  - *Example*: `"Claude 3.7 Sonnet Hybrid Reasoning: 64% Lower Latency in Production [2026]"`
+- **Formula 2 (Enterprise Blueprint)**: `How to Build an Enterprise [System] with [Stack]: [Concrete Metric] [2026]`
+  - *Example*: `"Build an Enterprise FastMCP PostgreSQL Gateway: Cut DB Latency by 52% in 2026"`
+- **Formula 3 (Pain-Point Solution)**: `[Problem Solved] in [Tech Stack]: [Architectural Breakthrough] [2026 Guide]`
+  - *Example*: `"Stop Agent Memory Leaks: 4 Graphiti & Redis Patterns for 99.4% Accuracy [2026]"`
 
-### B. Answer Engine Optimization (AEO) First Paragraph
-- **Direct Answer First**: The first 80–120 words must answer the core search query immediately.
-- **Zero Filler**: No introductory throat-clearing ("In today's fast-paced AI landscape...", "Artificial Intelligence is transforming..."). Start directly with the architecture, problem, and solution.
+### B. High-Converting Meta Description (145–158 Characters)
+- **Structure**: `[Imperative Action Verb] + [Primary Target Keyword] + [Exact Concrete Metric/Benefit] + [Secondary LSI Keyword] + [Click Incentive / Curiosity Hook].`
+- Include the main keyword within the first 60 characters for maximum mobile SERP snippet visibility.
 
-### C. Concise Depth & Runnable Multi-File Code (1,000 – 1,200 Words)
-- **Strict Word Count**: Every article MUST be between **1,000 and 1,200 words** (calculated by stripping HTML/Markdown). Reject under 1,000 words or over 1,200 words.
-- **No Repeated Paragraphs**: Every section must present unique, dense technical insights without reiteration or generic summaries.
-- **Multi-File Runnable Code Blocks**: Provide complete, copy-pasteable files (e.g. `main.py`, `tools.py`, `config.yaml`, `.env.example`) with exact `pip install` or `uv run` commands.
-- **Visuals**: Include ASCII or Mermaid architecture graphs illustrating state transitions, DAGs, or agent loops.
-- **Benchmark / Comparison Table**: Include structured Markdown tables comparing metrics (latency ms, VRAM GB, token cost per 1M tokens, throughput).
-- **"Production Reality Check"**: Include a dedicated section detailing rate-limit handling, memory leaks, retry exponential backoff, and failure recovery.
-
-### D. Google E-E-A-T Signals
-- **Experience**: Include real production deployment anecdotes ("In our production deployment at SaaSNext...", "When processing 10M+ tokens/day...").
-- **Expertise**: Specific tool versions (e.g., `LangGraph v0.3.18`, `FastMCP v1.2.0`, `PydanticAI v0.0.24`).
-- **Authoritativeness**: Linked author byline:  
-  `By <a href="https://x.com/deeepakbagada" rel="nofollow noopener noreferrer">Deepak Bagada</a>, CEO at SaaSNext & Principal AI Architect.`
-- **Trustworthiness**: Ending disclaimer:  
-  `*Last tested: August 2026 with Python 3.12, Node v22, and latest framework releases.*`
-
-### E. Semantic Heading Structure
-- `h2`: Major architectural sections
-- `h3`: Sub-modules, file breakdowns, step-by-step setup
-- `h4`: Configuration options, utility helpers, edge case notes
+### C. `seo_title` & `seo_keywords`
+- `seo_title`: Format as `[High CTR Title] | Daily AI World`
+- `seo_keywords`: 6–8 comma-separated terms combining broad category keywords, long-tail search phrases, and commercial intent modifiers (e.g. `fastmcp tutorial, claude desktop postgres, enterprise mcp server 2026, model context protocol architecture`).
 
 ---
 
-## 5. 🔗 Dynamic Live HTTP 200 Internal Link Weaving
+## 5. 🤖 Google AI Overview & Generative Engine Optimization (AEO / GEO)
 
-Every article MUST weave **3 to 5 contextual internal links** pointing ONLY to verified, live URLs returning HTTP 200.
+AI search engines (Google AI Overviews, SearchGPT, Perplexity, Claude Cite) summarize high-authority, direct-answer sources. Every post MUST include:
 
-### Step-by-Step Internal Link Protocol:
-1. Run the verified links provider:
+### A. The "AEO Direct Answer Block" (First 80–120 Words, No Visible Heading)
+Directly under the H1/introductory hook in the `content` body:
+1. Provide a direct 2-sentence technical definition or answer that AI crawlers can quote directly.
+2. Present a bulleted summary of the 3 primary architectural facts or metrics.
+3. Zero fluff or filler introductions (avoid "In this fast-paced world...").
+
+> [!CAUTION]
+> **NEVER use `## AEO Direct Answer Box` or any heading marker for the AEO block.**
+> The AEO content must be the first paragraph(s) of the `content` field WITHOUT any preceding heading.
+> A visible `## AEO Direct Answer Box` heading renders as an `<h2>` in the article body AND pollutes the Table of Contents.
+> The `ai_summary` JSON field and Schema.org `TechArticle` JSON-LD (rendered automatically by the blade template)
+> already handle all AEO/GEO metadata for AI search engines. Using a markdown heading duplicates this structure visually.
+> 
+> **Correct pattern**: The content starts with the AEO description text directly, no heading:
+> ```
+> content: "Google's MCP Toolbox for Databases is an open-source... [2-sentence definition].\n\n- Feature 1...\n- Feature 2...\n\n---\n\n## Real Content Heading Starts Here"
+> ```
+> 
+> **Incorrect pattern** (will be BLOCKED by audit):
+> ```
+> content: "## AEO Direct Answer Box\n\nGoogle's MCP Toolbox..."
+> ```
+
+### B. High-Density Semantic Triples & Entity Anchoring
+- Ground entity relationships explicitly: `[Subject] [Predicate] [Object]` (e.g., `FastMCP (Subject) standardizes (Predicate) client-tool RPC transports over SSE and stdio (Object)`).
+- Explicitly cite software versions, benchmark environments, hardware configurations (`Python 3.12`, `Node v22`, `PostgreSQL 16`, `NVIDIA H100`).
+
+### C. Structured Markdown Tables & Step-by-Step Matrices
+- **At least 1 Comparative Benchmark Table**: Real-world metrics (latency ms, cost per 1M tokens, throughput req/sec, memory overhead).
+- **Numbered Implementation Playbooks**: Clear, ordered technical steps (`Step 1: Setup`, `Step 2: Core Server`, `Step 3: Verification`).
+
+---
+
+## 6. ✍️ Content Quality, Dwell-Time & E-E-A-T Architecture (1,200 – 1,500 Words)
+
+To keep reader dwell time high (>4.5 minutes), reduce bounce rate, and establish unmatched E-E-A-T authority:
+
+1. **Strict Word Count Constraint**: Strictly **1,200 to 1,500 words** per article of dense, practical technical substance.
+2. **Multi-File Runnable Code Blocks**:
+   - Provide complete, copy-paste-ready code files with explicit file headers (`server.py`, `config.yaml`, `tools.ts`).
+   - Include exact install and run commands (`uv pip install`, `pnpm add`, `docker compose up`).
+3. **Mermaid & ASCII Architecture Diagrams**:
+   - Include at least 1 clear ASCII/Mermaid diagram visualizing request flows, state machines, or agent communication loops.
+4. **"Production Reality Check" & Failure Modes Section**:
+   - Every post must include a dedicated failure modes section detailing real-world bugs: rate limits, token budget explosions, silent tool hallucination, and fallback recovery patterns.
+5. **E-E-A-T Author Signature & Timestamp**:
+   - Author signature at top:
+     `By <a href="https://x.com/deeepakbagada" rel="nofollow noopener noreferrer">Deepak Bagada</a>, CEO at SaaSNext & Principal AI Architect.`
+   - Verification date at bottom:
+     `*Last tested & verified: September 2026 with Python 3.12, Node v22, and latest framework releases.*`
+6. **Engagement & Monetization CTA Hooks**:
+   - Weave natural CTAs connecting readers to the [AI Workflows Directory](https://dailyaiworld.com/workflows) and [MCP Directory](https://dailyaiworld.com/mcp-directory) to increase session depth and internal pageviews.
+
+---
+
+## 7. 🚫 Strict Anti-Duplicate FAQ Architecture
+
+> [!CAUTION]  
+> **NEVER PUT FAQ / Q&A HEADINGS IN MARKDOWN CONTENT**:  
+> - The Blade view template (`views/articles/show.blade.php`) automatically generates the interactive FAQ accordion UI and JSON-LD schema using the `"faqs"` JSON array.  
+> - If you place `## Frequently Asked Questions`, `### FAQ`, or `**Q:**` inside `content`, the FAQ will appear **TWICE** on the live webpage!  
+> - **RULE**: All FAQs must live **exclusively** in the `"faqs"` key of the article JSON.
+
+---
+
+## 8. 🔗 Dynamic Live HTTP 200 Internal Link Weaving
+
+Every article MUST weave **3 to 5 contextual internal links** to verified live URLs:
+1. Run the link fetcher before writing:
    ```bash
    php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/get_verified_internal_links.php
    ```
-2. Select 3-5 relevant live articles or directory hub pages from the output:
-   - AI Workflows Hub: `https://dailyaiworld.com/workflows`
-   - MCP Directory Hub: `https://dailyaiworld.com/mcp-directory`
-   - Latest AI News Hub: `https://dailyaiworld.com/latest-ai-news`
-   - Relevant existing articles from the JSON output.
-3. Weave links **contextually into the prose** (e.g. `"...similar to our benchmark on [Claude 3.7 vs DeepSeek-V3](https://dailyaiworld.com/blogs/...) which demonstrated..."`).
-4. **All external links** MUST use `rel="nofollow noopener noreferrer"`. Internal links to `dailyaiworld.com` do NOT use nofollow.
+2. Pick 3–5 relevant live URLs from the JSON output and weave them naturally into the article markdown body using markdown syntax:
+   `[Contextual Anchor Text](https://dailyaiworld.com/workflow/my-slug)`
+3. Use `rel="nofollow noopener noreferrer"` on external links; keep internal links standard markdown dofollow.
 
 ---
 
-## 6. 📄 Dispatch JSON Schema & Data Safety
+## 9. 📄 Dispatch JSON Schema
 
-Articles are saved as temporary JSON dispatch files conforming to this exact schema:
+Save each single post as a standalone JSON file (e.g. `scratch/dispatch_current.json`):
 
 ```json
 {
-  "title": "string (50-65 chars, high-CTR)",
+  "title": "string (50-65 chars, high-CTR, year [2026], concrete metric)",
   "seo_title": "string (ending with | Daily AI World)",
-  "meta_description": "string (140-160 chars, starting with action verb)",
-  "seo_keywords": "string (comma-separated, 5-8 keywords)",
+  "meta_description": "string (145-158 chars, active verb, primary keyword, high CTR)",
+  "seo_keywords": "string (comma-separated, 5-8 high-intent keywords)",
   "category_id": 1,
   "deck": "string (concise executive briefing, 2-3 sentences)",
-  "ai_summary": "string (executive summary for AI crawlers)",
+  "ai_summary": "string (structured AEO summary for search & AI crawlers)",
   "excerpt": "string (card preview text)",
-  "content": "string (full Markdown body, strictly 1,000-1,200 words, NO raw script tags)",
+  "content": "string (full Markdown body, strictly 1,200-1,500 words, AEO direct answer block, 3-5 verified internal links, runnable multi-file code, benchmark tables, NO raw script tags, NO duplicate FAQ headings)",
   "featured_image": "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80",
-  "reading_time": 6,
+  "reading_time": 7,
   "key_takeaways": [
-    "Takeaway 1: Specific architecture breakthrough",
-    "Takeaway 2: Specific cost/performance benchmark",
-    "Takeaway 3: Key production constraint"
+    "Takeaway 1: Specific architectural breakthrough & latency metric",
+    "Takeaway 2: Concrete cost/token economy comparison",
+    "Takeaway 3: Key production mitigation pattern"
   ],
   "faqs": [
     {
@@ -150,110 +241,90 @@ Articles are saved as temporary JSON dispatch files conforming to this exact sch
     {
       "question": "How does this compare in cost per 1M tokens?",
       "answer": "Concrete cost breakdown and comparison..."
+    },
+    {
+      "question": "What are the common failure modes in high-concurrency production?",
+      "answer": "Specific breakdown of mitigation patterns and fallbacks..."
     }
   ],
   "tier": "Deep Dive",
-  "trending_score": 88.5
+  "trending_score": 92.5
 }
 ```
 
 > [!CAUTION]  
-> **NO RAW SCHEMA IN CONTENT**: Do NOT put `<script type="application/ld+json">` or markdown schema blocks inside the `content` string. Schema.org metadata, FAQs, and Takeaways are automatically rendered by the Blade view template from the structured JSON fields.
+> **NO RAW SCHEMA IN CONTENT**: Do NOT place `<script type="application/ld+json">` inside the `content` string. The blade template renders FAQ and Article schema automatically.
 
 ---
 
-## 7. 🛠️ Execution Scripts Reference
+## 10. 🛠️ Execution & Quality Audit Scripts
 
-All helper scripts reside in `/Users/deepakbagada/personal/Daily AI world/scripts/`:
+All automated audit and publishing scripts reside in `/Users/deepakbagada/personal/Daily AI world/scripts/`:
 
-1. **Publish Single Article to Dual-DB**:
+1. **Verify Live Hostinger DB Connection**:
    ```bash
-   php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/publish_single_article.php /path/to/article_dispatch.json
+   php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/check_hostinger_connection.php
    ```
-   *Returns JSON with `success`, `slug`, `url`, `local_id`, and `remote_id`.*
+   *Validates: Remote MySQL connection to `srv1334.hstgr.io:3306` with database `u775719140_dailyai`.*
 
-2. **Audit Live URL (HTTP 200 & Quality Checks)**:
-   ```bash
-   php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/audit_live_url.php "https://dailyaiworld.com/workflow/my-slug"
-   ```
-   *Validates HTTP 200, author byline, body content, and internal links.*
-
-3. **Get Verified Internal Links**:
+2. **Get Verified Internal Links**:
    ```bash
    php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/get_verified_internal_links.php
    ```
 
----
+3. **Pre-Publish Payload Quality Gate Audit**:
+   ```bash
+   php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/audit_dispatch_payload.php /path/to/dispatch.json
+   ```
+   *Validates: Word count (1,200–1,500), anti-duplicate FAQ check, 3–5 verified internal links, no raw `<script>` tags, E-E-A-T author signature, valid FAQs and key takeaways.*
 
-## 8. 🔄 The 4-Cycle Execution Flow (Step-by-Step)
+4. **Direct Publish to Live Hostinger Database (`srv1334.hstgr.io`)**:
+   ```bash
+   php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/publish_single_article.php /path/to/dispatch.json
+   ```
+   *Directly inserts into Live Hostinger Database (`srv1334.hstgr.io`) as primary, triggers IndexNow/sitemaps, and makes the article immediately live without touching Git.*
 
-### CYCLE 1: AI Workflows (3 Articles)
-1. **Search & Research**: Search trending 2026 agentic workflows (LangGraph, CrewAI, AutoGen, PydanticAI, LlamaIndex, n8n). Check `memory.md` to ensure zero duplicates.
-2. **Fetch Live Links**: Run `php scripts/get_verified_internal_links.php` to obtain live 200 URLs.
-3. **Write Articles**: Write 3 in-depth dispatches (**strictly 1,000 – 1,200 words each**) and save as:
-   - `workflow_dispatch_1.json`
-   - `workflow_dispatch_2.json`
-   - `workflow_dispatch_3.json`
-4. **Content Audit**: Verify:
-   - **Word count: 1,000 to 1,200 words**
-   - AEO answer-first opening paragraph
-   - Title follows Power-CTR formula
-   - Multi-file runnable code blocks + pip install
-   - 3-5 verified live internal links
-   - Linked Deepak Bagada author byline
-   - No raw `<script>` tags in content
-   - Zero repeated paragraphs
-5. **Publish to Dual DB**: Run `php scripts/publish_single_article.php` for each JSON.
-6. **Live URL Audit**: Run `php scripts/audit_live_url.php <url>` for each live URL to confirm HTTP 200.
-7. **Log to Memory**: Append title, slug, and date to both `memory.md` files.
+5. **Live URL Quality & Layout Audit**:
+   ```bash
+   php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/audit_live_url.php "https://dailyaiworld.com/workflow/my-slug"
+   ```
+   *Validates: HTTP 200 OK, author byline, body length, >=3 internal links, single FAQ accordion rendering, and zero duplicate FAQ blocks.*
 
 ---
 
-### CYCLE 2: MCP Directory (3 Articles)
-1. **Search & Research**: Search novel Model Context Protocol (MCP) servers, FastMCP TypeScript/Python tools, SQLite/PostgreSQL/Kubernetes MCP servers, and Claude Code/Cursor integrations.
-2. **Write Articles**: Write 3 in-depth dispatches (`category_id` = 5, **strictly 1,000 – 1,200 words**) and save as:
-   - `mcp_dispatch_1.json`
-   - `mcp_dispatch_2.json`
-   - `mcp_dispatch_3.json`
-   - *Include: Complete FastMCP server code, Zod schemas, `.cursor/mcp.json` and `claude_desktop_config.json` snippets.*
-3. **Content Audit & Dual-DB Publish**: Audit (1,000-1,200 words) and run `php scripts/publish_single_article.php`.
-4. **Live URL Audit & Memory Log**: Confirm HTTP 200 on `https://dailyaiworld.com/mcp-directory/{slug}` and append to `memory.md`.
+## 11. 🔄 Step-by-Step One-By-One Execution Protocol
+
+Follow this exact loop for each of the 12 topics:
+
+```
+For topic_index = 1 to 12:
+    1. FETCH LINKS: Run `php scripts/get_verified_internal_links.php` to obtain 3-5 real internal links.
+    2. WRITE: Write article payload matching 1,200–1,500 words + runnable code + AEO answer block + 3-5 verified links + NO FAQ in content markdown.
+    3. PRE-PUBLISH AUDIT: Run `php scripts/audit_dispatch_payload.php <dispatch.json>`.
+       - If pre-publish audit fails: Fix word count / duplicate FAQ / internal link issues immediately before pushing.
+    4. DIRECT LIVE PUSH: Run `php scripts/publish_single_article.php <dispatch.json>`.
+       - Inserts directly to Live Hostinger DB (`srv1334.hstgr.io`).
+       - DO NOT run git push or trigger deployments.
+    5. LIVE URL AUDIT: Run `php scripts/audit_live_url.php <url>`.
+       - If verification fails: Fix and re-publish before continuing.
+    6. LOG: Append title, slug, category, and date to both `memory.md` files.
+    7. PROCEED: Only now advance to topic_index + 1.
+```
+
+### Cycle Breakdown:
+- **Topics 1–3 (Cycle 1 - AI Workflows)**: `category_id` = 1, URL route `https://dailyaiworld.com/workflow/{slug}`
+- **Topics 4–6 (Cycle 2 - MCP Tools)**: `category_id` = 5, URL route `https://dailyaiworld.com/mcp-directory/{slug}`
+- **Topics 7–9 (Cycle 3 - AI Blogs)**: `category_id` = 3 or 10, URL route `https://dailyaiworld.com/blogs/{slug}`
+- **Topics 10–12 (Cycle 4 - AI News)**: `category_id` = 11, URL route `https://dailyaiworld.com/blogs/{slug}`
 
 ---
 
-### CYCLE 3: AI Technical Blogs (3 Articles)
-1. **Search & Research**: Search frontier model benchmarks, token economics, agent governance, latency optimization, and architecture comparisons.
-2. **Write Articles**: Write 3 in-depth dispatches (`category_id` = 3 or 10, **strictly 1,000 – 1,200 words**) and save as:
-   - `blog_dispatch_1.json`
-   - `blog_dispatch_2.json`
-   - `blog_dispatch_3.json`
-   - *Include: Comparative benchmark tables, unit economics, ROI calculations, and code snippets.*
-3. **Content Audit & Dual-DB Publish**: Audit (1,000-1,200 words) and run `php scripts/publish_single_article.php`.
-4. **Live URL Audit & Memory Log**: Confirm HTTP 200 on `https://dailyaiworld.com/blogs/{slug}` and append to `memory.md`.
+## 12. 📋 Final Run Verification Report
 
----
-
-### CYCLE 4: Technical AI News (3 Articles)
-1. **Search & Research**: Search breaking 2026 AI industry news, frontier model releases, GPU cluster announcements, enterprise adoption milestones, or open-source weight drops.
-2. **Write Articles**: Write 3 breaking technical dispatches (`category_id` = 11, **strictly 1,000 – 1,200 words**) and save as:
-   - `news_dispatch_1.json`
-   - `news_dispatch_2.json`
-   - `news_dispatch_3.json`
-   - *Include: Enterprise impact breakdown, token cost shifts, developer architectural takeaways.*
-3. **Content Audit & Dual-DB Publish**: Audit (1,000-1,200 words) and run `php scripts/publish_single_article.php`.
-4. **Live URL Audit & Memory Log**: Confirm HTTP 200 on `https://dailyaiworld.com/blogs/{slug}` and append to `memory.md`.
-
----
-
-## 9. 📋 Final Run Verification Report
-
-At the conclusion of the 4 cycles, output a clean structured summary:
+At the conclusion of all 12 articles, output a final verification table:
 - **Total Published**: 12/12 articles
-- **Cycle Breakdown**:
-  - AI Workflows (3/3) — All Live URLs + HTTP 200 status
-  - MCP Directory (3/3) — All Live URLs + HTTP 200 status
-  - AI Blogs (3/3) — All Live URLs + HTTP 200 status
-  - AI News (3/3) — All Live URLs + HTTP 200 status
-- **Average Word Count**: ~1,000 – 1,200 words per article
-- **Dual-DB Sync Status**: Local MySQL + Hostinger Remote MySQL confirmed
-- **Memory Log Status**: Updated in both memory files
+- **Cycle Breakdown Table**:
+  - Index (1–12), Category, Title, Slug, Word Count, Verified Internal Links Count, Live URL, Live HTTP Status (200 OK)
+- **Dual-DB Sync Status**: Local MySQL + Hostinger Remote MySQL confirmed for each post
+- **Zero Duplicate FAQs**: Confirmed no dual FAQ sections on live pages
+- **Memory Log Status**: Confirmed updated in both workspace and config `memory.md`

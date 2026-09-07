@@ -40,7 +40,7 @@ Route::get('/latest-ai-news', [NewsDirectoryController::class, 'index'])->name('
 // Public Editorial Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
-// Legacy SEO 301 Redirects & 410 Removal (Fix Google Search Console 404 Not Found errors)
+// Legacy SEO 301 Redirects & Safe Redirection (Eliminates Google Search Console 404 errors)
 Route::get('/article/{slug}', function (string $slug) {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
@@ -50,19 +50,32 @@ Route::get('/article/{slug}', function (string $slug) {
 Route::get('/post/{slug}', function (string $slug) {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    return $article ? redirect($article->url, 301) : response('Content permanently removed', 410);
+    if ($article) return redirect($article->url, 301);
+    
+    // Fuzzy match
+    $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $cleanSlug);
+    $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
+    return $partialArt ? redirect($partialArt->url, 301) : redirect('/latest-ai-news', 301);
 });
 
 Route::get('/workflows/{slug}', function (string $slug) {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    return $article ? redirect($article->url, 301) : redirect('/workflows', 301);
+    if ($article) return redirect($article->url, 301);
+
+    $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $cleanSlug);
+    $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
+    return $partialArt ? redirect($partialArt->url, 301) : redirect('/workflows', 301);
 });
 
 Route::get('/blog/{slug}', function (string $slug) {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    return $article ? redirect($article->url, 301) : redirect('/latest-ai-news', 301);
+    if ($article) return redirect($article->url, 301);
+
+    $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $cleanSlug);
+    $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
+    return $partialArt ? redirect($partialArt->url, 301) : redirect('/latest-ai-news', 301);
 });
 
 Route::get('/latest-ai-news/{slug}', function (string $slug) {
@@ -72,9 +85,23 @@ Route::get('/latest-ai-news/{slug}', function (string $slug) {
 });
 
 Route::get('/reports/{slug}', function (string $slug) {
-    $cleanSlug = rtrim($slug, '*&$');
-    $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    return $article ? redirect($article->url, 301) : redirect('/', 301);
+    return redirect('/workflows', 301);
+});
+
+Route::get('/explore/{slug?}', function () {
+    return redirect('/workflows', 301);
+});
+
+Route::get('/tools/{slug?}', function () {
+    return redirect('/mcp-directory', 301);
+});
+
+Route::get('/insights/{slug?}', function () {
+    return redirect('/latest-ai-news', 301);
+});
+
+Route::get('/discover/{slug?}', function () {
+    return redirect('/workflows', 301);
 });
 
 Route::post('/article/{article}/comments', [ArticleController::class, 'storeComment'])->name('articles.comments.store');

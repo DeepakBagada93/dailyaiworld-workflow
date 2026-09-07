@@ -41,7 +41,9 @@ $checks = [
     'http_200' => ($httpCode === 200),
     'has_content' => (strlen($response) > 500),
     'has_author' => (stripos($response, 'Deepak Bagada') !== false || stripos($response, 'SaaSNext') !== false),
-    'has_internal_links' => (substr_count($response, 'dailyaiworld.com') >= 2),
+    'has_internal_links' => (substr_count($response, 'dailyaiworld.com') >= 3),
+    'has_faq_section' => (stripos($response, 'Frequently Asked Questions') !== false || stripos($response, 'id="faqs"') !== false),
+    'no_duplicate_faqs' => (substr_count($response, 'Frequently Asked Questions') <= 1 && substr_count($response, 'Core Takeaways for Founders') <= 1),
     'not_error_page' => (stripos($response, '404') === false && stripos($response, 'Page Not Found') === false && stripos($response, 'Server Error') === false),
 ];
 
@@ -52,7 +54,7 @@ echo json_encode([
     'url' => $url,
     'http_code' => $httpCode,
     'checks' => $checks,
-    'message' => $allPassed ? 'URL is live, healthy, and verified with HTTP 200!' : 'URL audit failed on one or more checks.'
-], JSON_PRETTY_PRINT);
+    'message' => $allPassed ? 'Live URL is healthy, HTTP 200 OK, author & links verified, zero duplicate FAQs!' : 'Live URL audit failed on one or more checks.'
+], JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
 
 exit($allPassed ? 0 : 1);

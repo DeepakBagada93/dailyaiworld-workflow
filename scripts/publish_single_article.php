@@ -46,7 +46,7 @@ use Illuminate\Support\Str;
 config([
     'database.connections.hostinger' => [
         'driver' => 'mysql',
-        'host' => '193.203.184.64',
+        'host' => 'srv1334.hstgr.io',
         'port' => '3306',
         'database' => 'u775719140_dailyai',
         'username' => 'u775719140_admin',
@@ -55,6 +55,9 @@ config([
         'collation' => 'utf8mb4_unicode_ci',
         'prefix' => '',
         'strict' => false,
+        'options' => [
+            \PDO::ATTR_TIMEOUT => 3,
+        ],
     ]
 ]);
 
@@ -115,17 +118,14 @@ try {
         'updated_at'     => now(),
     ];
 
-    // 1. Reset previous heroes & Insert into Local Database
-    DB::table('articles')->update(['is_hero' => 0]);
-    $localId = DB::table('articles')->insertGetId($row);
-
-    // 2. Reset previous heroes & Insert into Remote Hostinger Database
+    // 1. Primary: Reset previous heroes & Insert directly into Live Hostinger Database (srv1334.hstgr.io)
     $remoteId = null;
+    $remoteError = null;
     try {
         DB::connection('hostinger')->table('articles')->update(['is_hero' => 0]);
         $remoteId = DB::connection('hostinger')->table('articles')->insertGetId($row);
     } catch (\Throwable $re) {
-        // Retry remote insertion once
+        // Retry remote insertion once after purging connection cache
         try {
             DB::purge('hostinger');
             DB::connection('hostinger')->table('articles')->update(['is_hero' => 0]);
@@ -133,6 +133,19 @@ try {
         } catch (\Throwable $re2) {
             $remoteError = $re2->getMessage();
         }
+    }
+
+    if (!$remoteId) {
+        throw new \RuntimeException("Critical: Failed to insert article into Live Hostinger DB (srv1334.hstgr.io). Reason: " . ($remoteError ?? 'Unknown error'));
+    }
+
+    // 2. Secondary: Mirror to Local Database (non-blocking for live publish)
+    $localId = null;
+    try {
+        DB::table('articles')->update(['is_hero' => 0]);
+        $localId = DB::table('articles')->insertGetId($row);
+    } catch (\Throwable $le) {
+        // Local DB error is recorded but does not block live publication
     }
 
     // 3. Fast Indexing Notification (IndexNow & Search Engines)

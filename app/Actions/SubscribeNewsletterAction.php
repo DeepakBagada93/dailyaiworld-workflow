@@ -13,8 +13,22 @@ class SubscribeNewsletterAction
 {
     public function execute(NewsletterData $data): NewsletterSubscriber
     {
+        $email = trim(strtolower($data->email));
+        $domain = substr(strrchr($email, "@"), 1);
+
+        // 1. Check DNS MX records
+        if (!checkdnsrr($domain, "MX")) {
+            abort(422, 'Invalid email domain with no active mail exchange (MX) records.');
+        }
+
+        // 2. Reject obvious spam scraping patterns
+        $userPart = substr($email, 0, strpos($email, '@'));
+        if ($domain === 'azharhs.org' || preg_match('/[a-z]{5,}[0-9][a-z0-9]{4,}$/', $userPart)) {
+            abort(422, 'Suspicious email address pattern detected.');
+        }
+
         $subscriber = NewsletterSubscriber::firstOrCreate(
-            ['email' => $data->email],
+            ['email' => $email],
             $data->toArray()
         );
 

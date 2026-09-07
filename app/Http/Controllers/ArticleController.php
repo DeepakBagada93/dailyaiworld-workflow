@@ -11,17 +11,37 @@ class ArticleController extends Controller
 {
     public function show(Request $request, string $categorySlug, string $slug)
     {
-        // Resolve the published article by slug first, then enforce the canonical
-        // category prefix. A wrong-prefix URL (e.g. /blogs/{workflow-slug}, or an old
-        // /mcp/{slug} for a non-MCP article) is 301-redirected to the canonical URL
-        // so Google never sees a 404 for a live article.
+        // Resolve the published article by slug first.
+        // If not found, attempt fuzzy resolution (e.g. stripped timestamps or prefix matches)
         $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
             ->where('slug', $slug)
             ->published()
             ->first();
 
         if (!$article) {
-            abort(404);
+            $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $slug);
+            $cleanSlug = rtrim($baseSlug, '*&$');
+            
+            $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
+                ->where('slug', 'like', $cleanSlug . '%')
+                ->published()
+                ->first();
+
+            if ($article) {
+                return redirect($article->url, 301);
+            }
+
+            // If truly not found, redirect to the relevant hub or homepage with a 301
+            // instead of returning a hard 404, recovering SEO link equity for Googlebot.
+            if ($categorySlug === 'workflow' || $categorySlug === 'workflows') {
+                return redirect('/workflows', 301);
+            } elseif ($categorySlug === 'mcp-directory' || $categorySlug === 'mcp') {
+                return redirect('/mcp-directory', 301);
+            } elseif ($categorySlug === 'blogs' || $categorySlug === 'blog') {
+                return redirect('/latest-ai-news', 301);
+            }
+
+            return redirect('/', 301);
         }
 
         // Canonical prefix per category — must mirror Article::getUrlAttribute()
