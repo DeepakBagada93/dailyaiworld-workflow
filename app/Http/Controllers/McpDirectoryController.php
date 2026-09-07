@@ -10,25 +10,13 @@ class McpDirectoryController extends Controller
 {
     public function index(Request $request)
     {
-        $mcpCategory = Category::where('slug', 'ai-tools')->orWhere('slug', 'mcp-directory')->first();
+        $mcpCategory = Category::where('slug', 'ai-tools')->orWhere('id', 5)->first();
         
         $mcpArticles = Article::with(['author', 'category'])
             ->published()
-            ->where(function($query) {
-                $query->where('title', 'like', '%MCP%')
-                      ->orWhere('title', 'like', '%Model Context Protocol%')
-                      ->orWhere('content', 'like', '%Model Context Protocol%')
-                      ->orWhere('content', 'like', '%MCP%');
-            })
+            ->where('category_id', 5)
             ->latest('published_at')
             ->paginate(12);
-
-        if ($mcpArticles->total() === 0) {
-            $mcpArticles = Article::with(['author', 'category'])
-                ->published()
-                ->latest('published_at')
-                ->paginate(12);
-        }
 
         return view('mcp.index', compact('mcpArticles', 'mcpCategory'));
     }

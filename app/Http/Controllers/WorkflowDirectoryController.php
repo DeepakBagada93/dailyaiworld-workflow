@@ -10,24 +10,14 @@ class WorkflowDirectoryController extends Controller
 {
     public function index(Request $request)
     {
+        $workflowCategory = Category::where('slug', 'ai-workflows')->orWhere('id', 1)->first();
+
         $workflowArticles = Article::with(['author', 'category'])
             ->published()
-            ->where(function($query) {
-                $query->where('title', 'like', '%Workflow%')
-                      ->orWhere('title', 'like', '%Pipeline%')
-                      ->orWhere('title', 'like', '%Automation%')
-                      ->orWhere('content', 'like', '%Workflow%');
-            })
+            ->where('category_id', 1)
             ->latest('published_at')
             ->paginate(12);
 
-        if ($workflowArticles->total() === 0) {
-            $workflowArticles = Article::with(['author', 'category'])
-                ->published()
-                ->latest('published_at')
-                ->paginate(12);
-        }
-
-        return view('workflows.index', compact('workflowArticles'));
+        return view('workflows.index', compact('workflowArticles', 'workflowCategory'));
     }
 }

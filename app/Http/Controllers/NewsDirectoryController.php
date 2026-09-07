@@ -11,6 +11,7 @@ class NewsDirectoryController extends Controller
     {
         $latestNews = Article::with(['author', 'category'])
             ->published()
+            ->whereNotIn('category_id', [1, 5])
             ->latest('published_at')
             ->paginate(15);
 
