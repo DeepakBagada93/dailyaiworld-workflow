@@ -1,0 +1,70 @@
+User-agent: *
+Allow: /
+Disallow: /cms/
+Disallow: /dashboard
+Disallow: /admin
+Disallow: /checkout
+Disallow: /orders
+Disallow: /users
+Disallow: /chat
+Disallow: /scrape
+Disallow: /workspace
+Disallow: /tickets
+Disallow: /contact
+Disallow: /path/to/
+Disallow: /*.app$
+Disallow: /*.db$
+Disallow: /*.woff2$
+
+# Search Engines & News Crawlers
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-News
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+# AI Crawlers & Answer Engines
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: cohere-ai
+Allow: /
+
+# Sitemaps & AI Manifests
+Sitemap: https://dailyaiworld.com/sitemap.xml
+Sitemap: https://dailyaiworld.com/feed.xml
+# LLMs.txt: https://dailyaiworld.com/llms.txt
+# LLMs-full.txt: https://dailyaiworld.com/llms-full.txt
