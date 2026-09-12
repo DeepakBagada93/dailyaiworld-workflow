@@ -45,5 +45,5 @@ __pycache__/
 imported_blogs.json
 
 # Build artifacts
-/public/build
+# Note: /public/build must be committed to git for Hostinger production deployment
 composer.phar
