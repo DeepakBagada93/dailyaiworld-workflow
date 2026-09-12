@@ -29,8 +29,10 @@ Thumbs.db
 *.sql
 *.sql.gz
 /scratch/
+*.py
 *.pyc
 __pycache__/
+404file.md
 
 # Temporary payload/data files
 *_payload*.json
