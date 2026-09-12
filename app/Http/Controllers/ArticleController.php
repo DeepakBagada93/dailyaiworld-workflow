@@ -19,6 +19,15 @@ class ArticleController extends Controller
             ->first();
 
         if (!$article) {
+            // Check if slug has numeric duplicate suffix like -2, -3, etc.
+            $baseDuplicateSlug = preg_replace('/-[0-9]+$/', '', $slug);
+            if ($baseDuplicateSlug !== $slug) {
+                $canonicalArticle = Article::where('slug', $baseDuplicateSlug)->published()->first();
+                if ($canonicalArticle) {
+                    return redirect($canonicalArticle->url, 301);
+                }
+            }
+
             $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $slug);
             $cleanSlug = rtrim($baseSlug, '*&$');
             

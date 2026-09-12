@@ -3,8 +3,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-
     @php
         $pageTitle = View::hasSection('title') ? View::getSection('title') : 'Daily AI World — Ultra-Premium Artificial Intelligence Journal';
         $pageDescription = View::hasSection('meta_description') ? View::getSection('meta_description') : 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.';
@@ -14,6 +12,7 @@
         $pageModifiedTime = View::hasSection('modified_time') ? View::getSection('modified_time') : null;
         $pageSection = View::hasSection('article_section') ? View::getSection('article_section') : null;
         $pageKeywords = View::hasSection('meta_keywords') ? View::getSection('meta_keywords') : null;
+        $pageAuthor = View::hasSection('article_author') ? View::getSection('article_author') : 'Daily AI World Editorial Board';
     @endphp
 
     <title>{{ $pageTitle }}</title>
@@ -28,6 +27,7 @@
         :modifiedTime="$pageModifiedTime"
         :section="$pageSection"
         :keywords="$pageKeywords"
+        :author="$pageAuthor"
     />
 
     <!-- Site Icon / Favicon -->

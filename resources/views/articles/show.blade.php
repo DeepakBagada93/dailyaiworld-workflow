@@ -8,6 +8,7 @@
 @section('modified_time', $article->iso_updated_date)
 @section('article_section', $article->category->name ?? 'Artificial Intelligence')
 @section('meta_keywords', ($article->category->name ?? 'AI') . ', AI Workflows, Model Context Protocol, MCP Tools, AI Agents, LLM Benchmarks, ' . $article->title)
+@section('article_author', ($article->author->name ?? 'Daily AI World Editorial Board') . ' · ' . ($article->author->title ?? 'Editor'))
 
 @push('head')
     <!-- Schema.org JSON-LD TechArticle Markup for AI Engines (GEO / AEO) -->
@@ -32,9 +33,9 @@
         },
         "author": {
             "@type": "Person",
-            "name": {!! json_encode($article->author->name ?? 'Deepak Bagada') !!},
-            "jobTitle": {!! json_encode($article->author->title ?? 'CEO, SaaSNext & Principal AI Architect') !!},
-            "sameAs": "https://x.com/deeepakbagada"
+            "name": {!! json_encode($article->author->name ?? 'Daily AI World Editorial Board') !!},
+            "jobTitle": {!! json_encode($article->author->title ?? 'AI Systems Analyst') !!},
+            "sameAs": "{{ !empty($article->author->twitter) ? 'https://x.com/' . ltrim($article->author->twitter, '@') : 'https://x.com/deeepakbagada' }}"
         },
         "publisher": {
             "@type": "Organization",

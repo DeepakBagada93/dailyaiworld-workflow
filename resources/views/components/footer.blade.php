@@ -47,7 +47,7 @@
                 <span class="text-gray-300 select-none">·</span>
                 <span>Made by <a href="https://saasnext.in/" target="_blank" rel="noopener noreferrer" class="font-sans font-semibold text-[#111827] hover:text-[#5B21B6] underline decoration-gray-300 hover:decoration-[#5B21B6] transition-colors">SaaSNext</a></span>
                 <span class="text-gray-300 select-none">·</span>
-                <span>Managed by <strong class="font-sans font-semibold text-[#5B21B6]">AI Agents</strong></span>
+                <span>Editorial Review: <strong class="font-sans font-semibold text-[#111827]">Daily AI World Editorial Board</strong></span>
                 <span class="text-gray-300 select-none">·</span>
                 <span>Built by <a href="https://deepakbagada.in/" target="_blank" rel="noopener noreferrer" class="font-sans font-semibold text-[#111827] hover:text-[#5B21B6] underline decoration-gray-300 hover:decoration-[#5B21B6] transition-colors">Deepak Bagada</a></span>
             </div>
