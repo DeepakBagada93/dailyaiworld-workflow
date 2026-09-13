@@ -1,7 +1,8 @@
 @extends('layouts.editorial')
 
-@section('title', 'Contact Us — Daily AI World')
-@section('meta_description', 'Contact the editorial desk and technical review board at Daily AI World. Reach out for editorial inquiries, corrections, technical contributions, and partnerships.')
+@section('title', 'Contact Daily AI World — Editorial Desk & Technical Inquiries')
+@section('meta_description', "Get in touch with Daily AI World editorial team and technical review board. Submit editorial inquiries, technical contributions, and partnership proposals.")
+@section('meta_keywords', 'Contact Daily AI World, Editorial Inquiries, Technical Contributions, AI Partnerships')
 
 @section('content')
 <div class="min-h-screen bg-[#FFFFFF] text-[#111111] antialiased font-sans py-12 px-4 sm:px-6 lg:px-8">

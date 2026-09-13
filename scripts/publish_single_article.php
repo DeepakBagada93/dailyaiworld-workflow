@@ -210,6 +210,28 @@ try {
 
     $assignedAuthorName = $authorRows->firstWhere('id', $authorId)->name ?? "Author ID {$authorId}";
 
+    // 6. FAST INDEXING ENGINE (Google Indexing API + IndexNow)
+    $indexingStatus = [];
+    try {
+        $gRes = \App\Services\GoogleIndexingService::publishUrl($liveUrl, 'URL_UPDATED');
+        $indexingStatus['google'] = [
+            'status'  => $gRes['status'],
+            'success' => $gRes['success'],
+            'message' => $gRes['friendly_error'] ?? 'Accepted by Google'
+        ];
+    } catch (\Throwable $ge) {
+        $indexingStatus['google'] = ['error' => $ge->getMessage()];
+    }
+
+    try {
+        $inRes = \App\Services\IndexingService::submitSingleUrl($liveUrl);
+        $indexingStatus['indexnow'] = [
+            'success' => $inRes['success'] ?? false,
+        ];
+    } catch (\Throwable $ine) {
+        $indexingStatus['indexnow'] = ['error' => $ine->getMessage()];
+    }
+
     $response = [
         'success'       => true,
         'remote_id'     => $remoteId,
@@ -221,6 +243,7 @@ try {
         'author_name'   => $assignedAuthorName,
         'published_at'  => $publishedAt->toIso8601String(),
         'live_url'      => $liveUrl,
+        'indexing'      => $indexingStatus,
         'message'       => "Article published successfully to Hostinger Live DB (ID: {$remoteId}) and mirrored to local (ID: {$localId}) with specialist author: {$assignedAuthorName}!"
     ];
 

@@ -2,6 +2,7 @@
 
 @section('title', 'Editorial & Legal Disclaimer — Daily AI World')
 @section('meta_description', 'Editorial and Legal Disclaimer for Daily AI World. Information regarding code examples, benchmarks, AI disclosures, and trademark attributions.')
+@section('meta_keywords', 'Editorial Disclaimer, Legal Notice, AI Disclosures, Daily AI World, Benchmark Disclaimer')
 
 @section('content')
 <div class="min-h-screen bg-[#FFFFFF] text-[#111111] antialiased font-sans py-12 px-4 sm:px-6 lg:px-8">

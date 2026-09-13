@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
-        $pageTitle = View::hasSection('title') ? View::getSection('title') : 'Daily AI World — Ultra-Premium Artificial Intelligence Journal';
-        $pageDescription = View::hasSection('meta_description') ? View::getSection('meta_description') : 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.';
+        $pageTitle = View::hasSection('title') ? htmlspecialchars_decode(View::getSection('title'), ENT_QUOTES) : 'Daily AI World — AI Workflows, MCP Directory & Agentic AI Tools';
+        $pageDescription = View::hasSection('meta_description') ? htmlspecialchars_decode(View::getSection('meta_description'), ENT_QUOTES) : 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.';
         $pageImage = View::hasSection('og_image') ? View::getSection('og_image') : asset('images/logo.png');
         $pageType = View::hasSection('og_type') ? View::getSection('og_type') : 'website';
         $pagePublishedTime = View::hasSection('published_time') ? View::getSection('published_time') : null;
         $pageModifiedTime = View::hasSection('modified_time') ? View::getSection('modified_time') : null;
         $pageSection = View::hasSection('article_section') ? View::getSection('article_section') : null;
-        $pageKeywords = View::hasSection('meta_keywords') ? View::getSection('meta_keywords') : null;
-        $pageAuthor = View::hasSection('article_author') ? View::getSection('article_author') : 'Daily AI World Editorial Board';
+        $pageKeywords = View::hasSection('meta_keywords') ? htmlspecialchars_decode(View::getSection('meta_keywords'), ENT_QUOTES) : 'AI Workflows, Model Context Protocol, MCP Directory, MCP Tools, AI Agents, Agentic AI, LangGraph, CrewAI, FastMCP, Cursor MCP, Claude Desktop, LLM Benchmarks, Daily AI World';
+        $pageAuthor = View::hasSection('article_author') ? htmlspecialchars_decode(View::getSection('article_author'), ENT_QUOTES) : 'Daily AI World Editorial Board';
     @endphp
 
     <title>{{ $pageTitle }}</title>

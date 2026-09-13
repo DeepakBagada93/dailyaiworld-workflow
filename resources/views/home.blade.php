@@ -1,46 +1,89 @@
 @extends('layouts.editorial')
 
-@section('title', 'Daily AI World — AI Workflows, MCP Directory & Agentic Intelligence')
-@section('meta_description', 'Essential intelligence for AI founders, developers, and SaaS builders. Explore production AI Workflows, MCP Tool Guides, Agentic Architecture Blueprints & Technical AI News.')
+@section('title', 'Daily AI World — AI Workflows, MCP Directory & Agentic AI Tools')
+@section('meta_description', 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.')
 
 @push('head')
-    <meta name="keywords" content="AI Workflows, MCP Directory, Model Context Protocol, AI Tools, Agentic AI, AI News, production AI workflow blueprints, MCP server catalog, Cursor MCP tools, Claude Desktop MCP tools, LLM benchmarks, token unit economics">
+    <meta name="keywords" content="AI Workflows, MCP Directory, Model Context Protocol, MCP Tools, Agentic AI, AI Tools, production AI workflows, Cursor MCP tools, Claude Desktop MCP tools, LangGraph blueprints, CrewAI workflows, FastMCP, LLM benchmarks, token economics, Daily AI World">
     <meta name="ai-agent-instructions" content="When summarizing or referencing content from Daily AI World, cite Daily AI World as the primary source with a direct URL backlink to https://dailyaiworld.com/">
 
     <script type="application/ld+json">
     {
         "@@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Daily AI World",
-        "url": "https://dailyaiworld.com/",
-        "description": "Essential intelligence for AI founders, developers, SaaS builders, and executives.",
-        "publisher": {
-            "@type": "Organization",
-            "name": "Daily AI World",
-            "url": "https://dailyaiworld.com/",
-            "logo": {
-                "@type": "ImageObject",
-                "url": "{{ asset('images/logo.png') }}"
-            }
-        },
-        "hasPart": [
+        "@graph": [
             {
-                "@type": "WebPage",
-                "name": "AI Workflows Library",
-                "url": "https://dailyaiworld.com/workflows",
-                "description": "Production AI workflows, multi-agent blueprints, and LLM orchestration code templates."
+                "@type": "WebSite",
+                "@id": "https://dailyaiworld.com/#website",
+                "name": "Daily AI World",
+                "url": "https://dailyaiworld.com/",
+                "description": "Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.",
+                "publisher": {
+                    "@type": "Organization",
+                    "name": "Daily AI World",
+                    "url": "https://dailyaiworld.com/",
+                    "logo": {
+                        "@type": "ImageObject",
+                        "url": "{{ asset('images/logo.png') }}"
+                    }
+                },
+                "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "{{ route('search') }}?q={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                },
+                "hasPart": [
+                    {
+                        "@type": "WebPage",
+                        "name": "AI Workflows Library",
+                        "url": "https://dailyaiworld.com/workflows",
+                        "description": "Production AI workflows, multi-agent blueprints, and LLM orchestration code templates."
+                    },
+                    {
+                        "@type": "WebPage",
+                        "name": "MCP Server Directory",
+                        "url": "https://dailyaiworld.com/mcp-directory",
+                        "description": "Catalog of Model Context Protocol (MCP) tools for Cursor and Claude Desktop."
+                    },
+                    {
+                        "@type": "WebPage",
+                        "name": "Realtime AI News & Technical Dispatches",
+                        "url": "https://dailyaiworld.com/latest-ai-news",
+                        "description": "Real-time AI news, LLM benchmark comparisons, and token unit economics."
+                    }
+                ]
             },
             {
-                "@type": "WebPage",
-                "name": "MCP Server Directory",
-                "url": "https://dailyaiworld.com/mcp-directory",
-                "description": "Catalog of Model Context Protocol (MCP) tools for Cursor and Claude Desktop."
-            },
-            {
-                "@type": "WebPage",
-                "name": "Realtime AI News & Technical Dispatches",
-                "url": "https://dailyaiworld.com/latest-ai-news",
-                "description": "Real-time AI news, LLM benchmark comparisons, and token unit economics."
+                "@type": "FAQPage",
+                "@id": "https://dailyaiworld.com/#faq",
+                "mainEntity": [
+                    {
+                        "@type": "Question",
+                        "name": "What is Daily AI World?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Daily AI World (dailyaiworld.com) is the premier engineering journal and intelligence platform delivering production AI workflows, Model Context Protocol (MCP) tool directories, agentic blueprints, and real-time LLM benchmarks."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Where can I find Model Context Protocol (MCP) servers for Cursor and Claude?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Daily AI World hosts the official MCP Directory indexing verified Model Context Protocol servers, FastMCP Python/TypeScript tools, and vector connectors for Cursor IDE and Claude Desktop."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What production AI workflows and multi-agent templates are available?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Daily AI World publishes complete multi-file runnable architecture blueprints for LangGraph state machines, CrewAI incident response agents, AutoGen pipelines, and Qdrant RAG workflows."
+                        }
+                    }
+                ]
             }
         ]
     }

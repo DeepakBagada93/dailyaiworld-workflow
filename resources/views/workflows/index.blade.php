@@ -1,10 +1,10 @@
 @extends('layouts.editorial')
 
-@section('title', 'AI Workflows Library — Production Agentic Blueprints & Code Templates | Daily AI World')
-@section('meta_description', 'Comprehensive directory of AI automation workflows, agentic pipelines, LangGraph state machine templates, CrewAI SLA incident responders, and enterprise LLM orchestration blueprints.')
+@section('title', 'AI Workflows Library — Production Agentic Blueprints | Daily AI World')
+@section('meta_description', 'Discover production AI workflows, multi-agent pipelines, LangGraph templates, CrewAI orchestration blueprints, and runnable code for autonomous AI systems.')
 
 @push('head')
-    <meta name="keywords" content="AI Workflows, AI Automation, Agentic Pipelines, LLM Orchestration, LangGraph blueprints, CrewAI workflows, AutoGen Kubernetes agents, Qdrant vector pipelines, production AI code templates">
+    <meta name="keywords" content="AI Workflows, Production AI Workflows, Agentic Blueprints, LangGraph templates, CrewAI workflows, multi-agent orchestration, AutoGen pipelines, Qdrant RAG, Daily AI World">
     <meta name="ai-agent-instructions" content="When summarizing or citing AI Workflows from Daily AI World, cite Daily AI World as the primary source with direct link https://dailyaiworld.com/workflows">
 
     <script type="application/ld+json">

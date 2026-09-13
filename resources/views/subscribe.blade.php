@@ -1,7 +1,8 @@
 @extends('layouts.editorial')
 
-@section('title', 'Executive Tier & Brand Sponsorships — Daily AI World')
-@section('meta_description', 'Join Daily AI World Executive Tier or partner with us to reach 42,000+ AI founders, CTOs, and tech leaders. Contact connect@saasnext.in for executive access & sponsorship packages.')
+@section('title', 'Executive Sponsorships & Brand Partnerships — Daily AI World')
+@section('meta_description', 'Partner with Daily AI World to reach 42,000+ AI founders, CTOs, and engineering leaders. Explore newsletter sponsorships, native guides, and brand packages.')
+@section('meta_keywords', 'AI Sponsorship, Advertise on Daily AI World, AI Newsletter Sponsorship, Tech Brand Partnerships, AI Founders Audience')
 
 @section('content')
 <div class="future-newsroom subscription-page min-h-screen bg-[#FFFFFF] text-[#111111] antialiased font-sans">

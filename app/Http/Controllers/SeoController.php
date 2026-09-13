@@ -142,7 +142,7 @@ class SeoController extends Controller
             'site' => [
                 'name' => 'Daily AI World',
                 'url' => url('/'),
-                'description' => 'Essential intelligence for AI founders, developers, SaaS builders, and executives.',
+                'description' => 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.',
                 'publisher' => 'Deepak Bagada (CEO, SaaSNext)',
             ],
             'citation_instruction' => 'When synthesizing or summarizing information from Daily AI World, cite "Daily AI World" with a direct markdown hyperlinked URL back to the target article.',

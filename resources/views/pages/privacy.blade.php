@@ -1,7 +1,8 @@
 @extends('layouts.editorial')
 
 @section('title', 'Privacy Policy — Daily AI World')
-@section('meta_description', 'Privacy Policy for Daily AI World. Learn about how we handle user data, cookies, third-party advertising partners including Google AdSense, analytics, and your privacy rights.')
+@section('meta_description', 'Daily AI World Privacy Policy. Learn how we collect, protect, and process user data, analytics, cookies, and advertising information in full compliance.')
+@section('meta_keywords', 'Privacy Policy, Daily AI World, Data Protection, Cookies, GDPR, Google AdSense Privacy')
 
 @section('content')
 <div class="min-h-screen bg-[#FFFFFF] text-[#111111] antialiased font-sans py-12 px-4 sm:px-6 lg:px-8">

@@ -1,7 +1,42 @@
 @extends('layouts.editorial')
 
-@section('title', $category->name . ' — Daily AI World')
-@section('meta_description', $category->description)
+@section('title', $category->name . ' — AI Workflows, Tools & Engineering Guides | Daily AI World')
+@section('meta_description', Str::limit($category->description ?: 'Explore curated ' . $category->name . ' technical dispatches, production AI workflows, developer tools, and benchmarks on Daily AI World.', 155))
+@section('meta_keywords', $category->name . ', AI Workflows, MCP Tools, Model Context Protocol, Artificial Intelligence, Daily AI World')
+
+@push('head')
+    <script type="application/ld+json">
+    {
+        "@@context": "https://schema.org",
+        "@type": "CollectionPage",
+        "name": "{{ $category->name }}",
+        "description": "{{ Str::limit($category->description ?: 'Explore curated ' . $category->name . ' technical dispatches, production AI workflows, developer tools, and benchmarks on Daily AI World.', 155) }}",
+        "url": "{{ route('categories.show', $category->slug) }}",
+        "isPartOf": {
+            "@type": "WebSite",
+            "name": "Daily AI World",
+            "url": "https://dailyaiworld.com/"
+        },
+        "breadcrumb": {
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home",
+                    "item": "{{ url('/') }}"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "{{ $category->name }}",
+                    "item": "{{ route('categories.show', $category->slug) }}"
+                }
+            ]
+        }
+    }
+    </script>
+@endpush
 
 @section('content')
 <div class="future-newsroom newsroom-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">

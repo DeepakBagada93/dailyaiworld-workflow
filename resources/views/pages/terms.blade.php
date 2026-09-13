@@ -2,6 +2,7 @@
 
 @section('title', 'Terms of Service — Daily AI World')
 @section('meta_description', 'Terms of Service for Daily AI World. Read our terms of use, intellectual property policies, open-source code usage guidelines, and liability disclosures.')
+@section('meta_keywords', 'Terms of Service, Daily AI World, User Agreement, Open Source Guidelines, Intellectual Property')
 
 @section('content')
 <div class="min-h-screen bg-[#FFFFFF] text-[#111111] antialiased font-sans py-12 px-4 sm:px-6 lg:px-8">

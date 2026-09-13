@@ -1,6 +1,8 @@
 @extends('layouts.editorial')
 
 @section('title', 'Saved Reading List — Daily AI World')
+@section('meta_description', 'Access your saved AI workflows, MCP tool guides, and technical intelligence dispatches on Daily AI World.')
+@section('meta_keywords', 'Saved Articles, Reading List, AI Workflows, Daily AI World')
 
 @section('content')
 <div class="future-newsroom newsroom-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-8">

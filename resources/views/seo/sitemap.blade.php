@@ -90,14 +90,16 @@
             <lastmod>{{ $article->updated_at->toAtomString() }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.80</priority>
+            @if($article->published_at && $article->published_at->gt(now()->subDays(2)))
             <news:news>
                 <news:publication>
                     <news:name>Daily AI World</news:name>
                     <news:language>en</news:language>
                 </news:publication>
-                <news:publication_date>{{ $article->published_at ? $article->published_at->toAtomString() : $article->created_at->toAtomString() }}</news:publication_date>
+                <news:publication_date>{{ $article->published_at->toAtomString() }}</news:publication_date>
                 <news:title><![CDATA[{{ $article->title }}]]></news:title>
             </news:news>
+            @endif
             @if($article->featured_image)
                 @php
                     $imgUrl = $article->featured_image;

@@ -1,7 +1,7 @@
 @props([
-    'title' => 'Daily AI World — Ultra-Premium Artificial Intelligence Journal',
-    'description' => 'Essential intelligence for AI founders, developers, SaaS builders, and executives. AI Workflows, Tools & Insights for Builders.',
-    'keywords' => 'AI Workflows, Model Context Protocol, MCP Tools, AI Agents, LLM Benchmarks, LangGraph, CrewAI, FastMCP, Claude Code, DeepSeek, AI Automation',
+    'title' => 'Daily AI World — AI Workflows, MCP Directory & Agentic AI Tools',
+    'description' => 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.',
+    'keywords' => 'AI Workflows, Model Context Protocol, MCP Directory, MCP Tools, AI Agents, Agentic AI, LangGraph, CrewAI, FastMCP, Cursor MCP, Claude Desktop, LLM Benchmarks, Daily AI World',
     'image' => asset('images/logo.png'),
     'type' => 'website',
     'canonical' => null,
@@ -99,7 +99,7 @@
             "@id": "{{ url('/') }}#website",
             "url": "{{ url('/') }}",
             "name": "Daily AI World",
-            "description": "Essential intelligence for AI founders, developers, SaaS builders, and executives.",
+            "description": "Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.",
             "publisher": {
                 "@id": "{{ url('/') }}#organization"
             },

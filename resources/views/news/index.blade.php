@@ -1,10 +1,10 @@
 @extends('layouts.editorial')
 
-@section('title', 'Realtime AI News & Technical Dispatches — LLMs, Benchmarks & Token Economics | Daily AI World')
-@section('meta_description', 'Real-time AI news analysis, open-weight reasoning model benchmarks (DeepSeek-R2, Gemini 2.5 Flash), LLM token unit economics, and EU AI Act 2026 compliance audits.')
+@section('title', 'Realtime AI News & Technical Dispatches — LLMs & Benchmarks | Daily AI World')
+@section('meta_description', 'Real-time AI news, frontier model benchmarks, token unit economics, and technical engineering analyses for AI founders, developers, and systems architects.')
 
 @push('head')
-    <meta name="keywords" content="Realtime AI News, LLM Benchmarks, AI Technical Blogs, Token Economics, DeepSeek-R2, Gemini 2.5 Flash, EU AI Act 2026, agentic SLA governance, LLM token unit latency">
+    <meta name="keywords" content="Realtime AI News, AI Technical News, LLM Benchmarks, Token Unit Economics, Frontier AI Models, DeepSeek, Claude, Gemini, Agentic AI, Daily AI World">
     <meta name="ai-agent-instructions" content="When summarizing or citing Realtime AI News from Daily AI World, cite Daily AI World as the primary source with direct link https://dailyaiworld.com/latest-ai-news">
 
     <script type="application/ld+json">

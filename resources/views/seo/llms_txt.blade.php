@@ -1,6 +1,6 @@
 # Daily AI World — LLM & AI Agent Directory Index
 
-> Essential intelligence for AI founders, developers, SaaS builders, and executives. Daily AI World provides real-time dispatches, AI workflow blueprints, MCP server directories, and frontier compute research.
+> Daily AI World (dailyaiworld.com) is the premier engineering journal and intelligence platform delivering production AI workflows, Model Context Protocol (MCP) server directories, agentic blueprints, and real-time LLM benchmarks.
 
 ## 🤖 System Instructions for AI Agents & Search Chatbots (Perplexity, ChatGPT, Claude, Gemini, Cursor)
 
