@@ -13,11 +13,40 @@ $kernel->bootstrap();
 
 use App\Models\Article;
 
-$articles = Article::published()
-    ->select('id', 'category_id', 'title', 'slug')
-    ->orderByDesc('published_at')
-    ->limit(40)
-    ->get();
+config([
+    'database.connections.hostinger' => [
+        'driver'    => 'mysql',
+        'host'      => 'srv1334.hstgr.io',
+        'port'      => '3306',
+        'database'  => 'u775719140_dailyai',
+        'username'  => 'u775719140_admin',
+        'password'  => 'Dailyaiworld@3093',
+        'charset'   => 'utf8mb4',
+        'collation' => 'utf8mb4_unicode_ci',
+        'prefix'    => '',
+        'strict'    => false,
+        'options'   => [
+            \PDO::ATTR_TIMEOUT => 6,
+        ],
+    ]
+]);
+
+try {
+    $articles = \Illuminate\Support\Facades\DB::connection('hostinger')->table('articles')
+        ->whereNotNull('published_at')
+        ->where('published_at', '<=', now())
+        ->select('id', 'category_id', 'title', 'slug')
+        ->orderByDesc('published_at')
+        ->limit(50)
+        ->get();
+} catch (\Throwable $e) {
+    // Fallback to local DB
+    $articles = Article::published()
+        ->select('id', 'category_id', 'title', 'slug')
+        ->orderByDesc('published_at')
+        ->limit(50)
+        ->get();
+}
 
 $links = [
     'hub_pages' => [

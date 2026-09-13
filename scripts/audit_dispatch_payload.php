@@ -45,6 +45,7 @@ $app = require_once __DIR__ . '/../bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 
+use App\Models\Article;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 
@@ -77,9 +78,14 @@ if (empty($data['content'])) {
 
 $content = $data['content'] ?? '';
 $title = trim($data['title'] ?? '');
-$slug = !empty($data['slug']) ? Str::slug($data['slug']) : Str::slug($title);
+$slug = !empty($data['slug']) ? Str::slug($data['slug']) : Article::generateSeoSlug($title);
 
-// 2. Word Count Check (Strictly 1,200 - 1,500 words)
+// 2. Prohibit Numeric Slug Suffixes (-2, -3, etc.)
+if (preg_match('/-[0-9]+$/', $slug)) {
+    $errors[] = "NUMERIC SLUG SUFFIX DETECTED: Slug '{$slug}' ends with a numeric suffix (-2, -3, etc.). Numeric suffixes trigger Google duplicate content & 'Discovered - currently not indexed' errors. Pick a unique topic and clean slug.";
+}
+
+// 3. Word Count Check (Strictly 1,200 - 1,500 words)
 $wordCount = str_word_count(strip_tags($content));
 if ($wordCount < 1200 && preg_match_all('/\S+/', strip_tags($content), $matches) > $wordCount) {
     $wordCount = count($matches[0]);
@@ -91,7 +97,7 @@ if ($wordCount < 1200) {
     $warnings[] = "Word count is $wordCount words (Slightly above target 1,200 - 1,500 words). Trim any filler.";
 }
 
-// 3. Live Hostinger DB Anti-Duplication Check
+// 4. Live Hostinger DB Anti-Duplication Check
 try {
     $existing = DB::connection('hostinger')->table('articles')
         ->where('slug', $slug)
@@ -101,11 +107,25 @@ try {
     if ($existing) {
         $errors[] = "DUPLICATE ARTICLE DETECTED: An article with title '{$existing->title}' or slug '{$existing->slug}' already exists in Live Hostinger DB (ID: {$existing->id}). Pick a fresh, non-cannibalizing topic.";
     }
+
+    // Fuzzy title collision check
+    $titleWords = array_filter(explode(' ', preg_replace('/[^\w\s]/', '', strtolower($title))), fn($w) => strlen($w) > 4);
+    if (count($titleWords) >= 3) {
+        $firstThree = array_slice(array_values($titleWords), 0, 3);
+        $fuzzyQuery = DB::connection('hostinger')->table('articles');
+        foreach ($firstThree as $fw) {
+            $fuzzyQuery->where('title', 'like', "%{$fw}%");
+        }
+        $fuzzyMatches = $fuzzyQuery->limit(3)->get();
+        if ($fuzzyMatches->isNotEmpty()) {
+            $warnings[] = "POTENTIAL CONTENT OVERLAP: Found existing articles with similar key terms: " . $fuzzyMatches->pluck('title')->implode(' | ') . ". Ensure this article provides completely distinct architectural value.";
+        }
+    }
 } catch (\Throwable $dbe) {
     $warnings[] = "Could not verify duplicate against remote DB: " . $dbe->getMessage();
 }
 
-// 4. Anti-Hallucination & Speculative Claims Check
+// 5. Anti-Hallucination & Speculative Claims Check
 $hallucinatedPatterns = [
     '/gpt-6/i' => "Hallucinated model name 'GPT-6' detected. Do not fabricate unreleased frontier models.",
     '/gpt-7/i' => "Hallucinated model name 'GPT-7' detected.",
@@ -121,7 +141,7 @@ foreach ($hallucinatedPatterns as $pattern => $msg) {
     }
 }
 
-// 5. Anti-Duplicate FAQ Check in Content Body
+// 6. Anti-Duplicate FAQ Check in Content Body
 $duplicateFaqPatterns = [
     '/#+\s*frequently\s+asked\s+questions/i',
     '/#+\s*faq/i',
@@ -136,7 +156,7 @@ foreach ($duplicateFaqPatterns as $pattern) {
     }
 }
 
-// 6. Check FAQs Array in JSON
+// 7. Check FAQs Array in JSON
 $faqs = $data['faqs'] ?? [];
 if (empty($faqs) || !is_array($faqs) || count($faqs) < 2) {
     $warnings[] = "Expected 2-4 FAQs in the 'faqs' JSON array for schema & rich snippets.";
@@ -150,14 +170,49 @@ if (empty($faqs) || !is_array($faqs) || count($faqs) < 2) {
     }
 }
 
-// 7. Internal Links Check (Must weave 3-5 links to dailyaiworld.com)
+// 8. Internal Links Check & Live Verification (Must weave 3-5 verified links)
 preg_match_all('/\[([^\]]+)\]\((https?:\/\/dailyaiworld\.com\/[^\)]+)\)/i', $content, $internalLinkMatches);
 $internalLinkCount = count($internalLinkMatches[0] ?? []);
 if ($internalLinkCount < 3) {
     $errors[] = "Only found $internalLinkCount internal links to dailyaiworld.com in content (Required: 3 to 5 verified internal links). Use get_verified_internal_links.php.";
+} else {
+    // Validate that every link is active and exists
+    $hubUrls = [
+        'https://dailyaiworld.com',
+        'https://dailyaiworld.com/',
+        'https://dailyaiworld.com/workflows',
+        'https://dailyaiworld.com/mcp-directory',
+        'https://dailyaiworld.com/latest-ai-news',
+        'https://dailyaiworld.com/about',
+        'https://dailyaiworld.com/contact',
+        'https://dailyaiworld.com/privacy-policy',
+        'https://dailyaiworld.com/terms',
+        'https://dailyaiworld.com/disclaimer',
+        'https://dailyaiworld.com/advertise',
+        'https://dailyaiworld.com/subscribe',
+    ];
+    foreach ($internalLinkMatches[2] as $linkUrl) {
+        $cleanLink = rtrim($linkUrl, '/');
+        if (in_array($cleanLink, $hubUrls) || in_array($linkUrl, $hubUrls)) {
+            continue;
+        }
+        if (preg_match('/https?:\/\/dailyaiworld\.com\/(?:workflow|mcp-directory|blogs|category)\/([^\/?#]+)/i', $linkUrl, $slugMatch)) {
+            $targetSlug = $slugMatch[1];
+            try {
+                $targetExists = DB::connection('hostinger')->table('articles')->where('slug', $targetSlug)->exists();
+                if (!$targetExists) {
+                    $errors[] = "BROKEN/UNVERIFIED INTERNAL LINK: '{$linkUrl}' does not exist on Hostinger DB. Run get_verified_internal_links.php and only use verified live URLs.";
+                }
+            } catch (\Throwable $e) {
+                // Ignore remote connection check failure
+            }
+        } else {
+            $errors[] = "INVALID INTERNAL LINK PATTERN: '{$linkUrl}'. Must follow https://dailyaiworld.com/(workflow|mcp-directory|blogs)/{slug} or official hub URLs.";
+        }
+    }
 }
 
-// 8. No Raw Schema Scripts in Content Check
+// 9. No Raw Schema Scripts in Content Check
 if (stripos($content, '<script') !== false || stripos($content, 'application/ld+json') !== false) {
     $errors[] = "Raw <script> or JSON-LD schema found inside 'content'. Remove it — Blade templates handle JSON-LD automatically.";
 }

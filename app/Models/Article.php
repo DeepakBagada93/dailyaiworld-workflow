@@ -116,7 +116,8 @@ class Article extends Model
     }
 
     /**
-     * Ensure slug is unique by appending -2, -3, etc. if needed.
+     * Ensure slug is unique. Strictly prohibits numeric suffixes (-2, -3) to prevent
+     * Google Search Console "Discovered - currently not indexed" duplicate issues.
      */
     public static function ensureUniqueSlug(string $slug, ?int $excludeId = null): string
     {
@@ -129,12 +130,7 @@ class Article extends Model
             return $slug;
         }
 
-        $i = 2;
-        while (static::where('slug', "{$slug}-{$i}")->when($excludeId, fn($q) => $q->where('id', '!=', $excludeId))->exists()) {
-            $i++;
-        }
-
-        return "{$slug}-{$i}";
+        throw new \InvalidArgumentException("Duplicate slug '{$slug}' already exists (Article ID: " . $query->value('id') . "). Creating duplicate content or appending numeric suffixes (-2, -3) is strictly prohibited to prevent Google Search indexing degradation.");
     }
 
 

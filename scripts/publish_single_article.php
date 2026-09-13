@@ -71,6 +71,10 @@ try {
     $slug = !empty($data['slug']) ? Str::slug($data['slug']) : Article::generateSeoSlug($title);
     $categoryId = (int) ($data['category_id'] ?? 1);
 
+    if (preg_match('/-[0-9]+$/', $slug)) {
+        throw new \RuntimeException("NUMERIC SUFFIX BLOCKED: Slug '{$slug}' ends with a numeric suffix (-2, -3, etc.). Numeric suffixes trigger Google duplicate content & 'Discovered - currently not indexed' errors. Pick a unique topic and clean slug.");
+    }
+
     // 1. HARD ANTI-DUPLICATION GUARD ON LIVE HOSTINGER DB
     $existingRemote = DB::connection('hostinger')->table('articles')
         ->where('slug', $slug)
