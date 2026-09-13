@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', 'Editorial & Legal Disclaimer — Daily AI World')
+@section('title', 'Editorial and Legal Disclaimer — Daily AI World')
 @section('meta_description', 'Editorial and Legal Disclaimer for Daily AI World. Information regarding code examples, benchmarks, AI disclosures, and trademark attributions.')
 @section('meta_keywords', 'Editorial Disclaimer, Legal Notice, AI Disclosures, Daily AI World, Benchmark Disclaimer')
 

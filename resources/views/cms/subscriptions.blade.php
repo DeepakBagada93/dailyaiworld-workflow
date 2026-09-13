@@ -1,6 +1,6 @@
 @extends('layouts.cms')
 
-@section('title', 'Subscriber Management & MRR — Daily AI World Enterprise CMS')
+@section('title', 'Subscriber Management and MRR — Daily AI World Enterprise CMS')
 
 @section('content')
 <div class="space-y-8 max-w-7xl mx-auto">

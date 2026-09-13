@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', 'MCP Directory — Model Context Protocol Servers & Tools | Daily AI World')
+@section('title', 'MCP Directory — Model Context Protocol Servers and Tools | Daily AI World')
 @section('meta_description', 'Official Model Context Protocol (MCP) directory. Discover FastMCP servers, tools, and vector connectors for Cursor, Claude Desktop, and autonomous AI agents.')
 
 @push('head')

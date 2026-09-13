@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', 'About Daily AI World — Editorial Standards & Technical Leadership')
+@section('title', 'About Daily AI World — Editorial Standards and Technical Leadership')
 @section('meta_description', "Learn about Daily AI World's editorial mission, technical validation standards, and leadership team delivering production AI workflows and agent intelligence.")
 @section('meta_keywords', 'About Daily AI World, AI Journal, Deepak Bagada, AI Workflows, Editorial Standards, Model Context Protocol')
 

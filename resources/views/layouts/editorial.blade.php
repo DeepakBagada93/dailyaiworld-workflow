@@ -4,8 +4,9 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
-        $pageTitle = View::hasSection('title') ? htmlspecialchars_decode(View::getSection('title'), ENT_QUOTES) : 'Daily AI World — AI Workflows, MCP Directory & Agentic AI Tools';
-        $pageDescription = View::hasSection('meta_description') ? htmlspecialchars_decode(View::getSection('meta_description'), ENT_QUOTES) : 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.';
+        $pageTitle = View::hasSection('title') ? htmlspecialchars_decode(View::getSection('title'), ENT_QUOTES) : 'Daily AI World — AI Workflows, MCP Directory and Agentic AI Tools';
+        $pageTitle = str_replace([' & ', ' &amp; '], ' and ', $pageTitle);
+        $pageDescription = View::hasSection('meta_description') ? htmlspecialchars_decode(View::getSection('meta_description'), ENT_QUOTES) : 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.';
         $pageImage = View::hasSection('og_image') ? View::getSection('og_image') : asset('images/logo.png');
         $pageType = View::hasSection('og_type') ? View::getSection('og_type') : 'website';
         $pagePublishedTime = View::hasSection('published_time') ? View::getSection('published_time') : null;

@@ -1,6 +1,6 @@
 @extends('layouts.cms')
 
-@section('title', 'Sponsor CRM & Campaigns — Daily AI World Enterprise CMS')
+@section('title', 'Sponsor CRM and Campaigns — Daily AI World Enterprise CMS')
 
 @section('content')
 <div class="space-y-8 max-w-7xl mx-auto" x-data="{ addSponsorOpen: false }">

@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', 'Realtime AI News & Technical Dispatches — LLMs & Benchmarks | Daily AI World')
+@section('title', 'Realtime AI News and Technical Dispatches — LLMs and Benchmarks | Daily AI World')
 @section('meta_description', 'Real-time AI news, frontier model benchmarks, token unit economics, and technical engineering analyses for AI founders, developers, and systems architects.')
 
 @push('head')

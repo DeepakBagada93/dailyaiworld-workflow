@@ -1,7 +1,7 @@
 @extends('layouts.editorial')
 
-@section('title', 'Daily AI World — AI Workflows, MCP Directory & Agentic AI Tools')
-@section('meta_description', 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.')
+@section('title', 'Daily AI World — AI Workflows, MCP Directory and Agentic AI Tools')
+@section('meta_description', 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.')
 
 @push('head')
     <meta name="keywords" content="AI Workflows, MCP Directory, Model Context Protocol, MCP Tools, Agentic AI, AI Tools, production AI workflows, Cursor MCP tools, Claude Desktop MCP tools, LangGraph blueprints, CrewAI workflows, FastMCP, LLM benchmarks, token economics, Daily AI World">
@@ -16,7 +16,7 @@
                 "@id": "https://dailyaiworld.com/#website",
                 "name": "Daily AI World",
                 "url": "https://dailyaiworld.com/",
-                "description": "Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor & Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.",
+                "description": "Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.",
                 "publisher": {
                     "@type": "Organization",
                     "name": "Daily AI World",

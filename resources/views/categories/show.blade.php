@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', $category->name . ' — AI Workflows, Tools & Engineering Guides | Daily AI World')
+@section('title', $category->name . ' — AI Workflows, Tools and Engineering Guides | Daily AI World')
 @section('meta_description', Str::limit($category->description ?: 'Explore curated ' . $category->name . ' technical dispatches, production AI workflows, developer tools, and benchmarks on Daily AI World.', 155))
 @section('meta_keywords', $category->name . ', AI Workflows, MCP Tools, Model Context Protocol, Artificial Intelligence, Daily AI World')
 

@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', 'Global Design System & Token Specifications — Daily AI World')
+@section('title', 'Global Design System and Token Specifications — Daily AI World')
 
 @section('content')
 <div class="future-newsroom newsroom-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 space-y-16">

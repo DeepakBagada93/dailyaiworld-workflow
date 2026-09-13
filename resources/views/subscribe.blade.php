@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', 'Executive Sponsorships & Brand Partnerships — Daily AI World')
+@section('title', 'Executive Sponsorships and Brand Partnerships — Daily AI World')
 @section('meta_description', 'Partner with Daily AI World to reach 42,000+ AI founders, CTOs, and engineering leaders. Explore newsletter sponsorships, native guides, and brand packages.')
 @section('meta_keywords', 'AI Sponsorship, Advertise on Daily AI World, AI Newsletter Sponsorship, Tech Brand Partnerships, AI Founders Audience')
 

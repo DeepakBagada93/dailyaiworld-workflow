@@ -1,6 +1,6 @@
 @extends('layouts.cms')
 
-@section('title', 'Revenue Architecture & Monetization — Enterprise CMS')
+@section('title', 'Revenue Architecture and Monetization — Enterprise CMS')
 
 @section('content')
 <div class="space-y-8 max-w-7xl mx-auto">

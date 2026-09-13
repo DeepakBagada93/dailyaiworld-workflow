@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', ($query ? 'Search: "' . e($query) . '" — AI Workflows & Intelligence Archive' : 'Search AI Workflows, MCP Tools & Technical Intelligence') . ' | Daily AI World')
+@section('title', ($query ? 'Search: "' . e($query) . '" — AI Workflows and Intelligence Archive' : 'Search AI Workflows, MCP Tools and Technical Intelligence') . ' | Daily AI World')
 @section('meta_description', $query ? 'Explore curated AI workflows, Model Context Protocol (MCP) tools, LLM benchmarks, and research dispatches matching "' . e($query) . '" on Daily AI World.' : 'Search Daily AI World technical archive: production AI workflows, FastMCP server guides, LLM benchmark analyses, and agentic architecture dispatches.')
 @section('meta_keywords', 'Search AI, AI Workflows, Model Context Protocol, MCP Tools, LLM Benchmarks, Daily AI World')
 

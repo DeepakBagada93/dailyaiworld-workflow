@@ -1,6 +1,6 @@
 @extends('layouts.editorial')
 
-@section('title', 'Contact Daily AI World — Editorial Desk & Technical Inquiries')
+@section('title', 'Contact Daily AI World — Editorial Desk and Technical Inquiries')
 @section('meta_description', "Get in touch with Daily AI World editorial team and technical review board. Submit editorial inquiries, technical contributions, and partnership proposals.")
 @section('meta_keywords', 'Contact Daily AI World, Editorial Inquiries, Technical Contributions, AI Partnerships')
 
