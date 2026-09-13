@@ -45,7 +45,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/article/{slug}', function (string $slug) {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    return $article ? redirect($article->url, 301) : redirect('/', 301);
+    if ($article) return redirect($article->url, 301);
+
+    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
+    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
+    return $canonical ? redirect($canonical->url, 301) : redirect('/', 301);
 });
 
 Route::get('/post/{slug}', function (string $slug) {
@@ -53,10 +57,17 @@ Route::get('/post/{slug}', function (string $slug) {
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
     if ($article) return redirect($article->url, 301);
     
-    // Fuzzy match
-    $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $cleanSlug);
+    // Numeric duplicate suffix check (-2, -3, etc.)
+    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
+    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
+    if ($canonical) return redirect($canonical->url, 301);
+
+    // Forward and reverse prefix matching
     $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
-    return $partialArt ? redirect($partialArt->url, 301) : redirect('/latest-ai-news', 301);
+    if ($partialArt) return redirect($partialArt->url, 301);
+
+    $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
+    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/latest-ai-news', 301);
 });
 
 Route::get('/workflows/{slug}', function (string $slug) {
@@ -64,9 +75,17 @@ Route::get('/workflows/{slug}', function (string $slug) {
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
     if ($article) return redirect($article->url, 301);
 
-    $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $cleanSlug);
+    // Numeric duplicate suffix check (-2, -3, etc.)
+    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
+    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
+    if ($canonical) return redirect($canonical->url, 301);
+
+    // Forward and reverse prefix matching
     $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
-    return $partialArt ? redirect($partialArt->url, 301) : redirect('/workflows', 301);
+    if ($partialArt) return redirect($partialArt->url, 301);
+
+    $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
+    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/workflows', 301);
 });
 
 Route::get('/blog/{slug}', function (string $slug) {
@@ -74,15 +93,30 @@ Route::get('/blog/{slug}', function (string $slug) {
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
     if ($article) return redirect($article->url, 301);
 
-    $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $cleanSlug);
+    // Numeric duplicate suffix check (-2, -3, etc.)
+    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
+    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
+    if ($canonical) return redirect($canonical->url, 301);
+
+    // Forward and reverse prefix matching
     $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
-    return $partialArt ? redirect($partialArt->url, 301) : redirect('/latest-ai-news', 301);
+    if ($partialArt) return redirect($partialArt->url, 301);
+
+    $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
+    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/latest-ai-news', 301);
 });
 
 Route::get('/latest-ai-news/{slug}', function (string $slug) {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    return $article ? redirect($article->url, 301) : redirect('/latest-ai-news', 301);
+    if ($article) return redirect($article->url, 301);
+
+    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
+    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
+    if ($canonical) return redirect($canonical->url, 301);
+
+    $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
+    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/latest-ai-news', 301);
 });
 
 Route::get('/reports/{slug}', function (string $slug) {

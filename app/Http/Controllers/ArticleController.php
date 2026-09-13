@@ -19,7 +19,33 @@ class ArticleController extends Controller
             ->first();
 
         if (!$article) {
-            // Check if slug has numeric duplicate suffix like -2, -3, etc.
+            // 1. Explicit Redirect Map for deduplicated & renamed content
+            $redirectMap = [
+                'trending-blog-codex-6' => 'nvidia-nemotron-3-ultra-agent-orchestration-2026',
+                'deepseek-v4-flash-0731-vs-claude-opus-vs-gpt-56-sol-2' => 'deepseek-v4-flash-0731-vs-claude-opus-vs-gpt-56-sol',
+                'context-window-vs-context-recall-1m-token-windows-fail' => 'context-length-vs-context-recall-1m-token-context-windows',
+                'amd-bets-5b-anthropic-nvidia-backs-ssi-frontier-chip' => 'amd-bets-5b-anthropic-nvidia-backs-ssi-frontier-chip-race',
+                'anthropics-invisible-c2pa-watermarks-claude-outputs-prove-3' => 'anthropics-invisible-c2pa-watermarks-claude-outputs-prove',
+                'anthropics-invisible-c2pa-watermarks-claude-outputs-prove-2' => 'anthropics-invisible-c2pa-watermarks-claude-outputs-prove',
+                'anthropics-multi-agent-turf-war-study-ai-agents-sabotage' => 'anthropics-multi-agent-turf-war-study-claude-agents',
+                'cursor-2026-agent-mode-google-workspace-plugins-multi-file' => 'cursor-agent-mode-2026-google-workspace-plugins-multi-file',
+                'openai-assistants-api-sunset-tomorrow-migration-responses' => 'openai-sets-august-26-assistants-api-sunset-migration',
+                'okta-launches-agent-sso-ai-agents-now-log-like-employees' => 'okta-launches-agent-sso-ai-agents-login-like-employees',
+                'ship-agent-token-budget-enforcer-prevented-47k-runaway-cost' => 'build-autonomous-agent-token-budget-enforcer-prevented-47k',
+                'swe-bench-verified-96-benchmark-saturation-crisis-2026' => 'swe-bench-verified-hits-96-benchmark-saturation-crisis-2026',
+                'snowflake-data-warehouse-analytics-query-optimizer-fastmcp-2' => 'dominate-100m-rows-build-snowflake-mcp-server-real-time',
+                'eu-ai-act-2026-compliance-audit-autonomous-ai-agents-3' => 'eu-ai-act-2026-compliance-audit-autonomous-ai-agents',
+                'build-auto-scaling-rag-pipeline-pinecone-serverless-load-2' => 'build-auto-scaling-rag-pipeline-pinecone-serverless-load',
+            ];
+
+            if (isset($redirectMap[$slug])) {
+                $mappedArticle = Article::where('slug', $redirectMap[$slug])->published()->first();
+                if ($mappedArticle) {
+                    return redirect($mappedArticle->url, 301);
+                }
+            }
+
+            // 2. Check if slug has numeric duplicate suffix like -2, -3, etc.
             $baseDuplicateSlug = preg_replace('/-[0-9]+$/', '', $slug);
             if ($baseDuplicateSlug !== $slug) {
                 $canonicalArticle = Article::where('slug', $baseDuplicateSlug)->published()->first();
@@ -28,6 +54,7 @@ class ArticleController extends Controller
                 }
             }
 
+            // 3. Timestamped suffixes and forward prefix match
             $baseSlug = preg_replace('/-[0-9]{10,}$/', '', $slug);
             $cleanSlug = rtrim($baseSlug, '*&$');
             
@@ -38,6 +65,15 @@ class ArticleController extends Controller
 
             if ($article) {
                 return redirect($article->url, 301);
+            }
+
+            // 4. Reverse prefix match: existing article whose slug is a prefix of requested slug
+            $reversePrefixArt = Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])
+                ->published()
+                ->first();
+
+            if ($reversePrefixArt) {
+                return redirect($reversePrefixArt->url, 301);
             }
 
             // If truly not found, redirect to the relevant hub or homepage with a 301
