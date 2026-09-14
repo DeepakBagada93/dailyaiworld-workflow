@@ -10,11 +10,10 @@ Disallow: /chat
 Disallow: /scrape
 Disallow: /workspace
 Disallow: /tickets
-Disallow: /contact
-Disallow: /path/to/
+Disallow: /search
+Disallow: /bookmarks
 Disallow: /*.app$
 Disallow: /*.db$
-Disallow: /*.woff2$
 
 # Search Engines & News Crawlers
 User-agent: Googlebot

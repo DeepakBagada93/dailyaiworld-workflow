@@ -288,3 +288,27 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 \n| 2026-09-13 | AI News | News | Nvidia's AI Compute Dominance in September 2026: GPU Allocation as De Facto AI Monetary Policy | `nvidias-ai-compute-dominance-september-2026-gpu-allocation` | Nvidia, GPU Allocation, Vera Rubin, Blackwell, AI Compute Market |
 \n| 2026-09-13 | AI News | News | AI Price War Escalation September 2026: OpenAI, Anthropic, and DeepSeek Race to $0.10/1M Tokens | `ai-price-war-escalation-september-2026-openai-anthropic` | AI Price War, OpenAI, Anthropic, DeepSeek, Inference Pricing, Token Economics |
 \n| 2026-09-13 | AI News | News | Open-Source Apple Intelligence Reaches Linux and Windows: The On-Device AI Revolution [2026] | `open-source-apple-intelligence-reaches-linux-windows-device` | Apple Intelligence, Core ML, ONNX Runtime, Open Source, Linux AI, Windows AI |
+
+| 2026-09-14 | AI Workflows | Workflow | Build LangGraph Deep Agents: Cut Token Waste 65% [2026] | build-langgraph-deep-agents-token-efficient-production-playbook | LangGraph 1.2.5, Deep Agents, Postgres checkpointer, Python 3.12 |
+
+| 2026-09-14 | AI Tools | MCP Tool | Build ToolHive MCP Gateway: Secure 200+ Servers [2026] | build-toolhive-mcp-gateway-secure-fleet-production-playbook | ToolHive 1.8, FastMCP, K8s operator, OIDC |
+
+| 2026-09-14 | Coding | Blog | Claude Fable 5.1 vs Opus 5: 55.8% Coding Win [2026] | claude-fable-coding-benchmark-terminal-bench-production-guide | Claude Fable 5.1, Opus 5, Terminal-Bench 4.0, Python 3.12 |
+
+| 2026-09-14 | AI News | News | Pace the Frontier: Slow AI to Secure Agents [2026] | pace-frontier-slowdown-secure-agent-governance-playbook | Amodei Pace Frontier, Astra safeguards, agent governance |
+
+| 2026-09-14 | Coding | Blog | Qwen 3.8 27B on Cerebras: 1,500 tok/s Agents [2026] | qwen-38-27b-cerebras-inference-speed-production-playbook | Qwen 3.8 27B, Cerebras 1500 tok/s, Python 3.12 |
+
+| 2026-09-14 | AI News | News | GemStuffer Swarm: 2,000 Rogue Packages Hit Ruby [2026] | gemstuffer-swarm-rogue-packages-rubygems-supply-chain-playbook | GemStuffer, RubyGems, MCP Ruby 0.23.0 |
+
+| 2026-09-14 | AI Workflows | Workflow | Build Opus 5 Automation Workflow: 100% Pass [2026] | build-opus-automation-workflow-frontier-bench-production-playbook | Opus 5, Frontier-Bench 43.3, ARC-AGI-3 30.2 |
+
+| 2026-09-14 | AI Tools | MCP Tool | Build Hardened MCP Ruby Server: Fix 4 CVEs Fast [2026] | build-hardened-mcp-ruby-server-cve-fix-production-playbook | MCP Ruby 0.23.0, CVE-2026-67432 |
+
+| 2026-09-14 | Coding | Blog | DeepSeek V4 Flash Codex Pro: 82.7 Terminal Win [2026] | deepseek-v4-flash-codex-terminal-bench-production-playbook | DeepSeek V4 Flash 0731, Codex, 82.7 Terminal |
+
+| 2026-09-14 | Coding | Blog | Qwen 3.8 Max 2.4T Open Weights: 86.6% Agents [2026] | qwen-max-open-weights-terminal-bench-production-playbook | Qwen3.8 Max 2.4T, 86.6 Terminal, open weights |
+
+| 2026-09-14 | AI Workflows | Workflow | Build DGX Spark Local Agents: Zero Token Cost [2026] | build-dgx-spark-local-agent-cluster-production-playbook | DGX Spark GB10, NemoClaw, DeepSeek local |
+
+| 2026-09-14 | Coding | Blog | DeepSeek Vision Exp: Beats Opus on 3 Benchmarks [2026] | deepseek-vision-exp-multimodal-agent-production-playbook | Vision Exp, Opus 4.8, Harness 0.1.1 |

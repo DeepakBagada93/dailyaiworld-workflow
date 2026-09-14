@@ -138,6 +138,9 @@
     <!-- Floating Accessibility & Preferences Control Panel -->
     <x-accessibility-widget />
 
+    <!-- GDPR / Cookie Consent Banner -->
+    <x-cookie-consent />
+
     @stack('scripts')
 </body>
 </html>

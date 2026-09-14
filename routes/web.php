@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
 Route::get('/feed.xml', [SeoController::class, 'feed'])->name('feed');
 Route::get('/rss', [SeoController::class, 'feed']);
+Route::redirect('/feed', '/feed.xml', 301);
 Route::get('/llms.txt', [SeoController::class, 'llmsTxt'])->name('llms.txt');
 Route::get('/llms-full.txt', [SeoController::class, 'llmsFullTxt'])->name('llms.full');
 Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');

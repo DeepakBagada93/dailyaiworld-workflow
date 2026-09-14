@@ -333,6 +333,14 @@ h1, h2, h3, h4, h5, h6, .font-serif-editorial {
   line-height: 1.6;
 }
 
+.prose-editorial pre code {
+  background-color: transparent;
+  color: inherit;
+  padding: 0;
+  border-radius: 0;
+  font-size: inherit;
+}
+
 /* Custom Scrollbar for Minimalist Aesthetics */
 ::-webkit-scrollbar {
   width: 6px;

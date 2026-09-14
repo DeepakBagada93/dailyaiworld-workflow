@@ -39,36 +39,43 @@
     <!-- Static Pages -->
     <url>
         <loc>{{ route('about') }}</loc>
+        <lastmod>{{ date('c') }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>{{ route('contact') }}</loc>
+        <lastmod>{{ date('c') }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>{{ route('privacy') }}</loc>
+        <lastmod>{{ date('c') }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>{{ route('terms') }}</loc>
+        <lastmod>{{ date('c') }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>{{ route('disclaimer') }}</loc>
+        <lastmod>{{ date('c') }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>{{ route('advertise') }}</loc>
+        <lastmod>{{ date('c') }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>{{ route('subscribe') }}</loc>
+        <lastmod>{{ date('c') }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>

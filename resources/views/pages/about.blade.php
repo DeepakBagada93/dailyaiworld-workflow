@@ -107,9 +107,27 @@
             <section class="bg-[#FAF5FF] border border-[#E9D5FF] rounded-2xl p-6 sm:p-8 space-y-4">
                 <h3 class="text-lg font-serif font-bold text-[#1E1B4B]">Organization & Publisher Information</h3>
                 <p class="text-sm text-[#4B5563]">
-                    Daily AI World is published by <strong>SaaSNext</strong>, an AI engineering studio building digital products and developer tooling.
+                    Daily AI World is published by <strong>SaaSNext</strong>, a digital product and AI engineering studio headquartered in Surat, Gujarat, India.
                 </p>
-                <div class="flex flex-wrap gap-4 text-xs font-mono text-[#5B21B6]">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-mono text-[#4B5563] pt-2 pb-2">
+                    <div>
+                        <span class="text-[#6B7280] block uppercase tracking-wider text-[10px]">Publisher / Entity</span>
+                        <span class="text-[#111827] font-semibold font-sans">SaaSNext (Deepak Bagada)</span>
+                    </div>
+                    <div>
+                        <span class="text-[#6B7280] block uppercase tracking-wider text-[10px]">Headquarters</span>
+                        <span class="text-[#111827] font-semibold font-sans">Surat, Gujarat, India</span>
+                    </div>
+                    <div>
+                        <span class="text-[#6B7280] block uppercase tracking-wider text-[10px]">Editorial Inquiries</span>
+                        <a href="mailto:connect@saasnext.in" class="text-[#5B21B6] underline">connect@saasnext.in</a>
+                    </div>
+                    <div>
+                        <span class="text-[#6B7280] block uppercase tracking-wider text-[10px]">Official Website</span>
+                        <a href="https://saasnext.in" target="_blank" rel="noopener noreferrer" class="text-[#5B21B6] underline">https://saasnext.in ↗</a>
+                    </div>
+                </div>
+                <div class="flex flex-wrap gap-4 text-xs font-mono text-[#5B21B6] pt-2">
                     <a href="{{ route('contact') }}" class="px-4 py-2 bg-[#5B21B6] text-white rounded-lg font-bold hover:bg-[#4C1D95] transition-colors">
                         Contact Editorial Desk
                     </a>

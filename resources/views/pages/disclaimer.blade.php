@@ -53,17 +53,27 @@
                 </p>
             </section>
 
+            <section class="space-y-3 bg-[#FAF5FF] p-6 rounded-2xl border border-[#E9D5FF]">
+                <h2 class="text-xl font-bold font-serif text-[#1E1B4B]">4. Advertising & Affiliate Disclosure</h2>
+                <p class="text-sm text-[#374151]">
+                    Daily AI World participates in digital advertising networks (including Google AdSense) and select developer tooling affiliate programs. Some external links to developer platforms, cloud providers, or SaaS products may be affiliate links. If you click on an affiliate link and make a purchase or subscribe to a paid tier, Daily AI World may receive an affiliate commission at no extra cost to you.
+                </p>
+                <p class="text-sm text-[#374151]">
+                    Our editorial integrity, code benchmarks, and architectural evaluations remain strictly independent and impartial. We never accept compensation in exchange for positive architectural reviews, and all sponsored dispatches or brand integrations are explicitly labeled with sponsor attribution.
+                </p>
+            </section>
+
             <section class="space-y-3">
-                <h2 class="text-xl font-bold font-serif text-[#111827]">4. Trademark Notice</h2>
+                <h2 class="text-xl font-bold font-serif text-[#111827]">5. Trademark Notice</h2>
                 <p>
                     All product names, logos, trademarks, and registered trademarks mentioned on Daily AI World (including but not limited to Claude, Anthropic, OpenAI, ChatGPT, Google Gemini, DeepSeek, Meta Llama, Cursor, LangChain, LangGraph, and CrewAI) are the property of their respective owners. Their inclusion does not imply any affiliation, sponsorship, or endorsement.
                 </p>
             </section>
 
             <section class="space-y-3">
-                <h2 class="text-xl font-bold font-serif text-[#111827]">5. Inquiries</h2>
+                <h2 class="text-xl font-bold font-serif text-[#111827]">6. Inquiries</h2>
                 <p>
-                    For legal or disclosure inquiries, reach out to <a href="mailto:connect@saasnext.in" class="text-[#5B21B6] font-semibold underline">connect@saasnext.in</a>.
+                    For legal, affiliate, or disclosure inquiries, reach out to <a href="mailto:connect@saasnext.in" class="text-[#5B21B6] font-semibold underline">connect@saasnext.in</a>.
                 </p>
             </section>
 

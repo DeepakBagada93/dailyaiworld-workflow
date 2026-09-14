@@ -36,6 +36,7 @@ __pycache__/
 404file.md
 
 # Temporary payload/data files
+/dispatches/
 *_payload*.json
 *_dispatches*.json
 *_dispatch*.json
