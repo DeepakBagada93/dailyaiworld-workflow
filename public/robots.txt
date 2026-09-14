@@ -20,6 +20,9 @@ Disallow: /*.woff2$
 User-agent: Googlebot
 Allow: /
 
+User-agent: Mediapartners-Google
+Allow: /
+
 User-agent: Googlebot-News
 Allow: /
 
