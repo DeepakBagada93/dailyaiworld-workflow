@@ -20,8 +20,16 @@ use App\Http\Controllers\NewsDirectoryController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
-// SEO, AEO & GEO Optimization Engine Endpoints
+// SEO, AEO & GEO Optimization Engine Endpoints — Modular XML Sitemaps
 Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+Route::get('/sitemap_index.xml', [SeoController::class, 'sitemapIndex'])->name('sitemap.index');
+Route::get('/sitemap-recent.xml', [SeoController::class, 'sitemapRecent'])->name('sitemap.recent');
+Route::get('/sitemap-workflows.xml', [SeoController::class, 'sitemapWorkflows'])->name('sitemap.workflows');
+Route::get('/sitemap-mcp.xml', [SeoController::class, 'sitemapMcp'])->name('sitemap.mcp');
+Route::get('/sitemap-blogs.xml', [SeoController::class, 'sitemapBlogs'])->name('sitemap.blogs');
+Route::get('/sitemap-news.xml', [SeoController::class, 'sitemapNews'])->name('sitemap.news');
+Route::get('/sitemap-hubs.xml', [SeoController::class, 'sitemapHubs'])->name('sitemap.hubs');
+Route::get('/sitemap-all.xml', [SeoController::class, 'sitemapAll'])->name('sitemap.all');
 Route::get('/feed.xml', [SeoController::class, 'feed'])->name('feed');
 Route::get('/rss', [SeoController::class, 'feed']);
 Route::redirect('/feed', '/feed.xml', 301);

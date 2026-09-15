@@ -10,9 +10,197 @@ use Illuminate\Http\Response;
 class SeoController extends Controller
 {
     /**
-     * Generate dynamic XML Sitemap for Search Engines (Google, Bing, Yahoo).
+     * Master Sitemap Index for Google Search Console & Crawlers.
+     * Serves /sitemap.xml and /sitemap_index.xml
      */
     public function sitemap(): Response
+    {
+        return $this->sitemapIndex();
+    }
+
+    public function sitemapIndex(): Response
+    {
+        $latestArticle = Article::published()->latest('updated_at')->first();
+        $latestDate = $latestArticle && $latestArticle->updated_at 
+            ? $latestArticle->updated_at->toAtomString() 
+            : now()->toAtomString();
+
+        $latestWorkflow = Article::published()->where('category_id', 1)->latest('updated_at')->first();
+        $workflowDate = $latestWorkflow && $latestWorkflow->updated_at ? $latestWorkflow->updated_at->toAtomString() : $latestDate;
+
+        $latestMcp = Article::published()->where('category_id', 5)->latest('updated_at')->first();
+        $mcpDate = $latestMcp && $latestMcp->updated_at ? $latestMcp->updated_at->toAtomString() : $latestDate;
+
+        $latestBlog = Article::published()->whereIn('category_id', [2, 3, 4, 6, 7, 8, 9, 10, 12])->latest('updated_at')->first();
+        $blogDate = $latestBlog && $latestBlog->updated_at ? $latestBlog->updated_at->toAtomString() : $latestDate;
+
+        $latestNews = Article::published()->where('category_id', 11)->latest('updated_at')->first();
+        $newsDate = $latestNews && $latestNews->updated_at ? $latestNews->updated_at->toAtomString() : $latestDate;
+
+        $baseUrl = rtrim(config('app.url', 'https://dailyaiworld.com'), '/');
+
+        $sitemaps = [
+            [
+                'loc' => "{$baseUrl}/sitemap-recent.xml",
+                'lastmod' => $latestDate,
+            ],
+            [
+                'loc' => "{$baseUrl}/sitemap-workflows.xml",
+                'lastmod' => $workflowDate,
+            ],
+            [
+                'loc' => "{$baseUrl}/sitemap-mcp.xml",
+                'lastmod' => $mcpDate,
+            ],
+            [
+                'loc' => "{$baseUrl}/sitemap-blogs.xml",
+                'lastmod' => $blogDate,
+            ],
+            [
+                'loc' => "{$baseUrl}/sitemap-news.xml",
+                'lastmod' => $newsDate,
+            ],
+            [
+                'loc' => "{$baseUrl}/sitemap-hubs.xml",
+                'lastmod' => $latestDate,
+            ],
+        ];
+
+        $content = view('seo.sitemap_index', compact('sitemaps'))->render();
+
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * Recent High-Priority Dispatches (Top 200 - September & late August 2026).
+     * Solves GSC "Discovered - currently not indexed" by offering Googlebot a bite-sized fresh feed.
+     */
+    public function sitemapRecent(): Response
+    {
+        $articles = Article::published()
+            ->latest('published_at')
+            ->take(200)
+            ->get();
+
+        $content = view('seo.sitemap_articles', [
+            'articles' => $articles,
+            'priority' => '0.95',
+            'changefreq' => 'daily',
+        ])->render();
+
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * AI Workflows Directory Dispatches (/workflow/{slug})
+     */
+    public function sitemapWorkflows(): Response
+    {
+        $articles = Article::published()
+            ->where('category_id', 1)
+            ->latest('published_at')
+            ->get();
+
+        $content = view('seo.sitemap_articles', [
+            'articles' => $articles,
+            'priority' => '0.90',
+            'changefreq' => 'weekly',
+        ])->render();
+
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * MCP Tools & Server Directory Dispatches (/mcp-directory/{slug})
+     */
+    public function sitemapMcp(): Response
+    {
+        $articles = Article::published()
+            ->where('category_id', 5)
+            ->latest('published_at')
+            ->get();
+
+        $content = view('seo.sitemap_articles', [
+            'articles' => $articles,
+            'priority' => '0.90',
+            'changefreq' => 'weekly',
+        ])->render();
+
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * Technical Blogs, Coding & LLM Benchmark Dispatches (/blogs/{slug})
+     */
+    public function sitemapBlogs(): Response
+    {
+        $articles = Article::published()
+            ->whereIn('category_id', [2, 3, 4, 6, 7, 8, 9, 10, 12])
+            ->latest('published_at')
+            ->get();
+
+        $content = view('seo.sitemap_articles', [
+            'articles' => $articles,
+            'priority' => '0.85',
+            'changefreq' => 'weekly',
+        ])->render();
+
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * AI News Dispatches (/blogs/{slug})
+     */
+    public function sitemapNews(): Response
+    {
+        $articles = Article::published()
+            ->where('category_id', 11)
+            ->latest('published_at')
+            ->get();
+
+        $content = view('seo.sitemap_articles', [
+            'articles' => $articles,
+            'priority' => '0.85',
+            'changefreq' => 'daily',
+        ])->render();
+
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * Directory Hubs, Category Indices & Static Pages
+     */
+    public function sitemapHubs(): Response
+    {
+        $categories = Category::all();
+        $latestArticle = Article::published()->latest('updated_at')->first();
+        $latestArticleDate = $latestArticle && $latestArticle->updated_at 
+            ? $latestArticle->updated_at->toAtomString() 
+            : now()->toAtomString();
+
+        $content = view('seo.sitemap_hubs', compact('categories', 'latestArticleDate'))->render();
+
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+        ]);
+    }
+
+    /**
+     * Legacy / Full monolithic sitemap containing all 1,300+ dispatches.
+     */
+    public function sitemapAll(): Response
     {
         $articles = Article::published()->latest('published_at')->get();
         $categories = Category::all();

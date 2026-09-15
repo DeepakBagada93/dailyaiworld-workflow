@@ -85,28 +85,9 @@ try {
         throw new \RuntimeException("DUPLICATE BLOCKED: An article with title '{$existingRemote->title}' or slug '{$existingRemote->slug}' already exists on Hostinger (ID: {$existingRemote->id}). Duplicate publishing is strictly prohibited.");
     }
 
-    // 2. MULTI-AUTHOR E-E-A-T ASSIGNMENT
-    // Fetch author IDs dynamically from Hostinger DB
-    $authorRows = DB::connection('hostinger')->table('authors')->get()->keyBy('slug');
-    
-    $authorId = null;
-    if (!empty($data['author_id'])) {
-        $authorId = (int) $data['author_id'];
-    } elseif (!empty($data['author_slug']) && isset($authorRows[$data['author_slug']])) {
-        $authorId = (int) $authorRows[$data['author_slug']]->id;
-    } else {
-        // Automatic category-based specialist author routing:
-        $authorId = match ($categoryId) {
-            1 => ($data['tier'] ?? '') === 'Deep Dive' && rand(0, 2) === 0 
-                 ? ($authorRows['deepak-bagada']->id ?? 1) 
-                 : ($authorRows['elena-rostova']->id ?? 3),
-            2, 4 => ($authorRows['elena-rostova']->id ?? 3),
-            3, 10, 12 => ($authorRows['dr-aris-thorne']->id ?? 2),
-            5, 6 => ($authorRows['marcus-vance']->id ?? 4),
-            11 => ($authorRows['daily-ai-world-editorial-bureau']->id ?? 5),
-            default => ($authorRows['deepak-bagada']->id ?? 1),
-        };
-    }
+    // 2. SOLE AUTHOR ASSIGNMENT (Deepak Bagada)
+    $authorRow = DB::connection('hostinger')->table('authors')->where('slug', 'deepak-bagada')->orWhere('id', 1)->first();
+    $authorId = $authorRow ? (int) $authorRow->id : 1;
 
     // 3. EDITORIAL CADENCE & TIMESTAMP PACING
     // Avoid artificial clustering of timestamps

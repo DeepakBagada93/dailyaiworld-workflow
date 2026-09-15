@@ -222,13 +222,10 @@ if (preg_match('/##\s+AEO\s+Direct\s+Answer\s+Box/i', $content)) {
     $errors[] = "AEO DIRECT ANSWER BOX HEADING DETECTED in Markdown content. Remove the '## AEO Direct Answer Box' heading immediately. The first paragraph(s) after the H1 should serve as the AEO answer block without any heading marker.";
 }
 
-// 10. Multi-Author E-E-A-T Signature Check
+// 10. Sole Author E-E-A-T Signature Check (Deepak Bagada)
 $validAuthors = [
     'Deepak Bagada',
-    'Dr. Aris Thorne',
-    'Elena Rostova',
-    'Marcus Vance',
-    'Daily AI World Editorial',
+    'deeepakbagada',
     'SaaSNext'
 ];
 $authorFound = false;
@@ -239,7 +236,7 @@ foreach ($validAuthors as $va) {
     }
 }
 if (!$authorFound) {
-    $warnings[] = "Author signature missing from content. Ensure accredited author attribution (Elena Rostova, Dr. Aris Thorne, Marcus Vance, Deepak Bagada, or Daily AI World Editorial Bureau).";
+    $warnings[] = "Author signature missing from content. Ensure accredited author attribution (Deepak Bagada, Founder & Editor-in-Chief).";
 }
 
 // 11. Key Takeaways Check

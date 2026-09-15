@@ -1,0 +1,41 @@
+<?php echo '<?xml version="1.0" encoding="UTF-8"?>'; ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:news="http://www.google.com/schemas/sitemap-news/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+
+    @foreach($articles as $article)
+        <url>
+            <loc>{{ $article->url }}</loc>
+            <lastmod>{{ $article->updated_at ? $article->updated_at->toAtomString() : ($article->published_at ? $article->published_at->toAtomString() : now()->toAtomString()) }}</lastmod>
+            <changefreq>{{ $changefreq ?? 'weekly' }}</changefreq>
+            <priority>{{ $priority ?? '0.85' }}</priority>
+            @if($article->published_at && $article->published_at->gt(now()->subDays(2)))
+            <news:news>
+                <news:publication>
+                    <news:name>Daily AI World</news:name>
+                    <news:language>en</news:language>
+                </news:publication>
+                <news:publication_date>{{ $article->published_at->toAtomString() }}</news:publication_date>
+                <news:title><![CDATA[{{ $article->title }}]]></news:title>
+            </news:news>
+            @endif
+            @if($article->featured_image)
+                @php
+                    $imgUrl = $article->featured_image;
+                    if ($imgUrl && !str_starts_with($imgUrl, 'http://') && !str_starts_with($imgUrl, 'https://')) {
+                        $imgUrl = url('/' . ltrim($imgUrl, '/'));
+                    }
+                    $isValidImgUrl = $imgUrl && filter_var($imgUrl, FILTER_VALIDATE_URL);
+                @endphp
+                @if($isValidImgUrl)
+                    <image:image>
+                        <image:loc>{{ $imgUrl }}</image:loc>
+                        <image:title><![CDATA[{{ $article->title }}]]></image:title>
+                    </image:image>
+                @endif
+            @endif
+        </url>
+    @endforeach
+
+</urlset>
