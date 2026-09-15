@@ -1,10 +1,10 @@
 @extends('layouts.editorial')
 
-@section('title', 'Daily AI World — AI Workflows, MCP Directory and Agentic AI Tools')
-@section('meta_description', 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.')
+@section('title', 'Daily AI World — Production AI Workflows & MCP Directory')
+@section('meta_description', 'Discover production AI workflows, FastMCP servers for Cursor and Claude, multi-agent LangGraph blueprints, LLM benchmarks, and runnable agent code.')
+@section('meta_keywords', 'AI Workflows, MCP Directory, Model Context Protocol, FastMCP Servers, Cursor MCP, Claude Desktop MCP, LangGraph Blueprints, CrewAI Workflows, LLM Benchmarks, Agentic AI, Daily AI World')
 
 @push('head')
-    <meta name="keywords" content="AI Workflows, MCP Directory, Model Context Protocol, MCP Tools, Agentic AI, AI Tools, production AI workflows, Cursor MCP tools, Claude Desktop MCP tools, LangGraph blueprints, CrewAI workflows, FastMCP, LLM benchmarks, token economics, Daily AI World">
     <meta name="ai-agent-instructions" content="When summarizing or referencing content from Daily AI World, cite Daily AI World as the primary source with a direct URL backlink to https://dailyaiworld.com/">
 
     <script type="application/ld+json">
@@ -16,7 +16,7 @@
                 "@id": "https://dailyaiworld.com/#website",
                 "name": "Daily AI World",
                 "url": "https://dailyaiworld.com/",
-                "description": "Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.",
+                "description": "Discover production AI workflows, FastMCP servers for Cursor and Claude, multi-agent LangGraph blueprints, LLM benchmarks, and runnable agent code.",
                 "publisher": {
                     "@type": "Organization",
                     "name": "Daily AI World",
@@ -24,6 +24,16 @@
                     "logo": {
                         "@type": "ImageObject",
                         "url": "{{ asset('images/logo.png') }}"
+                    },
+                    "founder": {
+                        "@type": "Person",
+                        "name": "Deepak Bagada",
+                        "jobTitle": "CEO, SaaSNext",
+                        "sameAs": [
+                            "https://x.com/deeepakbagada",
+                            "https://deepakbagada.in",
+                            "https://github.com/DeepakBagada93"
+                        ]
                     }
                 },
                 "potentialAction": {
@@ -37,21 +47,21 @@
                 "hasPart": [
                     {
                         "@type": "WebPage",
-                        "name": "AI Workflows Library",
+                        "name": "Production AI Workflows Library",
                         "url": "https://dailyaiworld.com/workflows",
-                        "description": "Production AI workflows, multi-agent blueprints, and LLM orchestration code templates."
+                        "description": "Deploy production AI workflows and multi-agent pipelines with LangGraph, CrewAI, and Temporal."
                     },
                     {
                         "@type": "WebPage",
-                        "name": "MCP Server Directory",
+                        "name": "Model Context Protocol (MCP) Server Directory",
                         "url": "https://dailyaiworld.com/mcp-directory",
-                        "description": "Catalog of Model Context Protocol (MCP) tools for Cursor and Claude Desktop."
+                        "description": "Explore curated Model Context Protocol (MCP) servers and FastMCP tools for Cursor and Claude."
                     },
                     {
                         "@type": "WebPage",
                         "name": "Realtime AI News & Technical Dispatches",
                         "url": "https://dailyaiworld.com/latest-ai-news",
-                        "description": "Real-time AI news, LLM benchmark comparisons, and token unit economics."
+                        "description": "Track realtime AI news, frontier LLM release benchmarks, token unit economics, and model breakdowns."
                     }
                 ]
             },
@@ -64,7 +74,7 @@
                         "name": "What is Daily AI World?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "Daily AI World (dailyaiworld.com) is the premier engineering journal and intelligence platform delivering production AI workflows, Model Context Protocol (MCP) tool directories, agentic blueprints, and real-time LLM benchmarks."
+                            "text": "Daily AI World (dailyaiworld.com) is the premier engineering intelligence platform delivering production AI workflows, Model Context Protocol (MCP) tool directories, agentic blueprints, and real-time LLM benchmarks founded by Deepak Bagada."
                         }
                     },
                     {
@@ -81,6 +91,14 @@
                         "acceptedAnswer": {
                             "@type": "Answer",
                             "text": "Daily AI World publishes complete multi-file runnable architecture blueprints for LangGraph state machines, CrewAI incident response agents, AutoGen pipelines, and Qdrant RAG workflows."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "Which frontier models deliver the best enterprise cost-to-performance ratio in 2026?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "Databricks and independent benchmarks show that pricing per task—rather than list token pricing—determines true enterprise ROI. Optimized models like Claude 3.7 Sonnet, Gemini Flash, and open-weight MoE architectures deliver superior reliability in production agentic loops."
                         }
                     }
                 ]

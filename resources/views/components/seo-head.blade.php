@@ -1,7 +1,7 @@
 @props([
-    'title' => 'Daily AI World — AI Workflows, MCP Directory and Agentic AI Tools',
-    'description' => 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.',
-    'keywords' => 'AI Workflows, Model Context Protocol, MCP Directory, MCP Tools, AI Agents, Agentic AI, LangGraph, CrewAI, FastMCP, Cursor MCP, Claude Desktop, LLM Benchmarks, Daily AI World',
+    'title' => 'Daily AI World — Production AI Workflows & MCP Directory',
+    'description' => 'Discover production AI workflows, FastMCP servers for Cursor and Claude, multi-agent LangGraph blueprints, LLM benchmarks, and runnable agent code.',
+    'keywords' => 'AI Workflows, MCP Directory, Model Context Protocol, FastMCP Servers, Cursor MCP, Claude Desktop MCP, LangGraph Blueprints, CrewAI Workflows, LLM Benchmarks, Agentic AI, Daily AI World',
     'image' => asset('images/logo.png'),
     'type' => 'website',
     'canonical' => null,
@@ -99,7 +99,7 @@
             "@id": "{{ url('/') }}#website",
             "url": "{{ url('/') }}",
             "name": "Daily AI World",
-            "description": "Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.",
+            "description": "Discover production AI workflows, FastMCP servers for Cursor and Claude, multi-agent LangGraph blueprints, LLM benchmarks, and runnable agent code.",
             "publisher": {
                 "@id": "{{ url('/') }}#organization"
             },

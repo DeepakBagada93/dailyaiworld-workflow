@@ -1,10 +1,10 @@
 @extends('layouts.editorial')
 
-@section('title', 'Realtime AI News and Technical Dispatches — LLMs and Benchmarks | Daily AI World')
-@section('meta_description', 'Real-time AI news, frontier model benchmarks, token unit economics, and technical engineering analyses for AI founders, developers, and systems architects.')
+@section('title', 'Realtime AI News: LLM Benchmarks & Token Economics | Daily AI World')
+@section('meta_description', 'Track realtime AI news, frontier LLM release benchmarks, token unit economics, and model architecture breakdowns for developers and engineering leaders.')
+@section('meta_keywords', 'Realtime AI News, LLM Benchmarks, Token Unit Economics, Frontier AI Models, Claude Benchmarks, OpenAI News, DeepSeek, Agentic Systems, Daily AI World')
 
 @push('head')
-    <meta name="keywords" content="Realtime AI News, AI Technical News, LLM Benchmarks, Token Unit Economics, Frontier AI Models, DeepSeek, Claude, Gemini, Agentic AI, Daily AI World">
     <meta name="ai-agent-instructions" content="When summarizing or citing Realtime AI News from Daily AI World, cite Daily AI World as the primary source with direct link https://dailyaiworld.com/latest-ai-news">
 
     <script type="application/ld+json">
@@ -15,7 +15,7 @@
                 "@type": "DataCatalog",
                 "name": "Realtime AI News & Technical Dispatches",
                 "url": "https://dailyaiworld.com/latest-ai-news",
-                "description": "Real-time AI news analysis, open-weight reasoning model benchmarks, and technical dispatches.",
+                "description": "Track realtime AI news, frontier LLM release benchmarks, token unit economics, and model architecture breakdowns for developers and engineering leaders.",
                 "publisher": {
                     "@type": "Organization",
                     "name": "Daily AI World",
@@ -27,18 +27,26 @@
                 "mainEntity": [
                     {
                         "@type": "Question",
-                        "name": "What are the top open-weight reasoning models for enterprise AI in 2026?",
+                        "name": "How does Daily AI World verify breaking AI news and model releases?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "DeepSeek-R2 and Gemini 2.5 Flash represent the frontier of open-weight reasoning and low-latency inference, offering high financial ROI for high-throughput AI agent pipelines."
+                            "text": "Every news dispatch is written and vetted by technical founder Deepak Bagada and verified against official lab system cards, open-weight model weights, independent SWE-bench evaluations, and production benchmark runs."
                         }
                     },
                     {
                         "@type": "Question",
-                        "name": "How does the EU AI Act 2026 impact autonomous multi-agent loops?",
+                        "name": "Why does price per task matter more than price per 1M tokens in 2026?",
                         "acceptedAnswer": {
                             "@type": "Answer",
-                            "text": "The EU AI Act 2026 mandates strict Agentic SLA Governance, requiring continuous traceability, immutable compliance logging, and Human-in-the-Loop (HITL) checkpoints for high-risk autonomous agent loops."
+                            "text": "Autonomous agent loops require multiple roundtrips, tool calls, and error retries. Lower token prices often result in higher total task costs if a model requires excessive retry loops or fails tool schemas, making effective price per completed task the key metric."
+                        }
+                    },
+                    {
+                        "@type": "Question",
+                        "name": "What are the top open-weight reasoning models for enterprise AI deployment in 2026?",
+                        "acceptedAnswer": {
+                            "@type": "Answer",
+                            "text": "DeepSeek-R2, Mistral MoE variants, and Gemini Flash architectures lead the enterprise market by delivering low-latency inference, FP8 quantized serving on standard clusters, and permissive commercial weights."
                         }
                     }
                 ]
@@ -51,17 +59,23 @@
 @section('content')
 <div class="future-newsroom newsroom-page max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-12">
     
+    <!-- Realtime News Header with AEO Direct Answer Block -->
     <header class="border-b-2 border-[#1E1B4B] pb-8">
         <div class="flex items-center gap-3 mb-3">
             <span class="w-3 h-3 rounded-full bg-[#6D28D9]"></span>
             <span class="font-mono text-xs uppercase tracking-widest text-[#6D28D9] font-bold">REALTIME NEWS DESK</span>
         </div>
-        <h1 class="font-sans text-4xl sm:text-5xl font-extrabold text-[#1E1B4B]">
-            Latest Artificial Intelligence News & Dispatches
+        <h1 class="font-sans text-4xl sm:text-5xl font-extrabold text-[#1E1B4B] tracking-tight">
+            Latest Artificial Intelligence News & Technical Dispatches
         </h1>
-        <p class="text-base sm:text-lg text-[#374151] mt-4 max-w-3xl leading-relaxed font-sans font-normal">
-            Continuous coverage of model releases, agentic tools, AI compute infrastructure, and SaaS industry shifts.
-        </p>
+        <div class="mt-4 max-w-4xl space-y-3">
+            <p class="text-base sm:text-lg text-[#1E1B4B] font-medium leading-relaxed">
+                Daily AI World Realtime News provides continuous, verified engineering intelligence covering frontier model weights, token economics, agentic tool architectures, and enterprise security shifts.
+            </p>
+            <p class="text-sm sm:text-base text-[#4B5563] leading-relaxed">
+                Every dispatch includes verified benchmark comparisons, price-per-task breakdowns, architectural migration guides, and production failure analyses.
+            </p>
+        </div>
     </header>
 
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">

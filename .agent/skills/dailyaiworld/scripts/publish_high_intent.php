@@ -4,8 +4,8 @@
  * Usage: Run via CLI after generating dispatches JSON or array data.
  */
 
-require __DIR__ . '/../../../../../personal/Daily AI world/vendor/autoload.php';
-$app = require_once __DIR__ . '/../../../../../personal/Daily AI world/bootstrap/app.php';
+require __DIR__ . '/../../../../vendor/autoload.php';
+$app = require_once __DIR__ . '/../../../../bootstrap/app.php';
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 $kernel->bootstrap();
 

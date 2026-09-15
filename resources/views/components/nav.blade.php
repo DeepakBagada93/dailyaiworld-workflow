@@ -29,23 +29,31 @@
             </a>
         </div>
 
-        <!-- Center: Desktop Primary Navigation with Hover Glow Pills -->
-        <nav aria-label="Primary Navigation" class="hidden md:flex items-center gap-1 lg:gap-2 font-sans text-xs font-bold text-[#1E1B4B] tracking-wide uppercase">
+        <!-- Center: Desktop Primary Navigation with Hover Glow Pills & Schema Navigation -->
+        <nav aria-label="Primary Navigation" itemscope itemtype="https://schema.org/SiteNavigationElement" class="hidden md:flex items-center gap-1 lg:gap-2 font-sans text-xs font-bold text-[#1E1B4B] tracking-wide uppercase">
             <a href="{{ route('workflows.index') }}" 
+               itemprop="url"
+               title="Production AI Workflows, LangGraph Blueprints & Multi-Agent Templates"
                class="px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5 {{ request()->routeIs('workflows.index') ? 'text-[#6D28D9] bg-[#FAF5FF] border border-[#E9D5FF] font-extrabold shadow-2xs' : 'hover:text-[#6D28D9] hover:bg-[#FAF5FF]' }}">
-                <span>Workflows</span>
+                <span itemprop="name">Workflows</span>
             </a>
             <a href="{{ route('mcp.index') }}" 
+               itemprop="url"
+               title="Model Context Protocol (MCP) Servers, FastMCP Tools & Cursor Connectors"
                class="px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5 {{ request()->routeIs('mcp.index') ? 'text-[#6D28D9] bg-[#FAF5FF] border border-[#E9D5FF] font-extrabold shadow-2xs' : 'hover:text-[#6D28D9] hover:bg-[#FAF5FF]' }}">
-                <span>MCP Directory</span>
+                <span itemprop="name">MCP Directory</span>
             </a>
             <a href="{{ route('news.index') }}" 
+               itemprop="url"
+               title="Realtime AI News, Frontier Model Benchmarks & Token Unit Economics"
                class="px-3.5 py-2 rounded-lg transition-all duration-200 flex items-center gap-1.5 {{ request()->routeIs('news.index') ? 'text-[#6D28D9] bg-[#FAF5FF] border border-[#E9D5FF] font-extrabold shadow-2xs' : 'hover:text-[#6D28D9] hover:bg-[#FAF5FF]' }}">
-                <span>Realtime News</span>
+                <span itemprop="name">Realtime News</span>
             </a>
             <a href="{{ route('advertise') }}#sponsor-tier" 
+               itemprop="url"
+               title="Partner with Daily AI World: Reach 42,000+ AI Architects & Tech Leaders"
                class="px-3.5 py-2 rounded-lg transition-all duration-200 {{ request()->routeIs('advertise') ? 'text-[#6D28D9] bg-[#FAF5FF] border border-[#E9D5FF] font-extrabold shadow-2xs' : 'hover:text-[#6D28D9] hover:bg-[#FAF5FF]' }}">
-                <span>Sponsor</span>
+                <span itemprop="name">Sponsor</span>
             </a>
         </nav>
 
@@ -101,22 +109,31 @@
          x-transition:leave="transition ease-in duration-150"
          x-transition:leave-start="opacity-100 translate-y-0"
          x-transition:leave-end="opacity-0 -translate-y-2"
-         class="md:hidden border-t border-[#E9D5FF] bg-white px-4 pt-3 pb-6 space-y-2 font-sans text-xs font-bold uppercase tracking-wider text-[#1E1B4B] shadow-xl">
+          itemscope itemtype="https://schema.org/SiteNavigationElement"
+          class="md:hidden border-t border-[#E9D5FF] bg-white px-4 pt-3 pb-6 space-y-2 font-sans text-xs font-bold uppercase tracking-wider text-[#1E1B4B] shadow-xl">
         <a href="{{ route('workflows.index') }}" 
+           itemprop="url"
+           title="Production AI Workflows, LangGraph Blueprints & Multi-Agent Templates"
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('workflows.index') ? 'text-[#6D28D9] bg-[#FAF5FF] font-bold' : '' }}">
-            Workflows Library
+            <span itemprop="name">Workflows Library</span>
         </a>
         <a href="{{ route('mcp.index') }}" 
+           itemprop="url"
+           title="Model Context Protocol (MCP) Servers, FastMCP Tools & Cursor Connectors"
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('mcp.index') ? 'text-[#6D28D9] bg-[#FAF5FF] font-bold' : '' }}">
-            MCP Directory
+            <span itemprop="name">MCP Directory</span>
         </a>
         <a href="{{ route('news.index') }}" 
+           itemprop="url"
+           title="Realtime AI News, Frontier Model Benchmarks & Token Unit Economics"
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('news.index') ? 'text-[#6D28D9] bg-[#FAF5FF] font-bold' : '' }}">
-            Realtime AI News
+            <span itemprop="name">Realtime AI News</span>
         </a>
         <a href="{{ route('advertise') }}#sponsor-tier" 
+           itemprop="url"
+           title="Partner with Daily AI World: Reach 42,000+ AI Architects & Tech Leaders"
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('advertise') ? 'text-[#6D28D9] font-bold bg-[#FAF5FF]' : '' }}">
-            Sponsor Tier
+            <span itemprop="name">Sponsor Tier</span>
         </a>
         <a href="{{ route('subscribe') }}#executive-tier" 
            class="block px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#6D28D9] to-[#7C3AED] text-white text-center font-extrabold mt-2">

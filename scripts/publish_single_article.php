@@ -68,6 +68,9 @@ config([
 
 try {
     $title = trim($data['title']);
+    if (str_contains($title, '[') || str_contains($title, ']')) {
+        throw new \RuntimeException("SQUARE BRACKETS IN TITLE BLOCKED: Title '{$title}' contains square brackets. Bracket tags like [Analysis], [Guide], [2026], [Deep Dive], [Blueprint] are strictly prohibited. Use clean, natural editorial titles.");
+    }
     $slug = !empty($data['slug']) ? Str::slug($data['slug']) : Article::generateSeoSlug($title);
     $categoryId = (int) ($data['category_id'] ?? 1);
 
@@ -131,15 +134,21 @@ try {
     };
     $liveUrl = "https://dailyaiworld.com" . $urlPath;
 
+    // Ensure deck and meta_description are synchronized for optimal SEO / AEO snippet display
+    $metaDesc = trim($data['meta_description'] ?? '');
+    $deckText = trim($data['deck'] ?? '');
+    $finalDeck = !empty($metaDesc) ? $metaDesc : $deckText;
+    $finalExcerpt = !empty($data['excerpt']) ? trim($data['excerpt']) : Str::limit($finalDeck, 110);
+
     $row = [
         'category_id'    => $categoryId,
         'author_id'      => $authorId,
         'title'          => $title,
         'slug'           => $slug,
-        'deck'           => $data['deck'] ?? ($data['meta_description'] ?? ''),
-        'ai_summary'     => $data['ai_summary'] ?? ($data['deck'] ?? ''),
+        'deck'           => $finalDeck,
+        'ai_summary'     => $data['ai_summary'] ?? $finalDeck,
         'content'        => $data['content'],
-        'excerpt'        => $data['excerpt'] ?? ($data['deck'] ?? ''),
+        'excerpt'        => $finalExcerpt,
         'featured_image' => $data['featured_image'] ?? 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80',
         'reading_time'   => (int) ($data['reading_time'] ?? max(5, round(str_word_count(strip_tags($data['content'])) / 200))),
         'audio_url'      => $data['audio_url'] ?? null,
@@ -193,7 +202,7 @@ try {
         // Local DB error is recorded but does not block live publication
     }
 
-    $assignedAuthorName = $authorRows->firstWhere('id', $authorId)->name ?? "Author ID {$authorId}";
+    $assignedAuthorName = ($authorRow->name ?? null) ?: "Author ID {$authorId}";
 
     // 6. FAST INDEXING ENGINE (Google Indexing API + IndexNow)
     $indexingStatus = [];

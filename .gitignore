@@ -30,6 +30,7 @@ Thumbs.db
 *.sql
 *.sql.gz
 /scratch/
+/tmp/
 *.py
 *.pyc
 __pycache__/

@@ -80,6 +80,49 @@ $content = $data['content'] ?? '';
 $title = trim($data['title'] ?? '');
 $slug = !empty($data['slug']) ? Str::slug($data['slug']) : Article::generateSeoSlug($title);
 
+// 1B. STRICT BAN ON SQUARE BRACKETS IN TITLE
+if (str_contains($title, '[') || str_contains($title, ']')) {
+    $errors[] = "SQUARE BRACKET IN TITLE PROHIBITED: Title '{$title}' contains square brackets. Bracket tags like [Analysis], [Guide], [2026], [Deep Dive], [Blueprint] look spammy and artificial. Use clean, natural high-CTR titles.";
+}
+
+// 1C. MANDATORY SEO TITLE & META TITLE AUDIT
+$seoTitle = trim($data['seo_title'] ?? $data['meta_title'] ?? '');
+if (empty($seoTitle)) {
+    $errors[] = "Missing 'seo_title' (or 'meta_title'). Every dispatch must provide an SEO/AEO-optimized title for Google SERPs.";
+} else {
+    if (str_contains($seoTitle, '[') || str_contains($seoTitle, ']')) {
+        $errors[] = "SQUARE BRACKET IN SEO TITLE PROHIBITED: '{$seoTitle}' contains square brackets. Use clean editorial phrasing.";
+    }
+    $seoTitleLen = mb_strlen($seoTitle);
+    if ($seoTitleLen < 40 || $seoTitleLen > 70) {
+        $warnings[] = "SEO title length is {$seoTitleLen} chars. Optimal Google SERP display is 50-65 characters to prevent truncation.";
+    }
+}
+
+// 1D. MANDATORY META DESCRIPTION & DECK AUDIT (AEO / SEO)
+$metaDescription = trim($data['meta_description'] ?? '');
+if (empty($metaDescription)) {
+    $errors[] = "Missing 'meta_description'. A dedicated 145-158 character meta description is mandatory for SEO and AEO snippets.";
+} else {
+    $metaLen = mb_strlen($metaDescription);
+    if ($metaLen < 130 || $metaLen > 165) {
+        $errors[] = "Meta description length is {$metaLen} chars (Strictly required: 140-160 chars, ideal 145-158). Google truncates snippets over 160 chars and penalizes short descriptions under 130 chars.";
+    }
+    if (str_contains($metaDescription, '[') || str_contains($metaDescription, ']')) {
+        $errors[] = "SQUARE BRACKET IN META DESCRIPTION PROHIBITED: '{$metaDescription}' contains square brackets.";
+    }
+}
+
+$deck = trim($data['deck'] ?? '');
+if (empty($deck)) {
+    $errors[] = "Missing 'deck'. The deck field is served as the page meta description by the Blade template.";
+} else {
+    $deckLen = mb_strlen($deck);
+    if ($deckLen > 165) {
+        $warnings[] = "Deck length is {$deckLen} chars. Since Blade uses Str::limit(\$deck, 155), keep deck strictly 145-158 chars matching meta_description to avoid awkward mid-word truncation.";
+    }
+}
+
 // 2. Prohibit Numeric Slug Suffixes (-2, -3, etc.)
 if (preg_match('/-[0-9]+$/', $slug)) {
     $errors[] = "NUMERIC SLUG SUFFIX DETECTED: Slug '{$slug}' ends with a numeric suffix (-2, -3, etc.). Numeric suffixes trigger Google duplicate content & 'Discovered - currently not indexed' errors. Pick a unique topic and clean slug.";
@@ -126,8 +169,8 @@ try {
 }
 
 // 5. Anti-Hallucination & Speculative Claims Check
+// NOTE 2026-09-15: GPT-6 Astra verified real (OpenAI Sep 3 2026 launch, system card + InfoQ + CNBC). Allow GPT-6 Astra, still ban GPT-7/8.
 $hallucinatedPatterns = [
-    '/gpt-6/i' => "Hallucinated model name 'GPT-6' detected. Do not fabricate unreleased frontier models.",
     '/gpt-7/i' => "Hallucinated model name 'GPT-7' detected.",
     '/claude\s+3\.7\s+vision/i' => "Hallucinated model 'Claude 3.7 Vision' detected. Ensure accurate model designation (e.g. Claude 3.7 Sonnet).",
     '/stripe\s+buys\s+openrouter/i' => "Fabricated acquisition headline detected. All industry news must be verified via search.",

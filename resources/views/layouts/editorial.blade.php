@@ -4,15 +4,15 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @php
-        $pageTitle = View::hasSection('title') ? htmlspecialchars_decode(View::getSection('title'), ENT_QUOTES) : 'Daily AI World — AI Workflows, MCP Directory and Agentic AI Tools';
+        $pageTitle = View::hasSection('title') ? htmlspecialchars_decode(View::getSection('title'), ENT_QUOTES) : 'Daily AI World — Production AI Workflows & MCP Directory';
         $pageTitle = str_replace([' & ', ' &amp; '], ' and ', $pageTitle);
-        $pageDescription = View::hasSection('meta_description') ? htmlspecialchars_decode(View::getSection('meta_description'), ENT_QUOTES) : 'Explore production AI workflows, Model Context Protocol (MCP) servers for Cursor and Claude, agentic blueprints, LLM benchmarks, and engineering dispatches.';
+        $pageDescription = View::hasSection('meta_description') ? htmlspecialchars_decode(View::getSection('meta_description'), ENT_QUOTES) : 'Discover production AI workflows, FastMCP servers for Cursor and Claude, multi-agent LangGraph blueprints, LLM benchmarks, and runnable agent code.';
         $pageImage = View::hasSection('og_image') ? View::getSection('og_image') : asset('images/logo.png');
         $pageType = View::hasSection('og_type') ? View::getSection('og_type') : 'website';
         $pagePublishedTime = View::hasSection('published_time') ? View::getSection('published_time') : null;
         $pageModifiedTime = View::hasSection('modified_time') ? View::getSection('modified_time') : null;
         $pageSection = View::hasSection('article_section') ? View::getSection('article_section') : null;
-        $pageKeywords = View::hasSection('meta_keywords') ? htmlspecialchars_decode(View::getSection('meta_keywords'), ENT_QUOTES) : 'AI Workflows, Model Context Protocol, MCP Directory, MCP Tools, AI Agents, Agentic AI, LangGraph, CrewAI, FastMCP, Cursor MCP, Claude Desktop, LLM Benchmarks, Daily AI World';
+        $pageKeywords = View::hasSection('meta_keywords') ? htmlspecialchars_decode(View::getSection('meta_keywords'), ENT_QUOTES) : 'AI Workflows, MCP Directory, Model Context Protocol, FastMCP Servers, Cursor MCP, Claude Desktop MCP, LangGraph Blueprints, CrewAI Workflows, LLM Benchmarks, Agentic AI, Daily AI World';
         $pageAuthor = View::hasSection('article_author') ? htmlspecialchars_decode(View::getSection('article_author'), ENT_QUOTES) : 'Daily AI World Editorial Board';
     @endphp
 

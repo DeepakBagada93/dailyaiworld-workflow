@@ -1458,3 +1458,14 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 | 2026-09-14 | Coding | Blog | Atria Dawn 744B MoE: MIT Weights Serving Guide [2026] | `atria-dawn-744b-moe-mit-weights-serving-guide` | Atria Dawn 744B MoE MIT, 1M context, FP8 serving |
 
 | 2026-09-14 | AI News | News | METR Probe: 700 Agents Built a Secret Board [2026] | `metr-probe-700-agents-secret-message-board-hugging-face` | METR Redwood probe, 700 agents, 70k message board |
+| 2026-09-15 | Coding | Article | GPT-6 Astra: 72.6% OSWorld Computer Use Win [2026] | `gpt-6-astra-osworld-computer-use-production-guide` | GPT-6 Astra, OSWorld 72.6%, 1M context, computer-use |
+| 2026-09-15 | AI Workflows | Article | [Blueprint] Temporal + LangGraph: Crash-Proof Agents That Resume in 200ms | `temporal-langgraph-durable-execution-crash-proof-blueprint` | Temporal 1.27, LangGraph 1.0, durable execution |
+| 2026-09-15 | AI Workflows | Article | [Blueprint] CrewAI Flows in Production: Guardrails That Cut Errors 63% | `crewai-flows-production-guardrails-error-blueprint` | CrewAI 1.11, Flows, guardrails |
+| 2026-09-15 | AI Tools | Article | Build an npm Intelligence MCP Server: Catch Bad Packages in 42ms [Step-by-Step] | `build-npm-intelligence-mcp-server-malicious-package-audit` | FastMCP, npm registry, OSV, supply chain |
+| 2026-09-15 | AI Tools | Article | Build an LLDB Debugger MCP Server: Agents That Fix Crashes in 38ms [Step-by-Step] | `build-lldb-debugger-mcp-server-agent-driven-debugging` | LLDB, FastMCP, agentic debugging |
+| 2026-09-15 | Coding | Article | Sakana Fugu Max vs GPT-5.6 Sol: 40% Cheaper Orchestration Wins Terminal Bench [2026] | `sakana-fugu-max-orchestration-arbitrage-terminal-bench-pricing` | Sakana Fugu Max, orchestration, token economics |
+| 2026-09-15 | Coding | Article | GLM 5.2 Ties Opus 4.8 at $1.28/Task: Databricks Verdict on Price per Task [2026] | `databricks-glm-52-ties-opus-price-per-task-verdict` | Databricks, GLM 5.2, price per task |
+| 2026-09-15 | Coding | Article | Ornith-1.5-397B MIT Weights: 86.6% Agentic Coding on Par with Opus 4.8 [Deep Dive] | `ornith-15-397b-mit-weights-agentic-coding-opus-parity` | Ornith 1.5 397B, MIT, open weights |
+| 2026-09-15 | AI News | Article | Anthropic Alleges 151M-Exchange Distillation Blitz: Alibaba, Moonshot, DeepSeek Named [Analysis] | `anthropic-distillation-blitz-alibaba-moonshot-deepseek-analysis` | Anthropic, distillation, model security |
+| 2026-09-15 | AI News | Article | LMArena September Shake-Up: 3 Models Over 1500 Elo as Open Weights Close In [Analysis] | `lmarena-september-2026-three-over-1500-elo-open-weights` | LMArena, Elo 1500, open weights |
+| 2026-09-15 | AI News | Article | Cloudera x Mistral: Private Frontier Inference Meets Your Governed Data | `cloudera-mistral-private-frontier-inference-governed-data` | Cloudera, Mistral, sovereign AI |
