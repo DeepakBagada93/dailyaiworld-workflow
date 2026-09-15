@@ -141,6 +141,46 @@ foreach ($hallucinatedPatterns as $pattern => $msg) {
     }
 }
 
+// 5B. Anti-AI Clichés, Buzzwords & Synthetic Phrasing Gate
+$bannedAiPatterns = [
+    '/\bdelve\b/i' => "Banned AI cliché 'delve' detected. Use human phrasing like 'examine', 'trace', or 'break down'.",
+    '/\btapestry\b/i' => "Banned AI cliché 'tapestry' detected.",
+    '/\bbeacon\b/i' => "Banned AI cliché 'beacon' detected.",
+    '/\btestament to\b/i' => "Banned AI cliché 'testament to' detected.",
+    '/\btreasure trove\b/i' => "Banned AI cliché 'treasure trove' detected.",
+    '/\bgame-changer\b/i' => "Banned AI cliché 'game-changer' detected. State specific metrics instead of empty hype.",
+    '/\brevolutioniz(?:e|ing|ed)\b/i' => "Banned AI cliché 'revolutionize' detected.",
+    '/\bseamlessly\s+integrat(?:es?|ing|ed)\b/i' => "Banned AI cliché 'seamlessly integrates' detected. Detail the actual integration friction/setup.",
+    '/\bharness(?:ing)?\s+the\s+power\s+of\b/i' => "Banned AI cliché 'harness the power of' detected.",
+    '/in\s+today\'?s\s+fast-paced\s+digital/i' => "Banned synthetic AI introduction detected. Answer user intent immediately in first sentence.",
+    '/in\s+the\s+ever-evolving\s+landscape/i' => "Banned synthetic AI intro detected.",
+    '/\bfurthermore,\s/i' => "Synthetic transition 'Furthermore,' detected. Use natural conversational connectors.",
+    '/\bmoreover,\s/i' => "Synthetic transition 'Moreover,' detected.",
+    '/\bin\s+conclusion,\s/i' => "Synthetic AI transition 'In conclusion,' detected.",
+];
+
+foreach ($bannedAiPatterns as $pattern => $msg) {
+    if (preg_match($pattern, $content)) {
+        $errors[] = "ANTI-AI QUALITY GATE ERROR: {$msg}";
+    }
+}
+
+// 5C. Mandatory First-Person Engineering Experience Check (E-E-A-T)
+$firstPersonPatterns = [
+    '/\b(?:we|I)\s+(?:built|deployed|tested|benchmarked|encountered|configured|profiled|ran)\b/i',
+    '/\b(?:in\s+our\s+production|in\s+production\s+testing|our\s+cluster|at\s+SaaSNext)\b/i',
+    '/\b(?:when\s+we\s+benchmarked|when\s+we\s+ran|we\s+observed|we\s+hit\s+a)\b/i',
+];
+$firstPersonHits = 0;
+foreach ($firstPersonPatterns as $fpPattern) {
+    if (preg_match($fpPattern, $content)) {
+        $firstPersonHits++;
+    }
+}
+if ($firstPersonHits === 0) {
+    $warnings[] = "HUMAN VOICE WARNING: Zero first-person engineering friction or production testing anecdotes detected. Infuse genuine lived experience (e.g., 'When we deployed this on our test cluster...', 'In our testing at SaaSNext...').";
+}
+
 // 6. Anti-Duplicate FAQ Check in Content Body
 $duplicateFaqPatterns = [
     '/#+\s*frequently\s+asked\s+questions/i',
