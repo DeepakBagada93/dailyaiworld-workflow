@@ -29,6 +29,7 @@ Route::withoutMiddleware([
     \Illuminate\Cookie\Middleware\EncryptCookies::class,
     \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
     \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+    \Illuminate\Foundation\Http\Middleware\PreventRequestForgery::class,
 ])->group(function () {
     Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
     Route::get('/sitemap_index.xml', [SeoController::class, 'sitemapIndex'])->name('sitemap.index');
