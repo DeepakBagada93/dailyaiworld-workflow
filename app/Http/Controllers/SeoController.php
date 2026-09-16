@@ -14,7 +14,7 @@ class SeoController extends Controller
      * 
      * Critical headers:
      * - Cache-Control: public — allows Googlebot to cache (no-cache, private = GSC rejects)
-     * - X-Robots-Tag: noindex — sitemaps themselves should not appear in search results
+     * - No X-Robots-Tag — noindex on sitemaps causes Google to skip all URLs (0 discovered)
      * - No Set-Cookie — session/CSRF middleware is stripped at the route level
      */
     private function xmlResponse(string $content, int $maxAge = 3600): Response
@@ -22,7 +22,6 @@ class SeoController extends Controller
         return response($content, 200, [
             'Content-Type' => 'application/xml; charset=utf-8',
             'Cache-Control' => "public, max-age={$maxAge}, s-maxage={$maxAge}",
-            'X-Robots-Tag' => 'noindex',
         ]);
     }
 
