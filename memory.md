@@ -1469,3 +1469,23 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 | 2026-09-15 | AI News | Article | Anthropic Alleges 151M-Exchange Distillation Blitz: Alibaba, Moonshot, DeepSeek Named [Analysis] | `anthropic-distillation-blitz-alibaba-moonshot-deepseek-analysis` | Anthropic, distillation, model security |
 | 2026-09-15 | AI News | Article | LMArena September Shake-Up: 3 Models Over 1500 Elo as Open Weights Close In [Analysis] | `lmarena-september-2026-three-over-1500-elo-open-weights` | LMArena, Elo 1500, open weights |
 | 2026-09-15 | AI News | Article | Cloudera x Mistral: Private Frontier Inference Meets Your Governed Data | `cloudera-mistral-private-frontier-inference-governed-data` | Cloudera, Mistral, sovereign AI |
+| 2026-09-16 | AI Workflows | Article | LangGraph vs CrewAI vs OpenAI SDK: 97 Wins and 43% Token Cut | `langgraph-crewai-openai-sdk-97-wins-token-cut-production` | LangGraph, CrewAI, OpenAI Agents SDK |
+| 2026-09-16 | AI Workflows | Article | Gemini 3.8 Live Voice Agents: 97 Languages With Zero Hold Time | `gemini-live-voice-agents-languages-zero-hold-production` | Gemini 3.8 Live, voice agents, Extended Thinking |
+| 2026-09-16 | AI Tools | Article | Build a Postgres MCP Server With HypoPG Index Simulations in 38ms | `build-postgres-mcp-hypopg-index-simulation-production` | Postgres MCP, HypoPG, FastMCP |
+| 2026-09-16 | AI Tools | Article | Build Stripe MCP Server With Restricted Keys and Human Approvals | `build-stripe-mcp-restricted-keys-human-approval-production` | Stripe MCP, restricted keys, human approval |
+| 2026-09-16 | Coding | Article | Fable 5.1 Holds 11% Spend: Route to Opus 5 and Save 68% Tokens | `fable-spend-shift-route-opus-save-tokens-production` | Fable 5.1, Opus 5, token routing |
+| 2026-09-16 | Coding | Article | Claude Merges Chat and Cowork: Docs and Slides Change Agent UX | `claude-merged-interface-docs-slides-agent-ux-production` | Claude Cowork, Docs Slides, agent UX |
+| 2026-09-16 | Coding | Article | World Labs Atlas Turns Photos Into 3D Worlds Robots Can Train In | `world-labs-atlas-photos-3d-worlds-robot-training` | World Labs Atlas, world models, real-to-sim |
+| 2026-09-16 | AI News | Article | DeepSeek V4.1 Flash Replaces Pro Traffic at 30x Lower Cost | `deepseek-v41-flash-ced-routing-switch-migration` | DeepSeek V4.1 Flash, CED, migration |
+| 2026-09-16 | AI News | Article | Atria Dawn Ships Quietly: 744B MIT Weights With 5 Top Scores | `atria-dawn-preview-quiet-release-benchmarks-verdict` | Atria Dawn, InternLM, open weights |
+| 2026-09-16 | AI News | Article | Kimi K2.8 Preview Nears K3 Speed at 30% Less Cost for All Tiers | `kimi-k28-preview-coding-1m-context-all-tiers` | Kimi K2.8, Moonshot, coding |
+| 2026-09-16 | AI Workflows | Article | Gate Agent Deploys on Evals: Block 65% Regressions Before Users | `gate-agent-deploys-eval-ci-shadow-canary-production` | Eval gates, CI/CD, shadow canary |
+| 2026-09-16 | AI Workflows | Article | Host Agents on Foundry: Keep Data Home With Capability Hosts | `foundry-hosted-agents-capability-hosts-data-home` | Foundry Hosted Agents, capability hosts |
+| 2026-09-16 | AI Tools | Article | Use Official Slack MCP: Kill the CVSS 9.3 Unfurl Leak Class | `official-slack-mcp-cvss-unfurl-leak-migration` | Slack MCP, CVSS 9.3, unfurl |
+| 2026-09-16 | AI Tools | Article | Govern Tools Once With Foundry Toolbox and Reuse Everywhere | `foundry-toolbox-govern-tools-once-reuse-everywhere` | Foundry Toolbox, versioned tools |
+| 2026-09-16 | Coding | Article | Stop Defaulting to Max Thinking: Effort Tiers Cut 40% Cost | `thinking-effort-tiers-max-default-cost-cut-production` | Thinking effort, cost optimization |
+| 2026-09-16 | Coding | Article | Serve 1M-Token Agents Without Melting GPUs: KV Cache Design | `kv-cache-design-1m-agents-paged-prefix-production` | KV cache, prefix caching, serving |
+| 2026-09-16 | Coding | Article | ColPali Visual Retrieval: Let Agents Read PDFs Like Screenshots | `colpali-visual-retrieval-agents-pdfs-screenshots` | ColPali, visual RAG, document AI |
+| 2026-09-16 | AI News | Article | K2 Horizon Ships 6 Fully Open Models From Watch to 375B Flagship | `k2-horizon-six-fully-open-models-watch-flagship` | K2 Horizon, MBZUAI, open source |
+| 2026-09-16 | AI News | Article | TypeSafe Jev Exits Stealth: $40M Bet on AI That Skips Chat | `typesafe-jev-stealth-40m-decisions-not-chat` | TypeSafe Jev, DCVC, decision models |
+| 2026-09-16 | AI News | Article | Arcee Hits $1B After Building Trinity 400B for Just $20M | `arcee-1b-trinity-400b-20m-open-models` | Arcee, Trinity, Series B |

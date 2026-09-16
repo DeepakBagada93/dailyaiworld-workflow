@@ -10,6 +10,23 @@ use Illuminate\Http\Response;
 class SeoController extends Controller
 {
     /**
+     * Helper: Build an XML response with proper headers for Google Search Console.
+     * 
+     * Critical headers:
+     * - Cache-Control: public — allows Googlebot to cache (no-cache, private = GSC rejects)
+     * - X-Robots-Tag: noindex — sitemaps themselves should not appear in search results
+     * - No Set-Cookie — session/CSRF middleware is stripped at the route level
+     */
+    private function xmlResponse(string $content, int $maxAge = 3600): Response
+    {
+        return response($content, 200, [
+            'Content-Type' => 'application/xml; charset=utf-8',
+            'Cache-Control' => "public, max-age={$maxAge}, s-maxage={$maxAge}",
+            'X-Robots-Tag' => 'noindex',
+        ]);
+    }
+
+    /**
      * Master Sitemap Index for Google Search Console & Crawlers.
      * Serves /sitemap.xml and /sitemap_index.xml
      */
@@ -41,10 +58,6 @@ class SeoController extends Controller
 
         $sitemaps = [
             [
-                'loc' => "{$baseUrl}/sitemap-recent.xml",
-                'lastmod' => $latestDate,
-            ],
-            [
                 'loc' => "{$baseUrl}/sitemap-workflows.xml",
                 'lastmod' => $workflowDate,
             ],
@@ -68,18 +81,18 @@ class SeoController extends Controller
 
         $content = view('seo.sitemap_index', compact('sitemaps'))->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content, 1800);
     }
 
     /**
-     * Recent High-Priority Dispatches (Top 200 - September & late August 2026).
-     * Solves GSC "Discovered - currently not indexed" by offering Googlebot a bite-sized fresh feed.
+     * Recent High-Priority Dispatches (Top 200 — last 48 hours only).
+     * No longer included in sitemap index to prevent duplicate URL issues.
+     * Kept as a standalone endpoint for manual GSC ping and Googlebot-News.
      */
     public function sitemapRecent(): Response
     {
         $articles = Article::published()
+            ->where('published_at', '>=', now()->subDays(2))
             ->latest('published_at')
             ->take(200)
             ->get();
@@ -90,9 +103,7 @@ class SeoController extends Controller
             'changefreq' => 'daily',
         ])->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content, 900);
     }
 
     /**
@@ -111,9 +122,7 @@ class SeoController extends Controller
             'changefreq' => 'weekly',
         ])->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content);
     }
 
     /**
@@ -132,9 +141,7 @@ class SeoController extends Controller
             'changefreq' => 'weekly',
         ])->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content);
     }
 
     /**
@@ -153,9 +160,7 @@ class SeoController extends Controller
             'changefreq' => 'weekly',
         ])->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content);
     }
 
     /**
@@ -174,9 +179,7 @@ class SeoController extends Controller
             'changefreq' => 'daily',
         ])->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content);
     }
 
     /**
@@ -192,9 +195,7 @@ class SeoController extends Controller
 
         $content = view('seo.sitemap_hubs', compact('categories', 'latestArticleDate'))->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content);
     }
 
     /**
@@ -207,9 +208,7 @@ class SeoController extends Controller
 
         $content = view('seo.sitemap', compact('articles', 'categories'))->render();
 
-        return response($content, 200, [
-            'Content-Type' => 'application/xml; charset=utf-8',
-        ]);
+        return $this->xmlResponse($content);
     }
 
     /**
@@ -227,6 +226,7 @@ class SeoController extends Controller
 
         return response($content, 200, [
             'Content-Type' => 'application/rss+xml; charset=utf-8',
+            'Cache-Control' => 'public, max-age=1800, s-maxage=1800',
         ]);
     }
 
@@ -242,6 +242,7 @@ class SeoController extends Controller
 
         return response($content, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
+            'Cache-Control' => 'public, max-age=3600, s-maxage=3600',
         ]);
     }
 
@@ -261,6 +262,7 @@ class SeoController extends Controller
 
         return response($content, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
+            'Cache-Control' => 'public, max-age=3600, s-maxage=3600',
         ]);
     }
 
@@ -307,6 +309,7 @@ class SeoController extends Controller
 
         return response($txt, 200, [
             'Content-Type' => 'text/plain; charset=utf-8',
+            'Cache-Control' => 'public, max-age=86400, s-maxage=86400',
         ]);
     }
 

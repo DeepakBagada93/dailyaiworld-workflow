@@ -21,26 +21,36 @@ use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
 // SEO, AEO & GEO Optimization Engine Endpoints — Modular XML Sitemaps
-Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
-Route::get('/sitemap_index.xml', [SeoController::class, 'sitemapIndex'])->name('sitemap.index');
-Route::get('/sitemap-recent.xml', [SeoController::class, 'sitemapRecent'])->name('sitemap.recent');
-Route::get('/sitemap-workflows.xml', [SeoController::class, 'sitemapWorkflows'])->name('sitemap.workflows');
-Route::get('/sitemap-mcp.xml', [SeoController::class, 'sitemapMcp'])->name('sitemap.mcp');
-Route::get('/sitemap-blogs.xml', [SeoController::class, 'sitemapBlogs'])->name('sitemap.blogs');
-Route::get('/sitemap-news.xml', [SeoController::class, 'sitemapNews'])->name('sitemap.news');
-Route::get('/sitemap-hubs.xml', [SeoController::class, 'sitemapHubs'])->name('sitemap.hubs');
-Route::get('/sitemap-all.xml', [SeoController::class, 'sitemapAll'])->name('sitemap.all');
-Route::get('/feed.xml', [SeoController::class, 'feed'])->name('feed');
-Route::get('/rss', [SeoController::class, 'feed']);
-Route::redirect('/feed', '/feed.xml', 301);
-Route::get('/llms.txt', [SeoController::class, 'llmsTxt'])->name('llms.txt');
-Route::get('/llms-full.txt', [SeoController::class, 'llmsFullTxt'])->name('llms.full');
-Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
-Route::get('/robot.txt', [SeoController::class, 'robots']);
-Route::get('/8f3b2e7a1c9d40e5b6a7f8e9d0c1b2a3.txt', function () {
-    return response('8f3b2e7a1c9d40e5b6a7f8e9d0c1b2a3', 200, ['Content-Type' => 'text/plain; charset=utf-8']);
+// Excluded from session/CSRF/cookie middleware so Google gets clean XML
+// without Set-Cookie headers or cache-control: private (GSC rejection fix).
+Route::withoutMiddleware([
+    \Illuminate\Session\Middleware\StartSession::class,
+    \Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse::class,
+    \Illuminate\Cookie\Middleware\EncryptCookies::class,
+    \Illuminate\Foundation\Http\Middleware\VerifyCsrfToken::class,
+    \Illuminate\View\Middleware\ShareErrorsFromSession::class,
+])->group(function () {
+    Route::get('/sitemap.xml', [SeoController::class, 'sitemap'])->name('sitemap');
+    Route::get('/sitemap_index.xml', [SeoController::class, 'sitemapIndex'])->name('sitemap.index');
+    Route::get('/sitemap-recent.xml', [SeoController::class, 'sitemapRecent'])->name('sitemap.recent');
+    Route::get('/sitemap-workflows.xml', [SeoController::class, 'sitemapWorkflows'])->name('sitemap.workflows');
+    Route::get('/sitemap-mcp.xml', [SeoController::class, 'sitemapMcp'])->name('sitemap.mcp');
+    Route::get('/sitemap-blogs.xml', [SeoController::class, 'sitemapBlogs'])->name('sitemap.blogs');
+    Route::get('/sitemap-news.xml', [SeoController::class, 'sitemapNews'])->name('sitemap.news');
+    Route::get('/sitemap-hubs.xml', [SeoController::class, 'sitemapHubs'])->name('sitemap.hubs');
+    Route::get('/sitemap-all.xml', [SeoController::class, 'sitemapAll'])->name('sitemap.all');
+    Route::get('/feed.xml', [SeoController::class, 'feed'])->name('feed');
+    Route::get('/rss', [SeoController::class, 'feed']);
+    Route::redirect('/feed', '/feed.xml', 301);
+    Route::get('/llms.txt', [SeoController::class, 'llmsTxt'])->name('llms.txt');
+    Route::get('/llms-full.txt', [SeoController::class, 'llmsFullTxt'])->name('llms.full');
+    Route::get('/robots.txt', [SeoController::class, 'robots'])->name('robots');
+    Route::get('/robot.txt', [SeoController::class, 'robots']);
+    Route::get('/8f3b2e7a1c9d40e5b6a7f8e9d0c1b2a3.txt', function () {
+        return response('8f3b2e7a1c9d40e5b6a7f8e9d0c1b2a3', 200, ['Content-Type' => 'text/plain; charset=utf-8']);
+    });
+    Route::get('/api/v1/llm-context', [SeoController::class, 'llmContextApi'])->name('api.llm-context');
 });
-Route::get('/api/v1/llm-context', [SeoController::class, 'llmContextApi'])->name('api.llm-context');
 
 // Directory Hubs (AEO & GEO High Priority Index Pages)
 Route::get('/mcp-directory', [McpDirectoryController::class, 'index'])->name('mcp.index');

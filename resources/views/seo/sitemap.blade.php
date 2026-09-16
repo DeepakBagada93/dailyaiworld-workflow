@@ -7,7 +7,7 @@
     <!-- Main Homepage -->
     <url>
         <loc>{{ url('/') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
@@ -15,7 +15,7 @@
     <!-- AI Workflows Directory Hub -->
     <url>
         <loc>{{ route('workflows.index') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.95</priority>
     </url>
@@ -23,7 +23,7 @@
     <!-- MCP Server & Tool Directory Hub -->
     <url>
         <loc>{{ route('mcp.index') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>daily</changefreq>
         <priority>0.95</priority>
     </url>
@@ -31,7 +31,7 @@
     <!-- Realtime AI News Directory Hub -->
     <url>
         <loc>{{ route('news.index') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>hourly</changefreq>
         <priority>0.90</priority>
     </url>
@@ -39,43 +39,43 @@
     <!-- Static Pages -->
     <url>
         <loc>{{ route('about') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.8</priority>
     </url>
     <url>
         <loc>{{ route('contact') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>{{ route('privacy') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>{{ route('terms') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>{{ route('disclaimer') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.6</priority>
     </url>
     <url>
         <loc>{{ route('advertise') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
     <url>
         <loc>{{ route('subscribe') }}</loc>
-        <lastmod>{{ date('c') }}</lastmod>
+        <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
         <changefreq>monthly</changefreq>
         <priority>0.7</priority>
     </url>
@@ -84,17 +84,17 @@
     @foreach($categories as $category)
         <url>
             <loc>{{ route('categories.show', $category->slug) }}</loc>
-            <lastmod>{{ date('c') }}</lastmod>
+            <lastmod>{{ $articles->first() && $articles->first()->updated_at ? $articles->first()->updated_at->toAtomString() : now()->toAtomString() }}</lastmod>
             <changefreq>daily</changefreq>
             <priority>0.85</priority>
         </url>
     @endforeach
 
-    <!-- Articles (All 800+ Dispatches with Google News & Image Extensions) -->
+    <!-- Articles (All Dispatches with Google News & Image Extensions) -->
     @foreach($articles as $article)
         <url>
             <loc>{{ $article->url }}</loc>
-            <lastmod>{{ $article->updated_at->toAtomString() }}</lastmod>
+            <lastmod>{{ $article->updated_at ? $article->updated_at->toAtomString() : ($article->published_at ? $article->published_at->toAtomString() : now()->toAtomString()) }}</lastmod>
             <changefreq>weekly</changefreq>
             <priority>0.80</priority>
             @if($article->published_at && $article->published_at->gt(now()->subDays(2)))
