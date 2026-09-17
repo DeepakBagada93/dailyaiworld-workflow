@@ -303,6 +303,9 @@ class SeoController extends Controller
         $txt .= "User-agent: Bytespider\nAllow: /\n\n";
         $txt .= "User-agent: Amazonbot\nAllow: /\n\n";
         $txt .= "Sitemap: {$domain}/sitemap.xml\n";
+        $txt .= "Sitemap: {$domain}/sitemap-all.xml\n";
+        $txt .= "Sitemap: {$domain}/sitemap-recent.xml\n";
+        $txt .= "Sitemap: {$domain}/feed.xml\n";
         $txt .= "# LLMs.txt: {$domain}/llms.txt\n";
         $txt .= "# LLMs-full.txt: {$domain}/llms-full.txt\n";
 

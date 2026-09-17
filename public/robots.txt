@@ -67,6 +67,7 @@ Allow: /
 
 # Sitemaps & AI Manifests
 Sitemap: https://dailyaiworld.com/sitemap.xml
+Sitemap: https://dailyaiworld.com/sitemap-all.xml
 Sitemap: https://dailyaiworld.com/sitemap-recent.xml
 Sitemap: https://dailyaiworld.com/feed.xml
 # LLMs.txt: https://dailyaiworld.com/llms.txt
