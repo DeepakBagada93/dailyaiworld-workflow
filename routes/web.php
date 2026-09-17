@@ -62,35 +62,7 @@ Route::get('/latest-ai-news', [NewsDirectoryController::class, 'index'])->name('
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // Legacy SEO 301 Redirects & Safe Redirection (Eliminates Google Search Console 404 errors)
-Route::get('/article/{slug}', function (string $slug) {
-    $cleanSlug = rtrim($slug, '*&$');
-    $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    if ($article) return redirect($article->url, 301);
-
-    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
-    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
-    return $canonical ? redirect($canonical->url, 301) : redirect('/', 301);
-});
-
-Route::get('/post/{slug}', function (string $slug) {
-    $cleanSlug = rtrim($slug, '*&$');
-    $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    if ($article) return redirect($article->url, 301);
-    
-    // Numeric duplicate suffix check (-2, -3, etc.)
-    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
-    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
-    if ($canonical) return redirect($canonical->url, 301);
-
-    // Forward and reverse prefix matching
-    $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
-    if ($partialArt) return redirect($partialArt->url, 301);
-
-    $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
-    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/latest-ai-news', 301);
-});
-
-Route::get('/workflows/{slug}', function (string $slug) {
+$legacyArticleRedirect = function (string $slug, string $fallbackHub = '/latest-ai-news') {
     $cleanSlug = rtrim($slug, '*&$');
     $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
     if ($article) return redirect($article->url, 301);
@@ -105,59 +77,28 @@ Route::get('/workflows/{slug}', function (string $slug) {
     if ($partialArt) return redirect($partialArt->url, 301);
 
     $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
-    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/workflows', 301);
-});
+    if ($reverseArt) return redirect($reverseArt->url, 301);
 
-Route::get('/blog/{slug}', function (string $slug) {
-    $cleanSlug = rtrim($slug, '*&$');
-    $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    if ($article) return redirect($article->url, 301);
+    return redirect($fallbackHub, 301);
+};
 
-    // Numeric duplicate suffix check (-2, -3, etc.)
-    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
-    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
-    if ($canonical) return redirect($canonical->url, 301);
-
-    // Forward and reverse prefix matching
-    $partialArt = \App\Models\Article::where('slug', 'like', $baseSlug . '%')->published()->first();
-    if ($partialArt) return redirect($partialArt->url, 301);
-
-    $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
-    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/latest-ai-news', 301);
-});
-
-Route::get('/latest-ai-news/{slug}', function (string $slug) {
-    $cleanSlug = rtrim($slug, '*&$');
-    $article = \App\Models\Article::where('slug', $cleanSlug)->published()->first();
-    if ($article) return redirect($article->url, 301);
-
-    $baseSlug = preg_replace('/-[0-9]+$/', '', $cleanSlug);
-    $canonical = \App\Models\Article::where('slug', $baseSlug)->published()->first();
-    if ($canonical) return redirect($canonical->url, 301);
-
-    $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
-    return $reverseArt ? redirect($reverseArt->url, 301) : redirect('/latest-ai-news', 301);
-});
-
-Route::get('/reports/{slug}', function (string $slug) {
-    return redirect('/workflows', 301);
-});
-
-Route::get('/explore/{slug?}', function () {
-    return redirect('/workflows', 301);
-});
-
-Route::get('/tools/{slug?}', function () {
-    return redirect('/mcp-directory', 301);
-});
-
-Route::get('/insights/{slug?}', function () {
-    return redirect('/latest-ai-news', 301);
-});
-
-Route::get('/discover/{slug?}', function () {
-    return redirect('/workflows', 301);
-});
+Route::get('/article/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
+Route::get('/articles/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
+Route::get('/post/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
+Route::get('/posts/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
+Route::get('/workflows/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/workflows'));
+Route::get('/ai-workflows/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/workflows'));
+Route::get('/blog/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
+Route::get('/latest-ai-news/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
+Route::get('/news', fn() => redirect('/latest-ai-news', 301));
+Route::get('/news/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
+Route::get('/ai-tools/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/mcp-directory'));
+Route::get('/tools/{slug?}', fn() => redirect('/mcp-directory', 301));
+Route::get('/mcp-tools/{slug?}', fn() => redirect('/mcp-directory', 301));
+Route::get('/reports/{slug?}', fn() => redirect('/workflows', 301));
+Route::get('/explore/{slug?}', fn() => redirect('/workflows', 301));
+Route::get('/insights/{slug?}', fn() => redirect('/latest-ai-news', 301));
+Route::get('/discover/{slug?}', fn() => redirect('/workflows', 301));
 
 Route::post('/article/{article}/comments', [ArticleController::class, 'storeComment'])->name('articles.comments.store');
 Route::get('/category/{slug}', [CategoryController::class, 'show'])->name('categories.show');

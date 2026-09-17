@@ -17,6 +17,10 @@ class CategoryController extends Controller
             ->latest('published_at')
             ->paginate(12);
 
+        if ($articles->total() === 0) {
+            return redirect()->route('workflows.index', [], 301);
+        }
+
         $featuredArticle = $category->articles()
             ->with(['author', 'category'])
             ->published()

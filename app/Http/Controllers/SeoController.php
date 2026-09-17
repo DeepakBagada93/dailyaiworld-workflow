@@ -186,7 +186,7 @@ class SeoController extends Controller
      */
     public function sitemapHubs(): Response
     {
-        $categories = Category::all();
+        $categories = Category::whereHas('articles', fn($q) => $q->published())->get();
         $latestArticle = Article::published()->latest('updated_at')->first();
         $latestArticleDate = $latestArticle && $latestArticle->updated_at 
             ? $latestArticle->updated_at->toAtomString() 
