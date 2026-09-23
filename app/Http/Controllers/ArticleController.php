@@ -11,7 +11,51 @@ class ArticleController extends Controller
 {
     public function show(Request $request, string $categorySlug, string $slug)
     {
-        // Resolve the published article by slug first.
+        // 1. Explicit Redirect Map for deduplicated & cannibalized content (checked immediately to avoid cannibalization)
+        $redirectMap = [
+            'build-agentic-customer-service-escalation-workflow' => 'build-agentic-customer-support-escalation-workflow-real',
+            'build-autonomous-physical-ai-fleet-management-workflow' => 'build-multi-agent-physical-ai-fleet-workflow-nvidia-jetson',
+            'how-to-claude-code-dynamic-workflows-2026' => 'claude-code-dynamic-workflows-audit-2026',
+            'how-to-n8n-mcp-server-claude-code-builder-2026' => 'how-to-build-n8n-workflows-with-claude-code-6-steps',
+            'claude-code-n8n-build-workflows-10-min-2026-guide' => 'how-to-build-n8n-workflows-with-claude-code-6-steps',
+            'n8n-claude-code-workflows-from-4-hours-to-8-minutes' => 'how-to-build-n8n-workflows-with-claude-code-6-steps',
+            'trending-blog-codex-6' => 'nvidia-nemotron-3-ultra-agent-orchestration-2026',
+            'deepseek-v4-flash-0731-vs-claude-opus-vs-gpt-56-sol-2' => 'deepseek-v4-flash-0731-vs-claude-opus-vs-gpt-56-sol',
+            'context-window-vs-context-recall-1m-token-windows-fail' => 'context-length-vs-context-recall-1m-token-context-windows',
+            'amd-bets-5b-anthropic-nvidia-backs-ssi-frontier-chip' => 'amd-bets-5b-anthropic-nvidia-backs-ssi-frontier-chip-race',
+            'anthropics-invisible-c2pa-watermarks-claude-outputs-prove-3' => 'anthropics-invisible-c2pa-watermarks-claude-outputs-prove',
+            'anthropics-invisible-c2pa-watermarks-claude-outputs-prove-2' => 'anthropics-invisible-c2pa-watermarks-claude-outputs-prove',
+            'anthropics-multi-agent-turf-war-study-ai-agents-sabotage' => 'anthropics-multi-agent-turf-war-study-claude-agents',
+            'cursor-2026-agent-mode-google-workspace-plugins-multi-file' => 'cursor-agent-mode-2026-google-workspace-plugins-multi-file',
+            'openai-assistants-api-sunset-tomorrow-migration-responses' => 'openai-sets-august-26-assistants-api-sunset-migration',
+            'okta-launches-agent-sso-ai-agents-now-log-like-employees' => 'okta-launches-agent-sso-ai-agents-login-like-employees',
+            'ship-agent-token-budget-enforcer-prevented-47k-runaway-cost' => 'build-autonomous-agent-token-budget-enforcer-prevented-47k',
+            'swe-bench-verified-96-benchmark-saturation-crisis-2026' => 'swe-bench-verified-hits-96-benchmark-saturation-crisis-2026',
+            'snowflake-data-warehouse-analytics-query-optimizer-fastmcp-2' => 'dominate-100m-rows-build-snowflake-mcp-server-real-time',
+            'eu-ai-act-2026-compliance-audit-autonomous-ai-agents-3' => 'eu-ai-act-2026-compliance-audit-autonomous-ai-agents',
+            'build-auto-scaling-rag-pipeline-pinecone-serverless-load-2' => 'build-auto-scaling-rag-pipeline-pinecone-serverless-load',
+            'new-mcp-roadmap-drops-stateless-spec-oauth-21-agent-tool' => 'state-mcp-2026-stateless-spec-oauth-21-agent-tool-standard',
+            'nvidia-q2-earnings-962b-revenue-ai-spending-super-cycle' => 'nvidia-q2-earnings-beat-962b-revenue-108b-q3-guidance',
+            'nvidias-962b-q2-earnings-vera-rubin-price-hike-means-ai' => 'nvidia-q2-earnings-beat-962b-revenue-108b-q3-guidance',
+            'the-2026-ai-price-war-openai-anthropic-cut-while-deepseek' => 'august-2026-ai-price-war-openai-anthropic-deepseek-race',
+            'ai-price-war-escalation-september-2026-openai-anthropic' => 'august-2026-ai-price-war-openai-anthropic-deepseek-race',
+            'build-agentic-customer-service-escalation-workflow' => 'build-agentic-customer-support-escalation-workflow-real',
+            'build-autonomous-physical-ai-fleet-management-workflow' => 'build-multi-agent-physical-ai-fleet-workflow-nvidia-jetson',
+            'how-to-claude-code-dynamic-workflows-2026' => 'claude-code-dynamic-workflows-audit-2026',
+            'how-to-n8n-mcp-server-claude-code-builder-2026' => 'how-to-build-n8n-workflows-with-claude-code-6-steps',
+            'claude-code-n8n-build-workflows-10-min-2026-guide' => 'how-to-build-n8n-workflows-with-claude-code-6-steps',
+            'n8n-claude-code-workflows-from-4-hours-to-8-minutes' => 'how-to-build-n8n-workflows-with-claude-code-6-steps',
+            'nist-finalizes-tevv-athlon-framework-new-official-benchmark' => 'nist-tevv-athlon-framework-deep-dive-stage-benchmark',
+        ];
+
+        if (isset($redirectMap[$slug])) {
+            $mappedArticle = Article::with('category')->where('slug', $redirectMap[$slug])->published()->first();
+            if ($mappedArticle) {
+                return redirect($mappedArticle->url, 301);
+            }
+        }
+
+        // Resolve the published article by slug.
         // If not found, attempt fuzzy resolution (e.g. stripped timestamps or prefix matches)
         $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
             ->where('slug', $slug)
@@ -19,34 +63,6 @@ class ArticleController extends Controller
             ->first();
 
         if (!$article) {
-            // 1. Explicit Redirect Map for deduplicated & renamed content
-            $redirectMap = [
-                'trending-blog-codex-6' => 'nvidia-nemotron-3-ultra-agent-orchestration-2026',
-                'deepseek-v4-flash-0731-vs-claude-opus-vs-gpt-56-sol-2' => 'deepseek-v4-flash-0731-vs-claude-opus-vs-gpt-56-sol',
-                'context-window-vs-context-recall-1m-token-windows-fail' => 'context-length-vs-context-recall-1m-token-context-windows',
-                'amd-bets-5b-anthropic-nvidia-backs-ssi-frontier-chip' => 'amd-bets-5b-anthropic-nvidia-backs-ssi-frontier-chip-race',
-                'anthropics-invisible-c2pa-watermarks-claude-outputs-prove-3' => 'anthropics-invisible-c2pa-watermarks-claude-outputs-prove',
-                'anthropics-invisible-c2pa-watermarks-claude-outputs-prove-2' => 'anthropics-invisible-c2pa-watermarks-claude-outputs-prove',
-                'anthropics-multi-agent-turf-war-study-ai-agents-sabotage' => 'anthropics-multi-agent-turf-war-study-claude-agents',
-                'cursor-2026-agent-mode-google-workspace-plugins-multi-file' => 'cursor-agent-mode-2026-google-workspace-plugins-multi-file',
-                'openai-assistants-api-sunset-tomorrow-migration-responses' => 'openai-sets-august-26-assistants-api-sunset-migration',
-                'okta-launches-agent-sso-ai-agents-now-log-like-employees' => 'okta-launches-agent-sso-ai-agents-login-like-employees',
-                'ship-agent-token-budget-enforcer-prevented-47k-runaway-cost' => 'build-autonomous-agent-token-budget-enforcer-prevented-47k',
-                'swe-bench-verified-96-benchmark-saturation-crisis-2026' => 'swe-bench-verified-hits-96-benchmark-saturation-crisis-2026',
-                'snowflake-data-warehouse-analytics-query-optimizer-fastmcp-2' => 'dominate-100m-rows-build-snowflake-mcp-server-real-time',
-                'eu-ai-act-2026-compliance-audit-autonomous-ai-agents-3' => 'eu-ai-act-2026-compliance-audit-autonomous-ai-agents',
-                'build-auto-scaling-rag-pipeline-pinecone-serverless-load-2' => 'build-auto-scaling-rag-pipeline-pinecone-serverless-load',
-                'claude-code-n8n-build-workflows-10-min-2026-guide' => 'how-to-n8n-mcp-server-claude-code-builder-2026',
-                'n8n-claude-code-workflows-from-4-hours-to-8-minutes' => 'how-to-n8n-mcp-server-claude-code-builder-2026',
-                'how-to-build-n8n-workflows-with-claude-code-6-steps' => 'how-to-n8n-mcp-server-claude-code-builder-2026',
-            ];
-
-            if (isset($redirectMap[$slug])) {
-                $mappedArticle = Article::where('slug', $redirectMap[$slug])->published()->first();
-                if ($mappedArticle) {
-                    return redirect($mappedArticle->url, 301);
-                }
-            }
 
             // 2. Check if slug has numeric duplicate suffix like -2, -3, etc.
             $baseDuplicateSlug = preg_replace('/-[0-9]+$/', '', $slug);
