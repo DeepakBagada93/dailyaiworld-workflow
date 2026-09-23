@@ -36,6 +36,9 @@ class ArticleController extends Controller
                 'snowflake-data-warehouse-analytics-query-optimizer-fastmcp-2' => 'dominate-100m-rows-build-snowflake-mcp-server-real-time',
                 'eu-ai-act-2026-compliance-audit-autonomous-ai-agents-3' => 'eu-ai-act-2026-compliance-audit-autonomous-ai-agents',
                 'build-auto-scaling-rag-pipeline-pinecone-serverless-load-2' => 'build-auto-scaling-rag-pipeline-pinecone-serverless-load',
+                'claude-code-n8n-build-workflows-10-min-2026-guide' => 'how-to-n8n-mcp-server-claude-code-builder-2026',
+                'n8n-claude-code-workflows-from-4-hours-to-8-minutes' => 'how-to-n8n-mcp-server-claude-code-builder-2026',
+                'how-to-build-n8n-workflows-with-claude-code-6-steps' => 'how-to-n8n-mcp-server-claude-code-builder-2026',
             ];
 
             if (isset($redirectMap[$slug])) {
@@ -98,16 +101,18 @@ class ArticleController extends Controller
             $canonicalPrefix = 'blogs';
         }
 
-        // /mcp/{slug} is a legacy alias for /mcp-directory/{slug}
-        $requestedPrefix = $categorySlug === 'mcp' ? 'mcp-directory' : $categorySlug;
-
-        // Wrong category prefix → 301 to the single canonical URL (prevents 404s and duplicate indexing)
-        if ($requestedPrefix !== $canonicalPrefix) {
+        // Enforce strict category prefix: legacy /mcp/ or mismatched prefixes 301-redirect to canonical URL
+        // (prevents duplicate self-canonicalizing /mcp/{slug} vs /mcp-directory/{slug})
+        if ($categorySlug !== $canonicalPrefix) {
             return redirect($article->url, 301);
         }
 
-        // Increment view count
-        $article->increment('view_count');
+        // Protect DB write performance during Googlebot crawl bursts: only count human visitors
+        $userAgent = strtolower($request->header('User-Agent', ''));
+        $isCrawler = preg_match('/bot|crawl|spider|slurp|facebookexternalhit|whatsapp|google|bing|yandex|duckduckgo|baidu/i', $userAgent);
+        if (!$isCrawler) {
+            $article->increment('view_count');
+        }
 
         // Check if user has active subscription
         $isSubscribed = auth()->check() ? auth()->user()->isSubscribed() : false;
@@ -150,14 +155,16 @@ class ArticleController extends Controller
             $isBookmarked = in_array($article->id, $bookmarkedIds);
         }
 
-        return view('articles.show', compact(
-            'article',
-            'relatedArticles',
-            'prevArticle',
-            'nextArticle',
-            'isBookmarked',
-            'isSubscribed'
-        ));
+        return response()
+            ->view('articles.show', compact(
+                'article',
+                'relatedArticles',
+                'prevArticle',
+                'nextArticle',
+                'isBookmarked',
+                'isSubscribed'
+            ))
+            ->header('Cache-Control', 'public, max-age=3600, s-maxage=86400');
     }
 
     public function storeComment(Request $request, Article $article)

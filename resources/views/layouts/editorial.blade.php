@@ -14,6 +14,7 @@
         $pageSection = View::hasSection('article_section') ? View::getSection('article_section') : null;
         $pageKeywords = View::hasSection('meta_keywords') ? htmlspecialchars_decode(View::getSection('meta_keywords'), ENT_QUOTES) : 'AI Workflows, MCP Directory, Model Context Protocol, FastMCP Servers, Cursor MCP, Claude Desktop MCP, LangGraph Blueprints, CrewAI Workflows, LLM Benchmarks, Agentic AI, Daily AI World';
         $pageAuthor = View::hasSection('article_author') ? htmlspecialchars_decode(View::getSection('article_author'), ENT_QUOTES) : 'Daily AI World Editorial Board';
+        $pageCanonical = View::hasSection('canonical') ? trim(View::getSection('canonical')) : null;
     @endphp
 
     <title>{{ $pageTitle }}</title>
@@ -24,6 +25,7 @@
         :description="$pageDescription" 
         :image="$pageImage" 
         :type="$pageType"
+        :canonical="$pageCanonical"
         :publishedTime="$pagePublishedTime"
         :modifiedTime="$pageModifiedTime"
         :section="$pageSection"

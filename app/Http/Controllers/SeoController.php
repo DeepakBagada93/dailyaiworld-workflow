@@ -145,11 +145,18 @@ class SeoController extends Controller
 
     /**
      * Technical Blogs, Coding & LLM Benchmark Dispatches (/blogs/{slug})
+     * Also houses archived AI News older than 48 hours for standard Googlebot web indexing.
      */
     public function sitemapBlogs(): Response
     {
         $articles = Article::published()
-            ->whereIn('category_id', [2, 3, 4, 6, 7, 8, 9, 10, 12])
+            ->where(function ($q) {
+                $q->whereIn('category_id', [2, 3, 4, 6, 7, 8, 9, 10, 12])
+                  ->orWhere(function ($sub) {
+                      $sub->where('category_id', 11)
+                          ->where('published_at', '<', now()->subDays(2));
+                  });
+            })
             ->latest('published_at')
             ->get();
 
@@ -163,30 +170,35 @@ class SeoController extends Controller
     }
 
     /**
-     * AI News Dispatches (/blogs/{slug})
+     * Google News Dispatches (/blogs/{slug})
+     * Strictly conforms to Google News Sitemap spec: ONLY articles from last 48 hours.
      */
     public function sitemapNews(): Response
     {
         $articles = Article::published()
             ->where('category_id', 11)
+            ->where('published_at', '>=', now()->subDays(2))
             ->latest('published_at')
             ->get();
 
         $content = view('seo.sitemap_articles', [
             'articles' => $articles,
-            'priority' => '0.85',
-            'changefreq' => 'daily',
+            'priority' => '0.90',
+            'changefreq' => 'hourly',
         ])->render();
 
-        return $this->xmlResponse($content);
+        return $this->xmlResponse($content, 900);
     }
 
     /**
      * Directory Hubs, Category Indices & Static Pages
+     * Filters out duplicate categories that map directly to the 3 main directory hubs.
      */
     public function sitemapHubs(): Response
     {
-        $categories = Category::whereHas('articles', fn($q) => $q->published())->get();
+        $categories = Category::whereHas('articles', fn($q) => $q->published())
+            ->whereNotIn('slug', ['ai-workflows', 'ai-tools', 'ai-news', 'workflows', 'mcp-tools', 'news'])
+            ->get();
         $latestArticle = Article::published()->latest('updated_at')->first();
         $latestArticleDate = $latestArticle && $latestArticle->updated_at 
             ? $latestArticle->updated_at->toAtomString() 
@@ -303,8 +315,6 @@ class SeoController extends Controller
         $txt .= "User-agent: Bytespider\nAllow: /\n\n";
         $txt .= "User-agent: Amazonbot\nAllow: /\n\n";
         $txt .= "Sitemap: {$domain}/sitemap.xml\n";
-        $txt .= "Sitemap: {$domain}/sitemap-all.xml\n";
-        $txt .= "Sitemap: {$domain}/sitemap-recent.xml\n";
         $txt .= "Sitemap: {$domain}/feed.xml\n";
         $txt .= "# LLMs.txt: {$domain}/llms.txt\n";
         $txt .= "# LLMs-full.txt: {$domain}/llms-full.txt\n";

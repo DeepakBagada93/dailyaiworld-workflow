@@ -1,7 +1,8 @@
 @extends('layouts.editorial')
 
 @section('title', $article->title . ' — Daily AI World')
-@section('meta_description', Str::limit($article->deck ?? $article->excerpt, 155))
+@section('canonical', $article->url)
+@section('meta_description', Str::limit(!empty(trim($article->deck ?? '')) ? $article->deck : (!empty(trim($article->excerpt ?? '')) ? $article->excerpt : Str::limit(strip_tags($article->content), 155)), 155))
 @section('og_image', $article->featured_image)
 @section('og_type', 'article')
 @section('published_time', $article->iso_date)
