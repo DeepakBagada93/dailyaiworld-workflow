@@ -12,10 +12,65 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 
 ---
 
+## 🛡️ Search Engine Indexing & Production Quality Memory (Mandatory Publishing Standards)
+
+Following the comprehensive Google Search Console (GSC) forensic audit on **September 24, 2026**, all new dispatches must adhere strictly to these engineering standards to eliminate crawl delays and guarantee 100% indexation:
+
+### 1. Target Database Discipline: Hostinger Live MySQL Only
+- **Primary & Authoritative Database**: Hostinger Remote MySQL (`srv1334.hstgr.io`, DB `u775719140_dailyai`).
+- Local MySQL is completely secondary and must never block live publishing.
+- All pre-publish collision checks (`title`, `slug`, topic keywords) MUST query Hostinger Live MySQL directly.
+
+### 2. Strict Word Count & Content Depth (Defeating "Crawled - Currently Not Indexed")
+- **Mandatory Word Count**: **1,200 to 1,500 words per article** (dense, runnable code, latency/throughput tables, production benchmarks, zero AI fluff).
+- **Zero Thin Content**: Articles under 1,000 words are **strictly prohibited** (triggered previous GSC thin content holding penalties).
+- **Author Identity**: First-person engineering voice of Deepak Bagada, Founder & Editor-in-Chief at Daily AI World (`author_id = 1`).
+
+### 3. Canonical Architecture & URL Prefixes (Defeating "Duplicate Canonical" Issues)
+- **AI Workflows (Category ID 1)** ➔ `https://dailyaiworld.com/workflow/{slug}`
+- **MCP Directory (Category ID 5)** ➔ `https://dailyaiworld.com/mcp-directory/{slug}` (Never `/mcp/{slug}`)
+- **Technical Blogs & News (Categories 2, 3, 10, 11)** ➔ `https://dailyaiworld.com/blogs/{slug}`
+- Every page injects an explicit model-bound canonical tag matching `$article->url`.
+- Legacy paths (`/mcp/{slug}`, `/workflows/{slug}`, `/news/{slug}`, `/blog/{slug}`) permanently 301-redirect to canonical URLs.
+
+### 4. Topic Cannibalization & Anti-Duplication Pre-Check
+- **Live Topic Pre-Search**: Before writing any new article, search Hostinger DB for topic keywords to ensure zero overlap with existing guides (e.g. n8n workflows, Claude Code audits, AI price wars, benchmark comparisons).
+- When expanding on an existing topic, explore a distinct implementation angle or update the existing guide.
+
+### 5. Verified Internal Linking & Zero Orphan Articles
+- **Minimum 3–5 Contextual Internal Links**: Every dispatch must contain at least 3 to 5 live links using descriptive HTML `<a href="...">` anchors pointing to:
+  * Related production articles in the database.
+  * The 3 core directory hubs:
+    - [AI Workflows Directory](https://dailyaiworld.com/workflows)
+    - [MCP Server Directory](https://dailyaiworld.com/mcp-directory)
+    - [Latest AI News Hub](https://dailyaiworld.com/latest-ai-news)
+- Zero orphan articles are permitted on the site.
+
+### 6. Google News 48-Hour Lifecycle Compliance
+- **Breaking News (Category 11)**:
+  * Articles published within 48 hours are automatically output in `https://dailyaiworld.com/sitemap-news.xml` with full `<news:news>` schema markup.
+  * Articles older than 48 hours transition automatically into `https://dailyaiworld.com/sitemap-blogs.xml` for evergreen Googlebot crawling without expiration penalties.
+
+### 7. Editorial Title Architecture (Strictly Zero Square Brackets)
+- **STRICT BAN**: Square brackets `[ ]` (e.g. `[Analysis]`, `[Guide]`, `[2026]`) are completely forbidden in titles and SEO titles.
+- **Approved Power Separators**: Colon `:`, Em-dash `—`, Vertical pipe `|`, Forward slashes `//`, `$`, `%`, `→`, `&`.
+
+### 8. Meta Description & Deck Precision
+- **Length**: Strictly **145 to 155 characters**.
+- **Sync**: `meta_description` must exactly match `deck` and `excerpt`. Never allow an empty description.
+
+---
+
 ## 📜 Published Dispatches Log
 
 | Date (YYYY-MM-DD) | Category | Type | Title | Slug | Key Frameworks / Tech |
 |---|---|---|---|---|---|
+| 2026-09-22 | AI News | Article | Microsoft Opens South Central India Cloud Region in Hyderabad: $3.7B Sovereign AI Infrastructure Hub | `microsoft-opens-south-central-india-cloud-region-hyderabad` | Production AI |
+| 2026-09-22 | AI News | Article | NVIDIA and Einride Unveil Autonomous Trucking Architecture: Vera Rubin Silicon Powers 500-Vehicle Fleet | `nvidia-einride-autonomous-trucking-vera-rubin-silicon-fleet` | Production AI |
+| 2026-09-22 | LLMs | Article | Inference FinOps in 2026: Prompt Caching, KV Cache Compression, and Speculative Decoding Compared | `inference-finops-prompt-caching-kv-cache-compression-speculative-decoding` | Production AI |
+| 2026-09-22 | Coding | Article | Terminal-Bench 2.0 Coding Benchmark: Claude Fable 5 vs GPT-5.6 Sol on Monorepo Refactoring | `terminal-bench-20-claude-fable-gpt-56-monorepo-refactoring` | Production AI |
+| 2026-09-22 | AI Tools | Article | Build a Stateless Remote MCP Server with FastMCP 4.0: RBAC, Bearer Auth, and Zero Session Drift | `build-stateless-remote-mcp-server-fastmcp-rbac-bearer-auth` | Production AI |
+| 2026-09-22 | AI Workflows | Article | Build an Ephemeral Agent Sandbox with Firecracker MicroVMs: 5ms Boot Time and Zero Egress Leaks | `build-ephemeral-agent-sandbox-firecracker-microvms-zero-egress-leaks` | Production AI |
 | 2026-09-14 | Coding | Article | DeepSeek Vision Exp: Beats Opus on 3 Benchmarks [2026] | `deepseek-vision-exp-multimodal-agent-production-playbook` | Production AI |
 | 2026-09-14 | AI Workflows | Article | Build DGX Spark Local Agents: Zero Token Cost [2026] | `build-dgx-spark-local-agent-cluster-production-playbook` | Production AI |
 | 2026-09-14 | Coding | Article | Qwen 3.8 Max 2.4T Open Weights: 86.6% Agents [2026] | `qwen-max-open-weights-terminal-bench-production-playbook` | Production AI |
@@ -1489,3 +1544,92 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 | 2026-09-16 | AI News | Article | K2 Horizon Ships 6 Fully Open Models From Watch to 375B Flagship | `k2-horizon-six-fully-open-models-watch-flagship` | K2 Horizon, MBZUAI, open source |
 | 2026-09-16 | AI News | Article | TypeSafe Jev Exits Stealth: $40M Bet on AI That Skips Chat | `typesafe-jev-stealth-40m-decisions-not-chat` | TypeSafe Jev, DCVC, decision models |
 | 2026-09-16 | AI News | Article | Arcee Hits $1B After Building Trinity 400B for Just $20M | `arcee-1b-trinity-400b-20m-open-models` | Arcee, Trinity, Series B |
+| 2026-09-17 | AI Workflows | Article | ADK Go 2.0 Graphs: Durable Multi-Agent Workflows in Pure Go | `adk-go-20-graphs-durable-multi-agent-workflows-pure-go` | ADK Go 2.0, Temporal-style durability, HITL |
+| 2026-09-17 | AI Workflows | Article | Magentic Teams with Microsoft Agent Framework: Managed Runs | `magentic-teams-microsoft-agent-framework-managed-runs` | Magentic, Microsoft Agent Framework, manager-led |
+| 2026-09-17 | AI Tools | Article | Build a CIMD-Hardened MCP Server: Kill Token Passthrough Fast | `build-cimd-hardened-mcp-server-kill-token-passthrough-fast` | CIMD, OAuth 2.1, FastMCP, URL elicitation |
+| 2026-09-17 | AI Tools | Article | Build a Tasks-Enabled MCP Server: Durable Jobs Without Blocking | `build-tasks-enabled-mcp-server-durable-jobs-without-blocking` | MCP Tasks extension, FastMCP, durable handles |
+| 2026-09-17 | Coding | Article | Speculative Decoding Dies at Batch 32: SPEED-Bench Verdict | `speculative-decoding-dies-batch-32-speed-bench-verdict` | SPEED-Bench, vLLM, EAGLE, batch size |
+| 2026-09-17 | Coding | Article | Don't Break the Cache: Prompt Caching Cuts Agent Bills 80% | `dont-break-cache-prompt-caching-agent-bills` | prompt caching, prefix cache, TTFT, DeepResearchBench |
+| 2026-09-17 | Coding | Article | Agents Rot in 16 Steps: Per-Step Reliability Law Explained | `agents-rot-16-steps-per-step-reliability-law-explained` | agent rot, geometric decay, RULER, decomposition |
+| 2026-09-17 | AI News | Article | AIUC Banks $55M: Audit and Insurance for Frontier Agents | `aiuc-banks-55m-audit-insurance-frontier-agents` | AIUC, AIUC-1, Ribbit Capital, agent insurance |
+| 2026-09-17 | AI News | Article | Factory Triples to $5B: $200M Bet on Autonomous Droids | `factory-triples-5b-200m-bet-autonomous-droids` | Factory, Droids, Series C, model-agnostic |
+| 2026-09-17 | AI News | Article | Crusoe Banks $3B at $30B: Jane Street Signs $13B GPU Deal | `crusoe-banks-3b-30b-jane-street-signs-13b-gpu-deal` | Crusoe, Jane Street, GPU cloud, Series F |
+| 2026-09-18 | AI Workflows | Article | Temporal Sandbox Agents with OpenAI SDK: Zero Context Loss | `temporal-sandbox-agents-openai-sdk-zero-context-loss` | Temporal + OpenAI Agents SDK |
+| 2026-09-18 | AI Workflows | Article | Conductor Adaptive Graphs: Governed PR Reviews at Scale | `conductor-adaptive-graphs-governed-pr-reviews-scale` | Conductor OSS + PR agents |
+| 2026-09-18 | AI Tools | Article | Build a 2026-07-28 FastMCP Server with Elicitation Approval | `build-2026-07-28-fastmcp-server-elicitation-approval` | FastMCP 4 + MCP 2026-07-28 |
+| 2026-09-18 | AI Tools | Article | Hardened FastMCP OAuth Proxy: Stop Token Theft at 38ms | `hardened-fastmcp-oauth-proxy-stop-token-theft-38ms` | FastMCP OAuth Proxy |
+| 2026-09-18 | Coding | Article | Embedding Showdown for Agents: BGE vs E5 vs Nomic at 12ms | `embedding-showdown-agents-bge-vs-e5-vs-nomic-12ms` | Embeddings + RAG |
+| 2026-09-18 | LLMs | Article | Reasoning Models Waste Tokens on Tool Calls: Instruct Wins | `reasoning-models-waste-tokens-tool-calls-instruct-wins` | Reasoning vs instruct |
+| 2026-09-18 | Coding | Article | Agent Judges Lie Unless Forced: Tool-Call Verdicts Win | `agent-judges-lie-unless-forced-tool-call-verdicts-win` | Agent evals + judges |
+| 2026-09-18 | AI News | Article | Harvey Raises $550M at $15.5B and Buys Guardrails AI | `harvey-raises-550m-155b-buys-guardrails-ai` | Harvey + Guardrails AI |
+| 2026-09-18 | AI News | Article | Anthropic Opens Transcripts to METR as OpenAI Urges Law | `anthropic-opens-transcripts-metr-openai-urges-law` | Anthropic + METR + OpenAI |
+| 2026-09-18 | AI News | Article | Nomic Banks Strategic Cash as Aurecon Scales to 6700 Staff | `nomic-banks-strategic-cash-aurecon-scales-6700-staff` | Nomic + Aurecon + Arcadis |
+| 2026-09-19 | AI Workflows | Article | LangGraph on Temporal: Durable Agent Loops With Zero Crash Loss | `langgraph-temporal-durable-agent-loops-zero-crash-loss` | LangGraph Temporal durable execution |
+| 2026-09-19 | AI Workflows | Article | Kafka, Temporal, LangGraph: Fraud Agents With Zero Lost State | `kafka-temporal-langgraph-fraud-agents-zero-lost-state` | Kafka Temporal LangGraph event sourcing |
+| 2026-09-19 | AI Tools | Article | Hardened Postgres MCP Server: Row-Level Security at 38ms | `hardened-postgres-mcp-server-row-level-security-38ms` | Postgres RLS FastMCP |
+| 2026-09-19 | AI Tools | Article | Bill Every MCP Tool Call: Idempotent Metering at 12ms | `bill-every-mcp-tool-call-idempotent-metering-12ms` | MCP metering billing |
+| 2026-09-19 | Coding | Article | Price per Task vs Price per Token: Coding Agents at 58x Spread | `price-per-task-vs-price-per-token-coding-agents-58x-spread` | Token economics price-per-task |
+| 2026-09-19 | LLMs | Article | FP8 vs BF16 vs INT4: Quantization That Breaks Agent Tool Calls | `fp8-vs-bf16-vs-int4-quantization-breaks-agent-tool-calls` | Quantization FP8 BF16 INT4 |
+| 2026-09-19 | Coding | Article | DeepSWE vs Terminal-Bench vs SWE-Atlas: Pick the Right Agent Test | `deepswe-vs-terminal-bench-vs-swe-atlas-pick-right-agent-test` | Benchmarks DeepSWE Terminal-Bench |
+| 2026-09-19 | AI News | Article | Anthropic Taps Accenture: 1B Safety Evaluators Inside the Lab | `anthropic-taps-accenture-1b-safety-evaluators-inside-lab` | Anthropic Accenture safety |
+| 2026-09-19 | AI News | Article | Xenon Ships Hunmin 397B: Open Computer-Use AI at 75.6 Score | `xenon-ships-hunmin-397b-open-computer-use-ai-756-score` | Xenon Hunmin computer-use |
+| 2026-09-19 | AI News | Article | Qwen3.8-Omni-Flash Cuts Audio Costs 98% With 1M Context | `qwen38-omni-flash-cuts-audio-costs-98-1m-context` | Qwen Omni-Flash audio |
+| 2026-09-20 | AI Workflows | Article | Human-Gated Deploys: Temporal Signals with Zero-Cost Waits | `human-gated-agent-deploys-temporal-signals-zero-cost` | Temporal LangGraph HITL signals |
+| 2026-09-20 | AI Workflows | Article | Self-Correcting RAG Loops: Grade, Rewrite, Ground at 94% | `self-correcting-rag-graded-evidence-loops` | Corrective RAG LangGraph grading |
+| 2026-09-20 | AI Tools | Article | Progressive Tool Disclosure: 60 MCP Tools at 2,000 Tokens | `progressive-tool-disclosure-mcp-server-token-savings` | MCP disclosure FastMCP context |
+| 2026-09-20 | AI Tools | Article | Docker Fleet MCP Server: Triage at 41ms, Zero Shell Risk | `docker-fleet-mcp-server-allowlisted-exec-triage` | Docker MCP allowlist audit |
+| 2026-09-20 | LLMs | Article | BFCL v4 Verdict: Function-Calling Accuracy per Dollar | `bfcl-v4-function-calling-accuracy-per-dollar-verdict` | BFCL benchmarks value routing |
+| 2026-09-20 | Coding | Article | Compact on Phase Shifts, Not Token Counts: Keep 97.8% | `context-compaction-phase-shifts-coding-agents` | Compaction rubric coding agents |
+| 2026-09-20 | Coding | Article | Monorepo Agents Need Maps, Not Grep: 50.4% vs 41.9% | `monorepo-coding-agents-structural-index-grep-verdict` | Monorepo index localization |
+| 2026-09-20 | AI News | Article | FrontierSWE v2 Shakes Rankings: Fable 5.1 at 56.3%, Rivals 32% | `frontierswe-v2-fable-leads-ultra-long-horizon-tasks` | FrontierSWE marathon benchmark |
+| 2026-09-20 | AI News | Article | 575M Encoder Beats GPT-5-mini at Extraction: 91.10 vs 82.56 | `gliformer-575m-encoder-beats-gpt-mini-extraction` | GLiFormer extraction encoder |
+| 2026-09-20 | AI News | Article | Anthropic Opens Lab Books: Pace Metrics, Third-Party Checks | `anthropic-lab-pace-metrics-third-party-verification` | Anthropic transparency verification |
+| 2026-09-20 | AI Workflows | Article | Guarded Text-to-SQL Agents: Read-Only Default, 98% Valid | `guarded-text-sql-agents-read-only-verify-repair` | Text-to-SQL guardrails verify |
+| 2026-09-20 | AI Workflows | Article | Cron Agents That Survive the Night: Locks, Keys, Heartbeats | `cron-agents-survive-night-locks-heartbeats-idempotent` | Cron idempotency heartbeat |
+| 2026-09-20 | AI Tools | Article | Agent Release Control MCP: 8 Flags, Kill Switches, Ladders | `agent-release-control-mcp-flags-ladder-kill-switch` | OpenFeature release MCP |
+| 2026-09-20 | AI Tools | Article | PagerDuty On-Call MCP: Read-Open Triage, Gated Resolve | `pagerduty-oncall-mcp-server-read-triage-gated-writes` | PagerDuty on-call MCP |
+| 2026-09-20 | Coding | Article | TDD in the Agent Loop: Theater Until Tests Map the Blast | `tdd-agent-loop-theater-test-impact-maps` | TDD impact maps agents |
+| 2026-09-20 | LLMs | Article | Test-Time Compute Routing: Spend Tokens Where They Pay | `test-time-compute-routing-spend-tokens-pay` | Test-time routing CoBa |
+| 2026-09-20 | LLMs | Article | Stuff vs Retrieve: 1M Windows Work at 8K Effective | `stuff-vs-retrieve-long-context-rag-showdown` | Long-context RAG showdown |
+| 2026-09-20 | AI News | Article | GPT-5.4 Pro Tops FrontierScience at 36.7%: Research Bends | `gpt-54-pro-frontierscience-research-lead` | FrontierScience GPT-5.4 |
+| 2026-09-20 | AI News | Article | Open Weights Take 78.4% of Gateway Tokens: Routing Flips | `open-weights-784-percent-gateway-tokens-routing-flip` | Open weights gateway share |
+| 2026-09-20 | AI News | Article | NVIDIA AIPerf Ends Vanity Throughput: TTFT, ITL, Truth | `nvidia-aiperf-inference-benchmark-ttft-throughput-truth` | AIPerf inference benchmark |
+| 2026-09-21 | AI Workflows | Article | Lyft Self-Serve Agents: LangGraph Router for Millions of Requests | `lyft-self-serve-langgraph-router-millions-requests` | LangGraph 0.3.2, Postgres 16, Router Pattern |
+| 2026-09-21 | AI Workflows | Article | Human-Gated Approvals on Temporal: Signals That Wait for Days | `human-gated-approvals-temporal-signals-wait-days` | Temporal 1.27, Python 3.12, HITL |
+| 2026-09-21 | AI Tools | Article | Publish to MCP Registry: Server Cards That Get Discovered | `mcp-registry-server-cards-discovered` | FastMCP 2.11, MCP Registry, 2026-07-28 |
+| 2026-09-21 | AI Tools | Article | Build a Tasks MCP Server for Long Jobs With Live Progress | `tasks-mcp-server-long-jobs-live-progress` | FastMCP 2.11, Tasks extension, Redis |
+| 2026-09-21 | Coding | Article | Claude Opus 5 vs GPT-5.1 Codex: $18.75 Task Cost Showdown | `opus-5-vs-gpt-51-codex-task-cost` | Opus 5, GPT-5.1 Codex, SWE-bench |
+| 2026-09-21 | LLMs | Article | GPT OSS 20b at $0.02: Open-Weight Task Economics Win | `gpt-oss-20b-open-weight-task-economics` | GPT OSS 20b, DeepSeek V3, vLLM |
+| 2026-09-21 | Coding | Article | Fable 5.1 vs Astra: 75 tok/s Latency and Quality Lead | `fable-51-vs-astra-latency-throughput` | Fable 5.1, GPT-6 Astra, latency |
+| 2026-09-21 | AI News | Article | MCP Roadmap 2026 Goes Stateless: Tasks and Cards Ship Live | `mcp-roadmap-stateless-tasks-server-cards` | MCP 2026-07-28, Tasks, Server Cards |
+| 2026-09-21 | AI News | Article | MCP Registry Hits 26479 Servers at 98.8| 2026-09-21 | AI News | Article | MCP Registry Hits 26479 Servers at 98.8% Alive Rate | `mcp-registry-26479-servers-alive-health` | MCP Registry, 26479 servers |
+| 2026-09-21 | AI News | Article | Temporal Ships HITL Cookbook: Signals Over Polling | `temporal-hitl-cookbook-approval-signals` | Temporal, HITL, Signals |
+| 2026-09-21 | AI Workflows | Article | Self-Hosted AgentCrew Teams: Markdown Agents, NATS and Zero Code | `self-hosted-agentcrew-teams-markdown-nats-zero-code` | AgentCrew, NATS, MCP, Docker |
+| 2026-09-21 | AI Workflows | Article | CrewAI Flows with Human Gates: Approve, Revise and Ship at 3.1s | `crewai-flows-human-gates-approve-revise-ship` | CrewAI Flows, HITL, Slack |
+| 2026-09-21 | AI Tools | Article | Build a Changelog MCP Server: Draft from Git at 42ms per Call | `changelog-mcp-server-draft-git-approval-analytics` | FastMCP 4, MCP, OAuth |
+| 2026-09-21 | AI Tools | Article | Build a Document MCP Server: Read DOCX, XLSX, PPTX at 31ms | `document-mcp-server-docx-xlsx-pptx-outline-reads` | FastMCP, Office, OOXML |
+| 2026-09-21 | Coding | Article | Coding Agent Reasoning Effort: When xhigh Pays and Low Wins Big | `coding-agent-reasoning-effort-cost-pass-tiers` | AA Index, reasoning effort, token economics |
+| 2026-09-21 | LLMs | Article | DeepInfra vs Together AI: 34 of 36 Models Cheaper on One Side | `same-model-provider-arbitrage-deepinfra-together-routing` | DeepInfra, Together AI, inference pricing |
+| 2026-09-21 | Coding | Article | Background-Thread Agent Tracing: Full Costs at Zero Latency Hit | `zero-overhead-agent-token-tracing-background-thread` | observability, span tracing, cost attribution |
+| 2026-09-21 | Coding | Article | Muse Spark 1.3 vs Gemini 3.8 Flash: Same-Day Launch Showdown | `muse-spark-13-vs-gemini-38-flash-coding-showdown` | Muse Spark 1.3, Gemini 3.8 Flash, DeepSWE |
+| 2026-09-21 | Coding | Article | Agent Compaction Without Amnesia: 74% Fewer Tokens, Zero Drops | `agent-context-compaction-pin-constraints-offload-tools` | context compaction, governance decay, pinning |
+| 2026-09-21 | LLMs | Article | RAG Embeddings in 2026: Voyage Code 71.4 vs OpenAI 63.1 at $0.02 | `rag-embedding-models-voyage-openai-open-weights-guide` | Voyage, OpenAI, RAG embeddings |
+| 2026-09-21 | AI News | Article | Plugin4Shell Zero-Click RCE Hits Claude Code, Codex and Copilot | `plugin4shell-zero-click-rce-agent-cli-patch-matrix` | Plugin4Shell, RCE, agent security |
+| 2026-09-21 | AI News | Article | Union Alpha Is Pareto 26.9: Astra-Level Scores at 1B tok/min | `union-alpha-stealth-pareto-269-frontier-procurement-gate` | Union Alpha, Pareto 26.9, stealth launch |
+| 2026-09-21 | AI News | Article | StepFun Step 5: 600B Sparse MoE with 1M Context at $1 per 1M | `stepfun-step-5-preview-600b-moe-cache-migration-check` | StepFun Step 5, MoE, inference pricing |
+| 2026-09-21 | AI News | Article | Grok Voice Transcribe 2.0: WER 20.6 to 6.8% at $0.10 per Hour | `grok-voice-transcribe-20-wer-languages-swap-harness` | Grok Voice, transcription, WER |
+| 2026-09-21 | AI News | Article | Vals AI Raises $40M: Confidential Benchmarks Beat Contamination | `vals-ai-40m-confidential-benchmarks-heldout-harness` | Vals AI, a16z, eval contamination |
+| 2026-09-21 | AI News | Article | Ternary Bonsai 2 Fits 27B in 5.9GB at 98.2% Performance | `ternary-bonsai-2-qwen38-27b-local-deployment-harness` | Bonsai 2, quantization, local LLM |
+
+| 2026-09-23 | AI Workflows | Article | Durable LangGraph Agents on Temporal: Crash Recovery at Scale | `build-durable-langgraph-temporal-workflow-survive-crash-human-loop` | Production AI |
+| 2026-09-23 | AI Tools | Article | Stateless MCP on Quarkus 2.0: Migrate Without Breaking Clients | `build-quarkus-stateless-mcp-server-2026-07-28-migration` | Production AI |
+| 2026-09-23 | Coding | Article | Opus 5.5 vs GPT-6 Sol: Coding Benchmarks and Token Cost Verdict | `claude-opus-55-vs-gpt-6-sol-benchmark-token-economics-production` | Production AI |
+| 2026-09-23 | LLMs | Article | GPT-6 Luna vs Sol: Factuality, OSWorld Wins and Routing Guide | `gpt-6-sol-luna-factuality-osworld-agents-last-exam-reliability-guide` | Production AI |
+| 2026-09-23 | AI News | Article | Anthropic Ships Opus 5.5: Fable Power at 40% Lower Cost, Safer | `anthropic-opus-55-launch-pacing-frontier-coding-computer-use` | Production AI |
+| 2026-09-23 | AI News | Article | OpenAI Ships GPT-6 Sol and Luna: Astra Power at Half the Price | `openai-gpt-6-sol-luna-launch-Astra-efficiency-factuality` | Production AI |
+| 2026-09-24 | AI Workflows | Article | Build Event-Driven Agents with LlamaIndex: Zero DAG Bottlenecks | `build-event-driven-agents-llamaindex-workflows-zero-dag-bottlenecks` | LlamaIndex Workflows, async fan-out, event-driven agents |
+| 2026-09-24 | AI Tools | Article | Build a LanceDB Embedded Vector MCP Server: 18ms Hybrid Search | `build-lancedb-embedded-vector-mcp-server-hybrid-search` | FastMCP, LanceDB, hybrid BM25 vector search |
+| 2026-09-24 | Coding | Article | Terminal-Bench 4.0 Benchmark: Shell Autonomy and Task Economics | `terminal-bench-4-coding-benchmark-shell-autonomy-task-economics` | Terminal-Bench 4.0, shell autonomy, cost per task |
+| 2026-09-24 | LLMs | Article | SnapKV vs H2O vs StreamingLLM: Production KV Cache Eviction | `snapkv-vs-h2o-streamingllm-production-kv-cache-eviction` | SnapKV, StreamingLLM, H2O, KV cache eviction |
+| 2026-09-24 | AI News | Article | Alibaba Unveils Zhenwu V900 AI Chip: 500k Clusters and Qwen 4 | `alibaba-unveils-zhenwu-v900-ai-chip-500k-cluster-scaling` | Alibaba Zhenwu V900, Qwen 4, Apsara Conference |
+| 2026-09-24 | AI News | Article | Qualcomm Ships Snapdragon 8 Elite Gen 6: 30B MoE On-Device Agents | `qualcomm-snapdragon-8-elite-gen-6-on-device-moe-agents` | Qualcomm Snapdragon 8 Elite Gen 6, 2nm, 30B MoE |
