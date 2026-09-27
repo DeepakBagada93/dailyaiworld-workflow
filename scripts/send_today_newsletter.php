@@ -2,7 +2,7 @@
 
 /**
  * Daily AI World — Send Today's Newsletter Digest to Active Subscribers via Brevo
- * Usage: php scripts/send_today_newsletter.php [--live] [--date=YYYY-MM-DD]
+ * Usage: php scripts/send_today_newsletter.php [--live] [--date=YYYY-MM-DD] [--test=email@domain.com]
  */
 
 require __DIR__ . '/../vendor/autoload.php';
@@ -14,10 +14,15 @@ use Illuminate\Support\Facades\Mail;
 
 $isLive = in_array('--live', $argv);
 
-$targetDate = '2026-09-01';
+$targetDate = date('Y-m-d');
+$testEmail = null;
+
 foreach ($argv as $arg) {
     if (str_starts_with($arg, '--date=')) {
         $targetDate = substr($arg, 7);
+    }
+    if (str_starts_with($arg, '--test=')) {
+        $testEmail = trim(substr($arg, 7));
     }
 }
 
@@ -25,6 +30,12 @@ echo "===================================================\n";
 echo " Daily AI World — Newsletter Dispatcher (Brevo)\n";
 echo " Date Target: {$targetDate}\n";
 echo " Mode: " . ($isLive ? "LIVE PRODUCTION SEND" : "DRY RUN / PREVIEW") . "\n";
+if ($testEmail) {
+    echo " Target: Test Mode ONLY -> {$testEmail}\n";
+} else {
+    echo " Target: All Active Verified Subscribers\n";
+}
+echo " Theme: Responsive Executive Clean White\n";
 echo "===================================================\n\n";
 
 // 1. Fetch Today's Published Articles from Hostinger DB
@@ -84,7 +95,13 @@ $articleCount = count($articles);
 echo "Found {$articleCount} unique articles published for {$targetDate}:\n";
 foreach ($articles as $idx => $art) {
     $num = str_pad($idx + 1, 2, ' ', STR_PAD_LEFT);
-    echo " [{$num}] (Cat: {$art['category_id']}) {$art['title']}\n";
+    $catName = match ((int)$art['category_id']) {
+        1 => "Workflow",
+        5 => "MCP Tool",
+        11 => "News",
+        default => "Blog",
+    };
+    echo " [{$num}] ({$catName}) {$art['title']}\n";
 }
 echo "\n";
 
@@ -93,20 +110,29 @@ if ($articleCount === 0) {
     exit(1);
 }
 
-// 2. Fetch Active Subscribers from Hostinger DB
-$subStmt = $pdo->query("
-    SELECT id, email, edition, status, created_at 
-    FROM newsletter_subscribers 
-    WHERE status = 'active'
-    ORDER BY id ASC
-");
-$subscribers = $subStmt->fetchAll(PDO::FETCH_ASSOC);
-$totalSubscribers = count($subscribers);
+// 2. Fetch Active Subscribers
+if ($testEmail) {
+    $subscribers = [
+        ['id' => 0, 'email' => $testEmail, 'edition' => 'Daily Executive Briefing', 'status' => 'active']
+    ];
+    $totalSubscribers = 1;
+} else {
+    $subStmt = $pdo->query("
+        SELECT id, email, edition, status, created_at 
+        FROM newsletter_subscribers 
+        WHERE status = 'active'
+        ORDER BY id ASC
+    ");
+    $subscribers = $subStmt->fetchAll(PDO::FETCH_ASSOC);
+    $totalSubscribers = count($subscribers);
+}
 
-echo "Found {$totalSubscribers} active subscribers in database.\n\n";
+echo "Targeting {$totalSubscribers} active subscriber(s).\n\n";
 
 $formattedDate = date('F j, Y', strtotime($targetDate));
-$subjectTitle = "⚡ Daily AI World: {$articleCount} Breakthrough AI Dispatches, Workflows & MCP Servers (" . date('M d, Y', strtotime($targetDate)) . ")";
+
+// High-converting CTR Subject Line
+$subjectTitle = "⚡ Daily AI World: 10 Breakthrough Dispatches — Temporal Sandbox Agents, FastMCP Elicitation & AI Benchmarks (" . date('M d, Y', strtotime($targetDate)) . ")";
 
 $data = [
     'appName' => 'Daily AI World',
@@ -178,8 +204,8 @@ foreach ($subscribers as $idx => $sub) {
             'time' => date('Y-m-d H:i:s'),
         ];
         
-        // Delay (200ms) to respect Brevo SMTP throughput
-        usleep(200000);
+        // Delay (150ms) to respect Brevo SMTP throughput
+        usleep(150000);
     } catch (\Throwable $e) {
         echo "❌ FAILED: " . $e->getMessage() . "\n";
         $failedCount++;
@@ -203,5 +229,5 @@ echo " Successfully Dispatched:  {$sentCount}\n";
 echo " Failed / Skipped:         {$failedCount}\n";
 echo " Delivery Rate:            " . ($totalSubscribers > 0 ? round(($sentCount / $totalSubscribers) * 100, 2) : 0) . "%\n";
 echo " Brevo Campaign Tag:       daily-digest-{$targetDate}\n";
+echo " Theme:                    Responsive Executive White\n";
 echo "===================================================\n";
-

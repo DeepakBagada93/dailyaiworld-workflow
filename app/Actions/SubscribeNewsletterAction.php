@@ -22,8 +22,9 @@ class SubscribeNewsletterAction
         }
 
         // 2. Reject obvious spam scraping patterns
+        $spamDomains = ['azharhs.org', 'azhlyce.org', 'azhacd.org', 'immenseignite.info'];
         $userPart = substr($email, 0, strpos($email, '@'));
-        if ($domain === 'azharhs.org' || preg_match('/[a-z]{5,}[0-9][a-z0-9]{4,}$/', $userPart)) {
+        if (in_array($domain, $spamDomains) || str_starts_with($domain, 'azh') || str_ends_with($domain, '.info') || preg_match('/[a-z]{4,}[0-9][a-z0-9]{3,}$/i', $userPart)) {
             abort(422, 'Suspicious email address pattern detected.');
         }
 
