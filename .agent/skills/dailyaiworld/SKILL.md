@@ -53,7 +53,7 @@ description: >
 >
 > **MANDATORY SEQUENTIAL FLOW (PRE-FLIGHT → SEARCH 1 → WRITE 1 → PUSH 1)**:  
 > **NEVER batch search or write articles in parallel**. For each session and individual article in sequence:
-> - **Step 0 — Pre-Flight Live URL Indexing Inspection & Quota Radar**: Run `php scripts/daily_indexing_reminder.php`. First, verify whether today's / latest published URLs are already indexed (`✅ [INDEXED]`) or pending in Googlebot queue (`⚡ [IN BOT QUEUE]`) via Google Search Console Inspection API. Second, check today's Google Indexing API quota usage (max 200 URLs/day). Third, verify today's scheduled batch from the 7-day master rotation plan in `TODO_INDEXING_AND_TRAFFIC_GROWTH.md`. Only when today's indexing state is inspected and the daily batch is executed (or already maxed 200/200), proceed to Step 1 to search, write, and push the next dispatch.
+> - **Step 0 — Pre-Flight Cadence Audit, Live URL Indexing Inspection & Quota Radar**: Run `php scripts/daily_indexing_reminder.php`. First, the automated cadence engine (`php scripts/audit_daily_cadence.php`) audits today's publication quota in Hostinger DB and verifies calendar continuity—strictly prohibiting any skipped calendar dates ($D, D+1, D+2$). Second, verify whether today's / latest published URLs are already indexed (`✅ [INDEXED]`) or pending in Googlebot queue (`⚡ [IN BOT QUEUE]`) via Google Search Console Inspection API. Third, check today's Google Indexing API quota usage (max 200 URLs/day). Fourth, verify today's scheduled batch from the 7-day master rotation plan in `TODO_INDEXING_AND_TRAFFIC_GROWTH.md`. Only when today's indexing state is inspected and the daily batch is executed (or already maxed 200/200), proceed to Step 1 to search, write, and push the next dispatch.
 > - **Step 1 — Search Trending Topic**: Run real-time `search_web` for a fresh, viral topic matching the current cycle with high search demand and commercial intent.
 > - **Step 2 — Anti-Duplication & Live DB Collision Pre-Check**: Check `memory.md` and query Hostinger Live DB (`srv1334.hstgr.io`, DB `u775719140_dailyai`) to verify zero collision on title, slug, or technical concepts. Reject any numeric slug suffixes (`-[0-9]+` strictly banned). Check topic keywords to prevent search intent cannibalization.
 > - **Step 3 — Fetch Verified Internal Links**: Run `php scripts/get_verified_internal_links.php` to obtain 3–5 guaranteed live HTTP 200 URLs directly from Hostinger Live DB. Intentionally include links to previously discovered articles and the 3 core hubs (`/workflows`, `/mcp-directory`, `/latest-ai-news`) to pull Googlebot deeper into the site and prevent orphan pages.
@@ -63,6 +63,16 @@ description: >
 > - **Step 7 — Live URL Quality Audit & Instant Dual Indexing**: Run `php scripts/audit_live_url.php <url>` to verify HTTP 200 OK, author byline (Deepak Bagada), body content, meta tags, and interactive FAQs. Immediately push the newly live URL to **both** Google Indexing API via `App\Services\GoogleIndexingService::publishUrl($url, 'URL_UPDATED')` and Bing/IndexNow via `App\Services\IndexingService::submitToIndexNow([$url])` so Googlebot and Bingbot index the new content within hours.
 > - **Step 8 — Log to `memory.md`**: Record slug, title, category, author, and date in `memory.md` and `.agent/skills/dailyaiworld/memory.md`.
 > - **Step 9 — Advance to Next Article**: Only when the current article is verified 100% live on Hostinger and healthy, proceed to search and write the next article in the cycle.
+
+---
+
+## 🗓️ CALENDAR CONTINUITY & ZERO-GAP SCHEDULING ENFORCEMENT
+
+> [!IMPORTANT]
+> **STRICT RULE: CONSECUTIVE CALENDAR SCHEDULING (ZERO SKIPPED DAYS)**  
+> 1. **Zero Skipped Days**: Dispatches must be strictly consecutive ($D, D+1, D+2$). Never skip a calendar date.
+> 2. **Pre-Scheduling Gap Audit**: Before creating dispatches for any future date, query Hostinger Live DB using `php scripts/audit_daily_cadence.php`. If there is a missing day between the latest published date and the requested date (e.g., Oct 16 to Oct 18 skipping Oct 17), the agent MUST immediately flag the gap and author the missing day's full quota first.
+> 3. **Timezone Awareness for published_at**: Timestamps are interpreted in UTC by Laravel's `scopePublished()`. For immediate publication, timestamps must be $\le \text{now()}$ UTC. For scheduled dispatches on future dates, distribute across $04:30$, $06:45$, $09:00$, $11:15$, $13:30$, and $15:45$ UTC.
 
 ---
 

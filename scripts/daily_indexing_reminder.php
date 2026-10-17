@@ -34,6 +34,13 @@ echo "======================================================================\n";
 echo " 📅 Date: {$todayDateStr} ({$todayDayName})\n\n";
 
 // =====================================================================
+// STEP 0: AUDIT TODAY'S PUBLISHING CADENCE & CALENDAR CONTINUITY
+// =====================================================================
+echo "📋 STEP 0: AUDITING TODAY'S DISPATCH CADENCE & CALENDAR CONTINUITY...\n";
+echo "----------------------------------------------------------------------\n";
+passthru(PHP_BINARY . ' ' . escapeshellarg(__DIR__ . '/audit_daily_cadence.php'));
+
+// =====================================================================
 // STEP 1: CHECK TODAY'S URLS LIVE INDEXING STATUS VIA GSC INSPECTION API
 // =====================================================================
 if (!isset($options['quick'])) {

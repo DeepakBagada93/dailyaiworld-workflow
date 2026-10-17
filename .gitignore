@@ -38,6 +38,9 @@ __pycache__/
 
 # Temporary payload/data files
 /dispatches/
+/storage/dispatches/
+*.csv
+dispatch_live_*.json
 *_payload*.json
 *_dispatches*.json
 *_dispatch*.json

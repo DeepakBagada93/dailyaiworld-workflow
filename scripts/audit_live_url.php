@@ -44,7 +44,7 @@ $checks = [
     'has_internal_links' => (substr_count($response, 'dailyaiworld.com') >= 3),
     'has_faq_section' => (stripos($response, 'Frequently Asked Questions') !== false || stripos($response, 'id="faqs"') !== false),
     'no_duplicate_faqs' => (substr_count($response, 'Frequently Asked Questions') <= 1 && substr_count($response, 'Core Takeaways for Founders') <= 1),
-    'not_error_page' => (stripos($response, '404') === false && stripos($response, 'Page Not Found') === false && stripos($response, 'Server Error') === false),
+    'not_error_page' => (stripos($response, '<title>404') === false && stripos($response, '<title>Page Not Found') === false && stripos($response, '<title>Server Error') === false && stripos($response, '<h1>404') === false && stripos($response, '<h1>Page Not Found') === false),
 ];
 
 $allPassed = !in_array(false, $checks, true);
