@@ -47,15 +47,15 @@ echo " 🕒 Current IST: {$nowIst->format('Y-m-d H:i:s')} | UTC: {$nowUtc->forma
 $errors = [];
 $warnings = [];
 
-// Determine Phase & Quota
+// Determine Phase & Quota (Phase 1: Sep 22 - Oct 22, 2026 = 6 dispatches/day)
 $anchorDate = Carbon::parse('2026-09-22');
 $daysSinceAnchor = $anchorDate->diffInDays($nowIst) + 1;
 
-if ($daysSinceAnchor <= 30) {
-    $phase = "Phase 1 (Days 1–30 | Crawl Budget Protection)";
+if ($daysSinceAnchor <= 31) {
+    $phase = "Phase 1 (Days 1–31 | Crawl Budget Protection)";
     $dailyQuota = 6;
-} elseif ($daysSinceAnchor <= 60) {
-    $phase = "Phase 2 (Days 31–60 | Gradual Expansion)";
+} elseif ($daysSinceAnchor <= 61) {
+    $phase = "Phase 2 (Days 32–61 | Gradual Expansion)";
     $dailyQuota = 10;
 } elseif ($daysSinceAnchor <= 90) {
     $phase = "Phase 3 (Days 61–90 | Full Scale Mode)";

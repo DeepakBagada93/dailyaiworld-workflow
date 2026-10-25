@@ -293,6 +293,30 @@ if ($internalLinkCount < 3) {
             $errors[] = "INVALID INTERNAL LINK PATTERN: '{$linkUrl}'. Must follow https://dailyaiworld.com/(workflow|mcp-directory|blogs)/{slug} or official hub URLs.";
         }
     }
+
+    // 8B. Anti-Bounce Rate Recirculation Architecture Audit
+    // 1. Hub Backlink Check: Must link to at least 1 directory hub (/workflows, /mcp-directory, /latest-ai-news)
+    $hasHubLink = false;
+    foreach ($internalLinkMatches[2] as $linkUrl) {
+        $cleanLink = rtrim($linkUrl, '/');
+        if (in_array($cleanLink, ['https://dailyaiworld.com/workflows', 'https://dailyaiworld.com/mcp-directory', 'https://dailyaiworld.com/latest-ai-news'])) {
+            $hasHubLink = true;
+            break;
+        }
+    }
+    if (!$hasHubLink) {
+        $warnings[] = "BOUNCE RATE RECIRCULATION WARNING: No link to a core directory hub (/workflows, /mcp-directory, or /latest-ai-news). Linking to a directory hub recirculates single-article readers and lowers site-wide bounce rate.";
+    }
+
+    // 2. Mid-Article Callout Box Check (> 💡 or blockquote with internal link)
+    if (!preg_match('/>\s*[\x{1F300}-\x{1FAD6}\x{2600}-\x{27BF}\x{1F4A1}\*]*\s*\*\*Related/u', $content) && !preg_match('/>\s*\[[^\]]+\]\(https?:\/\/dailyaiworld\.com\/[^\)]+\)/i', $content)) {
+        $warnings[] = "BOUNCE RATE RETENTION WARNING: Missing mid-article visual callout box (e.g. '> 💡 **Related Engineering Blueprint:** [Title](https://dailyaiworld.com/...)'). Placed at ~50% read progress, this directly counters the 85-100% bounce rate on single articles.";
+    }
+
+    // 3. Recommended Next Architecture Section Check
+    if (!preg_match('/###?\s*[^#\n]*(?:Recommended\s+Next|Next\s+Architecture|Companion\s+Guide)/i', $content)) {
+        $warnings[] = "BOUNCE RATE RETENTION WARNING: Missing 'Recommended Next Architecture' bridge section before author signoff. Readers reaching the end of the article need an explicit next step to stay on site.";
+    }
 }
 
 // 9. No Raw Schema Scripts in Content Check
