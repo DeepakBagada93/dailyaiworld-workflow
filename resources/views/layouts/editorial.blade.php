@@ -49,7 +49,11 @@
         window.dataLayer = window.dataLayer || [];
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', '{{ config('services.google.analytics_id') }}');
+
+        // Bot & Headless Scraper Filter: Prevent automated webdrivers and crawlers from polluting traffic analytics
+        if (!navigator.webdriver && !/(Bytespider|bot|crawler|spider|headlesschrome|headless|phantom|puppeteer)/i.test(navigator.userAgent)) {
+            gtag('config', '{{ config('services.google.analytics_id') }}');
+        }
     </script>
     @endif
 

@@ -311,7 +311,7 @@
                 <td class="header" style="background-color: #FFFFFF; padding: 36px 32px 26px; border-bottom: 1px solid #F1F5F9; text-align: left;">
                     <span class="brand-badge" style="display: inline-block; background-color: #EEF2FF; border: 1px solid #C7D2FE; color: #4338CA; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.2px; padding: 5px 12px; border-radius: 9999px; margin-bottom: 12px;">{{ $editionName }}</span>
                     <h1 class="brand-title" style="color: #0F172A; font-size: 26px; font-weight: 800; margin: 0 0 6px; letter-spacing: -0.6px; line-height: 1.2;">
-                        <a href="{{ $siteUrl }}" target="_blank" style="color: #0F172A; text-decoration: none;">{{ $appName }}</a>
+                        <a href="{{ $siteUrl }}?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" target="_blank" style="color: #0F172A; text-decoration: none;">{{ $appName }}</a>
                     </h1>
                     <p class="brand-sub" style="color: #64748B; font-size: 13px; font-weight: 500; margin: 0; line-height: 1.5;">{{ $issueDate }} &bull; Curated Intelligence &amp; Breakthrough Dispatches</p>
                 </td>
@@ -339,17 +339,17 @@
                         @endif
 
                         <h3 class="article-title" style="font-size: 16px; font-weight: 700; color: #0F172A; margin: 0 0 8px; line-height: 1.4;">
-                            <a href="{{ $art['url'] }}" target="_blank" style="color: #0F172A; text-decoration: none;">{{ $art['title'] }}</a>
+                            <a href="{{ $art['url'] }}?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" target="_blank" style="color: #0F172A; text-decoration: none;">{{ $art['title'] }}</a>
                         </h3>
                         <p class="article-desc" style="font-size: 13.5px; color: #475569; margin: 0 0 12px; line-height: 1.55;">{{ $art['deck'] }}</p>
                         <div class="article-meta" style="font-size: 12px; color: #64748B; font-weight: 500;">
-                            ⏱️ {{ $art['reading_time'] }} min read &bull; <a href="{{ $art['url'] }}" style="color: #4F46E5; text-decoration: none; font-weight: 600;" target="_blank">Read Full Article &rarr;</a>
+                            ⏱️ {{ $art['reading_time'] }} min read &bull; <a href="{{ $art['url'] }}?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" style="color: #4F46E5; text-decoration: none; font-weight: 600;" target="_blank">Read Full Article &rarr;</a>
                         </div>
                     </div>
                     @endforeach
 
                     <div class="cta-container" style="text-align: center; margin: 32px 0 12px; padding-top: 16px; border-top: 1px solid #F1F5F9;">
-                        <a href="{{ $siteUrl }}" class="btn-primary" target="_blank" style="display: inline-block; background-color: #4F46E5; color: #FFFFFF; font-size: 14.5px; font-weight: 700; text-decoration: none; padding: 14px 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); letter-spacing: 0.2px;">Explore All Dispatches on Daily AI World &rarr;</a>
+                        <a href="{{ $siteUrl }}?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" class="btn-primary" target="_blank" style="display: inline-block; background-color: #4F46E5; color: #FFFFFF; font-size: 14.5px; font-weight: 700; text-decoration: none; padding: 14px 30px; border-radius: 8px; box-shadow: 0 4px 12px rgba(79, 70, 229, 0.25); letter-spacing: 0.2px;">Explore All Dispatches on Daily AI World &rarr;</a>
                     </div>
                 </td>
             </tr>
@@ -361,10 +361,10 @@
                         You received this daily dispatch because you are an active subscriber to <strong>{{ $appName }}</strong>.
                     </p>
                     <p class="footer-links" style="margin: 12px 0;">
-                        <a href="{{ $siteUrl }}" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">Home</a> &bull;
-                        <a href="{{ $siteUrl }}/workflows" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">Workflows</a> &bull;
-                        <a href="{{ $siteUrl }}/mcp-directory" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">MCP Directory</a> &bull;
-                        <a href="{{ $siteUrl }}/latest-ai-news" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">AI News</a>
+                        <a href="{{ $siteUrl }}?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">Home</a> &bull;
+                        <a href="{{ $siteUrl }}/workflows?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">Workflows</a> &bull;
+                        <a href="{{ $siteUrl }}/mcp-directory?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">MCP Directory</a> &bull;
+                        <a href="{{ $siteUrl }}/latest-ai-news?utm_source=newsletter&utm_medium=email&utm_campaign=daily-digest" style="color: #4F46E5; text-decoration: none; margin: 0 8px; font-size: 12px; font-weight: 600;">AI News</a>
                     </p>
                     <p class="footer-copy" style="color: #94A3B8; font-size: 11px; line-height: 1.5; margin: 14px 0 0;">
                         &copy; {{ date('Y') }} {{ $appName }}. All rights reserved. &bull; By Deepak Bagada, CEO at SaaSNext.

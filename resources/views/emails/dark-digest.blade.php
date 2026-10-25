@@ -288,7 +288,7 @@
             <tr>
                 <td class="header">
                     <span class="brand-pill">⚡ Live Technical Dispatch</span>
-                    <h1 class="logo-title">Daily AI World</h1>
+                    <h1 class="logo-title"><a href="https://dailyaiworld.com?utm_source=newsletter&utm_medium=email&utm_campaign=daily-dark" style="color: inherit; text-decoration: none;">Daily AI World</a></h1>
                     <p class="logo-sub">{{ $editionName ?? 'Executive Briefing' }} · {{ $issueDate ?? date('F j, Y') }}</p>
                 </td>
             </tr>
@@ -381,9 +381,9 @@
                         Zero synthetic AI fluff · 100% runnable multi-file code · Production war stories.
                     </p>
                     <p style="margin: 0;">
-                        <a href="https://dailyaiworld.com" target="_blank">Visit Daily AI World</a> · 
-                        <a href="https://dailyaiworld.com/workflows" target="_blank">Workflows</a> · 
-                        <a href="https://dailyaiworld.com/mcp-directory" target="_blank">MCP Directory</a> · 
+                        <a href="https://dailyaiworld.com?utm_source=newsletter&utm_medium=email&utm_campaign=daily-dark" target="_blank">Visit Daily AI World</a> · 
+                        <a href="https://dailyaiworld.com/workflows?utm_source=newsletter&utm_medium=email&utm_campaign=daily-dark" target="_blank">Workflows</a> · 
+                        <a href="https://dailyaiworld.com/mcp-directory?utm_source=newsletter&utm_medium=email&utm_campaign=daily-dark" target="_blank">MCP Directory</a> · 
                         <a href="{{ $unsubscribeUrl ?? 'https://dailyaiworld.com/unsubscribe' }}">Unsubscribe</a>
                     </p>
                 </td>

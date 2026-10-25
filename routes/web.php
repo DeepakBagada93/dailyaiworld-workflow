@@ -20,6 +20,16 @@ use App\Http\Controllers\NewsDirectoryController;
 use App\Http\Controllers\PageController;
 use Illuminate\Support\Facades\Route;
 
+// Canonical 301 Redirect: Prevent /public/ duplicate URL indexing and strip stray /public prefix
+Route::any('/public/{fallback?}', function ($fallback = '') {
+    $target = '/' . ltrim($fallback, '/');
+    $qs = request()->server('QUERY_STRING') ?: request()->getQueryString();
+    if ($qs) {
+        $target .= '?' . $qs;
+    }
+    return redirect($target, 301);
+})->where('fallback', '.*');
+
 // SEO, AEO & GEO Optimization Engine Endpoints — Modular XML Sitemaps
 // Excluded from session/CSRF/cookie middleware so Google gets clean XML
 // without Set-Cookie headers or cache-control: private (GSC rejection fix).

@@ -29,6 +29,7 @@
 <meta name="author" content="{{ $author }}">
 <meta name="publisher" content="Daily AI World">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="referrer" content="origin-when-cross-origin">
 
 @if(config('services.google.site_verification'))
 <!-- Google Search Console Verification -->
