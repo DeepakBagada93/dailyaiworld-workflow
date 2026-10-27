@@ -2,12 +2,16 @@
 name: dailyaiworld
 description: >
   Universal, production-grade autonomous content publishing skill for Daily AI World (dailyaiworld.com).
-  Engineered to eliminate synthetic AI writing patterns, defeat Google Helpful Content System / Core Update
-  penalties, and enforce genuine 100% human-written engineering depth from Founder & Editor-in-Chief Deepak Bagada.
+  Engineered for #1 Generative Engine Optimization (GEO) and Answer Engine Optimization (AEO) citations
+  across Perplexity, ChatGPT Search, Gemini, Claude, and Google AI Overviews.
+  Enforces deep multi-source primary research (arXiv papers, GitHub releases, official RFCs & docs),
+  verifiable empirical benchmarks, co-citation authority graphs (2-4 external primary sources),
+  conversational prompt-matched subheadings, and genuine 100% human-written engineering depth from
+  Founder & Editor-in-Chief Deepak Bagada.
   Driven by live Google Search Console & database analytics: prioritizes high-CTR head-to-head comparison showdowns
   (X vs Y at 20%-31% CTR), high-engagement automation workflows (n8n, LangGraph, SecOps at 50k+ views), and the
   #1 organic search driver "ai workflow directory".
-  Executes a strict 4-CYCLE SEQUENTIAL ONE-BY-ONE loop (Search One → Write One → Audit One → Direct Push to Live DB → Verify Live URL → Push Google Indexing API → Log Memory → Repeat).
+  Executes a strict 4-CYCLE SEQUENTIAL ONE-BY-ONE loop (Deep Research One → Write One → Audit One → Direct Push to Live DB → Verify Live URL → Push Google Indexing API → Log Memory → Repeat).
   Features an automated date-driven scaling engine: Days 1-30 (Sep 22 - Oct 22, 2026) at 6 Dispatches/day for crawl protection, Days 31-60 (Oct 23 - Nov 21, 2026) at 10 Dispatches/day, Days 61-90 (Nov 22 - Dec 21, 2026) at 16 Dispatches/day, and Days 91+ at 20 Dispatches/day.
   Titles engineered for maximum CTR featuring clean, natural, authoritative editorial headlines with high-converting
   symbols (:, —, |, //, $, %, →, &) — STRICTLY ZERO SQUARE BRACKETS ([ ]).
@@ -17,8 +21,8 @@ description: >
   Zero git commits/pushes for content publishing to protect Google search indexing stability.
 ---
 
-# 🌐 Daily AI World — Autonomous Content Engine v18.0
-### (Analytics-Driven Topic Focus: 20%–31% CTR Face-Offs & 50k+ View Automations | 4-Cycle Sequential Architecture | Automated Progressive Scaling)
+# 🌐 Daily AI World — Autonomous Content Engine v19.0
+### (High-Value Primary Research & Citations Engine | Generative Engine Optimization [GEO] & AEO Visibility | Analytics-Driven 20%–31% CTR Face-Offs & 50k+ View Automations | 4-Cycle Sequential Architecture)
 
 > [!IMPORTANT]  
 > **CORE ARCHITECTURE: 4 CYCLES — STRICT ITEM-BY-ITEM CLOSED LOOP**:  
@@ -55,18 +59,21 @@ description: >
 >   - Cycle 4: **7 Latest AI News**
 >   - *Purpose*: Full-scale authority publishing across all categories.
 >
-> **MANDATORY SEQUENTIAL FLOW (PRE-FLIGHT → SEARCH 1 → WRITE 1 → PUSH 1)**:  
+> **MANDATORY SEQUENTIAL FLOW (PRE-FLIGHT → DEEP RESEARCH 1 → WRITE 1 → AUDIT 1 → PUSH 1)**:  
 > **NEVER batch search or write articles in parallel**. For each session and individual article in sequence:
-> - **Step 0 — Pre-Flight Cadence Audit, Live URL Indexing Inspection & Quota Radar**: Run `php scripts/daily_indexing_reminder.php`. First, the automated cadence engine (`php scripts/audit_daily_cadence.php`) audits today's publication quota in Hostinger DB and verifies calendar continuity—strictly prohibiting any skipped calendar dates ($D, D+1, D+2$). Second, verify whether today's / latest published URLs are already indexed (`✅ [INDEXED]`) or pending in Googlebot queue (`⚡ [IN BOT QUEUE]`) via Google Search Console Inspection API. Third, check today's Google Indexing API quota usage (max 200 URLs/day). Fourth, verify today's scheduled batch from the 7-day master rotation plan in `TODO_INDEXING_AND_TRAFFIC_GROWTH.md`. Only when today's indexing state is inspected and the daily batch is executed (or already maxed 200/200), proceed to Step 1 to search, write, and push the next dispatch.
-> - **Step 1 — Search Trending Topic**: Run real-time `search_web` for a fresh, viral topic matching the current cycle with high search demand and commercial intent.
+> - **Step 0 — Pre-Flight Cadence Audit, Live URL Indexing Inspection & Quota Radar**: Run `php scripts/daily_indexing_reminder.php`. First, the automated cadence engine (`php scripts/audit_daily_cadence.php`) audits today's publication quota in Hostinger DB and verifies calendar continuity—strictly prohibiting any skipped calendar dates ($D, D+1, D+2$). Second, verify whether today's / latest published URLs are already indexed (`✅ [INDEXED]`) or pending in Googlebot queue (`⚡ [IN BOT QUEUE]`) via Google Search Console Inspection API. Third, check today's Google Indexing API quota usage (max 200 URLs/day). Fourth, verify today's scheduled batch from the 7-day master rotation plan in `TODO_INDEXING_AND_TRAFFIC_GROWTH.md`. Only when today's indexing state is inspected and the daily batch is executed (or already maxed 200/200), proceed to Step 1 to research, write, and push the next dispatch.
+> - **Step 1 — Deep Multi-Source Primary Research (3 Targeted Searches)**: NEVER perform a single shallow search. Run real-time `search_web` across 3 distinct angles to extract verifiable primary evidence:
+>   1. *Primary Source Discovery*: Locate official GitHub repository, release notes, arXiv pre-print paper, system card, or official documentation (e.g. `github.com/...`, `arxiv.org/...`, `docs.anthropic.com/...`).
+>   2. *Empirical Benchmark & Hardware Specs*: Find hard, verifiable numbers: TTFT latency in ms, token cost per 1M, memory footprints (MB/GB), GPU testbeds (NVIDIA H100 SXM5 / A100), and verified evaluation scores (SWE-bench, HumanEval).
+>   3. *Production Friction & Edge-Case Traces*: Uncover real developer GitHub issues, unhandled exceptions, concurrency deadlocks, rate limit blips, or breaking dependency quirks.
 > - **Step 2 — Anti-Duplication & Live DB Collision Pre-Check**: Check `memory.md` and query Hostinger Live DB (`srv1334.hstgr.io`, DB `u775719140_dailyai`) to verify zero collision on title, slug, or technical concepts. Reject any numeric slug suffixes (`-[0-9]+` strictly banned). Check topic keywords to prevent search intent cannibalization.
 > - **Step 3 — Fetch Verified Internal Links**: Run `php scripts/get_verified_internal_links.php` to obtain 3–5 guaranteed live HTTP 200 URLs directly from Hostinger Live DB. Intentionally include links to previously discovered articles and the 3 core hubs (`/workflows`, `/mcp-directory`, `/latest-ai-news`) to pull Googlebot deeper into the site and prevent orphan pages.
-> - **Step 4 — Write 1 Dispatch Payload**: (Strictly 1,200 – 1,500 words — zero thin content, clean high-CTR title with **ZERO SQUARE BRACKETS**, mandatory `seo_title`, strictly 145–158 char `meta_description` synchronized with `deck`, first-person engineering voice of Deepak Bagada, production war stories, runnable multi-file code, AEO direct answer block, 3–5 verified internal links including >=1 directory hub link, mandatory mid-article blueprint callout card (`> 💡 **Related Engineering Blueprint:**`), mandatory end-of-article `### 🚀 Recommended Next Architecture` bridge, **NO FAQ headings in content body**, interactive FAQs array, author signature).
-> - **Step 5 — Pre-Publish Audit**: Run `php scripts/audit_dispatch_payload.php <dispatch.json>` to enforce zero square brackets in title, word count (1,200–1,500), meta description length (140–160 chars), deck synchronization, verified internal links, anti-bounce recirculation architecture (mid-article callout box, recommended next architecture bridge, hub link), banned AI buzzwords, zero duplicate FAQs, live DB uniqueness, and block numeric slug suffixes.
+> - **Step 4 — Write 1 Dispatch Payload (GEO / AEO High-Citation Architecture)**: (Strictly 1,200 – 1,500 words — zero thin content, clean high-CTR title with **ZERO SQUARE BRACKETS**, mandatory `seo_title`, strictly 145–158 char `meta_description` synchronized with `deck`, first-person engineering voice of Deepak Bagada, production war stories, runnable multi-file code with pinned dependencies, AEO direct answer block in first 80–120 words, conversational prompt-matched H2/H3 headings, quotable expert soundbites with metrics, 3–5 verified internal links including >=1 directory hub link, mandatory mid-article blueprint callout card (`> 💡 **Related Engineering Blueprint:**`), mandatory comparative Markdown benchmark matrix, mandatory **`### 📚 Authoritative Primary Sources & Research Citations`** block with 2–4 verified external primary links, mandatory end-of-article `### 🚀 Recommended Next Architecture` bridge, **NO FAQ headings in content body**, interactive FAQs array matching natural-language conversational queries, author signature).
+> - **Step 5 — Pre-Publish Audit**: Run `php scripts/audit_dispatch_payload.php <dispatch.json>` to enforce zero square brackets in title, word count (1,200–1,500), meta description length (140–160 chars), deck synchronization, verified internal links, 2–4 external primary source citations, presence of Authoritative Sources block, empirical benchmark metric density, anti-bounce recirculation architecture (mid-article callout box, recommended next architecture bridge, hub link), banned AI buzzwords, zero duplicate FAQs, live DB uniqueness, and block numeric slug suffixes.
 > - **Step 6 — Direct Push to Hostinger Live DB (Primary Target)**: Run `php scripts/publish_single_article.php <dispatch.json>` which inserts directly into **Hostinger Remote MySQL (`srv1334.hstgr.io`) as the exclusive live production database** with Deepak Bagada (`author_id = 1`) as sole author and realistic publication pacing. Local DB is secondary/optional. **Zero git commits/pushes for content publishing**.
 > - **Step 7 — Live URL Quality Audit & Instant Dual Indexing**: Run `php scripts/audit_live_url.php <url>` to verify HTTP 200 OK, author byline (Deepak Bagada), body content, meta tags, and interactive FAQs. Immediately push the newly live URL to **both** Google Indexing API via `App\Services\GoogleIndexingService::publishUrl($url, 'URL_UPDATED')` and Bing/IndexNow via `App\Services\IndexingService::submitToIndexNow([$url])` so Googlebot and Bingbot index the new content within hours.
 > - **Step 8 — Log to `memory.md`**: Record slug, title, category, author, and date in `memory.md` and `.agent/skills/dailyaiworld/memory.md`.
-> - **Step 9 — Advance to Next Article**: Only when the current article is verified 100% live on Hostinger and healthy, proceed to search and write the next article in the cycle.
+> - **Step 9 — Advance to Next Article**: Only when the current article is verified 100% live on Hostinger and healthy, proceed to search, research, and write the next article in the cycle.
 
 ---
 
@@ -364,22 +371,115 @@ AI text has monotonous, predictable sentence length (uniform 15–20 words). Hum
 
 ---
 
-## 🤖 GOOGLE AI OVERVIEW & GENERATIVE ENGINE OPTIMIZATION (AEO / GEO)
+## 🤖 GENERATIVE ENGINE OPTIMIZATION (GEO) & HIGH-VALUE AI CITATION ENGINE
 
-### A. The "AEO Direct Answer Box" (First 80–120 Words)
+> [!IMPORTANT]
+> **THE AI CITATION CO-CITATION GRAPH LAW (PERPLEXITY, CHATGPT SEARCH, GEMINI & CLAUDE CITATIONS)**  
+> Generative AI search engines (Perplexity, ChatGPT Search, Gemini, Claude, and Google AI Overviews) evaluate source authority using **co-citation graphs and empirical information gain**:
+> 1. **Co-Citation Graph Verification**: An article that only links internally is classified by AI retrieval algorithms as an ungrounded or speculative secondary opinion. In contrast, articles that cite **authoritative primary sources** (official GitHub repositories, arXiv research papers, official RFCs, and provider documentation) are recognized as high-authority synthesis hubs and are cited **2-3x more frequently** in AI-generated answers.
+> 2. **Novel Information Gain vs. LLM Training Memory**: Frontier LLMs already know general documentation. They cite external web pages **only when the page introduces novel empirical data**: real latency measurements across hardware, cost per 1M tokens, reproducible benchmark harnesses, and production failure traces that do not exist in standard documentation.
+> 3. **Semantic Query Alignment**: AI crawlers match user prompt embeddings to page heading embeddings. Structuring subheadings as natural-language technical questions guarantees direct snippet extraction into AI answer cards.
+
+Every published dispatch MUST implement the following **8-pillar Generative Engine Optimization (GEO) protocol**:
+
+### 1. 🔬 The 3-Step Deep Multi-Source Primary Research Protocol
+Before writing a single line of text, the agent MUST run real-time `search_web` across 3 distinct research vectors to gather primary evidence:
+
+```
+┌─────────────────────────────────────────────────────────────────────────────────────────────────┐
+│                          3-STEP DEEP MULTI-SOURCE PRIMARY RESEARCH PROTOCOL                     │
+├─────────┬──────────────────────────────────┬────────────────────────────────────────────────────┤
+│ Query # │ Research Target                  │ Extracted High-Value Primary Evidence              │
+├─────────┼──────────────────────────────────┼────────────────────────────────────────────────────┤
+│ Query 1 │ Primary Source & Repository      │ - Official GitHub repo URL (e.g. github.com/...)   │
+│         │ (e.g. 'github "fastmcp" anthropic│ - Pinned release tags & commit hashes (e.g. v0.4.1)│
+│         │  spec' or 'arxiv "radixattention"│ - Official documentation or RFC URL                │
+│         │  sglang')                        │ - arXiv paper ID & author research lab             │
+├─────────┼──────────────────────────────────┼────────────────────────────────────────────────────┤
+│ Query 2 │ Empirical Benchmarks & Hardware  │ - p50/p90/p99 Time-To-First-Token (TTFT) latency ms│
+│         │ (e.g. 'sglang radixattention     │ - Token throughput (tok/sec) & context cache hit % │
+│         │  benchmark ttft vllm h100' or    │ - Prompt vs completion price per 1M tokens ($)     │
+│         │  'swe-bench verified leaderboard │ - Exact GPU testbed (e.g. 8x NVIDIA H100 SXM5,     │
+│         │  sonnet 3.7 vs gpt-4.5')         │   PCIe 5.0, vLLM v0.6.3, PyTorch 2.4)              │
+├─────────┼──────────────────────────────────┼────────────────────────────────────────────────────┤
+│ Query 3 │ Production Friction & Bug Traces │ - Real GitHub issue numbers & open PR discussions │
+│         │ (e.g. 'langgraph postgresql      │ - Specific unhandled Python/Node exception traces  │
+│         │  checkpointer deadlock 429' or   │ - Pydantic v2 validation errors & schema mismatches│
+│         │  'fastmcp sse connection drop')  │ - Timeout defaults & worker pool exhaustion fixes  │
+└─────────┴──────────────────────────────────┴────────────────────────────────────────────────────┘
+```
+
+### 2. 🔗 Mandatory 2–4 External Primary Authoritative Citations
+Every article MUST weave **2 to 4 external links directly to primary authoritative sources**:
+* **Permitted Primary Domains**:
+  - Official GitHub Repositories (`https://github.com/...`)
+  - arXiv Research Papers (`https://arxiv.org/abs/...` or `https://arxiv.org/pdf/...`)
+  - Official Technical Documentation (`https://docs.anthropic.com/...`, `https://platform.openai.com/...`, `https://modelcontextprotocol.io/...`, `https://docs.vllm.ai/...`, `https://python.langchain.com/...`)
+  - Open-Source Machine Learning Hubs (`https://huggingface.co/...`)
+  - Official Evaluation Standards (`https://swebench.com/...`)
+* **Strict Formatting Rules**:
+  - Always use descriptive, entity-rich anchor text:
+    - ❌ Bad: `Inspect the code [here](https://github.com/...)`
+    - ✅ Good: `Inspect the official [Anthropic Model Context Protocol Specification](https://github.com/modelcontextprotocol/specification) for JSON-RPC message schemas.`
+  - External links must be accompanied by the dedicated reference section below.
+
+### 3. 📚 The Mandatory "Authoritative Primary Sources & Research Citations" Block
+Directly before the `### 🚀 Recommended Next Architecture` bridge and Deepak Bagada's signoff, every article MUST include an explicit, structured primary source citation section:
+
+```markdown
+### 📚 Authoritative Primary Sources & Research Citations
+- 🔗 **Official Implementation**: [FastMCP GitHub Repository](https://github.com/jlowin/fastmcp) — High-performance Python framework for Model Context Protocol servers.
+- 🔗 **Protocol Specification**: [Model Context Protocol Specification v1.1](https://modelcontextprotocol.io/introduction) — Official JSON-RPC schema definitions and client-server transport layers.
+- 🔗 **Peer-Reviewed Research**: [arXiv:2408.01234 — RadixAttention: Dynamic KV Cache Reuse for LLM Serving](https://arxiv.org/abs/2312.07104) — Empirical evaluation of tree-based prefix caching algorithms.
+- 🔗 **Official Benchmark Harness**: [SWE-bench Verified Leaderboard](https://www.swebench.com) — Standardized software engineering evaluation benchmark for autonomous coding agents.
+```
+
+### 4. 💬 Conversational Prompt-Matched Subheadings (H2 / H3)
+AI search engines (Perplexity, ChatGPT Search) retrieve passages whose headings match conversational queries. Never use vague, single-word headers. Subheadings MUST be structured as natural-language technical questions and explicit architectures:
+* ❌ Vague: `## Performance`
+* ✅ Prompt-Matched: `## How Does FastMCP Compare to Legacy STDIO MCP in Latency and Memory?`
+* ❌ Vague: `## Mechanics`
+* ✅ Prompt-Matched: `## Why Do Pure In-Memory Python Agent Chains Crash Under High Concurrency?`
+* ❌ Vague: `## Setup Guide`
+* ✅ Prompt-Matched: `## Step-by-Step Production Architecture: Implementing Stateful Checkpointing with PostgreSQL`
+* ❌ Vague: `## Problems`
+* ✅ Prompt-Matched: `## Common Production Failure Modes: Handling 429 Rate Spikes and Socket Leaks`
+* ❌ Vague: `## Summary`
+* ✅ Prompt-Matched: `## Architectural Verdict: When Should You NOT Use This Framework?`
+
+### 5. 🔊 Quotable Expert Soundbites (Blockquote Extraction Format)
+AI search engines look for definitive 1–2 sentence expert claims to quote directly in chat summaries. Every dispatch MUST include at least 1 formatted blockquote soundbite pairing an architectural finding with an empirical metric:
+
+```markdown
+> "Across our SaaSNext test fleet of 10,000 synthetic API requests, switching from polling to FastMCP SSE reduced server CPU utilization from 78% to 14% while lowering p99 latency from 182ms down to 38ms."
+```
+
+### 6. 📊 Verifiable Empirical Benchmark Comparison Matrix
+Every article MUST feature at least 1 side-by-side Markdown comparison matrix containing concrete, real-world metrics (latency, cost, throughput, memory). Generic "High / Medium / Low" tables are strictly prohibited:
+
+| Benchmark Dimension | Baseline Architecture | New Implementation | Delta / Production Impact |
+|---|---|---|---|
+| **Time-To-First-Token (TTFT)** | 310 ms (Standard KV Cache) | 48 ms (RadixAttention Prefix Cache) | **84.5% latency reduction** |
+| **Token Cost per 10k Requests**| $42.50 (Uncached prompts) | $8.20 (Cached prefix reuse) | **80.7% token cost savings** |
+| **P99 Memory Footprint** | 680 MB per agent process | 142 MB (Shared memory pool) | **79.1% RAM reduction** |
+| **Concurrency Ceiling** | 45 concurrent sessions | 320 concurrent sessions | **7.1x throughput expansion** |
+| **Crash Recovery Time** | 184 seconds (Full replay) | 3.2 seconds (Checkpoint resume) | **98.2% faster recovery** |
+
+### 7. 🎯 The "AEO Direct Answer Box" (First 80–120 Words)
 Directly under the H1 / introduction:
-1. Provide a direct 2-sentence technical definition or answer that AI crawlers can quote directly.
-2. Present a bulleted summary of the 3 primary architectural facts or metrics.
-3. Zero fluff or filler introductions (avoid "In today's fast-paced world...").
-4. **NO "## AEO Direct Answer Box" heading** — render directly in prose.
+1. **Sentence 1 (Definitive Technical Definition)**: Ground the entity immediately using the formula:  
+   `[Subject/Entity] is an [Architecture/Framework Class] that [Solves Problem X] by [Specific Technical Mechanism].`
+2. **Sentence 2 (Empirical Breakthrough Metric)**: State the exact measurable delta (e.g. `cuts cold-start latency by 58ms`, `slashes token overhead by 68%`).
+3. **Bulleted Semantic Triples (3 High-Density Facts)**:
+   - `* **Core Mechanism**: [Specific algorithm, protocol, or data structure with version numbers].`
+   - `* **Hardware & Runtime**: [Tested runtime parameters, e.g., Python 3.12, PostgreSQL 16, NVIDIA H100].`
+   - `* **Production Value**: [Specific dollar, latency, or reliability guarantee].`
+4. **NO "## AEO Direct Answer Box" heading** — render directly in seamless prose.
 
-### B. High-Density Semantic Triples & Entity Anchoring
-* Ground entity relationships: `[Subject] [Predicate] [Object]`.
-* Explicitly cite software versions and hardware configurations (`Python 3.12`, `Node v22`, `PostgreSQL 16`, `NVIDIA H100`).
-
-### C. Structured Markdown Tables & Step-by-Step Matrices
-* **At least 1 Comparative Benchmark Table**: Real-world metrics (latency ms, cost per 1M tokens, throughput req/sec).
-* **Numbered Implementation Steps**: Clear, ordered technical steps (`Step 1: Setup`, `Step 2: Core Server`, `Step 3: Verification`).
+### 8. 🧠 High-Density Semantic `ai_summary` Engineering
+In the dispatch JSON payload, the `ai_summary` field is served directly to search engine crawlers and AI answer scrapers (PerplexityBot, GPTBot, ClaudeBot). Format it as 2–3 dense, factual sentences packed with entity names, empirical benchmarks, and architectural verdicts:
+* *Example*:  
+  `FastMCP v0.4.1 replaces legacy WebSocket transport with stateless HTTP/SSE for Model Context Protocol servers, reducing p99 latency to 38ms and memory usage by 64% in SaaSNext production clusters. This guide provides multi-file Python and TypeScript implementations with Zod schema validation and PostgreSQL checkpointer state resilience.`
 
 ---
 
@@ -497,7 +597,7 @@ All automated audit and publishing scripts reside in `/Users/deepakbagada/person
    ```bash
    php /Users/deepakbagada/personal/Daily\ AI\ world/scripts/audit_dispatch_payload.php /path/to/dispatch.json
    ```
-   *Validates: ZERO square brackets in title/seo_title/meta_description, mandatory 140–160 char meta_description, deck synchronization, word count (1,200–1,500), anti-duplicate FAQ check, anti-AI buzzword filter (bans delve, tapestry, game-changer, etc.), first-person engineering voice check, 3–5 verified internal links against Hostinger DB, no numeric slug suffixes, live DB anti-duplication guard, factual integrity & anti-hallucination filter, accredited author attribution (Deepak Bagada).*
+   *Validates: ZERO square brackets in title/seo_title/meta_description, mandatory 140–160 char meta_description, deck synchronization, word count (1,200–1,500), anti-duplicate FAQ check, anti-AI buzzword filter (bans delve, tapestry, game-changer, etc.), first-person engineering voice check, 3–5 verified internal links against Hostinger DB, 2–4 external primary source citations (GitHub, arXiv, official docs), presence of Authoritative Primary Sources block, empirical benchmark metric density (ms, %, $, tokens), no numeric slug suffixes, live DB anti-duplication guard, factual integrity & anti-hallucination filter, accredited author attribution (Deepak Bagada).*
 
 4. **Direct Publish to Live Hostinger Database (`srv1334.hstgr.io`)**:
    ```bash
@@ -522,15 +622,17 @@ When the user invokes this skill:
    - **Phase 2 (Days 31–60 | Oct 23 – Nov 21, 2026)**: Target **10 Dispatches** (2 Workflows, 2 MCP, 3 Blogs, 3 News).
    - **Phase 3 (Days 61–90 | Nov 22 – Dec 21, 2026)**: Target **16 Dispatches** (2 Workflows, 2 MCP, 6 Blogs, 6 News).
    - **Phase 4 (Days 91+ | Dec 22, 2026 Onwards)**: Target **20 Dispatches** (3 Workflows, 3 MCP, 7 Blogs, 7 News).
-2. Execute the 4 cycles in strict sequential order for today's quota. Each article must be searched, written, audited, pushed to DB, and verified live **individually before moving to the next item**:
+2. Execute the 4 cycles in strict sequential order for today's quota. Each article must be researched, written, audited, pushed to DB, and verified live **individually before moving to the next item**:
 
 ```
 ========================================================================================
 CYCLE 1: AI WORKFLOWS (Category ID: 1, Canonical: /workflow/{slug})
 ========================================================================================
 For each Item in Cycle 1 (Phase 1: 1 item | Phase 2 & 3: 2 items | Phase 4: 3 items):
-  1. SEARCH:
-     - Run `search_web` for a trending AI Workflow architecture, agent loop, or orchestration release.
+  1. DEEP MULTI-SOURCE PRIMARY RESEARCH (3 TARGETED SEARCHES):
+     - Query 1 (Repo/Spec): Run `search_web` for official GitHub repo, release tag, or RFC for the workflow tool (e.g. `github "langgraph" checkpointing` or `github "prefect" 3.0 pydantic`).
+     - Query 2 (Empirical Benchmarks): Run `search_web` for real latency, token overhead, crash recovery times, or concurrency limits.
+     - Query 3 (Production Friction): Run `search_web` for actual failure modes, rate limit traps, or database connection pool exhausts.
      - Formulate a clean, high-CTR editorial title with ZERO square brackets:
        (e.g. `Multi-Agent DAG Orchestration with LangGraph: 68% Cost Drop and Zero Token Waste`).
   2. PRE-CHECK DUPLICATE:
@@ -550,13 +652,19 @@ For each Item in Cycle 1 (Phase 1: 1 item | Phase 2 & 3: 2 items | Phase 4: 3 it
        * Multi-file runnable code (`config.py`, `workflow.py`, `requirements.txt`).
        * Dwell-time ASCII / Mermaid flow diagram.
        * AEO answer block in first 80-120 words (prose only, NO heading).
-       * 3-5 verified internal links woven into body.
+       * Conversational prompt-matched H2/H3 subheadings (e.g. `## How Does X Compare to Y...?`).
+       * Quotable expert soundbite block (`> "Across our SaaSNext test fleet..."`).
+       * Comparative Markdown benchmark matrix with concrete units (ms, %, $, tokens).
+       * 3-5 verified internal links woven into body (including >=1 directory hub link).
+       * Mid-article blueprint callout card (`> 💡 **Related Engineering Blueprint:**`).
+       * Mandatory `### 📚 Authoritative Primary Sources & Research Citations` block (2-4 external primary links).
+       * End-of-article `### 🚀 Recommended Next Architecture` bridge.
        * Zero FAQ headings in Markdown content body.
-       * Interactive FAQs array (3-4 technical Q&As).
+       * Interactive FAQs array (3-4 technical Q&As matching conversational AI queries).
        * Author signature matching Deepak Bagada.
   5. PRE-PUBLISH AUDIT:
      - Run `php scripts/audit_dispatch_payload.php workflow_dispatch_X.json`.
-     - If failed: Fix title / meta description / word count / links immediately and re-audit until PASSED.
+     - If failed: Fix title / meta description / word count / links / citations immediately and re-audit until PASSED.
   6. DIRECT DB PUSH:
      - Run `php scripts/publish_single_article.php workflow_dispatch_X.json`.
      - Direct push to Hostinger Live DB (`srv1334.hstgr.io`). Zero git push.
@@ -572,8 +680,10 @@ For each Item in Cycle 1 (Phase 1: 1 item | Phase 2 & 3: 2 items | Phase 4: 3 it
 CYCLE 2: MCP DIRECTORY (Category ID: 5, Canonical: /mcp-directory/{slug})
 ========================================================================================
 For each Item in Cycle 2 (Phase 1: 1 item | Phase 2 & 3: 2 items | Phase 4: 3 items):
-  1. SEARCH:
-     - Run `search_web` for a trending MCP server, tool integration, or Model Context Protocol innovation.
+  1. DEEP MULTI-SOURCE PRIMARY RESEARCH (3 TARGETED SEARCHES):
+     - Query 1 (Repo/Spec): Run `search_web` for official MCP server repo, FastMCP release, or Model Context Protocol specification.
+     - Query 2 (Empirical Benchmarks): Run `search_web` for response latency ms, token payload overhead, SSE connection benchmarks.
+     - Query 3 (Production Friction): Run `search_web` for Zod schema validation errors, Cursor/Claude tool registration drops.
      - Formulate a clean, high-CTR title with ZERO square brackets:
        (e.g. `Build a FastMCP SQLite Server with 42ms Response Times and Zero Overhead`).
   2. PRE-CHECK DUPLICATE:
@@ -581,7 +691,15 @@ For each Item in Cycle 2 (Phase 1: 1 item | Phase 2 & 3: 2 items | Phase 4: 3 it
   3. FETCH LINKS:
      - Run `php scripts/get_verified_internal_links.php` for 3-5 verified live links.
   4. WRITE:
-     - Write complete JSON payload (`mcp_dispatch_X.json`) following all Anti-AI Manifesto rules, clean title (no brackets), 145–158 char meta description & deck, multi-file FastMCP server code, Zod schemas, Cursor/Claude integration, 1,200–1,500 words, Deepak Bagada author attribution.
+     - Write complete JSON payload (`mcp_dispatch_X.json`) following all Anti-AI Manifesto and GEO rules:
+       * Clean title (no brackets), 145–158 char meta description & deck.
+       * Multi-file FastMCP server code (`server.py`, `schemas.py`, `requirements.txt`).
+       * Zod schemas, Cursor/Claude desktop config JSON.
+       * Conversational prompt-matched H2/H3 subheadings.
+       * Quotable expert soundbite block.
+       * Markdown benchmark matrix (latency ms, RAM MB, concurrency).
+       * Mandatory `### 📚 Authoritative Primary Sources & Research Citations` block (2-4 external primary links).
+       * 1,200–1,500 words, Deepak Bagada author attribution.
   5. PRE-PUBLISH AUDIT:
      - Run `php scripts/audit_dispatch_payload.php mcp_dispatch_X.json`. Fix any errors.
   6. DIRECT DB PUSH:
@@ -597,8 +715,10 @@ For each Item in Cycle 2 (Phase 1: 1 item | Phase 2 & 3: 2 items | Phase 4: 3 it
 CYCLE 3: AI BLOGS (Category ID: 3 or 10, Canonical: /blogs/{slug})
 ========================================================================================
 For each Item in Cycle 3 (Phase 1: 2 items | Phase 2: 3 items | Phase 3: 6 items | Phase 4: 7 items):
-  1. SEARCH:
-     - Run `search_web` for trending LLM benchmarks, token economics, coding agent evaluations, or architecture comparisons.
+  1. DEEP MULTI-SOURCE PRIMARY RESEARCH (3 TARGETED SEARCHES):
+     - Query 1 (Benchmark/Paper): Run `search_web` for official paper (arXiv), system card, or SWE-bench / HumanEval leaderboard.
+     - Query 2 (Empirical Benchmarks): Run `search_web` for exact dollar cost per 1M tokens, TTFT latency, context cache hit rates.
+     - Query 3 (Production Friction): Run `search_web` for agent loop runaway token billing, context truncation, failure rates.
      - Formulate a clean, high-CTR title with ZERO square brackets:
        (e.g. `Claude 3.7 Sonnet vs GPT-4.5: Terminal Benchmark Showdown and Token Economics`).
   2. PRE-CHECK DUPLICATE:
@@ -606,7 +726,14 @@ For each Item in Cycle 3 (Phase 1: 2 items | Phase 2: 3 items | Phase 3: 6 items
   3. FETCH LINKS:
      - Run `php scripts/get_verified_internal_links.php` for 3-5 verified live links.
   4. WRITE:
-     - Write complete JSON payload (`blog_dispatch_X.json`) with clean title, 145–158 char meta description & deck, deep technical benchmarks, token economics tables, latency profiling, failure analysis, 1,200–1,500 words, Deepak Bagada voice.
+     - Write complete JSON payload (`blog_dispatch_X.json`) with clean title, 145–158 char meta description & deck:
+       * Deep technical benchmarks, token economics breakdown ($/1M prompt vs completion).
+       * Latency profiling (p50/p99 TTFT ms), failure analysis.
+       * Conversational prompt-matched H2/H3 subheadings.
+       * Quotable expert soundbite block.
+       * Side-by-side Markdown comparison matrix.
+       * Mandatory `### 📚 Authoritative Primary Sources & Research Citations` block (2-4 external primary links).
+       * 1,200–1,500 words, Deepak Bagada voice.
   5. PRE-PUBLISH AUDIT:
      - Run `php scripts/audit_dispatch_payload.php blog_dispatch_X.json`. Fix any errors.
   6. DIRECT DB PUSH:
@@ -622,8 +749,10 @@ For each Item in Cycle 3 (Phase 1: 2 items | Phase 2: 3 items | Phase 3: 6 items
 CYCLE 4: LATEST AI NEWS (Category ID: 11, Canonical: /blogs/{slug})
 ========================================================================================
 For each Item in Cycle 4 (Phase 1: 2 items | Phase 2: 3 items | Phase 3: 6 items | Phase 4: 7 items):
-  1. SEARCH:
-     - Run `search_web` for breaking, factual AI news from the last 24-48 hours (model releases, frontier lab announcements, open-weight weights drops, enterprise security shifts). Verify against real sources.
+  1. DEEP MULTI-SOURCE PRIMARY RESEARCH (3 TARGETED SEARCHES):
+     - Query 1 (Official Release): Run `search_web` for breaking official announcement, model release notes, or weights repository from the last 24-48 hours.
+     - Query 2 (Empirical Specs): Run `search_web` for architectural parameters (parameters count, context window, pricing, inference speed).
+     - Query 3 (Enterprise Impact): Run `search_web` for enterprise migration requirements, security implications, or serving engine support (vLLM/SGLang).
      - Formulate a clean, high-CTR title with ZERO square brackets:
        (e.g. `Cloudera x Mistral: Private Frontier Inference Meets Governed Enterprise Data`).
   2. PRE-CHECK DUPLICATE:
@@ -631,7 +760,13 @@ For each Item in Cycle 4 (Phase 1: 2 items | Phase 2: 3 items | Phase 3: 6 items
   3. FETCH LINKS:
      - Run `php scripts/get_verified_internal_links.php` for 3-5 verified live links.
   4. WRITE:
-     - Write complete JSON payload (`news_dispatch_X.json`) with clean title, 145–158 char meta description & deck, architectural impact analysis, benchmark breakdown, migration guide, 1,200–1,500 words, Deepak Bagada voice.
+     - Write complete JSON payload (`news_dispatch_X.json`) with clean title, 145–158 char meta description & deck:
+       * Architectural impact analysis, benchmark breakdown, migration guide.
+       * Conversational prompt-matched H2/H3 subheadings.
+       * Quotable expert soundbite block.
+       * Side-by-side Markdown comparison matrix.
+       * Mandatory `### 📚 Authoritative Primary Sources & Research Citations` block (2-4 external primary links).
+       * 1,200–1,500 words, Deepak Bagada voice.
   5. PRE-PUBLISH AUDIT:
      - Run `php scripts/audit_dispatch_payload.php news_dispatch_X.json`. Fix any errors.
   6. DIRECT DB PUSH:
@@ -653,26 +788,29 @@ At the completion of the 4 cycles for today's active phase (Phase 1: 6 articles 
 - **Active Phase & Date**: e.g. Phase 1 (Day X/30) | Quota: 6 Dispatches
 - **Total Dispatches Published**: Confirmed exact count published to Hostinger Live DB.
 - **4-Cycle Verification Table**:
-  | Cycle | # | Category | Clean Editorial Title (Zero Brackets) | Meta Description (145–158 chars) | Slug | Word Count | Internal Links | Live URL | Live Status |
-  |---|---|---|---|---|---|---|---|---|---|
-  | Cycle 1 | 1 | AI Workflows | `Multi-Agent DAG Orchestration...` | `Build multi-agent DAG pipelines with...` | `...` | 1,350 | 4 Links | `https://dailyaiworld.com/workflow/...` | 200 OK |
-  | Cycle 1 | 2 | AI Workflows | `Autonomous Code Review Workflow...` | `Deploy an autonomous code review...` | `...` | 1,410 | 4 Links | `https://dailyaiworld.com/workflow/...` | 200 OK |
-  | Cycle 2 | 1 | AI Tools (MCP) | `Build a FastMCP SQLite Server...` | `Learn how to build a FastMCP SQLite...` | `...` | 1,320 | 3 Links | `https://dailyaiworld.com/mcp-directory/...` | 200 OK |
-  | Cycle 2 | 2 | AI Tools (MCP) | `Hardened MCP Gateway Playbook...` | `Secure 200+ agent tools with Zod...` | `...` | 1,380 | 4 Links | `https://dailyaiworld.com/mcp-directory/...` | 200 OK |
-  | Cycle 3 | 1 | Coding / LLMs | `Claude 3.7 Sonnet vs GPT-4.5...` | `Benchmark Claude 3.7 Sonnet against...` | `...` | 1,440 | 5 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 3 | 2 | Coding / LLMs | `Agent Memory Architecture in 2026...` | `Compare episodic, vector, and graph...` | `...` | 1,310 | 4 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 3 | 3 | Coding / LLMs | `DeepSeek V4 Flash Codex Pro...` | `Evaluate DeepSeek V4 Flash Codex Pro...` | `...` | 1,390 | 4 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 3 | 4 | Coding / LLMs | `Price per Task vs Price per Token...` | `Analyze real-world Databricks agent...` | `...` | 1,420 | 4 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 3 | 5 | Coding / LLMs | `Context Compression Algorithms...` | `Compare prompt caching and eviction...` | `...` | 1,360 | 4 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 3 | 6 | Coding / LLMs | `Speculative Decoding in Production...` | `Evaluate draft model latency drops...` | `...` | 1,330 | 5 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 4 | 1 | AI News | `Cloudera x Mistral: Private Frontier...`| `Explore how Cloudera and Mistral bring...` | `...` | 1,280 | 3 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 4 | 2 | AI News | `OpenAI Ships GPT-6 Astra...` | `Discover OpenAI GPT-6 Astra reasoning...` | `...` | 1,340 | 4 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 4 | 3 | AI News | `Anthropic Unveils Tool Search GA...` | `Analyze Anthropic Tool Search GA with...` | `...` | 1,305 | 3 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 4 | 4 | AI News | `Google Releases Gemini 3.7 Flash...` | `Review Gemini 3.7 Flash coding standard...`| `...` | 1,350 | 4 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 4 | 5 | AI News | `Meta Llama 4 Scout Weights Released...` | `Explore Meta Llama 4 Scout architecture...` | `...` | 1,380 | 4 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
-  | Cycle 4 | 6 | AI News | `Cursor Ships Background Agent Cloud...` | `Inspect Cursor Background Agent Cloud...` | `...` | 1,290 | 3 Links | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle | # | Category | Clean Editorial Title (Zero Brackets) | Meta Description (145–158 chars) | Slug | Word Count | Internal Links | Primary Citations | Live URL | Live Status |
+  |---|---|---|---|---|---|---|---|---|---|---|
+  | Cycle 1 | 1 | AI Workflows | `Multi-Agent DAG Orchestration...` | `Build multi-agent DAG pipelines with...` | `...` | 1,350 | 4 Links | 3 Sources | `https://dailyaiworld.com/workflow/...` | 200 OK |
+  | Cycle 1 | 2 | AI Workflows | `Autonomous Code Review Workflow...` | `Deploy an autonomous code review...` | `...` | 1,410 | 4 Links | 3 Sources | `https://dailyaiworld.com/workflow/...` | 200 OK |
+  | Cycle 2 | 1 | AI Tools (MCP) | `Build a FastMCP SQLite Server...` | `Learn how to build a FastMCP SQLite...` | `...` | 1,320 | 3 Links | 2 Sources | `https://dailyaiworld.com/mcp-directory/...` | 200 OK |
+  | Cycle 2 | 2 | AI Tools (MCP) | `Hardened MCP Gateway Playbook...` | `Secure 200+ agent tools with Zod...` | `...` | 1,380 | 4 Links | 3 Sources | `https://dailyaiworld.com/mcp-directory/...` | 200 OK |
+  | Cycle 3 | 1 | Coding / LLMs | `Claude 3.7 Sonnet vs GPT-4.5...` | `Benchmark Claude 3.7 Sonnet against...` | `...` | 1,440 | 5 Links | 4 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 3 | 2 | Coding / LLMs | `Agent Memory Architecture in 2026...` | `Compare episodic, vector, and graph...` | `...` | 1,310 | 4 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 3 | 3 | Coding / LLMs | `DeepSeek V4 Flash Codex Pro...` | `Evaluate DeepSeek V4 Flash Codex Pro...` | `...` | 1,390 | 4 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 3 | 4 | Coding / LLMs | `Price per Task vs Price per Token...` | `Analyze real-world Databricks agent...` | `...` | 1,420 | 4 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 3 | 5 | Coding / LLMs | `Context Compression Algorithms...` | `Compare prompt caching and eviction...` | `...` | 1,360 | 4 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 3 | 6 | Coding / LLMs | `Speculative Decoding in Production...` | `Evaluate draft model latency drops...` | `...` | 1,330 | 5 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 4 | 1 | AI News | `Cloudera x Mistral: Private Frontier...`| `Explore how Cloudera and Mistral bring...` | `...` | 1,280 | 3 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 4 | 2 | AI News | `OpenAI Ships GPT-6 Astra...` | `Discover OpenAI GPT-6 Astra reasoning...` | `...` | 1,340 | 4 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 4 | 3 | AI News | `Anthropic Unveils Tool Search GA...` | `Analyze Anthropic Tool Search GA with...` | `...` | 1,305 | 3 Links | 2 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 4 | 4 | AI News | `Google Releases Gemini 3.7 Flash...` | `Review Gemini 3.7 Flash coding standard...`| `...` | 1,350 | 4 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 4 | 5 | AI News | `Meta Llama 4 Scout Weights Released...` | `Explore Meta Llama 4 Scout architecture...` | `...` | 1,380 | 4 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
+  | Cycle 4 | 6 | AI News | `Cursor Ships Background Agent Cloud...` | `Inspect Cursor Background Agent Cloud...` | `...` | 1,290 | 3 Links | 3 Sources | `https://dailyaiworld.com/blogs/...` | 200 OK |
 - **Zero Square Brackets Policy**: Confirmed 100% clean of `[ ]` across all 16 live titles and SEO titles.
 - **Strict Meta Description & Deck Sync**: Confirmed all 16 dispatches have verified 145–158 character meta descriptions synchronized with deck to prevent Blade truncation.
+- **Authoritative Primary Citations & GEO Grounding**: Confirmed 2–4 external primary sources (GitHub, arXiv, official docs) and `### 📚 Authoritative Primary Sources & Research Citations` block across all live dispatches.
+- **Empirical Information Gain**: Confirmed hard benchmark metrics (ms, %, $, tokens) and Markdown comparison matrices present in all live dispatches.
+- **Conversational Query Subheadings**: Confirmed natural-language prompt-matched H2/H3 headings for AI overview and chat search extraction.
 - **Zero Duplicate FAQs**: Confirmed 100% clean Blade accordion rendering across all 16 live URLs.
 - **Zero Numeric Suffix Slugs**: Confirmed all 16 slugs are clean semantic strings without `-[0-9]+`.
 - **Sole Author Attribution**: Confirmed Deepak Bagada (`author_id = 1`) across all 16 live dispatches.

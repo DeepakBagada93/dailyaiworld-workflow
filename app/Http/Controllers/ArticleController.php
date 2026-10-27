@@ -56,10 +56,10 @@ class ArticleController extends Controller
         }
 
         // Resolve the published article by slug.
-        // If not found, attempt fuzzy resolution (e.g. stripped timestamps or prefix matches)
+        // Accepts any article with status='published' so scheduled dispatches don't 301-redirect prematurely when Googlebot crawls.
         $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
             ->where('slug', $slug)
-            ->published()
+            ->where('status', 'published')
             ->first();
 
         if (!$article) {
@@ -67,7 +67,7 @@ class ArticleController extends Controller
             // 2. Check if slug has numeric duplicate suffix like -2, -3, etc.
             $baseDuplicateSlug = preg_replace('/-[0-9]+$/', '', $slug);
             if ($baseDuplicateSlug !== $slug) {
-                $canonicalArticle = Article::where('slug', $baseDuplicateSlug)->published()->first();
+                $canonicalArticle = Article::where('slug', $baseDuplicateSlug)->where('status', 'published')->first();
                 if ($canonicalArticle) {
                     return redirect($canonicalArticle->url, 301);
                 }
@@ -79,7 +79,7 @@ class ArticleController extends Controller
             
             $article = Article::with(['category', 'author', 'comments', 'sponsorships.sponsor', 'affiliateLinks'])
                 ->where('slug', 'like', $cleanSlug . '%')
-                ->published()
+                ->where('status', 'published')
                 ->first();
 
             if ($article) {
@@ -88,7 +88,7 @@ class ArticleController extends Controller
 
             // 4. Reverse prefix match: existing article whose slug is a prefix of requested slug
             $reversePrefixArt = Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])
-                ->published()
+                ->where('status', 'published')
                 ->first();
 
             if ($reversePrefixArt) {

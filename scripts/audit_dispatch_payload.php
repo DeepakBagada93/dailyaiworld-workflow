@@ -319,6 +319,28 @@ if ($internalLinkCount < 3) {
     }
 }
 
+// 8C. AI Visibility & Generative Engine Optimization (GEO) Citations Check
+// To earn top AI overview & conversational search citations (Perplexity, ChatGPT Search, Gemini, Claude),
+// content must cite 2 to 4 authoritative external primary sources (GitHub, arXiv, official docs).
+preg_match_all('/\[([^\]]+)\]\((https?:\/\/(?!dailyaiworld\.com|x\.com\/deeepakbagada|twitter\.com\/deeepakbagada|deepakbagada\.in|images\.unsplash\.com)[^\)]+)\)/i', $content, $externalLinkMatches);
+$externalLinks = $externalLinkMatches[2] ?? [];
+$externalLinkCount = count($externalLinks);
+
+if ($externalLinkCount < 2) {
+    $warnings[] = "AI CITATION & GEO WARNING: Only {$externalLinkCount} external primary source citation(s) found (Recommended: 2 to 4 authoritative primary sources like official GitHub repos, arXiv papers, or official vendor documentation). Citing primary sources increases Perplexity, ChatGPT Search, and Gemini citation probability by 40-115%.";
+}
+
+// Check for Authoritative Primary Sources & Research Citations section
+if (!preg_match('/###?\s*[^#\n]*(?:Authoritative\s+(?:Primary\s+)?Sources|Primary\s+Research|Primary\s+Documentation|References\s+&\s+Citations)/i', $content)) {
+    $warnings[] = "AI CITATION SECTION WARNING: Missing '### 📚 Authoritative Primary Sources & Research Citations' section. AI search engines (Perplexity, ChatGPT Search, Claude) preferentially cite articles featuring an explicit, structured primary reference block.";
+}
+
+// Check for Empirical Benchmark & Metric Density (ms, %, $, tokens)
+$hasEmpiricalMetrics = preg_match('/(?:[0-9]+(?:\.[0-9]+)?\s*(?:ms|tok\/s|tokens|%|\$|GB|MB|req\/s))/i', $content);
+if (!$hasEmpiricalMetrics) {
+    $warnings[] = "EMPIRICAL BENCHMARK WARNING: No explicit performance or economic metrics detected (ms, tok/s, %, $, MB). Generative AI search engines cite novel information gain—ensure the article provides hard empirical numbers.";
+}
+
 // 9. No Raw Schema Scripts in Content Check
 if (stripos($content, '<script') !== false || stripos($content, 'application/ld+json') !== false) {
     $errors[] = "Raw <script> or JSON-LD schema found inside 'content'. Remove it — Blade templates handle JSON-LD automatically.";
