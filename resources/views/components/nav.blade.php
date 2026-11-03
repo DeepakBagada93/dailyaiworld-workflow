@@ -55,6 +55,15 @@
                class="px-3.5 py-2 rounded-lg transition-all duration-200 {{ request()->routeIs('advertise') ? 'text-[#6D28D9] bg-[#FAF5FF] border border-[#E9D5FF] font-extrabold shadow-2xs' : 'hover:text-[#6D28D9] hover:bg-[#FAF5FF]' }}">
                 <span itemprop="name">Sponsor</span>
             </a>
+            <a href="https://deepakbagada.in/products?utm_source=dailyaiworld&utm_medium=nav&utm_campaign=store" 
+               itemprop="url"
+               target="_blank"
+               rel="noopener"
+               title="Production AI Toolkits, FastMCP Starters & Agent Blueprints by Deepak Bagada"
+               class="px-3 py-2 rounded-lg transition-all duration-200 flex items-center gap-1 hover:text-[#6D28D9] hover:bg-[#FAF5FF]">
+                <span itemprop="name">Toolkits</span>
+                <span class="text-[10px] text-[#6D28D9] font-mono leading-none">↗</span>
+            </a>
         </nav>
 
         <!-- Right Utilities: Interactive Search, Executive Pass CTA & Mobile Hamburger -->
@@ -134,6 +143,15 @@
            title="Partner with Daily AI World: Reach 42,000+ AI Architects & Tech Leaders"
            class="block px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors {{ request()->routeIs('advertise') ? 'text-[#6D28D9] font-bold bg-[#FAF5FF]' : '' }}">
             <span itemprop="name">Sponsor Tier</span>
+        </a>
+        <a href="https://deepakbagada.in/products?utm_source=dailyaiworld&utm_medium=mobile_nav&utm_campaign=store" 
+           itemprop="url"
+           target="_blank"
+           rel="noopener"
+           title="Production AI Toolkits by Deepak Bagada"
+           class="flex items-center justify-between px-3.5 py-2.5 rounded-xl hover:bg-[#FAF5FF] hover:text-[#6D28D9] transition-colors">
+            <span itemprop="name">Production Toolkits</span>
+            <span class="text-xs text-[#6D28D9] font-mono font-bold">↗</span>
         </a>
         <a href="{{ route('subscribe') }}#executive-tier" 
            class="block px-3.5 py-2.5 rounded-xl bg-gradient-to-r from-[#6D28D9] to-[#7C3AED] text-white text-center font-extrabold mt-2">

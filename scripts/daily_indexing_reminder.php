@@ -192,11 +192,16 @@ $schedule = [
     ],
 ];
 
-$currentTask = $schedule[$todayDateStr] ?? [
-    'day' => "Ongoing Daily Routine ({$todayDayName}, {$todayDateStr})",
-    'target' => "Daily Dispatches + Unindexed Hostinger Backlog (200 URLs)",
-    'command' => 'php scripts/fast_google_index.php --month=' . $today->format('m') . ' --limit=200',
-    'secondary' => 'Queue newly published articles to Google Indexing API + IndexNow',
+// Dynamic Multi-Month Rolling Window (Previous month + Current month)
+$prevMonth = date('m', strtotime('-1 month'));
+$currMonth = $today->format('m');
+$targetMonths = ($prevMonth === $currMonth) ? $currMonth : "{$prevMonth},{$currMonth}";
+
+$currentTask = [
+    'day' => "Automated Daily Indexing Radar ({$todayDayName}, {$todayDateStr})",
+    'target' => "Core Hubs + Today's Dispatches + Unindexed Backlog ({$remainingQuota} URLs)",
+    'command' => "php scripts/fast_google_index.php --month={$targetMonths} --force --limit={$remainingQuota} --submit-indexnow",
+    'secondary' => "Submit Core Directory Hubs, Google Indexing API & IndexNow (Bing/Copilot)",
 ];
 
 echo " Task Assigned:     {$currentTask['day']}\n";
@@ -206,12 +211,12 @@ echo " Secondary Task:    {$currentTask['secondary']}\n\n";
 if ($submittedToday >= 200) {
     echo " ✅ STATUS: Today's Google quota (200/200) has already been SUBMITTED!\n";
     echo " ℹ️  All 200 target URLs are currently in Googlebot's active priority crawl queue.\n";
-    echo " ➡️  YOU MAY NOW PROCEED TO PUBLISH TODAY'S DISPATCHES OR WORK ON SITE FEATURES.\n";
+    echo " ➡️  Cadence is fully satisfied for today.\n";
 } else {
-    echo " ⚠️  ACTION REQUIRED: Today's batch has not been fully submitted yet.\n";
-    echo " Run this command now to submit today's 200 batch:\n\n";
+    echo " ⚠️  ACTION REQUIRED: Today's quota has {$remainingQuota} slots available.\n";
+    echo " Run this command now (or use --run-today) to submit the batch:\n\n";
     echo "   \033[1;32m{$currentTask['command']}\033[0m\n\n";
-    echo " Once submitted, proceed to search & write new dispatches in sequence.\n";
+    echo " Or run via Artisan: \033[1;36mphp artisan indexing:radar --run-today\033[0m\n";
 }
 
 echo "======================================================================\n\n";
@@ -222,6 +227,23 @@ if (isset($options['run-today'])) {
         echo "⚠️ Quota already exhausted. Skipping execution.\n";
         exit(0);
     }
-    echo "🚀 Running today's command: {$currentTask['command']} ...\n";
-    passthru($currentTask['command']);
+    
+    echo "🌐 Step 3A: Ensuring Core Directory Hubs are fresh in Google Index...\n";
+    $hubs = [
+        'https://dailyaiworld.com/',
+        'https://dailyaiworld.com/workflows',
+        'https://dailyaiworld.com/mcp-directory',
+        'https://dailyaiworld.com/latest-ai-news',
+    ];
+    foreach ($hubs as $hub) {
+        $res = GoogleIndexingService::publishUrl($hub, 'URL_UPDATED');
+        echo "   -> {$hub} : " . ($res['success'] ? '✅ OK (200)' : "⚠️ HTTP {$res['status']}") . "\n";
+    }
+    
+    $remainingAfterHubs = max(0, 200 - GoogleIndexingService::getSubmittedTodayCount());
+    if ($remainingAfterHubs > 0) {
+        $execCommand = "php scripts/fast_google_index.php --month={$targetMonths} --force --limit={$remainingAfterHubs} --submit-indexnow";
+        echo "\n🚀 Step 3B: Running batch command: {$execCommand} ...\n";
+        passthru($execCommand);
+    }
 }

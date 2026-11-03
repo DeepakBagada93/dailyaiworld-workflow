@@ -356,6 +356,127 @@
             </a>
         </section>
 
+        <!-- Production Toolkits & Developer Kits Showcase (Founder Deepak Bagada) -->
+        <section class="mt-14 sm:mt-16" aria-labelledby="toolkits-showcase-title">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[#dfddd6]">
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="inline-block w-2 h-2 rounded-full bg-[#7047d7]"></span>
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-[#7047d7] font-bold">Production Codebases · Instant Download</span>
+                    </div>
+                    <h2 id="toolkits-showcase-title" class="font-serif text-2xl sm:text-3xl font-extrabold text-[#111323] tracking-tight">
+                        Production Toolkits &amp; Agent Starters
+                    </h2>
+                    <p class="text-xs sm:text-sm text-[#586174] mt-1 max-w-2xl">
+                        Pre-built, commercial-licensed architecture kits authored by Founder <a href="https://deepakbagada.in" target="_blank" rel="noopener" class="font-semibold text-[#111323] hover:text-[#7047d7] underline decoration-[#dfddd6]">Deepak Bagada</a>. Skip weeks of boilerplate.
+                    </p>
+                </div>
+                <a href="https://deepakbagada.in/products?utm_source=dailyaiworld&utm_medium=home_section&utm_campaign=all_products" 
+                   target="_blank" 
+                   rel="noopener"
+                   class="inline-flex items-center gap-1.5 font-mono text-xs font-bold text-[#7047d7] hover:text-[#502bb5] transition-colors shrink-0">
+                    <span>Explore All 28 Toolkits</span>
+                    <span class="text-sm">↗</span>
+                </a>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-5">
+                <!-- Product 1: The AI Systems Master Bundle -->
+                <article class="p-6 rounded-2xl bg-gradient-to-br from-[#111323] to-[#1e1b4b] text-white flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:shadow-xl relative overflow-hidden group">
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-[#7047d7]/20 rounded-full blur-2xl group-hover:bg-[#7047d7]/35 transition-all"></div>
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-0.5 rounded-full bg-[#7047d7] text-white font-mono text-[10px] font-bold tracking-wider uppercase">Master Bundle</span>
+                            <span class="font-mono text-xs text-[#d4ff64] font-bold">₹9,999 / $149</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-white group-hover:text-[#d4ff64] transition-colors">
+                            The AI Systems Master Bundle
+                        </h3>
+                        <p class="text-xs text-white/70 mt-2 line-clamp-3 leading-relaxed">
+                            Every production engineering toolkit in one package: Agency Delivery OS, Context Architect, FastMCP Launch Kit, and n8n Hardener with commercial license.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-white/60">
+                            <span class="px-2 py-0.5 rounded bg-white/10">Multi-Agent</span>
+                            <span class="px-2 py-0.5 rounded bg-white/10">MCP</span>
+                            <span class="px-2 py-0.5 rounded bg-white/10">CI Pipelines</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-white/10 flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-white/50">Instant ZIP + Lifetime Updates</span>
+                        <a href="https://deepakbagada.in/products/agent-skills-master-bundle?utm_source=dailyaiworld&utm_medium=home_grid&utm_campaign=master_bundle" 
+                           target="_blank" 
+                           rel="noopener sponsored"
+                           class="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#d4ff64] group-hover:translate-x-0.5 transition-transform">
+                            <span>Get Bundle</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Product 2: MCP Server Launch Kit -->
+                <article class="p-6 rounded-2xl bg-white border border-[#dfddd6] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#7047d7] hover:shadow-lg group">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-0.5 rounded-full bg-purple-50 text-[#7047d7] border border-[#e9d5ff] font-mono text-[10px] font-bold tracking-wider uppercase">Agent Toolkits</span>
+                            <span class="font-mono text-xs text-[#111323] font-bold">₹2,499 / $99</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-[#111323] group-hover:text-[#7047d7] transition-colors">
+                            MCP Server Launch Kit
+                        </h3>
+                        <p class="text-xs text-[#586174] mt-2 line-clamp-3 leading-relaxed">
+                            From tool spec to smoke-tested, security-gated FastMCP server. Pre-configured for Cursor, Claude Desktop, and enterprise microservices with zero DAG bottleneck.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-[#586174]">
+                            <span class="px-2 py-0.5 rounded bg-[#f7f6f2] border border-[#dfddd6]">FastMCP</span>
+                            <span class="px-2 py-0.5 rounded bg-[#f7f6f2] border border-[#dfddd6]">Cursor</span>
+                            <span class="px-2 py-0.5 rounded bg-[#f7f6f2] border border-[#dfddd6]">TypeScript / Python</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-[#dfddd6] flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-[#586174]">Commercial License</span>
+                        <a href="https://deepakbagada.in/products/mcp-server-launch-kit?utm_source=dailyaiworld&utm_medium=home_grid&utm_campaign=mcp_launch_kit" 
+                           target="_blank" 
+                           rel="noopener sponsored"
+                           class="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#7047d7] group-hover:translate-x-0.5 transition-transform">
+                            <span>Inspect Kit</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Product 3: GEO Visibility OS -->
+                <article class="p-6 rounded-2xl bg-white border border-[#dfddd6] flex flex-col justify-between transition-all duration-300 hover:-translate-y-1 hover:border-[#7047d7] hover:shadow-lg group">
+                    <div>
+                        <div class="flex items-center justify-between gap-2 mb-3">
+                            <span class="px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 font-mono text-[10px] font-bold tracking-wider uppercase">Content &amp; AEO</span>
+                            <span class="font-mono text-xs text-[#111323] font-bold">₹2,499 / $99</span>
+                        </div>
+                        <h3 class="font-serif text-lg font-bold text-[#111323] group-hover:text-[#7047d7] transition-colors">
+                            GEO Visibility OS
+                        </h3>
+                        <p class="text-xs text-[#586174] mt-2 line-clamp-3 leading-relaxed">
+                            Turn "are we visible in ChatGPT &amp; Perplexity?" into rank #1 AI citations. Includes benchmark audits, entity schema maps, and zero-SaaS prompts.
+                        </p>
+                        <div class="mt-4 flex flex-wrap gap-1.5 font-mono text-[10px] text-[#586174]">
+                            <span class="px-2 py-0.5 rounded bg-[#f7f6f2] border border-[#dfddd6]">GEO &amp; AEO</span>
+                            <span class="px-2 py-0.5 rounded bg-[#f7f6f2] border border-[#dfddd6]">Perplexity</span>
+                            <span class="px-2 py-0.5 rounded bg-[#f7f6f2] border border-[#dfddd6]">Audit Prompts</span>
+                        </div>
+                    </div>
+                    <div class="mt-6 pt-4 border-t border-[#dfddd6] flex items-center justify-between">
+                        <span class="text-[11px] font-mono text-[#586174]">30-Day Guarantee</span>
+                        <a href="https://deepakbagada.in/products/geo-visibility-os?utm_source=dailyaiworld&utm_medium=home_grid&utm_campaign=geo_visibility_os" 
+                           target="_blank" 
+                           rel="noopener sponsored"
+                           class="inline-flex items-center gap-1 font-mono text-xs font-bold text-[#7047d7] group-hover:translate-x-0.5 transition-transform">
+                            <span>Inspect Kit</span>
+                            <span>↗</span>
+                        </a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <section class="newsletter-panel" aria-labelledby="newsletter-title"
                  x-data="{
                      email: '',

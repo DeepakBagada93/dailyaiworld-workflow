@@ -112,6 +112,21 @@ To systematically index all 1,444 articles and clear the 200-URL backlog without
   - Validate `application/ld+json` for `TechArticle` and `FAQPage` schema on live articles.
   - Structure benchmarks with explicit HTML `<table>` elements (AI engines scrape tables 4x more reliably than plain markdown).
 
+### D. Automated Multi-Platform Syndication & High-DA Backlink Engine (Dev.to DA 92)
+- [x] **Dev.to REST API Integration (`DEVTO_API_KEY` active)**:
+  - Created `scripts/syndicate_to_devto.php` to push articles directly to Dev.to.
+  - Automatically embeds `<link rel="canonical" href="https://dailyaiworld.com/...">` in HTML head.
+  - Injects contextual author bridge linking back to `dailyaiworld.com` and `/workflows`.
+  - First article live on Dev.to: [LlamaIndex Workflows vs LangGraph Showdown](https://dev.to/deepak_bagada_98e87bd2723/llamaindex-workflows-vs-langgraph-event-driven-architecture-and-async-state-overhead-showdown-407l) (Dev.to Post ID: 4963330).
+- [ ] **Phase 1 Strategy (Months 1–2 / Current)**:
+  - Syndicate **1 to 2 Flagship Dispatches per day** to Dev.to.
+  - Builds **30 to 60 DA 92 dofollow/canonical backlinks per month**, systematically elevating site DA and accelerating Google crawl velocity.
+- [ ] **Phase 2 Expansion (Months 3–4)**:
+  - Integrate **Hashnode (DA 88)** GraphQL API and **Medium (DA 95)** REST API.
+  - Scale to 2–3 cross-platform syndications per day.
+- [ ] **Phase 3 Wikipedia & GitHub Co-Citations (Months 5+)**:
+  - Run `dailyai-wiki-backlinks` skill to fulfill 1–2 Wikipedia `[citation needed]` or dead links per week.
+
 ---
 
 ## 🛠️ Quick Daily Commands Reference
@@ -125,4 +140,7 @@ php scripts/daily_indexing_reminder.php --run-today
 
 # 3. Check Google Indexing API usage status
 php scripts/fast_google_index.php --status
+
+# 4. Syndicate flagship article to Dev.to (DA 92 Backlink)
+php scripts/syndicate_to_devto.php --article-id=<id>
 ```

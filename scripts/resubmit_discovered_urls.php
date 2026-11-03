@@ -32,9 +32,24 @@ foreach ($csvFiles as $f) {
     }
 }
 
+$options = getopt('', ['limit:', 'force']);
 $urls = array_values(array_unique($urls));
 $total = count($urls);
 echo "Loaded {$total} unique URLs from " . implode(' & ', $csvFiles) . "\n\n";
+
+$submittedToday = GoogleIndexingService::getSubmittedTodayCount();
+$remainingQuota = max(0, 200 - $submittedToday);
+echo "Google Indexing API Quota: {$submittedToday}/200 used today. Remaining slots: {$remainingQuota}\n";
+
+$limit = isset($options['limit']) ? (int)$options['limit'] : $remainingQuota;
+if ($limit <= 0) {
+    echo "⚠️ Google daily quota of 200 requests is already reached for today!\n";
+    echo "Skipping Google Indexing API submission to prevent 429 errors.\n";
+    $urlsToSubmit = [];
+} else {
+    $urlsToSubmit = array_slice($urls, 0, $limit);
+    echo "Submitting {$limit} URLs to Google Indexing API today...\n\n";
+}
 
 $credPath = GoogleIndexingService::getCredentialsPath();
 echo "Credentials: {$credPath}\n";
@@ -47,9 +62,10 @@ $successCount = 0;
 $failCount = 0;
 $results = [];
 
-foreach ($urls as $idx => $url) {
+foreach ($urlsToSubmit as $idx => $url) {
     $num = $idx + 1;
-    echo "[{$num}/{$total}] Submitting: {$url} ... ";
+    $submitTotal = count($urlsToSubmit);
+    echo "[{$num}/{$submitTotal}] Submitting: {$url} ... ";
     
     $res = GoogleIndexingService::publishUrl($url, 'URL_UPDATED');
     
@@ -83,7 +99,7 @@ echo "Failed:      {$failCount}\n";
 // Also notify IndexNow (Bing/Yandex) in batch
 try {
     echo "\nNotifying IndexNow (Bing & Yandex) for all {$total} URLs...\n";
-    $indexNowRes = IndexingService::submitIndexNow($urls);
+    $indexNowRes = IndexingService::submitToIndexNow($urls);
     if ($indexNowRes['success'] ?? false) {
         echo "✅ IndexNow accepted batch submission (HTTP " . ($indexNowRes['status'] ?? 200) . ")\n";
     } else {

@@ -1,0 +1,17 @@
+# Wikipedia Citation Template (WP:RS Compliant)
+# Parameter mapping for Daily AI World articles:
+
+<ref>{{cite web
+  | url          = {{ARTICLE_URL}}
+  | title        = {{ARTICLE_TITLE}}
+  | author       = Bagada, Deepak
+  | publisher    = Daily AI World
+  | date         = {{PUBLISHED_DATE}}
+  | access-date  = {{TODAY_DATE}}
+  | quote        = {{CONTEXT_QUOTE}}
+}}</ref>
+
+# Standard Compliant Edit Summaries:
+# For Dead Link: "Replaced dead external link with active technical documentation per WP:DEADREF"
+# For Citation Needed: "Added verifiable empirical benchmark source per WP:RS"
+# For Protocol Specification: "Added technical architectural reference for protocol specification per WP:RS"

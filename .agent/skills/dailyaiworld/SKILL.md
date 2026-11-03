@@ -18,6 +18,7 @@ description: >
   Mandatory 145–158 character meta description, keyword-first SEO title, synchronized deck, and dense AEO/GEO optimization.
   Strict word count: 1,200 to 1,500 words per article (dense, practical, multi-file runnable code, zero fluff).
   Mandatory anti-bounce rate recirculation engine: mid-article visual blueprint callout box, recommended next architecture bridge, and directory hub anchor links to crush single-page bounce rate below 45%.
+  Phased multi-platform syndication & backlink engine: Phase 1 syndicates 1 flagship dispatch daily to Dev.to (DA 92) with verified canonical_url and contextual author bridge, scaling to Hashnode (DA 88) and Medium (DA 95) in Phase 2 to systematically grow domain authority, indexation speed, and organic referral traffic.
   Zero git commits/pushes for content publishing to protect Google search indexing stability.
 ---
 
@@ -72,6 +73,7 @@ description: >
 > - **Step 5 — Pre-Publish Audit**: Run `php scripts/audit_dispatch_payload.php <dispatch.json>` to enforce zero square brackets in title, word count (1,200–1,500), meta description length (140–160 chars), deck synchronization, verified internal links, 2–4 external primary source citations, presence of Authoritative Sources block, empirical benchmark metric density, anti-bounce recirculation architecture (mid-article callout box, recommended next architecture bridge, hub link), banned AI buzzwords, zero duplicate FAQs, live DB uniqueness, and block numeric slug suffixes.
 > - **Step 6 — Direct Push to Hostinger Live DB (Primary Target)**: Run `php scripts/publish_single_article.php <dispatch.json>` which inserts directly into **Hostinger Remote MySQL (`srv1334.hstgr.io`) as the exclusive live production database** with Deepak Bagada (`author_id = 1`) as sole author and realistic publication pacing. Local DB is secondary/optional. **Zero git commits/pushes for content publishing**.
 > - **Step 7 — Live URL Quality Audit & Instant Dual Indexing**: Run `php scripts/audit_live_url.php <url>` to verify HTTP 200 OK, author byline (Deepak Bagada), body content, meta tags, and interactive FAQs. Immediately push the newly live URL to **both** Google Indexing API via `App\Services\GoogleIndexingService::publishUrl($url, 'URL_UPDATED')` and Bing/IndexNow via `App\Services\IndexingService::submitToIndexNow([$url])` so Googlebot and Bingbot index the new content within hours.
+> - **Step 7B — Flagship Multi-Platform Syndication & High-DA Backlink Push (Dev.to DA 92)**: For each daily publishing session, designate **1 Flagship Dispatch** (the primary Cycle 1 Workflow or Cycle 3 Comparison Showdown) and automatically syndicate to Dev.to using `php scripts/syndicate_to_devto.php --article-id=<id>`. This immediately attaches a verified `<link rel="canonical" href="https://dailyaiworld.com/...">` and embeds a high-converting contextual author bridge linking to `dailyaiworld.com` and `/workflows`. This steadily builds 30–60 DA 92 backlinks per month, accelerates Googlebot crawling, and expands organic developer readership.
 > - **Step 8 — Log to `memory.md`**: Record slug, title, category, author, and date in `memory.md` and `.agent/skills/dailyaiworld/memory.md`.
 > - **Step 9 — Advance to Next Article**: Only when the current article is verified 100% live on Hostinger and healthy, proceed to search, research, and write the next article in the cycle.
 
@@ -84,6 +86,35 @@ description: >
 > 1. **Zero Skipped Days**: Dispatches must be strictly consecutive ($D, D+1, D+2$). Never skip a calendar date.
 > 2. **Pre-Scheduling Gap Audit**: Before creating dispatches for any future date, query Hostinger Live DB using `php scripts/audit_daily_cadence.php`. If there is a missing day between the latest published date and the requested date (e.g., Oct 16 to Oct 18 skipping Oct 17), the agent MUST immediately flag the gap and author the missing day's full quota first.
 > 3. **Timezone Awareness for published_at**: Timestamps are interpreted in UTC by Laravel's `scopePublished()`. For immediate publication, timestamps must be $\le \text{now()}$ UTC. For scheduled dispatches on future dates, distribute across $04:30$, $06:45$, $09:00$, $11:15$, $13:30$, and $15:45$ UTC.
+
+---
+
+## 🚀 PHASED MULTI-PLATFORM SYNDICATION & DOMAIN AUTHORITY ENGINE
+
+To systematically elevate Daily AI World's Domain Authority (DA), accelerate Googlebot crawl frequency, and eliminate holding queues ("Crawled - currently not indexed"), every dispatch run executes a phased cross-platform syndication strategy:
+
+### 📅 The 3-Phase Backlink & Authority Growth Roadmap:
+
+* **Phase 1 (Months 1–2 / Current): Daily Flagship Dev.to Syndication (DA 92)**:
+  - **Cadence**: Exactly **1 to 2 Flagship Dispatches per day** (the primary Cycle 1 Workflow or Cycle 3 Comparison Showdown) are automatically syndicated to Dev.to.
+  - **Pacing Rule**: Never batch-syndicate all 10 dispatches at once to protect Dev.to developer feed reputation and maximize homepage algorithmic feature rate.
+  - **Canonical Transfer**: The API payload embeds `"canonical_url": "https://dailyaiworld.com/{prefix}/{slug}"`. Googlebot reads the `<link rel="canonical">` tag on Dev.to and passes full PageRank and primary entity authority back to Daily AI World.
+  - **Contextual In-Body Bridge**: Automatically appends an editorial callout card crediting Deepak Bagada with direct hyperlinks to `dailyaiworld.com` and `/workflows`.
+  - **CLI Command**:
+    ```bash
+    php scripts/syndicate_to_devto.php --article-id=<id>
+    ```
+  - **Cumulative Growth**: **30 to 60 high-authority DA 92 backlinks per month**.
+
+* **Phase 2 (Months 3–4): Multi-Network Scale (Hashnode DA 88 + Medium DA 95)**:
+  - Expand automated publishing to **Hashnode** (via GraphQL API) and **Medium** (via REST API).
+  - Multi-publish the daily flagship to all three platforms with synchronized `canonical_url` parameters.
+  - Yields **90 to 180 high-DA canonical backlinks per month** across 3 distinct search-trusted domains.
+
+* **Phase 3 (Months 5+): Knowledge Graph & Co-Citation Dominance (Wikipedia DA 98 + GitHub)**:
+  - Execute the `dailyai-wiki-backlinks` skill to fulfill 1–2 Wikipedia `{{Citation needed}}` or `{{Dead link}}` claims per week with empirical benchmarks.
+  - Submit MCP servers and workflows to GitHub `awesome-mcp-servers` and `awesome-ai-agents` repositories.
+  - Establishes Daily AI World in Google's Knowledge Graph and top-tier Answer Engine Optimization (AEO/GEO) citations in Perplexity and ChatGPT Search.
 
 ---
 
@@ -814,4 +845,5 @@ At the completion of the 4 cycles for today's active phase (Phase 1: 6 articles 
 - **Zero Duplicate FAQs**: Confirmed 100% clean Blade accordion rendering across all 16 live URLs.
 - **Zero Numeric Suffix Slugs**: Confirmed all 16 slugs are clean semantic strings without `-[0-9]+`.
 - **Sole Author Attribution**: Confirmed Deepak Bagada (`author_id = 1`) across all 16 live dispatches.
+- **Flagship Dev.to Syndication (DA 92 Backlink)**: Confirmed today's flagship technical dispatch syndicated to Dev.to with verified `canonical_url` and contextual author bridge (`php scripts/syndicate_to_devto.php --article-id=<id>`).
 - **Memory Synchronized**: Confirmed both workspace and config `memory.md` logged all 16 articles.

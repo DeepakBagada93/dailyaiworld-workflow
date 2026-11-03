@@ -425,6 +425,46 @@
                     </div>
                 </div>
 
+                <!-- PRODUCTION IMPLEMENTATION TOOLKITS CALLOUT (FOUNDER DEEPAK BAGADA) -->
+                <div class="my-10 p-6 sm:p-7 rounded-2xl bg-gradient-to-br from-[#FAF5FF] via-[#FFFFFF] to-[#F5F3FF] border border-[#DDD6FE] shadow-xs relative overflow-hidden">
+                    <div class="flex flex-wrap items-center justify-between gap-2 pb-3 mb-3 border-b border-[#EDE9FE]">
+                        <div class="flex items-center gap-2">
+                            <span class="inline-flex items-center justify-center w-6 h-6 rounded-md bg-[#6D28D9] text-white text-xs font-mono font-bold">⚡</span>
+                            <span class="font-mono text-xs uppercase tracking-wider text-[#6D28D9] font-bold">Production Codebase &amp; Architecture</span>
+                        </div>
+                        <span class="text-[11px] font-mono text-[#6B7280]">Commercial License · Instant Download</span>
+                    </div>
+                    <h4 class="font-serif text-lg sm:text-xl font-bold text-[#1E1B4B]">
+                        Deploy this architecture without building boilerplate from scratch
+                    </h4>
+                    <p class="text-xs sm:text-sm text-[#4B5563] mt-2 leading-relaxed">
+                        Need runnable agent skeletons, FastMCP server packages, or multi-agent orchestrators? Founder <a href="https://deepakbagada.in" target="_blank" rel="noopener" class="font-semibold text-[#1E1B4B] hover:text-[#6D28D9] underline decoration-[#DDD6FE]">Deepak Bagada</a> maintains 28 commercial-grade production toolkits for enterprise AI builders.
+                    </p>
+                    <div class="mt-5 flex flex-wrap items-center gap-3">
+                        <a href="https://deepakbagada.in/products?utm_source=dailyaiworld&utm_medium=article_footer&utm_campaign=all_products" 
+                           target="_blank" 
+                           rel="noopener sponsored"
+                           class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-[#6D28D9] hover:bg-[#5B21B6] text-white text-xs font-bold font-sans transition-all shadow-xs hover:shadow-sm">
+                            <span>Browse 28 Production Toolkits</span>
+                            <span class="font-mono">↗</span>
+                        </a>
+                        <a href="https://deepakbagada.in/products/mcp-server-launch-kit?utm_source=dailyaiworld&utm_medium=article_footer&utm_campaign=mcp_launch_kit" 
+                           target="_blank" 
+                           rel="noopener sponsored"
+                           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-purple-50 border border-[#DDD6FE] text-[#6D28D9] text-xs font-bold transition-all">
+                            <span>FastMCP Launch Kit</span>
+                            <span class="font-mono text-[10px]">↗</span>
+                        </a>
+                        <a href="https://deepakbagada.in/products/agent-skills-master-bundle?utm_source=dailyaiworld&utm_medium=article_footer&utm_campaign=master_bundle" 
+                           target="_blank" 
+                           rel="noopener sponsored"
+                           class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white hover:bg-purple-50 border border-[#DDD6FE] text-[#1E1B4B] hover:text-[#6D28D9] text-xs font-bold transition-all">
+                            <span>AI Systems Master Bundle</span>
+                            <span class="font-mono text-[10px]">↗</span>
+                        </a>
+                    </div>
+                </div>
+
                 <!-- PREVIOUS / NEXT ARTICLE NAVIGATION -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 my-12 border-y border-[var(--border-subtle)] py-8">
                     @if($prevArticle)
