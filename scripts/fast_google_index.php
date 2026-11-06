@@ -53,6 +53,7 @@ $options = getopt('', [
     'limit:',
     'all',
     'force',
+    'check-indexed',
     'submit-indexnow',
     'help',
 ]);
@@ -68,6 +69,7 @@ if (isset($options['help'])) {
     echo "  --limit=N          Max URLs to submit (default: 200, Google's daily quota)\n";
     echo "  --all              Submit without limit (will stop if quota exceeded)\n";
     echo "  --force            Submit even if previously recorded in history\n";
+    echo "  --check-indexed    Inspect GSC first & skip URLs already indexed to preserve 200/day quota\n";
     echo "  --submit-indexnow  Also submit batch to IndexNow (Bing/Yandex)\n\n";
     exit(0);
 }
@@ -217,9 +219,11 @@ if ($isDryRun) {
 }
 
 // SUBMISSION LOOP
-echo "\nInitiating Google Indexing API submissions...\n";
+$checkIndexed = isset($options['check-indexed']);
+echo "\nInitiating Google Indexing API submissions" . ($checkIndexed ? " (with GSC pre-inspection check enabled)" : "") . "...\n";
 $successCount = 0;
 $failCount = 0;
+$skippedIndexedCount = 0;
 $urlsToSubmit = array_column($candidateUrls, 'url');
 
 foreach ($candidateUrls as $index => $item) {
@@ -227,12 +231,15 @@ foreach ($candidateUrls as $index => $item) {
     $total = count($candidateUrls);
     $url = $item['url'];
 
-    echo sprintf("[%d/%d] Submitting: %s ... ", $num, $total, substr($url, 25));
+    echo sprintf("[%d/%d] Checking: %s ... ", $num, $total, substr($url, 25));
 
-    $res = GoogleIndexingService::publishUrl($url, 'URL_UPDATED');
+    $res = GoogleIndexingService::publishUrl($url, 'URL_UPDATED', $checkIndexed);
 
-    if ($res['success']) {
-        echo "✅ OK (200)\n";
+    if (!empty($res['skipped'])) {
+        echo "⚡ SKIPPED (Already Indexed: {$res['response']['coverage']}) [Quota Saved!]\n";
+        $skippedIndexedCount++;
+    } elseif ($res['success']) {
+        echo "✅ OK (200 - Submitted)\n";
         $successCount++;
     } else {
         echo "❌ HTTP {$res['status']}\n";
@@ -267,9 +274,10 @@ if (isset($options['submit-indexnow'])) {
 echo "\n=========================================================\n";
 echo " 📊 Submission Summary\n";
 echo "=========================================================\n";
-echo "Total Processed: " . ($successCount + $failCount) . "\n";
-echo "Successful:      {$successCount} ✅\n";
-echo "Failed:          {$failCount} ❌\n";
+echo "Total Evaluated:         " . ($successCount + $failCount + $skippedIndexedCount) . "\n";
+echo "Submitted to Google API: {$successCount} ✅\n";
+echo "Skipped (Already Indexed): {$skippedIndexedCount} ⚡ (Quota Saved!)\n";
+echo "Failed:                  {$failCount} ❌\n";
 echo "=========================================================\n\n";
 
 exit($failCount > 0 ? 1 : 0);

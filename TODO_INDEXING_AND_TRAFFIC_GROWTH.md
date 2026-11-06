@@ -94,21 +94,21 @@ To systematically index all 1,444 articles and clear the 200-URL backlog without
 
 ## ⚡ 3. Views & Traffic Growth Action Items (10x Pageviews)
 
-### A. Fix Internal Recirculation (Reduce Bounce Rate: 73.6% → 45%)
-- [ ] **Add Inline "Next Blueprint" Box**:
-  - In `resources/views/articles/show.blade.php`, insert an attractive callout card midway through article content recommending a related workflow in the same category.
-- [ ] **Add 3-Card Related Articles Footer**:
-  - At the bottom of every article, render 3 high-contrast cards (`Workflows`, `MCP Servers`, `Trending News`) to encourage users to click through.
-  - **Math**: Moving from 1.4 pages/session to 3.2 pages/session instantly turns 3,000 visitors into **9,600+ pageviews**.
+### A. Fix Internal Recirculation (Reduce Bounce Rate: 90.4% → 45%)
+- [x] **Add Inline "Recommended Architecture Blueprint" Box (COMPLETED ✅)**:
+  - In `resources/views/articles/show.blade.php`, dynamically injected after the 2nd paragraph with direct links, reading time badge, and deck/excerpt preview.
+- [x] **Add 3-Card Diverse Related Articles Footer (COMPLETED ✅)**:
+  - In `app/Http/Controllers/ArticleController.php`, upgraded query to dynamically fetch 1 latest Workflow, 1 latest MCP Server, and 1 latest Intelligence/Blog post with cross-category hub navigation links.
+  - **Math**: Moving from 1.1 pages/session to 2.5+ pages/session instantly turns 5,670 visitors into **14,000+ pageviews**.
 
 ### B. Double Down on Page-1 Keyword Clusters
-- [ ] **Link to High-Rank Assets**:
+- [x] **Link to High-Rank Assets (ACTIVE)**:
   - `ai workflow directory` ranks at **Position 8.2** (16.7% CTR).
   - Ensure all new workflow dispatches include a contextual internal link to `https://dailyaiworld.com/workflows` with exact anchor text `AI Workflow Directory`.
   - Ensure all MCP dispatches link to `https://dailyaiworld.com/mcp-directory` with anchor text `MCP Server Directory`.
 
 ### C. Generative Engine Optimization (AEO / GEO for Perplexity & ChatGPT)
-- [ ] **Ensure JSON-LD Schemas are Active**:
+- [x] **Ensure JSON-LD Schemas are Active (ACTIVE)**:
   - Validate `application/ld+json` for `TechArticle` and `FAQPage` schema on live articles.
   - Structure benchmarks with explicit HTML `<table>` elements (AI engines scrape tables 4x more reliably than plain markdown).
 
@@ -117,8 +117,10 @@ To systematically index all 1,444 articles and clear the 200-URL backlog without
   - Created `scripts/syndicate_to_devto.php` to push articles directly to Dev.to.
   - Automatically embeds `<link rel="canonical" href="https://dailyaiworld.com/...">` in HTML head.
   - Injects contextual author bridge linking back to `dailyaiworld.com` and `/workflows`.
-  - First article live on Dev.to: [LlamaIndex Workflows vs LangGraph Showdown](https://dev.to/deepak_bagada_98e87bd2723/llamaindex-workflows-vs-langgraph-event-driven-architecture-and-async-state-overhead-showdown-407l) (Dev.to Post ID: 4963330).
-- [ ] **Phase 1 Strategy (Months 1–2 / Current)**:
+  - Flagship articles live on Dev.to:
+    1. [LlamaIndex Workflows vs LangGraph Showdown](https://dev.to/deepak_bagada_98e87bd2723/llamaindex-workflows-vs-langgraph-event-driven-architecture-and-async-state-overhead-showdown-407l) (Post ID: 4963330)
+    2. [Llama 3.3 70B vs DeepSeek-V3 Benchmark Showdown](https://dev.to/deepak_bagada_98e87bd2723/llama-33-70b-vs-deepseek-v3-open-weight-frontier-benchmark-reasoning-latency-and-gpu-economics-3hcl) (Post ID: 4988335)
+- [x] **Phase 1 Strategy (Months 1–2 / Current) [ACTIVE]**:
   - Syndicate **1 to 2 Flagship Dispatches per day** to Dev.to.
   - Builds **30 to 60 DA 92 dofollow/canonical backlinks per month**, systematically elevating site DA and accelerating Google crawl velocity.
 - [ ] **Phase 2 Expansion (Months 3–4)**:
@@ -132,15 +134,18 @@ To systematically index all 1,444 articles and clear the 200-URL backlog without
 ## 🛠️ Quick Daily Commands Reference
 
 ```bash
-# 1. View today's quota and scheduled task
+# 1. 100% Policy-Compliant Smart Rotating Indexer (Active in Crontab at 08:30 IST)
+php scripts/run_compliant_indexing_cron.php
+
+# 2. Run via Artisan Command
+php artisan indexing:compliant
+
+# 3. View today's quota and scheduled task
 php scripts/daily_indexing_reminder.php
 
-# 2. Run today's scheduled batch automatically
-php scripts/daily_indexing_reminder.php --run-today
-
-# 3. Check Google Indexing API usage status
+# 4. Check Google Indexing API usage status
 php scripts/fast_google_index.php --status
 
-# 4. Syndicate flagship article to Dev.to (DA 92 Backlink)
+# 5. Syndicate flagship article to Dev.to (DA 92 Backlink)
 php scripts/syndicate_to_devto.php --article-id=<id>
 ```

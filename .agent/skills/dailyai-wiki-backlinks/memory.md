@@ -1,6 +1,6 @@
 # Daily AI World — Wikipedia Citation Opportunities Tracker
 
-Last Updated: 2026-11-02 13:30:16 UTC
+Last Updated: 2026-11-04 15:26:08 UTC
 Total Active Opportunities: 16
 
 ### 1. [Synthetic data](https://en.wikipedia.org/wiki/Synthetic_data)
@@ -18,10 +18,10 @@ Total Active Opportunities: 16
 ### 2. [Retrieval-augmented generation](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)
 - **Type:** `CITATION_NEEDED`
 - **Wikipedia Claim:** *"The model feeds this relevant retrieved information into the LLM via [[prompt engineering]] of the user's original query. Newer implementations ({{as of|2023|lc=y}}) can also incorporate specific augmentation modules wit..."*
-- **Matched Article:** [Build a Dragonfly Cache MCP Server: Sub-Millisecond Redis Replacement for High-Concurrency Swarms](https://dailyaiworld.com/mcp-directory/build-dragonfly-cache-mcp-server-sub-millisecond-redis-replacement) (ID: 2632)
+- **Matched Article:** [Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents](https://dailyaiworld.com/blogs/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation) (ID: 2659)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/mcp-directory/build-dragonfly-cache-mcp-server-sub-millisecond-redis-replacement |title=Build a Dragonfly Cache MCP Server: Sub-Millisecond Redis Replacement for High-Concurrency Swarms |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-01 |access-date=2026-11-02}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation |title=Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-03 |access-date=2026-11-04}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -33,7 +33,7 @@ Total Active Opportunities: 16
 - **Matched Article:** [AST-Based Code Refactoring vs Raw LLM Generation: Benchmarking Deterministic AST Agents](https://dailyaiworld.com/blogs/ast-based-code-refactoring-vs-raw-llm-generation-benchmarking) (ID: 2554)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/ast-based-code-refactoring-vs-raw-llm-generation-benchmarking |title=AST-Based Code Refactoring vs Raw LLM Generation: Benchmarking Deterministic AST Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-24 |access-date=2026-11-02}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/ast-based-code-refactoring-vs-raw-llm-generation-benchmarking |title=AST-Based Code Refactoring vs Raw LLM Generation: Benchmarking Deterministic AST Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-24 |access-date=2026-11-04}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -42,10 +42,10 @@ Total Active Opportunities: 16
 ### 4. [Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 - **Type:** `CITATION_NEEDED`
 - **Wikipedia Claim:** *"Since 2023, many LLMs have been trained to be [[Multimodal learning|multimodal]], having the ability to also process or generate other types of data, such as images, audio, or 3D meshes.{{citation needed|date=April 2026}..."*
-- **Matched Article:** [Mistral AI Ships Voxtral 3: Real-Time Multimodal Audio Reasoning at 45ms Latency](https://dailyaiworld.com/blogs/mistral-ai-ships-voxtral-real-time-multimodal-audio) (ID: 2549)
+- **Matched Article:** [Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use](https://dailyaiworld.com/blogs/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming) (ID: 2677)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/mistral-ai-ships-voxtral-real-time-multimodal-audio |title=Mistral AI Ships Voxtral 3: Real-Time Multimodal Audio Reasoning at 45ms Latency |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-23 |access-date=2026-11-02}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming |title=Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-05 |access-date=2026-11-04}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -69,7 +69,7 @@ Total Active Opportunities: 16
 - **Matched Article:** [vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters](https://dailyaiworld.com/blogs/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters) (ID: 2629)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters |title=vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-31 |access-date=2026-11-02}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters |title=vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-31 |access-date=2026-11-04}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -78,10 +78,10 @@ Total Active Opportunities: 16
 ### 7. [Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 - **Type:** `CITATION_NEEDED`
 - **Wikipedia Claim:** *"''Post-training [[Quantization (signal processing)|quantization]]''{{Cite journal |last1=Nagel |first1=Markus |last2=Amjad |first2=Rana Ali |last3=Baalen |first3=Mart Van |last4=Louizos |first4=Christos |last5=Blankevoor..."*
-- **Matched Article:** [Tiered KV Cache Offloading to NVMe: INT4 Quantization and GPUDirect Storage Economics](https://dailyaiworld.com/blogs/tiered-kv-cache-offloading-nvme-int4-quantization-gpudirect) (ID: 2537)
+- **Matched Article:** [vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown](https://dailyaiworld.com/blogs/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown) (ID: 2665)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/tiered-kv-cache-offloading-nvme-int4-quantization-gpudirect |title=Tiered KV Cache Offloading to NVMe: INT4 Quantization and GPUDirect Storage Economics |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-22 |access-date=2026-11-02}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown |title=vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-04 |access-date=2026-11-04}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -126,10 +126,10 @@ Total Active Opportunities: 16
 ### 11. [Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 - **Type:** `CITATION_NEEDED`
 - **Wikipedia Claim:** *"LLM applications accessible to the public, like ChatGPT or Claude, typically incorporate safety measures designed to filter out harmful content. However, implementing these controls effectively has proven challenging. Fo..."*
-- **Matched Article:** [How to Build n8n Workflows with Claude Code: Complete Multi-Agent Blueprint](https://dailyaiworld.com/workflow/how-to-build-n8n-workflows-claude-code-multi-agent-blueprint) (ID: 2570)
+- **Matched Article:** [vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown](https://dailyaiworld.com/blogs/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown) (ID: 2665)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/workflow/how-to-build-n8n-workflows-claude-code-multi-agent-blueprint |title=How to Build n8n Workflows with Claude Code: Complete Multi-Agent Blueprint |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-26 |access-date=2026-11-02}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown |title=vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-04 |access-date=2026-11-04}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 

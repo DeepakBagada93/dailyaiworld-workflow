@@ -27,3 +27,17 @@ Schedule::command('indexing:radar --run-today')
     ->name('daily-indexing-radar')
     ->withoutOverlapping();
 
+Artisan::command('indexing:compliant {--dry-run : Simulate submission without sending API requests}', function () {
+    if ($this->option('dry-run')) {
+        $_SERVER['argv'][] = '--dry-run';
+    }
+    require base_path('scripts/run_compliant_indexing_cron.php');
+})->purpose('100% Google guideline-compliant smart rotating indexing batch (max 200 URLs)');
+
+// Automated Compliant Daily Indexing Routine: Executes at 08:30 IST (03:00 UTC)
+Schedule::command('indexing:compliant')
+    ->dailyAt('03:00')
+    ->timezone('UTC')
+    ->name('daily-compliant-indexer')
+    ->withoutOverlapping();
+

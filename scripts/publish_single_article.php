@@ -205,13 +205,16 @@ try {
     $assignedAuthorName = ($authorRow->name ?? null) ?: "Author ID {$authorId}";
 
     // 6. FAST INDEXING ENGINE (Google Indexing API + IndexNow)
+    // Pre-checks GSC indexing status so already-indexed URLs do not waste the 200/day quota
     $indexingStatus = [];
     try {
-        $gRes = \App\Services\GoogleIndexingService::publishUrl($liveUrl, 'URL_UPDATED');
+        $gRes = \App\Services\GoogleIndexingService::publishUrl($liveUrl, 'URL_UPDATED', true);
         $indexingStatus['google'] = [
             'status'  => $gRes['status'],
             'success' => $gRes['success'],
-            'message' => $gRes['friendly_error'] ?? 'Accepted by Google'
+            'skipped' => $gRes['skipped'] ?? false,
+            'reason'  => $gRes['reason'] ?? null,
+            'message' => $gRes['friendly_error'] ?? (!empty($gRes['skipped']) ? $gRes['reason'] : 'Accepted by Google')
         ];
     } catch (\Throwable $ge) {
         $indexingStatus['google'] = ['error' => $ge->getMessage()];

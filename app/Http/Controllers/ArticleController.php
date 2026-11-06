@@ -144,18 +144,44 @@ class ArticleController extends Controller
             ->oldest('published_at')
             ->first();
 
-        $relatedArticles = Article::with(['category', 'author'])
+        // Recommended Blueprint for Mid-Article Inline Recirculation (crush bounce rate)
+        $nextBlueprint = Article::with(['category', 'author'])
             ->published()
             ->where('id', '!=', $article->id)
-            ->where('category_id', $article->category_id)
-            ->take(3)
-            ->get();
+            ->whereIn('category_id', [1, 5]) // Workflows or MCP servers
+            ->latest('published_at')
+            ->first();
+
+        // 3-Card Diverse Related Articles Footer (1 Workflow, 1 MCP Server, 1 Intelligence/Blog)
+        $relatedWorkflows = Article::with(['category', 'author'])
+            ->published()
+            ->where('id', '!=', $article->id)
+            ->where('category_id', 1)
+            ->latest('published_at')
+            ->first();
+
+        $relatedMcp = Article::with(['category', 'author'])
+            ->published()
+            ->where('id', '!=', $article->id)
+            ->where('category_id', 5)
+            ->latest('published_at')
+            ->first();
+
+        $relatedNews = Article::with(['category', 'author'])
+            ->published()
+            ->where('id', '!=', $article->id)
+            ->whereNotIn('category_id', [1, 5])
+            ->latest('published_at')
+            ->first();
+
+        $relatedArticles = collect([$relatedWorkflows, $relatedMcp, $relatedNews])->filter();
 
         if ($relatedArticles->count() < 3) {
             $extra = Article::with(['category', 'author'])
                 ->published()
                 ->where('id', '!=', $article->id)
                 ->whereNotIn('id', $relatedArticles->pluck('id'))
+                ->latest('published_at')
                 ->take(3 - $relatedArticles->count())
                 ->get();
             $relatedArticles = $relatedArticles->merge($extra);
@@ -175,6 +201,7 @@ class ArticleController extends Controller
             ->view('articles.show', compact(
                 'article',
                 'relatedArticles',
+                'nextBlueprint',
                 'prevArticle',
                 'nextArticle',
                 'isBookmarked',

@@ -8,13 +8,18 @@ use Illuminate\Support\Facades\Log;
 
 class GoogleIndexingService
 {
-    public const INDEXING_ENDPOINT = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
-    public const STATUS_ENDPOINT   = 'https://indexing.googleapis.com/v3/urlNotifications/metadata';
-    public const TOKEN_ENDPOINT    = 'https://oauth2.googleapis.com/token';
-    public const OAUTH_SCOPE       = 'https://www.googleapis.com/auth/indexing';
+    public const INDEXING_ENDPOINT       = 'https://indexing.googleapis.com/v3/urlNotifications:publish';
+    public const STATUS_ENDPOINT         = 'https://indexing.googleapis.com/v3/urlNotifications/metadata';
+    public const GSC_INSPECTION_ENDPOINT = 'https://searchconsole.googleapis.com/v1/urlInspection/index:inspect';
+    public const TOKEN_ENDPOINT          = 'https://oauth2.googleapis.com/token';
+    public const OAUTH_SCOPE             = 'https://www.googleapis.com/auth/indexing';
+    public const GSC_OAUTH_SCOPE         = 'https://www.googleapis.com/auth/webmasters.readonly';
 
     protected static ?string $cachedToken = null;
     protected static int $tokenExpiry = 0;
+
+    protected static ?string $cachedGscToken = null;
+    protected static int $gscTokenExpiry = 0;
 
     /**
      * Resolve credentials JSON path.
@@ -110,15 +115,211 @@ class GoogleIndexingService
     }
 
     /**
+     * Get or refresh Google Search Console OAuth2 Access Token for URL inspection.
+     */
+    public static function getGscAccessToken(): string
+    {
+        if (self::$cachedGscToken && time() < (self::$gscTokenExpiry - 60)) {
+            return self::$cachedGscToken;
+        }
+
+        $credPath = self::getCredentialsPath();
+        if (!$credPath || !file_exists($credPath)) {
+            throw new \RuntimeException("Google credentials file not found.");
+        }
+
+        $creds = json_decode(file_get_contents($credPath), true);
+        if (!$creds || empty($creds['client_email']) || empty($creds['private_key'])) {
+            throw new \RuntimeException("Invalid service account credentials in $credPath");
+        }
+
+        $now = time();
+        $header = ['alg' => 'RS256', 'typ' => 'JWT'];
+        $claims = [
+            'iss'   => $creds['client_email'],
+            'scope' => self::GSC_OAUTH_SCOPE,
+            'aud'   => self::TOKEN_ENDPOINT,
+            'exp'   => $now + 3600,
+            'iat'   => $now,
+        ];
+
+        $b64Header = self::base64UrlEncode(json_encode($header));
+        $b64Claims = self::base64UrlEncode(json_encode($claims));
+        $signatureInput = $b64Header . '.' . $b64Claims;
+
+        $privateKey = openssl_pkey_get_private($creds['private_key']);
+        if (!$privateKey) {
+            throw new \RuntimeException("Failed to load private key from Google credentials");
+        }
+
+        $signature = '';
+        if (!openssl_sign($signatureInput, $signature, $privateKey, OPENSSL_ALGO_SHA256)) {
+            throw new \RuntimeException("Failed to sign JWT with RSA private key for GSC");
+        }
+
+        $jwt = $signatureInput . '.' . self::base64UrlEncode($signature);
+
+        $response = Http::asForm()->timeout(15)->post(self::TOKEN_ENDPOINT, [
+            'grant_type' => 'urn:ietf:params:oauth:grant-type:jwt-bearer',
+            'assertion'  => $jwt,
+        ]);
+
+        if (!$response->successful()) {
+            throw new \RuntimeException("OAuth2 token exchange for GSC failed: " . $response->body());
+        }
+
+        $tokenData = $response->json();
+        self::$cachedGscToken = $tokenData['access_token'];
+        self::$gscTokenExpiry = $now + ($tokenData['expires_in'] ?? 3600);
+
+        return self::$cachedGscToken;
+    }
+
+    /**
+     * Inspect a URL using Google Search Console URL Inspection API.
+     *
+     * @param string $url The canonical URL to inspect
+     * @param string $siteUrl The GSC property site URL (default: https://dailyaiworld.com/)
+     * @return array
+     */
+    public static function inspectUrl(string $url, string $siteUrl = 'https://dailyaiworld.com/'): array
+    {
+        try {
+            $token = self::getGscAccessToken();
+            $response = Http::withToken($token)
+                ->timeout(12)
+                ->post(self::GSC_INSPECTION_ENDPOINT, [
+                    'inspectionUrl' => $url,
+                    'siteUrl'       => $siteUrl,
+                ]);
+
+            if (!$response->successful()) {
+                return [
+                    'url'        => $url,
+                    'status'     => $response->status(),
+                    'success'    => false,
+                    'is_indexed' => false,
+                    'verdict'    => 'UNKNOWN',
+                    'coverage'   => 'UNKNOWN',
+                    'error'      => $response->body(),
+                ];
+            }
+
+            $idx = $response->json()['inspectionResult']['indexStatusResult'] ?? [];
+            $verdict = $idx['verdict'] ?? 'UNKNOWN';
+            $coverage = $idx['coverageState'] ?? 'UNKNOWN';
+            $lastCrawl = $idx['lastCrawlTime'] ?? 'Never';
+            $indexingState = $idx['indexingState'] ?? 'UNKNOWN';
+
+            $isIndexed = ($verdict === 'PASS' || str_contains(strtolower($coverage), 'indexed'));
+
+            return [
+                'url'            => $url,
+                'status'         => 200,
+                'success'        => true,
+                'is_indexed'     => $isIndexed,
+                'verdict'        => $verdict,
+                'coverage'       => $coverage,
+                'indexing_state' => $indexingState,
+                'last_crawled'   => $lastCrawl,
+                'raw'            => $idx,
+            ];
+        } catch (\Throwable $e) {
+            return [
+                'url'        => $url,
+                'status'     => 0,
+                'success'    => false,
+                'is_indexed' => false,
+                'verdict'    => 'ERROR',
+                'coverage'   => 'ERROR',
+                'error'      => $e->getMessage(),
+            ];
+        }
+    }
+
+    /**
+     * Determine if a URL is already indexed by Google.
+     */
+    public static function isUrlIndexed(string $url): bool
+    {
+        $inspection = self::inspectUrl($url);
+        return $inspection['is_indexed'] ?? false;
+    }
+
+    /**
+     * Check if submitting to Google Indexing API is needed or if URL is already indexed.
+     * Prevents wasting the 200 URLs/day quota on pages Google already indexed.
+     *
+     * @param string $url
+     * @return array ['needed' => bool, 'reason' => string, ...]
+     */
+    public static function isIndexingSubmissionNeeded(string $url): array
+    {
+        $inspection = self::inspectUrl($url);
+
+        if (!$inspection['success']) {
+            // If GSC inspection call fails, assume submission is needed as fallback
+            return [
+                'needed'     => true,
+                'reason'     => 'GSC Inspection unavailable (proceeding with submission)',
+                'is_indexed' => false,
+                'verdict'    => $inspection['verdict'] ?? 'UNKNOWN',
+                'coverage'   => $inspection['coverage'] ?? 'UNKNOWN',
+                'inspection' => $inspection,
+            ];
+        }
+
+        if ($inspection['is_indexed']) {
+            return [
+                'needed'     => false,
+                'reason'     => "Already indexed by Google ({$inspection['coverage']})",
+                'is_indexed' => true,
+                'verdict'    => $inspection['verdict'],
+                'coverage'   => $inspection['coverage'],
+                'inspection' => $inspection,
+            ];
+        }
+
+        return [
+            'needed'     => true,
+            'reason'     => "Not indexed ({$inspection['coverage']}) - Indexing API submission needed",
+            'is_indexed' => false,
+            'verdict'    => $inspection['verdict'],
+            'coverage'   => $inspection['coverage'],
+            'inspection' => $inspection,
+        ];
+    }
+
+    /**
      * Submit a single URL to Google Indexing API.
      *
      * @param string $url The canonical URL to publish
      * @param string $type 'URL_UPDATED' or 'URL_DELETED'
+     * @param bool $checkIfIndexedFirst If true, inspects GSC first and skips if already indexed to save 200/day quota
      * @return array Result array with status, response body, and friendly error if any
      */
-    public static function publishUrl(string $url, string $type = 'URL_UPDATED'): array
+    public static function publishUrl(string $url, string $type = 'URL_UPDATED', bool $checkIfIndexedFirst = false): array
     {
         try {
+            if ($checkIfIndexedFirst && $type === 'URL_UPDATED') {
+                $check = self::isIndexingSubmissionNeeded($url);
+                if (!$check['needed']) {
+                    return [
+                        'url'        => $url,
+                        'status'     => 200,
+                        'success'    => true,
+                        'skipped'    => true,
+                        'reason'     => $check['reason'],
+                        'type'       => $type,
+                        'timestamp'  => date('c'),
+                        'response'   => [
+                            'message'  => 'Skipped: URL is already indexed by Google Search Console.',
+                            'coverage' => $check['coverage'] ?? '',
+                            'verdict'  => $check['verdict'] ?? '',
+                        ],
+                    ];
+                }
+            }
             $token = self::getAccessToken();
             $response = Http::withToken($token)
                 ->timeout(12)

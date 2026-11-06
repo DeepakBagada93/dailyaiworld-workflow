@@ -274,9 +274,50 @@
                     </div>
                 @endif
 
+                @php
+                    $formattedHtml = $article->formatted_content;
+                    if (isset($nextBlueprint) && $nextBlueprint) {
+                        $badgeText = ($nextBlueprint->category_id == 1 ? 'Production Workflow' : ($nextBlueprint->category_id == 5 ? 'MCP Server Guide' : 'Frontier Intelligence'));
+                        $readingTime = $nextBlueprint->reading_time ?? '5';
+                        $blueprintCallout = '
+                        <div class="my-8 p-5 sm:p-6 rounded-2xl border-2 border-[#DDD6FE] dark:border-purple-800/60 bg-gradient-to-br from-[#FAF5FF] via-[#FFFFFF] to-[#F5F3FF] dark:from-purple-950/30 dark:via-gray-900 dark:to-purple-950/15 shadow-sm not-prose">
+                            <div class="flex items-center justify-between gap-3 mb-2.5">
+                                <span class="text-[11px] font-mono uppercase tracking-wider text-[#6D28D9] font-bold flex items-center gap-2">
+                                    <span class="inline-block w-2 h-2 rounded-full bg-[#6D28D9] animate-pulse"></span>
+                                    Recommended Next Architecture
+                                </span>
+                                <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 font-bold">' . e($badgeText) . ' · ' . e($readingTime) . 'm read</span>
+                            </div>
+                            <a href="' . e($nextBlueprint->url) . '" class="group block">
+                                <h4 class="font-serif text-lg sm:text-xl font-bold text-[#1E1B4B] dark:text-purple-100 group-hover:text-[#6D28D9] dark:group-hover:text-purple-300 transition-colors leading-snug">
+                                    ' . e($nextBlueprint->title) . ' <span class="inline-block transition-transform group-hover:translate-x-1">→</span>
+                                </h4>
+                                <p class="text-xs sm:text-sm text-[#4B5563] dark:text-gray-300 mt-2 line-clamp-2 leading-relaxed font-sans">
+                                    ' . e(!empty(trim($nextBlueprint->deck ?? '')) ? $nextBlueprint->deck : (!empty(trim($nextBlueprint->excerpt ?? '')) ? $nextBlueprint->excerpt : 'Deep dive into architecture benchmarks, runnable code patterns, and production deployment.')) . '
+                                </p>
+                            </a>
+                        </div>';
+
+                        $pCount = 0;
+                        $injected = preg_replace_callback('/<\/p>/i', function($match) use (&$pCount, $blueprintCallout) {
+                            $pCount++;
+                            if ($pCount === 2) {
+                                return '</p>' . $blueprintCallout;
+                            }
+                            return '</p>';
+                        }, $formattedHtml, 2);
+
+                        if ($pCount >= 2) {
+                            $formattedHtml = $injected;
+                        } else {
+                            $formattedHtml = $blueprintCallout . $formattedHtml;
+                        }
+                    }
+                @endphp
+
                 <!-- ARTICLE PROSE CONTENT (760PX MAX WIDTH, COMFORTABLE LINE HEIGHT, INTERNAL LINKS, QUOTES, CODE BLOCKS, TABLES) -->
                 <div class="prose-editorial">
-                    {!! $article->formatted_content !!}
+                    {!! $formattedHtml !!}
                 </div>
 
                 <!-- AFFILIATE LINKS DISCLOSURE -->
@@ -488,10 +529,20 @@
                     @endif
                 </div>
 
-                <!-- RELATED ARTICLES GRID -->
+                <!-- RELATED ARTICLES GRID (CROSS-PILLAR RECIRCULATION: WORKFLOWS, MCP, NEWS) -->
                 @if($relatedArticles->count() > 0)
                     <section class="mt-16 pt-12 border-t border-[var(--border-subtle)]">
-                        <h3 class="font-serif text-2xl font-bold text-[var(--text-heading)] mb-8">Related Intelligence Analysis</h3>
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                            <div>
+                                <span class="text-xs font-mono uppercase tracking-widest text-[#6D28D9] font-bold block mb-1">Continuous Intelligence</span>
+                                <h3 class="font-serif text-2xl font-bold text-[var(--text-heading)]">Related Production Architectures</h3>
+                            </div>
+                            <div class="flex items-center gap-3 text-xs font-mono">
+                                <a href="{{ route('workflows.index') }}" class="text-[#6D28D9] hover:underline font-bold">All Workflows →</a>
+                                <span class="text-gray-300 dark:text-gray-700">|</span>
+                                <a href="{{ route('mcp.index') }}" class="text-[#6D28D9] hover:underline font-bold">MCP Directory →</a>
+                            </div>
+                        </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                             @foreach($relatedArticles as $related)
                                 <x-article-card :article="$related" :showImage="false" />
