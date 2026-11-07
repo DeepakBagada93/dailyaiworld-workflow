@@ -13,7 +13,9 @@ Route::prefix('v1')->group(function () {
     Route::get('/articles/{slug}', [ArticleApiController::class, 'show'])->name('api.articles.show');
     Route::get('/categories', [CategoryApiController::class, 'index'])->name('api.categories.index');
     Route::get('/categories/{slug}', [CategoryApiController::class, 'show'])->name('api.categories.show');
-    Route::post('/newsletter/subscribe', [NewsletterApiController::class, 'subscribe'])->name('api.newsletter.subscribe');
+    Route::post('/newsletter/subscribe', [NewsletterApiController::class, 'subscribe'])
+        ->middleware('throttle:5,1')
+        ->name('api.newsletter.subscribe');
     Route::get('/sponsors', [SponsorApiController::class, 'index'])->name('api.sponsors.index');
     Route::post('/subscriptions/webhook', [StripeWebhookController::class, 'handle'])->name('api.subscriptions.webhook');
 

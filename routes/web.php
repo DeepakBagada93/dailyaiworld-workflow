@@ -128,15 +128,19 @@ Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name
 Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmarks.index');
 Route::post('/bookmarks/{article}/toggle', [BookmarkController::class, 'toggle'])->name('bookmarks.toggle');
 
-// Newsletter
-Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+// Newsletter (Rate-limited to protect against bot floods)
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
+    ->middleware('throttle:5,1')
+    ->name('newsletter.subscribe');
 
 // Company, Legal & Compliance Trust Routes (AdSense & Regulatory Compliance)
 Route::get('/about', [PageController::class, 'about'])->name('about');
 Route::get('/privacy-policy', [PageController::class, 'privacyPolicy'])->name('privacy');
 Route::get('/terms', [PageController::class, 'terms'])->name('terms');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
-Route::post('/contact', [PageController::class, 'submitContact'])->name('contact.submit');
+Route::post('/contact', [PageController::class, 'submitContact'])
+    ->middleware('throttle:5,1')
+    ->name('contact.submit');
 Route::get('/disclaimer', [PageController::class, 'disclaimer'])->name('disclaimer');
 
 // Design System Showcase

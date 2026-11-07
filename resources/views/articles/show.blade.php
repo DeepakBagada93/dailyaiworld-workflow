@@ -337,6 +337,7 @@
                 <div class="bg-[var(--bg-card)] border border-[var(--border-subtle)] rounded-xl p-8 my-12 shadow-sm"
                      x-data="{
                          email: '',
+                         b_hp_url: '',
                          loading: false,
                          submitted: false,
                          successMessage: '',
@@ -353,7 +354,7 @@
                                          'Accept': 'application/json',
                                          'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                      },
-                                     body: JSON.stringify({ email: this.email, edition: 'Daily Executive Briefing' })
+                                     body: JSON.stringify({ email: this.email, b_hp_url: this.b_hp_url, edition: 'Daily Executive Briefing' })
                                  });
                                  const data = await res.json();
                                  if (res.ok && (data.success || data.status === 'success')) {
@@ -389,6 +390,11 @@
                     <!-- Form State -->
                     <form x-show="!submitted" @submit.prevent="subscribe" action="{{ route('newsletter.subscribe') }}" method="POST" class="mt-4 flex flex-col sm:flex-row gap-3">
                         @csrf
+                        <!-- Honeypot anti-bot trap (Invisible to humans) -->
+                        <div style="display:none !important; visibility:hidden !important; opacity:0; position:absolute; left:-9999px;">
+                            <label for="hp-field-article">Do not fill this field</label>
+                            <input type="text" id="hp-field-article" name="b_hp_url" x-model="b_hp_url" tabindex="-1" autocomplete="off">
+                        </div>
                         <div class="flex-grow flex flex-col gap-1">
                             <input type="email" name="email" x-model="email" required placeholder="founder@company.com" :disabled="loading"
                                    class="bg-[var(--bg-main)] border border-[var(--border-subtle)] text-[var(--text-heading)] text-sm rounded-md px-4 py-2.5 focus:outline-none focus:border-[#6D28D9] w-full">

@@ -17,15 +17,23 @@ class SubscribeNewsletterAction
         $domain = substr(strrchr($email, "@"), 1);
 
         // 1. Check DNS MX records
-        if (!checkdnsrr($domain, "MX")) {
+        if (!checkdnsrr($domain, "MX") && !checkdnsrr($domain, "A")) {
             abort(422, 'Invalid email domain with no active mail exchange (MX) records.');
         }
 
-        // 2. Reject obvious spam scraping patterns
-        $spamDomains = ['azharhs.org', 'azhlyce.org', 'azhacd.org', 'immenseignite.info'];
+        // 2. Reject disposable, burner, and spam scraping domains
+        $disposableDomains = [
+            'smaqt.com', 'mailinator.com', 'tempmail.com', '10minutemail.com',
+            'guerrillamail.com', 'sharklasers.com', 'yopmail.com', 'trashmail.com',
+            'dispostable.com', 'getnada.com', 'inboxkitten.com', 'burnermail.io',
+            'dropmail.me', 'fakemailgenerator.com', 'mohmal.com', 'crazymailing.com',
+            'temp-mail.org', 'mytemp.email', 'throwawaymail.com', 'emailondeck.com',
+            'generator.email', 'azharhs.org', 'azhlyce.org', 'azhacd.org', 'immenseignite.info'
+        ];
+
         $userPart = substr($email, 0, strpos($email, '@'));
-        if (in_array($domain, $spamDomains) || str_starts_with($domain, 'azh') || str_ends_with($domain, '.info') || preg_match('/[a-z]{4,}[0-9][a-z0-9]{3,}$/i', $userPart)) {
-            abort(422, 'Suspicious email address pattern detected.');
+        if (in_array($domain, $disposableDomains) || str_starts_with($domain, 'azh') || str_ends_with($domain, '.info')) {
+            abort(422, 'Disposable, temporary, or suspicious email domains are not permitted.');
         }
 
         $subscriber = NewsletterSubscriber::firstOrCreate(

@@ -1,6 +1,33 @@
 <IfModule mod_rewrite.c>
     RewriteEngine On
 
+    # ==============================================================================
+    # 1. BLOCK REFERRAL SPAM & GHOST BOTS
+    # ==============================================================================
+    RewriteCond %{HTTP_REFERER} aocr\.org [NC,OR]
+    RewriteCond %{HTTP_REFERER} 114\.114\.114\.114 [NC,OR]
+    RewriteCond %{HTTP_REFERER} semalt\.com [NC,OR]
+    RewriteCond %{HTTP_REFERER} buttons-for-website\.com [NC,OR]
+    RewriteCond %{HTTP_REFERER} traffic2money\.com [NC,OR]
+    RewriteCond %{HTTP_REFERER} darodar\.com [NC,OR]
+    RewriteCond %{HTTP_REFERER} ilovevitaly\.com [NC,OR]
+    RewriteCond %{HTTP_REFERER} econom\.co [NC,OR]
+    RewriteCond %{HTTP_REFERER} best-seo-offer\.com [NC,OR]
+    RewriteCond %{HTTP_REFERER} keywords-monitoring-your-success\.com [NC]
+    RewriteRule .* - [F,L]
+
+    # ==============================================================================
+    # 2. BLOCK AGGRESSIVE SCRAPERS & EXPLOIT SCANNER USER-AGENTS
+    # ==============================================================================
+    RewriteCond %{HTTP_USER_AGENT} (ahrefsbot|dotbot|semrushbot|megaindex|mj12bot|serpstatbot|bytespider|zoominfobot|petalsearch|blexbot|coccocbot) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (nikto|sqlmap|masscan|zgrab|acunetix|havij|morfeus|nessus|dirbuster) [NC]
+    RewriteRule .* - [F,L]
+
+    # ==============================================================================
+    # 3. BLOCK ACCESS TO SENSITIVE DOTFILES & CONFIGS
+    # ==============================================================================
+    RewriteRule ^(\.git|\.env|\.htaccess|\.config|\.lock|composer\.json) - [F,L]
+
     # 301 Redirect any direct request hitting /public/ to the clean URL
     RewriteCond %{THE_REQUEST} \s/+public/([^\s?]*) [NC]
     RewriteRule ^ /%1 [L,R=301]

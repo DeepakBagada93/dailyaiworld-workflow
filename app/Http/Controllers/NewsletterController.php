@@ -10,6 +10,22 @@ class NewsletterController extends Controller
 {
     public function subscribe(Request $request, SubscribeNewsletterAction $action)
     {
+        // 1. Invisible Bot Honeypot Trap
+        // If hidden honeypot fields are filled by an automated bot/scraper, fake success without saving
+        if ($request->filled('b_hp_url') || $request->filled('website') || $request->filled('hp_email')) {
+            if ($request->wantsJson()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Thank you for subscribing! Check your inbox for confirmation.',
+                    'data' => [
+                        'email' => $request->input('email'),
+                        'edition' => 'Daily Executive Briefing',
+                    ]
+                ]);
+            }
+            return back()->with('success', 'You have successfully subscribed to the Daily AI World executive briefing!');
+        }
+
         $validated = $request->validate([
             'email' => 'required|email|max:255',
             'edition' => 'nullable|string|max:100',

@@ -480,6 +480,7 @@
         <section class="newsletter-panel" aria-labelledby="newsletter-title"
                  x-data="{
                      email: '',
+                     b_hp_url: '',
                      loading: false,
                      submitted: false,
                      successMessage: '',
@@ -496,7 +497,7 @@
                                      'Accept': 'application/json',
                                      'X-CSRF-TOKEN': '{{ csrf_token() }}'
                                  },
-                                 body: JSON.stringify({ email: this.email, edition: 'Daily Executive Briefing' })
+                                 body: JSON.stringify({ email: this.email, b_hp_url: this.b_hp_url, edition: 'Daily Executive Briefing' })
                              });
                              const data = await res.json();
                              if (res.ok && (data.success || data.status === 'success')) {
@@ -531,6 +532,11 @@
                 <!-- Form State -->
                 <form x-show="!submitted" @submit.prevent="subscribe" action="{{ route('newsletter.subscribe') }}" method="POST" class="newsletter-form">
                     @csrf
+                    <!-- Honeypot anti-bot trap (Invisible to humans) -->
+                    <div style="display:none !important; visibility:hidden !important; opacity:0; position:absolute; left:-9999px;">
+                        <label for="hp-field-home">Do not fill this field</label>
+                        <input type="text" id="hp-field-home" name="b_hp_url" x-model="b_hp_url" tabindex="-1" autocomplete="off">
+                    </div>
                     <div class="w-full flex flex-col gap-1">
                         <label class="sr-only" for="homepage-email">Email address</label>
                         <input id="homepage-email" type="email" name="email" x-model="email" required placeholder="you@company.com" autocomplete="email" :disabled="loading">
