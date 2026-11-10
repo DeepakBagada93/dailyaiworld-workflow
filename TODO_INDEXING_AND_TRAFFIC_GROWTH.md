@@ -25,9 +25,29 @@
 
 ---
 
-## 📅 2. 7-Day Day-Wise Indexing Rotation Schedule (200 URLs/Day)
+## 📅 2. Autonomous Daily Indexing & Pruning Engine (200 URLs/Day)
 
-To systematically index all 1,444 articles and clear the 200-URL backlog without triggering crawl traps or exceeding Google's daily quota of 200 submissions/day:
+To systematically index all published articles, track daily status transitions in Google Search Console, and prune deadweight content without triggering crawl traps or exceeding Google's daily quota:
+
+```bash
+# Run daily indexing rotation + status change tracker + prune radar
+php scripts/daily_indexing_and_prune_audit.php
+
+# To preview status & prune candidates without sending indexing API requests:
+php scripts/daily_indexing_and_prune_audit.php --report-only
+
+# To safely archive an unindexed deadweight article and purge from Googlebot (URL_DELETED):
+php scripts/daily_indexing_and_prune_audit.php --prune-id=<id>
+```
+
+### 3-Tier Daily Rotation Architecture (200 Submissions/Day):
+1. **Tier 1 (Fresh Dispatches)**: Today's newly published dispatches (Immediate priority).
+2. **Tier 2 (Core Navigation Hubs)**: `/workflows`, `/mcp-directory`, `/latest-ai-news`, `/`.
+3. **Tier 3 (Circular Smart Backlog)**: Oldest unindexed / never-indexed articles in chronological rotation.
+* **Natural Pacing**: 250ms delay between requests (4 req/sec max).
+* **Idempotency Guard**: Never submits the same URL twice on the same day.
+
+---
 
 ```
 [x] Day 1 (Sun, Sep 27): 200 September 2026 Dispatches & Hubs Submitted (200/200 Quota Maxed) ✅

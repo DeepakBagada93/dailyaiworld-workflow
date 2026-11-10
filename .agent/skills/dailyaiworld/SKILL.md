@@ -12,7 +12,10 @@ description: >
   (X vs Y at 20%-31% CTR), high-engagement automation workflows (n8n, LangGraph, SecOps at 50k+ views), and the
   #1 organic search driver "ai workflow directory".
   Executes a strict 4-CYCLE SEQUENTIAL ONE-BY-ONE loop (Deep Research One → Write One → Audit One → Direct Push to Live DB → Verify Live URL → Push Google Indexing API → Log Memory → Repeat).
-  Features an automated date-driven scaling engine: Days 1-30 (Sep 22 - Oct 22, 2026) at 6 Dispatches/day for crawl protection, Days 31-60 (Oct 23 - Nov 21, 2026) at 10 Dispatches/day, Days 61-90 (Nov 22 - Dec 21, 2026) at 16 Dispatches/day, and Days 91+ at 20 Dispatches/day.
+  Features an automated date-driven scaling engine with a mandatory 10-Day Indexing & Quality Recovery Quarantine Protocol:
+  halts mass unindexed URL flooding when indexation is below 50%, restricts XML sitemaps strictly to top 100–150 deep pillar guides,
+  enforces HTTP 410 Gone on all dead migration URLs (eliminating 783 404s), sets noindex/follow on thin directory stubs,
+  and prioritizes 1 daily flagship dispatch paired with high-DA Dev.to syndication (DA 92) and Wikipedia citation verification.
   Titles engineered for maximum CTR featuring clean, natural, authoritative editorial headlines with high-converting
   symbols (:, —, |, //, $, %, →, &) — STRICTLY ZERO SQUARE BRACKETS ([ ]).
   Mandatory 145–158 character meta description, keyword-first SEO title, synchronized deck, and dense AEO/GEO optimization.
@@ -22,15 +25,26 @@ description: >
   Zero git commits/pushes for content publishing to protect Google search indexing stability.
 ---
 
-# 🌐 Daily AI World — Autonomous Content Engine v19.0
+# 🌐 Daily AI World — Autonomous Content Engine v20.0
 ### (High-Value Primary Research & Citations Engine | Generative Engine Optimization [GEO] & AEO Visibility | Analytics-Driven 20%–31% CTR Face-Offs & 50k+ View Automations | 4-Cycle Sequential Architecture)
+
+> [!CAUTION]
+> **🚨 10-DAY EMERGENCY INDEXING RECOVERY & QUALITY QUARANTINE PROTOCOL (ACTIVE NOW)**:  
+> **Empirical GSC Audit (Nov 9, 2026):** 1,675 / 1,693 submitted URLs are unindexed (1.06% index rate), 1,405 crawled-not-indexed, 1,293 discovered-not-indexed, and 783 404 errors. Impressions collapsed from 3,061 to 7/day.
+>
+> **MANDATORY QUARANTINE RULES UNTIL INDEXATION RATE > 50%:**
+> 1. **HALT MASS URL FLOODING**: Do NOT publish 10–20 programmatic/templated posts per day. Limit new publications to **1 Flagship High-EEAT Deep Dive per day** (1,500+ words, multi-file code, empirical benchmark matrix, Dev.to syndication).
+> 2. **SITEMAP QUARANTINE**: Restrict submitted XML sitemaps to ONLY the top 100–150 highest-performing, canonical, deep-dive articles. Exclude all thin programmatic cards from `sitemap.xml`.
+> 3. **HTTP 410 FOR 783 DEAD URLS**: Configure Apache/Laravel to return HTTP 410 Gone on all dead legacy URLs to instantly purge them from Googlebot's crawl queue.
+> 4. **SET NOINDEX, FOLLOW ON THIN DIRECTORY STUBS**: Prevent Googlebot from categorizing the domain as a "thin directory farm". Allow search bots to pass link equity without indexing shallow stubs.
+> 5. **DOMAIN AUTHORITY BEFORE VELOCITY**: Every daily dispatch MUST be syndicated to Dev.to (DA 92) with `canonical_url` and leverage `dailyai-wiki-backlinks` to build high-trust external citations.
 
 > [!IMPORTANT]  
 > **CORE ARCHITECTURE: 4 CYCLES — STRICT ITEM-BY-ITEM CLOSED LOOP**:  
 > Every execution of this skill runs through **4 sequential cycles**.
 >
 > ### 📅 AUTOMATIC DATE-DRIVEN PROGRESSIVE SCALING ENGINE:
-> The engine automatically determines today's dispatch quota based on elapsed calendar days from the anchor baseline date (**2026-09-22**):
+> When the domain's indexation rate is healthy (> 50%), the engine determines today's dispatch quota based on elapsed calendar days from the anchor baseline date (**2026-09-22**):
 >
 > * **Phase 1 (Days 1–30 | 2026-09-22 to 2026-10-22) — Crawl Budget Protection (6 Dispatches Total)**:
 >   - Cycle 1: **1 Workflow** (`/workflow/{slug}`)
@@ -62,7 +76,12 @@ description: >
 >
 > **MANDATORY SEQUENTIAL FLOW (PRE-FLIGHT → DEEP RESEARCH 1 → WRITE 1 → AUDIT 1 → PUSH 1)**:  
 > **NEVER batch search or write articles in parallel**. For each session and individual article in sequence:
-> - **Step 0 — Pre-Flight Cadence Audit, Live URL Indexing Inspection & Quota Radar**: Run `php scripts/daily_indexing_reminder.php`. First, the automated cadence engine (`php scripts/audit_daily_cadence.php`) audits today's publication quota in Hostinger DB and verifies calendar continuity—strictly prohibiting any skipped calendar dates ($D, D+1, D+2$). Second, verify whether today's / latest published URLs are already indexed (`✅ [INDEXED]`) or pending in Googlebot queue (`⚡ [IN BOT QUEUE]`) via Google Search Console Inspection API. Third, check today's Google Indexing API quota usage (max 200 URLs/day). Fourth, verify today's scheduled batch from the 7-day master rotation plan in `TODO_INDEXING_AND_TRAFFIC_GROWTH.md`. Only when today's indexing state is inspected and the daily batch is executed (or already maxed 200/200), proceed to Step 1 to research, write, and push the next dispatch.
+> - **Step 0 — Pre-Flight Cadence Audit, Live Status Tracking, Daily Indexing & Prune Radar**: Run `php scripts/daily_indexing_and_prune_audit.php`.
+>   1. *Cadence & Continuity Audit*: Runs `php scripts/audit_daily_cadence.php` to audit today's publication quota in Hostinger DB and enforce calendar continuity ($D, D+1, D+2$).
+>   2. *URL Status Change Detection*: Uses Google Search Console URL Inspection API to detect status changes (`⚡ [IN BOT QUEUE]` -> `⏳ [CRAWLED - NOT INDEXED]` -> `✅ [INDEXED]`). Compares with `storage/app/url_indexing_status_cache.json` and logs newly promoted or changed articles.
+>   3. *Prune Candidate Radar (Zero-Bloat Protection)*: Scans Hostinger DB for stagnant articles (>21 days old, <600 words or 0 views/impressions, stuck in `Crawled - not indexed`). Displays candidate table. If any deadweight article is selected for deletion, runs `php scripts/daily_indexing_and_prune_audit.php --prune-id=<id>` which sets `status = 'archived'` in Hostinger DB and issues `URL_DELETED` to Google Indexing API to clear crawl budget.
+>   4. *Google Compliant Indexing Execution*: Checks remaining Google daily quota (200 URLs/day ceiling) and executes the smart rotating batch (Tier 1 fresh dispatches, Tier 2 core hubs, Tier 3 oldest unindexed articles) with 250ms natural rate-pacing.
+>   5. *Executive Daily Report*: Generates structured markdown report at `storage/logs/indexing_audit_YYYY-MM-DD.md`. Only when Step 0 is audited and daily quota is active, proceed to Step 1.
 > - **Step 1 — Deep Multi-Source Primary Research (3 Targeted Searches)**: NEVER perform a single shallow search. Run real-time `search_web` across 3 distinct angles to extract verifiable primary evidence:
 >   1. *Primary Source Discovery*: Locate official GitHub repository, release notes, arXiv pre-print paper, system card, or official documentation (e.g. `github.com/...`, `arxiv.org/...`, `docs.anthropic.com/...`).
 >   2. *Empirical Benchmark & Hardware Specs*: Find hard, verifiable numbers: TTFT latency in ms, token cost per 1M, memory footprints (MB/GB), GPU testbeds (NVIDIA H100 SXM5 / A100), and verified evaluation scores (SWE-bench, HumanEval).
@@ -115,6 +134,25 @@ To systematically elevate Daily AI World's Domain Authority (DA), accelerate Goo
   - Execute the `dailyai-wiki-backlinks` skill to fulfill 1–2 Wikipedia `{{Citation needed}}` or `{{Dead link}}` claims per week with empirical benchmarks.
   - Submit MCP servers and workflows to GitHub `awesome-mcp-servers` and `awesome-ai-agents` repositories.
   - Establishes Daily AI World in Google's Knowledge Graph and top-tier Answer Engine Optimization (AEO/GEO) citations in Perplexity and ChatGPT Search.
+
+---
+
+## 🛠️ 10-DAY EMERGENCY INDEXING RECOVERY TASK PROTOCOL
+
+When the site is in Indexing Quarantine (< 50% index rate), execute this sequential 10-day recovery protocol:
+
+| Day | Focus Area | Concrete Execution Action | Success Metric |
+| :---: | :--- | :--- | :--- |
+| **Day 1** | **404 Cleanout & 410 Gone** | Audit the 783 GSC 404 URLs. Add 301 redirects for real migration pages; return HTTP 410 Gone for deleted legacy URLs. | Zero active 404s in GSC crawl cycle. |
+| **Day 2** | **Sitemap Quarantine** | Limit `/sitemap.xml` strictly to the top 100–150 highest-performing, canonical pillar articles. Exclude thin directory stubs. Resubmit to GSC. | Submitted sitemap URLs cut from 1,693 to ~150. |
+| **Day 3** | **Thin Stub Noindexing** | Inject `<meta name="robots" content="noindex, follow">` on thin/programmatic workflow and MCP server listings that lack extensive depth. | Protects domain from "thin content farm" algorithmic penalty. |
+| **Day 4** | **Pillar Guide Consolidation** | Identify 5 overlapping short articles and merge them into 1 comprehensive 2,500+ word master blueprint with runnable code & architecture diagram. | Higher dwell time, reduced bounce rate (< 45%). |
+| **Day 5** | **Dev.to High-DA Backlink Blast** | Syndicate top 3 flagship workflow breakdowns to Dev.to (DA 92) with canonical links back to `dailyaiworld.com`. | 3 live, index-verified DA 92 backlinks. |
+| **Day 6** | **Internal Link Architecture** | Run `php scripts/get_verified_internal_links.php` to weave 4–5 deep links into the top 20 indexed pages, pointing directly to unindexed priority guides. | Googlebot discovers deep URLs through internal PageRank flow. |
+| **Day 7** | **Wikipedia Citation Matching** | Run `dailyai-wiki-backlinks` skill to match 2 empirical benchmarks to Wikipedia AI claims with dead/missing references. | Top-tier entity trust in Google Knowledge Graph. |
+| **Day 8** | **Crawl Budget & Server Latency Audit** | Audit TTFB (< 250ms), remove server redirects, verify HTTP/2 caching on Hostinger, test mobile Core Web Vitals. | 100% crawl efficiency for Googlebot. |
+| **Day 9** | **Secondary Dev.to & GitHub Push** | Syndicate 2 comparison showdowns to Dev.to and submit MCP directory entries to top GitHub `awesome-mcp-servers` lists. | Diversified referral traffic & index signals. |
+| **Day 10** | **GSC Validation & Trajectory Audit** | Re-run GSC coverage extraction. Verify 404s resolving to 410, crawl budget reallocation, and first batch of unindexed backlog entering the index. | Measurable reversal in GSC "Crawled - not indexed" curve. |
 
 ---
 
@@ -354,6 +392,42 @@ To permanently eliminate Google Search Console **"Discovered - currently not ind
 6. **Strict No Git Push For Content Policy**:
    - Articles live directly inside the MySQL database (`articles` table on `srv1334.hstgr.io`).
    - Pushing code to GitHub triggers unnecessary deployments on the live host, which disrupts active crawler sessions and harms Google indexing.
+
+---
+
+## 🧹 ZERO-BLOAT "INDEX OR PRUNE" LIFECYCLE & DAILY STATUS AUDIT ENGINE
+
+Google evaluates domains holistically. Having hundreds of stale URLs stuck in **"Crawled - currently not indexed"** or **"Discovered - currently not indexed"** pulls down the domain-wide quality score and throttles crawl budget for high-performing fresh content.
+
+Daily AI World enforces an autonomous **"Index or Prune"** operational lifecycle:
+
+### 1. Daily Engine Execution (`Step 0`)
+At the start of every publishing session, run:
+```bash
+php scripts/daily_indexing_and_prune_audit.php
+```
+This automated command runs three sequential sub-engines:
+1. **Status Transition Tracker**: Inspects URLs via Google Search Console Inspection API, compares with `storage/app/url_indexing_status_cache.json`, and outputs whether URLs were **PROMOTED TO INDEXED**, **CRAWLED**, or are **STAGNANT**.
+2. **Prune Candidate Radar**: Evaluates published articles older than 21 days with low view counts (<5) or thin content (<600 words) that remain stuck in `Crawled - currently not indexed`.
+3. **Compliant Rotating Indexing Batch**: Capped strictly at 200 URLs/day with 250ms rate-pacing, pushing Tier 1 fresh dispatches, Tier 2 core hubs, and Tier 3 unindexed backlog.
+4. **Markdown Audit Briefing**: Writes an executive log to `storage/logs/indexing_audit_YYYY-MM-DD.md`.
+
+### 2. The 14-Day "Index or Prune" Decision Framework
+When an article is audited:
+* **Outcome A — Indexed (`Submitted and indexed`)**: Keep and amplify. Link contextually to it from new related dispatches to reinforce PageRank.
+* **Outcome B — Progressing (`In Bot Queue` / Fresh Crawl)**: Allow normal rotation in Tier 3 smart batches.
+* **Outcome C — Deadweight / Stubbornly Rejected**:
+  If an article has been submitted across 14–21 days and remains stubbornly in `Crawled - currently not indexed` with zero impressions:
+  * **Option 1: 301 Consolidation**: If the topic overlaps with a stronger guide or core hub, 301-redirect it.
+  * **Option 2: Hard Prune & 410 De-index**: Run:
+    ```bash
+    php scripts/daily_indexing_and_prune_audit.php --prune-id=<id>
+    ```
+    This automatically:
+    - Changes `status = 'archived'` in Hostinger Remote DB (`articles` table).
+    - Immediately calls Google Indexing API with `publishUrl($url, 'URL_DELETED')`.
+    - Tells Googlebot to immediately purge the URL and reallocate crawl budget to new dispatches.
+    - Logs the de-indexed URL in `storage/logs/pruned_articles.log`.
 
 ---
 

@@ -1,5 +1,5 @@
 {
-    "last_scan": "2026-11-04T15:26:08+00:00",
+    "last_scan": "2026-11-08T11:36:36+00:00",
     "opportunities": [
         {
             "type": "CITATION_NEEDED",
@@ -20,18 +20,18 @@
             "matched_article_title": "Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents",
             "matched_article_url": "https:\/\/dailyaiworld.com\/blogs\/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation",
             "relevance_score": 6,
-            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation |title=Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-03 |access-date=2026-11-04}}<\/ref>",
+            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation |title=Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-03 |access-date=2026-11-08}}<\/ref>",
             "edit_summary": "Added verifiable empirical benchmark source per WP:RS"
         },
         {
             "type": "CITATION_NEEDED",
             "wiki_page": "Large language model",
             "sentence": "Since 2022, [[Open-source artificial intelligence|open-source]] models (those with their source code and weights made publicly available) have been gaining popularity, especially at first with [[BLOOM (language model)|BL...",
-            "matched_article_id": 2554,
-            "matched_article_title": "AST-Based Code Refactoring vs Raw LLM Generation: Benchmarking Deterministic AST Agents",
-            "matched_article_url": "https:\/\/dailyaiworld.com\/blogs\/ast-based-code-refactoring-vs-raw-llm-generation-benchmarking",
-            "relevance_score": 14,
-            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/ast-based-code-refactoring-vs-raw-llm-generation-benchmarking |title=AST-Based Code Refactoring vs Raw LLM Generation: Benchmarking Deterministic AST Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-24 |access-date=2026-11-04}}<\/ref>",
+            "matched_article_id": 2679,
+            "matched_article_title": "Hugging Face Releases Open-R1: Fully Open-Source Pipeline for Training Frontier Reasoning Models with GRPO",
+            "matched_article_url": "https:\/\/dailyaiworld.com\/blogs\/hugging-face-releases-open-r1-reproducing-deepseek-r1-reasoning-swarms",
+            "relevance_score": 12,
+            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/hugging-face-releases-open-r1-reproducing-deepseek-r1-reasoning-swarms |title=Hugging Face Releases Open-R1: Fully Open-Source Pipeline for Training Frontier Reasoning Models with GRPO |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-05 |access-date=2026-11-08}}<\/ref>",
             "edit_summary": "Added verifiable empirical benchmark source per WP:RS"
         },
         {
@@ -42,7 +42,7 @@
             "matched_article_title": "Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use",
             "matched_article_url": "https:\/\/dailyaiworld.com\/blogs\/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming",
             "relevance_score": 6,
-            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming |title=Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-05 |access-date=2026-11-04}}<\/ref>",
+            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming |title=Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-05 |access-date=2026-11-08}}<\/ref>",
             "edit_summary": "Added verifiable empirical benchmark source per WP:RS"
         },
         {
@@ -64,7 +64,7 @@
             "matched_article_title": "vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters",
             "matched_article_url": "https:\/\/dailyaiworld.com\/blogs\/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters",
             "relevance_score": 4,
-            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters |title=vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-31 |access-date=2026-11-04}}<\/ref>",
+            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters |title=vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-31 |access-date=2026-11-08}}<\/ref>",
             "edit_summary": "Added verifiable empirical benchmark source per WP:RS"
         },
         {
@@ -75,7 +75,7 @@
             "matched_article_title": "vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown",
             "matched_article_url": "https:\/\/dailyaiworld.com\/blogs\/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown",
             "relevance_score": 30,
-            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown |title=vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-04 |access-date=2026-11-04}}<\/ref>",
+            "cite_markup": "<ref>{{cite web |url=https:\/\/dailyaiworld.com\/blogs\/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown |title=vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-04 |access-date=2026-11-08}}<\/ref>",
             "edit_summary": "Added verifiable empirical benchmark source per WP:RS"
         },
         {

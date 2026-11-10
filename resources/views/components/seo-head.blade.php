@@ -9,6 +9,7 @@
     'modifiedTime' => null,
     'section' => null,
     'author' => 'Daily AI World Editorial Board',
+    'robots' => null,
 ])
 
 @php
@@ -18,6 +19,7 @@
         return $pageNum ? $base . '?page=' . $pageNum : $base;
     })();
     $computedTitle = $pageNum ? $title . ' — Page ' . $pageNum : $title;
+    $computedRobots = $robots ?? (View::hasSection('robots') ? View::getSection('robots') : ($pageNum ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1'));
 @endphp
 
 <!-- Primary Meta Tags -->
@@ -28,7 +30,7 @@
 @endif
 <meta name="author" content="{{ $author }}">
 <meta name="publisher" content="Daily AI World">
-<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+<meta name="robots" content="{{ $computedRobots }}">
 <meta name="referrer" content="origin-when-cross-origin">
 
 @if(config('services.google.site_verification'))

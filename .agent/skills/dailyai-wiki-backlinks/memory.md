@@ -1,6 +1,6 @@
 # Daily AI World — Wikipedia Citation Opportunities Tracker
 
-Last Updated: 2026-11-04 15:26:08 UTC
+Last Updated: 2026-11-08 11:36:36 UTC
 Total Active Opportunities: 16
 
 ### 1. [Synthetic data](https://en.wikipedia.org/wiki/Synthetic_data)
@@ -21,7 +21,7 @@ Total Active Opportunities: 16
 - **Matched Article:** [Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents](https://dailyaiworld.com/blogs/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation) (ID: 2659)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation |title=Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-03 |access-date=2026-11-04}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/meta-fair-ships-segment-anything-model-2-1-real-time-video-segmentation |title=Meta FAIR Ships Segment Anything Model 2.1: Real-Time Zero-Shot Video Segmentation for Autonomous Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-03 |access-date=2026-11-08}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -30,10 +30,10 @@ Total Active Opportunities: 16
 ### 3. [Large language model](https://en.wikipedia.org/wiki/Large_language_model)
 - **Type:** `CITATION_NEEDED`
 - **Wikipedia Claim:** *"Since 2022, [[Open-source artificial intelligence|open-source]] models (those with their source code and weights made publicly available) have been gaining popularity, especially at first with [[BLOOM (language model)|BL..."*
-- **Matched Article:** [AST-Based Code Refactoring vs Raw LLM Generation: Benchmarking Deterministic AST Agents](https://dailyaiworld.com/blogs/ast-based-code-refactoring-vs-raw-llm-generation-benchmarking) (ID: 2554)
+- **Matched Article:** [Hugging Face Releases Open-R1: Fully Open-Source Pipeline for Training Frontier Reasoning Models with GRPO](https://dailyaiworld.com/blogs/hugging-face-releases-open-r1-reproducing-deepseek-r1-reasoning-swarms) (ID: 2679)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/ast-based-code-refactoring-vs-raw-llm-generation-benchmarking |title=AST-Based Code Refactoring vs Raw LLM Generation: Benchmarking Deterministic AST Agents |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-24 |access-date=2026-11-04}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/hugging-face-releases-open-r1-reproducing-deepseek-r1-reasoning-swarms |title=Hugging Face Releases Open-R1: Fully Open-Source Pipeline for Training Frontier Reasoning Models with GRPO |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-05 |access-date=2026-11-08}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -45,7 +45,7 @@ Total Active Opportunities: 16
 - **Matched Article:** [Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use](https://dailyaiworld.com/blogs/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming) (ID: 2677)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming |title=Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-05 |access-date=2026-11-04}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/google-announces-gemini-2-0-flash-multimodal-live-api-real-time-streaming |title=Google Announces Gemini 2.0 Flash: Multimodal Live API, Native Audio-to-Audio Streaming, and Built-In Tool Use |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-05 |access-date=2026-11-08}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -69,7 +69,7 @@ Total Active Opportunities: 16
 - **Matched Article:** [vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters](https://dailyaiworld.com/blogs/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters) (ID: 2629)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters |title=vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-31 |access-date=2026-11-04}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-07-ships-unified-kv-cache-compression-enterprise-clusters |title=vLLM 0.7 Ships Unified KV Cache Compression: 3.4x Higher Concurrency on Enterprise Clusters |author=Bagada, Deepak |publisher=Daily AI World |date=2026-10-31 |access-date=2026-11-08}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 
@@ -81,7 +81,7 @@ Total Active Opportunities: 16
 - **Matched Article:** [vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown](https://dailyaiworld.com/blogs/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown) (ID: 2665)
 - **Wikitext Markup:**
 ```wikitext
-<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown |title=vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-04 |access-date=2026-11-04}}</ref>
+<ref>{{cite web |url=https://dailyaiworld.com/blogs/vllm-vs-tensorrt-llm-blackwell-fp4-serving-latency-showdown |title=vLLM vs TensorRT-LLM: Blackwell FP4 Quantization, Serving Throughput, and Concurrency Showdown |author=Bagada, Deepak |publisher=Daily AI World |date=2026-11-04 |access-date=2026-11-08}}</ref>
 ```
 - **Edit Summary:** `Added verifiable empirical benchmark source per WP:RS`
 

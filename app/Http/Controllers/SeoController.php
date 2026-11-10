@@ -107,12 +107,14 @@ class SeoController extends Controller
 
     /**
      * AI Workflows Directory Dispatches (/workflow/{slug})
+     * Quarantined to top 50 deepest, highest-quality technical workflows during 10-day recovery.
      */
     public function sitemapWorkflows(): Response
     {
         $articles = Article::published()
             ->where('category_id', 1)
             ->latest('published_at')
+            ->take(50)
             ->get();
 
         $content = view('seo.sitemap_articles', [
@@ -126,12 +128,14 @@ class SeoController extends Controller
 
     /**
      * MCP Tools & Server Directory Dispatches (/mcp-directory/{slug})
+     * Quarantined to top 40 verified MCP servers during 10-day recovery.
      */
     public function sitemapMcp(): Response
     {
         $articles = Article::published()
             ->where('category_id', 5)
             ->latest('published_at')
+            ->take(40)
             ->get();
 
         $content = view('seo.sitemap_articles', [
@@ -145,7 +149,7 @@ class SeoController extends Controller
 
     /**
      * Technical Blogs, Coding & LLM Benchmark Dispatches (/blogs/{slug})
-     * Also houses archived AI News older than 48 hours for standard Googlebot web indexing.
+     * Quarantined to top 50 deep pillar blogs & comparison showdowns during 10-day recovery.
      */
     public function sitemapBlogs(): Response
     {
@@ -158,6 +162,7 @@ class SeoController extends Controller
                   });
             })
             ->latest('published_at')
+            ->take(50)
             ->get();
 
         $content = view('seo.sitemap_articles', [
@@ -179,6 +184,7 @@ class SeoController extends Controller
             ->where('category_id', 11)
             ->where('published_at', '>=', now()->subDays(2))
             ->latest('published_at')
+            ->take(15)
             ->get();
 
         $content = view('seo.sitemap_articles', [

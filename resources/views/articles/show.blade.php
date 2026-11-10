@@ -1,7 +1,13 @@
 @extends('layouts.editorial')
 
+@php
+    $isThinArticle = ($article->word_count < 600) || ($article->status === 'archived');
+    $robotsDirective = $isThinArticle ? 'noindex, follow' : 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1';
+@endphp
+
 @section('title', $article->title . ' — Daily AI World')
 @section('canonical', $article->url)
+@section('robots', $robotsDirective)
 @section('meta_description', Str::limit(!empty(trim($article->deck ?? '')) ? $article->deck : (!empty(trim($article->excerpt ?? '')) ? $article->excerpt : Str::limit(strip_tags($article->content), 155)), 155))
 @section('og_image', $article->featured_image)
 @section('og_type', 'article')

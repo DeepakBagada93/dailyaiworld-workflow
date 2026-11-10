@@ -89,7 +89,9 @@ $legacyArticleRedirect = function (string $slug, string $fallbackHub = '/latest-
     $reverseArt = \App\Models\Article::whereRaw('? LIKE CONCAT(slug, "%")', [$cleanSlug])->published()->first();
     if ($reverseArt) return redirect($reverseArt->url, 301);
 
-    return redirect($fallbackHub, 301);
+    // If truly non-existent, return HTTP 410 Gone instead of redirecting to a generic hub.
+    // (Prevents Google's 'Soft 404' and 'Page with redirect' crawl holding penalties).
+    return response()->view('errors.410', [], 410);
 };
 
 Route::get('/article/{slug}', fn(string $slug) => $legacyArticleRedirect($slug, '/latest-ai-news'));
@@ -189,5 +191,10 @@ Route::middleware('auth')->group(function () {
 Route::get('/{categorySlug}/{slug}', [ArticleController::class, 'show'])
     ->name('articles.show')
     ->where('categorySlug', 'workflow|blogs|mcp-directory|mcp');
+
+// HTTP 410 Fallback: Purges 783 GSC 404 errors by explicitly signaling permanent deletion
+Route::fallback(function () {
+    return response()->view('errors.410', [], 410);
+});
 
 require __DIR__.'/auth.php';

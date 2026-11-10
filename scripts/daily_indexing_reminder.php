@@ -143,70 +143,100 @@ echo " Remaining Slots:   {$remainingQuota} URLs available today\n\n";
 // =====================================================================
 // STEP 3: SCHEDULED ROTATION TASK & ACTION REMINDER
 // =====================================================================
-echo "🎯 STEP 3: TODAY'S SCHEDULED TASK & NEXT ACTION...\n";
+echo "🎯 STEP 3: 10-DAY EMERGENCY INDEXING RECOVERY TASKBOARD\n";
 echo "----------------------------------------------------------------------\n";
 
-// 7-Day Master Rotation Schedule Map
-$schedule = [
-    '2026-09-27' => [
-        'day' => 'Day 1 (Sunday, Sep 27)',
-        'target' => 'Top September 2026 Dispatches & Core Hubs (200 URLs)',
-        'command' => 'php scripts/fast_google_index.php --month=09 --force --limit=200',
-        'secondary' => 'Submit all 1,198+ URLs to Bing/IndexNow & Fix /public/ .htaccess',
+// 10-Day Emergency Recovery Protocol Schedule (Anchor: 2026-11-09)
+$recoverySchedule = [
+    '2026-11-09' => [
+        'day' => 'Day 1 (Mon, Nov 9)',
+        'target' => '404 Purge & HTTP 410 Setup (Kill 783 GSC 404s)',
+        'status' => 'COMPLETED / VALIDATION RUNNING',
+        'action' => 'HTTP 410 deployed, 15 GSC prefixes removed, and GSC Validation officially started.',
     ],
-    '2026-09-28' => [
-        'day' => 'Day 2 (Monday, Sep 28)',
-        'target' => '173 Discovered Backlog URLs (Table 24 sept.csv)',
-        'command' => 'php scripts/resubmit_discovered_urls.php',
-        'secondary' => 'Verify GSC coverage transition from Discovered to Crawled',
+    '2026-11-10' => [
+        'day' => 'Day 2 (Tue, Nov 10)',
+        'target' => 'Sitemap Quarantine (Trim 1,693 URLs down to top 100–150 pillar guides)',
+        'status' => 'COMPLETED',
+        'action' => 'Sitemaps trimmed to 153 curated URLs and re-submitted to GSC API (HTTP 204 OK).',
     ],
-    '2026-09-29' => [
-        'day' => 'Day 3 (Tuesday, Sep 29)',
-        'target' => 'August 2026 Workflows Batch (200 URLs)',
-        'command' => 'php scripts/fast_google_index.php --month=08 --limit=200',
-        'secondary' => 'Submit IndexNow batch for recent workflows',
+    '2026-11-11' => [
+        'day' => 'Day 3 (Wed, Nov 11)',
+        'target' => 'Thin Directory Stub Protection (Inject noindex, follow on shallow stubs)',
+        'status' => 'COMPLETED (AHEAD OF SCHEDULE)',
+        'action' => 'Dynamic noindex injected on articles < 600 words, paginated loops, and search pages.',
     ],
-    '2026-09-30' => [
-        'day' => 'Day 4 (Wednesday, Sep 30)',
-        'target' => 'August 2026 MCP Directory Servers Batch (200 URLs)',
-        'command' => 'php scripts/fast_google_index.php --month=08 --limit=200',
-        'secondary' => 'Verify /mcp-directory canonical recrawl status in GSC',
+    '2026-11-12' => [
+        'day' => 'Day 4 (Thu, Nov 12)',
+        'target' => 'Pillar Guide Consolidation (Merge overlapping short stubs into 2k+ blueprints)',
+        'status' => 'UPCOMING',
+        'action' => 'Identify 5 cannibalized articles, consolidate into master guide, 301 redirect legacy slugs.',
     ],
-    '2026-10-01' => [
-        'day' => 'Day 5 (Thursday, Oct 01)',
-        'target' => 'August 2026 AI Blogs Batch (200 URLs)',
-        'command' => 'php scripts/fast_google_index.php --month=08 --limit=200',
-        'secondary' => 'Submit IndexNow batch for blogs',
+    '2026-11-13' => [
+        'day' => 'Day 5 (Fri, Nov 13)',
+        'target' => 'Flagship Dev.to Backlink Blast (DA 92 Authority Building)',
+        'status' => 'UPCOMING',
+        'action' => 'Syndicate top 3 dispatches to Dev.to using php scripts/syndicate_to_devto.php with verified canonical.',
     ],
-    '2026-10-02' => [
-        'day' => 'Day 6 (Friday, Oct 02)',
-        'target' => 'Core Hubs, High-Intent Keywords & Missing Slugs (200 URLs)',
-        'command' => 'php scripts/fast_google_index.php --all --limit=200',
-        'secondary' => 'Re-index evergreen pillar articles',
+    '2026-11-14' => [
+        'day' => 'Day 6 (Sat, Nov 14)',
+        'target' => 'Internal Link Recirculation Overhaul',
+        'status' => 'UPCOMING',
+        'action' => 'Inject deep links inside the 18 currently indexed pages pointing to unindexed priority guides.',
     ],
-    '2026-10-03' => [
-        'day' => 'Day 7 (Saturday, Oct 03)',
-        'target' => 'Full Google Search Console & GA4 Indexing Verification Audit',
-        'command' => 'php scripts/fast_google_index.php --status',
-        'secondary' => 'Check GSC Inspection API & run updated traffic report',
+    '2026-11-15' => [
+        'day' => 'Day 7 (Sun, Nov 15)',
+        'target' => 'Wikipedia & High-Trust Authority Discovery',
+        'status' => 'UPCOMING',
+        'action' => 'Run dailyai-wiki-backlinks to discover and match empirical benchmarks to citations needed.',
+    ],
+    '2026-11-16' => [
+        'day' => 'Day 8 (Mon, Nov 16)',
+        'target' => 'Server Performance & Crawl Efficiency Audit',
+        'status' => 'UPCOMING',
+        'action' => 'Audit TTFB (< 250ms), HTTP/2 caching, Core Web Vitals to maximize crawl throughput.',
+    ],
+    '2026-11-17' => [
+        'day' => 'Day 9 (Tue, Nov 17)',
+        'target' => 'GitHub & Multi-Platform Referral Push',
+        'status' => 'UPCOMING',
+        'action' => 'Submit MCP servers to GitHub awesome-lists; syndicate 2nd flagship to Dev.to/Hashnode.',
+    ],
+    '2026-11-18' => [
+        'day' => 'Day 10 (Wed, Nov 18)',
+        'target' => 'GSC Validation & Trajectory Audit',
+        'status' => 'UPCOMING',
+        'action' => 'Re-extract GSC coverage charts, verify 404 elimination and unindexed backlog promotion.',
     ],
 ];
 
-// Dynamic Multi-Month Rolling Window (Previous month + Current month)
+$activePlan = $recoverySchedule[$todayDateStr] ?? [
+    'day' => "Day 10+ Post-Quarantine Monitoring ({$todayDateStr})",
+    'target' => 'Audit GSC indexing transition (>50% target) and plan gradual sitemap unquarantine',
+    'status' => 'ONGOING',
+    'action' => 'Inspect indexation curve and gradually add 25 upgraded articles per week into sitemap.',
+];
+
+echo " 🚨 QUARANTINE STATUS: ACTIVE (Mass publishing halted | Max 1 Flagship/day)\n";
+echo " 📅 Recovery Phase:   {$activePlan['day']}\n";
+echo " 🎯 Today's Target:   {$activePlan['target']}\n";
+echo " ⚡ Action Required:  {$activePlan['action']}\n\n";
+
+echo " 📋 10-DAY ROADMAP OVERVIEW:\n";
+foreach ($recoverySchedule as $dateKey => $plan) {
+    $marker = ($dateKey === $todayDateStr) ? "👉 [TODAY]" : ($dateKey < $todayDateStr ? "✅ [DONE] " : "⏳ [PLAN] ");
+    echo "  {$marker} {$plan['day']}: {$plan['target']}\n";
+}
+echo "\n";
+
 $prevMonth = date('m', strtotime('-1 month'));
 $currMonth = $today->format('m');
 $targetMonths = ($prevMonth === $currMonth) ? $currMonth : "{$prevMonth},{$currMonth}";
+$defaultCommand = "php scripts/daily_indexing_and_prune_audit.php";
 
-$currentTask = [
-    'day' => "Automated Daily Indexing Radar ({$todayDayName}, {$todayDateStr})",
-    'target' => "Core Hubs + Today's Dispatches + Unindexed Backlog ({$remainingQuota} URLs)",
-    'command' => "php scripts/fast_google_index.php --month={$targetMonths} --force --limit={$remainingQuota} --submit-indexnow",
-    'secondary' => "Submit Core Directory Hubs, Google Indexing API & IndexNow (Bing/Copilot)",
-];
-
-echo " Task Assigned:     {$currentTask['day']}\n";
-echo " Batch Target:      {$currentTask['target']}\n";
-echo " Secondary Task:    {$currentTask['secondary']}\n\n";
+echo " Task Assigned:     {$activePlan['day']}\n";
+echo " Batch Target:      {$activePlan['target']}\n";
+echo " Action Step:       {$activePlan['action']}\n\n";
 
 if ($submittedToday >= 200) {
     echo " ✅ STATUS: Today's Google quota (200/200) has already been SUBMITTED!\n";
@@ -215,7 +245,7 @@ if ($submittedToday >= 200) {
 } else {
     echo " ⚠️  ACTION REQUIRED: Today's quota has {$remainingQuota} slots available.\n";
     echo " Run this command now (or use --run-today) to submit the batch:\n\n";
-    echo "   \033[1;32m{$currentTask['command']}\033[0m\n\n";
+    echo "   \033[1;32m{$defaultCommand}\033[0m\n\n";
     echo " Or run via Artisan: \033[1;36mphp artisan indexing:radar --run-today\033[0m\n";
 }
 

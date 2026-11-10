@@ -1,6 +1,7 @@
 @extends('layouts.editorial')
 
 @section('title', '404 Page Not Found — Daily AI World')
+@section('robots', 'noindex, follow')
 
 @section('content')
 <div class="future-newsroom newsroom-page max-w-4xl mx-auto px-4 sm:px-6 py-24 text-center space-y-8">

@@ -37,12 +37,19 @@ if (empty($apiKey)) {
 }
 
 // 2. Fetch Article from Hostinger DB
+$historyFile = storage_path('app/devto_syndicated.json');
+$history = file_exists($historyFile) ? json_decode(file_get_contents($historyFile), true) : [];
+$syndicatedIds = is_array($history) ? array_filter(array_column($history, 'article_id')) : [];
+
 $query = DB::connection('hostinger')->table('articles')
     ->where('status', 'published');
 
 if ($articleId) {
     $article = $query->where('id', $articleId)->first();
 } else {
+    if (!empty($syndicatedIds)) {
+        $query->whereNotIn('id', $syndicatedIds);
+    }
     $article = $query->orderBy('published_at', 'desc')->first();
 }
 

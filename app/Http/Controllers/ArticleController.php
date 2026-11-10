@@ -95,17 +95,10 @@ class ArticleController extends Controller
                 return redirect($reversePrefixArt->url, 301);
             }
 
-            // If truly not found, redirect to the relevant hub or homepage with a 301
-            // instead of returning a hard 404, recovering SEO link equity for Googlebot.
-            if ($categorySlug === 'workflow' || $categorySlug === 'workflows') {
-                return redirect('/workflows', 301);
-            } elseif ($categorySlug === 'mcp-directory' || $categorySlug === 'mcp') {
-                return redirect('/mcp-directory', 301);
-            } elseif ($categorySlug === 'blogs' || $categorySlug === 'blog') {
-                return redirect('/latest-ai-news', 301);
-            }
-
-            return redirect('/', 301);
+            // If truly not found, return HTTP 410 Gone instead of redirecting to a generic hub.
+            // (Redirecting dead individual URLs to generic hubs triggers Google's 'Soft 404' and 'Page with redirect' penalties).
+            // HTTP 410 tells Googlebot the resource is permanently gone, dropping it from crawl queues immediately.
+            return response()->view('errors.410', [], 410);
         }
 
         // Canonical prefix per category — must mirror Article::getUrlAttribute()

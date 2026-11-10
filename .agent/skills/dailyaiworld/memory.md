@@ -6,10 +6,13 @@ Before generating new dispatches, check this memory log to ensure **zero repeate
 ---
 
 ## 📌 Memory Check Rules
-0. **Session Pre-Flight & Indexing First (MANDATORY)**: Whenever resuming a session or starting daily publishing, ALWAYS execute Step 0 before searching or writing content:
-   - Run `php scripts/daily_indexing_reminder.php` to check the live Google Search Console inspection status (`✅ [INDEXED]`, `⏳ [CRAWLED - PENDING INDEX]`, or `⚡ [IN BOT QUEUE]`) and remaining Google Indexing API daily quota (200 URLs/day).
-   - If today's 200 quota has available slots, run `php scripts/fast_google_index.php --limit=200` to submit the priority batch (freshly published dispatches first, followed by unindexed backlog URLs).
-   - Only after today's indexing state is inspected and today's batch is triggered/maxed, proceed to search, write, or schedule new dispatches.
+0. **Session Pre-Flight, Status Tracking & Prune Radar (MANDATORY)**: Whenever resuming a session or starting daily publishing, ALWAYS execute Step 0 before searching or writing content:
+   - Run `php scripts/daily_indexing_and_prune_audit.php` to:
+     1. Track URL status changes via GSC Inspection API (`⚡ [IN BOT QUEUE]` -> `⏳ [CRAWLED - NOT INDEXED]` -> `✅ [INDEXED]`).
+     2. Review the Prune Radar table for stagnant/thin articles (>21 days, <600 words, 0 impressions) and prune deadweight with `--prune-id=<id>` (which sets DB status='archived' and sends `URL_DELETED` to Googlebot).
+     3. Dispatch the compliant rotating indexing batch (max 200 URLs/day with 250ms rate-pacing).
+     4. Review the daily executive briefing at `storage/logs/indexing_audit_YYYY-MM-DD.md`.
+   - Only after Step 0 is audited and today's batch is triggered/maxed, proceed to search, write, or schedule new dispatches.
 1. **Never repeat existing topics or slugs** listed in this memory file.
 2. Every new dispatch must explore a novel architectural pattern, tool integration, or AI insight.
 3. Update this file immediately after publishing new dispatches.
@@ -2038,6 +2041,34 @@ Following the comprehensive Google Search Console (GSC) forensic audit on **Sept
 | 2026-11-08 | AI News | Article | Mistral Releases Le Chat Enterprise: Workspace Agent Canvas, Native Code Interpreter, and Web Search | `mistral-releases-le-chat-enterprise-agent-workspace` | mistral le chat enterprise, mistral agent canvas, mistral code interpreter, enterprise ai workspace, mistral large 2 canvas |
 | 2026-11-08 | AI News | Article | Anthropic Introduces Prompt Caching for Claude 3.5 Haiku: Sub-50ms Latency at 90 Percent Cost Reduction | `anthropic-introduces-prompt-caching-for-claude-35-haiku` | claude 3.5 haiku prompt caching, anthropic prompt caching latency, ttft sub-50ms, kv cache reuse llm, ai agent token economics |
 | 2026-11-08 | AI News | Article | Cohere Announces Command R7B: High-Throughput Edge Reasoning Model with Native Tool Use and Multilingual Support | `cohere-announces-command-r7b-efficient-edge-agent-model` | cohere command r7b, edge ai model, local tool calling llm, command r7b benchmark, open weight reasoning agent |
+
+---
+
+---
+
+| 2026-11-09 | AI Workflows | Article | Build an Autonomous Kubernetes SRE Agent with LangGraph: Sub-30s Pod CrashLoopBackOff Self-Healing | `build-autonomous-kubernetes-sre-agent-langgraph-crashloop-healing` | kubernetes sre agent, langgraph self healing pod, crashloopbackoff automated remediation, k8s autonomous agent, devops agentic ai |
+| 2026-11-09 | AI Workflows | Article | Build an Autonomous Semantic Cache Agent with Redis and LangGraph: 78% LLM Latency Reduction and Token Deduplication | `build-autonomous-semantic-cache-agent-redis-langgraph-latency` | semantic cache agent, redis langgraph cache, vector deduplication llm, redis vss cache, autonomous caching pipeline |
+| 2026-11-09 | AI Tools | Article | Build a Redis Semantic Cache MCP Server: Sub-4ms Vector Lookup and Adaptive TTL for Swarms | `build-redis-semantic-cache-mcp-server-sub-4ms-vector-lookup` | redis mcp server, fastmcp semantic cache, vector cache mcp, model context protocol redis, agent swarm token caching |
+| 2026-11-09 | AI Tools | Article | Build a GitHub Actions CI/CD Automation MCP Server: Sub-100ms Log Triage and Automated Patch Pull Requests | `build-github-actions-ci-cd-automation-mcp-server-log-triage` | github actions mcp server, fastmcp ci cd automation, automated log triage agent, model context protocol github, autonomous devops pr |
+| 2026-11-09 | LLMs | Article | SGLang vs vLLM: RadixAttention Dynamic KV Reuse, Prefix Caching Latency, and Concurrency Showdown | `sglang-vs-vllm-radixattention-kv-reuse-serving-concurrency-showdown` | sglang vs vllm, radixattention benchmark, prefix caching latency, enterprise llm serving, pagedattention kv cache |
+| 2026-11-09 | LLMs | Article | pgvector vs Milvus: Billion-Scale Vector Search Latency, HNSW Memory Overhead, and Sharding Showdown | `pgvector-vs-milvus-vector-search-latency-hnsw-memory-showdown` | pgvector vs milvus, billion scale vector search, milvus distributed vector database, pgvector hnsw benchmark, vector database showdown |
+| 2026-11-09 | LLMs | Article | Smolagents vs LangGraph: Code-as-Action Execution, Multi-Agent Coordination, and Token Overhead Showdown | `smolagents-vs-langgraph-code-agent-execution-token-showdown` | smolagents vs langgraph, code as action agent, hugging face smolagents, langgraph multi agent benchmark, agentic token economics |
+| 2026-11-09 | AI News | Article | Anthropic Unveils Tool Search Tool for Claude 3.5 Sonnet: 85% Context Window Savings for Enterprise Swarms | `anthropic-unveils-tool-search-tool-claude-35-sonnet-context-savings` | anthropic tool search, claude 3.5 sonnet dynamic tools, context window optimization, model context protocol tool search, agent swarm tooling |
+| 2026-11-09 | AI News | Article | Google Releases Gemini 1.5 Flash-8B: Sub-Cent Multimodal Inference and High-Throughput Agentic Batching | `google-releases-gemini-15-flash-8b-sub-cent-multimodal-inference` | gemini 1.5 flash 8b, google deepmind multimodal, sub cent llm pricing, high throughput agent batching, lightweight vision agent |
+| 2026-11-09 | AI News | Article | Meta FAIR Releases Llama Stack: Standardized API Framework for Local and Cloud Agent Deployments | `meta-fair-releases-llama-stack-standardized-agent-api-framework` | meta llama stack, llama stack api, standardized agent api framework, llama guard safety, open source agent distribution |
+
+---
+
+| 2026-11-10 | AI Workflows | Article | Build an Autonomous SQL Self-Healing Agent with LangGraph: Sub-15ms Query Optimization and Index Tuning | `build-autonomous-sql-database-self-healing-agent-langgraph-optimization` | sql self healing agent, langgraph query optimization, postgres explain analyze agent, automated index tuning, database ai agent |
+| 2026-11-10 | AI Workflows | Article | Build an Autonomous SecOps Incident Response Agent with LangGraph: Sub-60s AWS CloudTrail Anomaly Quarantine | `build-autonomous-secops-security-incident-response-agent-langgraph` | secops incident response agent, langgraph security automation, aws cloudtrail anomaly detection, automated iam revocation, autonomous cloud security |
+| 2026-11-10 | AI Tools | Article | Build an AWS CloudWatch and CloudTrail MCP Server: Sub-150ms Log Querying and Metric Alarms for Swarms | `build-aws-cloudwatch-cloudtrail-mcp-server-sub-150ms-log-querying` | aws cloudwatch mcp server, fastmcp cloudtrail, cloudwatch logs insights mcp, model context protocol aws, devops agent tools |
+| 2026-11-10 | AI Tools | Article | Build a PostgreSQL EXPLAIN Query Optimizer MCP Server: Sub-10ms Execution Plan Analysis for Swarms | `build-postgresql-explain-query-optimizer-mcp-server-execution-analysis` | postgresql explain mcp server, fastmcp query optimizer, execution plan analysis mcp, model context protocol postgres, database tuning agent |
+| 2026-11-10 | LLMs | Article | ChromaDB vs Qdrant: Local In-Memory Retrieval, HNSW Filtering Latency, and Memory Footprint Showdown | `chromadb-vs-qdrant-local-in-memory-retrieval-hnsw-filtering-showdown` | chromadb vs qdrant, local vector database benchmark, hnsw filtering latency, in memory vector search, python rag vector store |
+| 2026-11-10 | LLMs | Article | LlamaIndex Workflows vs CrewAI: Event-Driven Async Execution, Multi-Agent Delegation, and Token Cost Showdown | `llamaindex-workflows-vs-crewai-event-driven-multi-agent-showdown` | llamaindex workflows vs crewai, event driven ai agent, multi agent delegation showdown, agent token economics, python async agent framework |
+| 2026-11-10 | LLMs | Article | TensorRT-LLM vs SGLang: Blackwell FP4 Throughput, KV Cache Paging, and Speculative Decoding Showdown | `tensorrt-llm-vs-sglang-blackwell-fp4-serving-speculative-showdown` | tensorrt llm vs sglang, blackwell fp4 serving benchmark, speculative decoding throughput, nvidia tensorrt llm, enterprise inference engine |
+| 2026-11-10 | AI News | Article | OpenAI Launches ChatGPT Search GA: Real-Time Web Grounding, Search Engine Partnerships, and Perplexity Showdown | `openai-launches-chatgpt-search-ga-real-time-web-grounding-showdown` | chatgpt search ga, openai search engine, perplexity vs chatgpt search, real time web grounding, ai answer engine optimization |
+| 2026-11-10 | AI News | Article | Anthropic Introduces Computer Use API in Claude 3.5 Sonnet: Autonomous OS Navigation and GUI Automation | `anthropic-introduces-computer-use-api-claude-35-sonnet-gui-automation` | anthropic computer use api, claude 3.5 sonnet computer use, autonomous os navigation, gui automation agent, osworld benchmark claude |
+| 2026-11-10 | AI News | Article | AWS Launches Bedrock Knowledge Bases Multi-Modal RAG: Native Embedding Ingestion for Graphs, Tables, and Charts | `aws-bedrock-knowledge-bases-multimodal-rag-embedding-ingestion` | aws bedrock knowledge bases, multimodal rag aws, titan multimodal embeddings, enterprise document parsing, vector knowledge base |
 
 ---
 
