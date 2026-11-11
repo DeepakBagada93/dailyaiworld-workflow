@@ -107,15 +107,23 @@ class SeoController extends Controller
 
     /**
      * AI Workflows Directory Dispatches (/workflow/{slug})
-     * Quarantined to top 50 deepest, highest-quality technical workflows during 10-day recovery.
+     * Quarantined to top 50 technical workflows (15 highest-authority pillars + 35 latest dispatches).
      */
     public function sitemapWorkflows(): Response
     {
-        $articles = Article::published()
+        $topPillars = Article::published()
+            ->where('category_id', 1)
+            ->orderByDesc('view_count')
+            ->take(15)
+            ->get();
+
+        $latest = Article::published()
             ->where('category_id', 1)
             ->latest('published_at')
-            ->take(50)
+            ->take(35)
             ->get();
+
+        $articles = $topPillars->concat($latest)->unique('id')->values();
 
         $content = view('seo.sitemap_articles', [
             'articles' => $articles,
@@ -128,15 +136,23 @@ class SeoController extends Controller
 
     /**
      * MCP Tools & Server Directory Dispatches (/mcp-directory/{slug})
-     * Quarantined to top 40 verified MCP servers during 10-day recovery.
+     * Quarantined to top 40 verified MCP servers (15 highest-authority pillars + 25 latest dispatches).
      */
     public function sitemapMcp(): Response
     {
-        $articles = Article::published()
+        $topPillars = Article::published()
+            ->where('category_id', 5)
+            ->orderByDesc('view_count')
+            ->take(15)
+            ->get();
+
+        $latest = Article::published()
             ->where('category_id', 5)
             ->latest('published_at')
-            ->take(40)
+            ->take(25)
             ->get();
+
+        $articles = $topPillars->concat($latest)->unique('id')->values();
 
         $content = view('seo.sitemap_articles', [
             'articles' => $articles,
@@ -149,21 +165,24 @@ class SeoController extends Controller
 
     /**
      * Technical Blogs, Coding & LLM Benchmark Dispatches (/blogs/{slug})
-     * Quarantined to top 50 deep pillar blogs & comparison showdowns during 10-day recovery.
+     * Quarantined to top 50 deep pillar blogs & comparison showdowns (15 highest-authority pillars + 35 latest dispatches).
      */
     public function sitemapBlogs(): Response
     {
-        $articles = Article::published()
-            ->where(function ($q) {
-                $q->whereIn('category_id', [2, 3, 4, 6, 7, 8, 9, 10, 12])
-                  ->orWhere(function ($sub) {
-                      $sub->where('category_id', 11)
-                          ->where('published_at', '<', now()->subDays(2));
-                  });
-            })
-            ->latest('published_at')
-            ->take(50)
-            ->get();
+        $blogQuery = function () {
+            return Article::published()
+                ->where(function ($q) {
+                    $q->whereIn('category_id', [2, 3, 4, 6, 7, 8, 9, 10, 12])
+                      ->orWhere(function ($sub) {
+                          $sub->where('category_id', 11)
+                              ->where('published_at', '<', now()->subDays(2));
+                      });
+                });
+        };
+
+        $topPillars = $blogQuery()->orderByDesc('view_count')->take(15)->get();
+        $latest = $blogQuery()->latest('published_at')->take(35)->get();
+        $articles = $topPillars->concat($latest)->unique('id')->values();
 
         $content = view('seo.sitemap_articles', [
             'articles' => $articles,
