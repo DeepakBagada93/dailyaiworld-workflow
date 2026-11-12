@@ -23,7 +23,7 @@
     # ==============================================================================
     # 2. BLOCK AGGRESSIVE SCRAPERS & EXPLOIT SCANNER USER-AGENTS
     # ==============================================================================
-    RewriteCond %{HTTP_USER_AGENT} (ahrefsbot|dotbot|semrushbot|megaindex|mj12bot|serpstatbot|bytespider|zoominfobot|petalsearch|blexbot|coccocbot) [NC,OR]
+    RewriteCond %{HTTP_USER_AGENT} (ahrefsbot|dotbot|semrushbot|megaindex|mj12bot|serpstatbot|bytespider|zoominfobot|petalsearch|petalbot|blexbot|coccocbot|scrapy) [NC,OR]
     RewriteCond %{HTTP_USER_AGENT} (nikto|sqlmap|masscan|zgrab|acunetix|havij|morfeus|nessus|dirbuster) [NC]
     RewriteRule .* - [F,L]
 

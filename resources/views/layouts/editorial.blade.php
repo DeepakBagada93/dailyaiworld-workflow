@@ -52,10 +52,21 @@
         function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
 
-        // Bot & Headless Scraper Filter: Prevent automated webdrivers and crawlers from polluting traffic analytics
-        if (!navigator.webdriver && !/(Bytespider|bot|crawler|spider|headlesschrome|headless|phantom|puppeteer)/i.test(navigator.userAgent)) {
-            gtag('config', '{{ config('services.google.analytics_id') }}');
-        }
+        // Advanced Bot, Headless Scraper & Referral Spam Guard
+        // Prevents automated webdrivers, scrapers, and ghost referral domains (e.g. aocr.org) from polluting GA4 metrics
+        (function() {
+            var ua = navigator.userAgent || '';
+            var ref = document.referrer || '';
+            var isBot = navigator.webdriver ||
+                /(Bytespider|bot|crawler|spider|headlesschrome|headless|phantom|puppeteer|selenium|scrapy|aiohttp)/i.test(ua) ||
+                /(aocr\.org|114\.114\.114\.114|semalt|traffic2money|darodar|ilovevitaly|econom\.co|buttons-for-website)/i.test(ref) ||
+                (window.outerWidth === 0 && window.outerHeight === 0) ||
+                (!navigator.languages || navigator.languages.length === 0);
+
+            if (!isBot) {
+                gtag('config', '{{ config('services.google.analytics_id') }}');
+            }
+        })();
     </script>
     @endif
 

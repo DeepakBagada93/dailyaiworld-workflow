@@ -2,8 +2,24 @@
 
 > **Author**: Deepak Bagada (Founder & Editor-in-Chief)  
 > **Status**: ACTIVE EXECUTION  
-> **Baseline Date**: Sunday, September 27, 2026  
-> **Target**: 100% Indexation of 1,444 Published Articles & 10x Organic Pageviews  
+> **Baseline Date**: Sunday, September 27, 2026 (Updated: November 12, 2026)  
+> **Target**: 100% Indexation of High-Authority Pillar Articles & 10x Organic Pageviews  
+
+---
+
+## 🛡️ PRIORITY ACTION FOR TOMORROW: Cloudflare Activation & Bot Shielding
+- [ ] **Step 1:** Create free account on [cloudflare.com](https://dash.cloudflare.com/sign-up) and add `dailyaiworld.com` (Select **Free $0 Plan**).
+- [ ] **Step 2:** Verify imported DNS records match Hostinger (A record pointing to Hostinger server IP, Proxied Orange Cloud ☁️).
+- [ ] **Step 3:** In Hostinger hPanel -> Domains -> `dailyaiworld.com` -> DNS / Nameservers -> Change `ns1.dns-parking.com` and `ns2.dns-parking.com` to Cloudflare's 2 assigned nameservers.
+- [ ] **Step 4:** In Cloudflare dashboard:
+  - Security -> Bots -> Enable **Bot Fight Mode** (blocks Chinese/Singapore datacenter scrapers).
+  - SSL/TLS -> Set encryption mode to **Full** (prevents redirect loop).
+  - Speed -> Optimization -> Ensure **Brotli** is ON.
+- [x] **Codebase Shields Applied (Nov 12):**
+  - Laravel Middleware `App\Http\Middleware\BlockBotTraffic` created & registered in `bootstrap/app.php`.
+  - GA4 Telemetry Guard in `resources/views/layouts/editorial.blade.php` prevents `aocr.org` and headless bot hits from triggering Google Analytics tags.
+  - Aggressive scrapers blocked in `public/robots.txt` (`Bytespider`, `PetalBot`, `DotBot`, `MegaIndex`, etc.).
+  - Server `.htaccess` rules updated with mod_rewrite drop conditions.
 
 ---
 
