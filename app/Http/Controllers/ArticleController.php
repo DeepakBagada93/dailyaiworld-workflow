@@ -136,13 +136,37 @@ class ArticleController extends Controller
             ->oldest('published_at')
             ->first();
 
-        // Recommended Blueprint for Mid-Article Inline Recirculation (crush bounce rate)
+        // Contextual Recommended Blueprint for Mid-Article Inline Recirculation (crushes bounce rate & passes PageRank)
+        $targetCategory = match((int)$article->category_id) {
+            1 => [5, 2, 3], // If workflow, recommend MCP server or LLM showdown
+            5 => [1, 2, 3], // If MCP server, recommend Workflow or LLM showdown
+            default => [1, 5] // If blog/news, recommend flagship Workflow or MCP server
+        };
+
         $nextBlueprint = Article::with(['category', 'author'])
             ->published()
             ->where('id', '!=', $article->id)
-            ->whereIn('category_id', [1, 5]) // Workflows or MCP servers
-            ->latest('published_at')
+            ->whereIn('category_id', $targetCategory)
+            ->orderByDesc('view_count')
             ->first();
+
+        if (!$nextBlueprint) {
+            $nextBlueprint = Article::with(['category', 'author'])
+                ->published()
+                ->where('id', '!=', $article->id)
+                ->whereIn('category_id', [1, 5])
+                ->latest('published_at')
+                ->first();
+        }
+
+        // Top 4 Cross-Discipline Authority Pillar Guides for Recirculation
+        $pillarGuides = Article::with(['category', 'author'])
+            ->published()
+            ->where('id', '!=', $article->id)
+            ->whereIn('category_id', [1, 5, 2, 3])
+            ->orderByDesc('view_count')
+            ->take(4)
+            ->get();
 
         // 3-Card Diverse Related Articles Footer (1 Workflow, 1 MCP Server, 1 Intelligence/Blog)
         $relatedWorkflows = Article::with(['category', 'author'])
@@ -194,6 +218,7 @@ class ArticleController extends Controller
                 'article',
                 'relatedArticles',
                 'nextBlueprint',
+                'pillarGuides',
                 'prevArticle',
                 'nextArticle',
                 'isBookmarked',

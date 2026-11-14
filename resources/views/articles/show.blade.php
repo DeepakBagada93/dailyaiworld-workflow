@@ -553,6 +553,8 @@
                                 <a href="{{ route('workflows.index') }}" class="text-[#6D28D9] hover:underline font-bold">All Workflows →</a>
                                 <span class="text-gray-300 dark:text-gray-700">|</span>
                                 <a href="{{ route('mcp.index') }}" class="text-[#6D28D9] hover:underline font-bold">MCP Directory →</a>
+                                <span class="text-gray-300 dark:text-gray-700">|</span>
+                                <a href="{{ route('news.index') }}" class="text-[#6D28D9] hover:underline font-bold">AI News →</a>
                             </div>
                         </div>
                         <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
@@ -562,6 +564,61 @@
                         </div>
                     </section>
                 @endif
+
+                <!-- CORE ARCHITECTURE DIRECTORY HUBS & PILLAR GUIDES RECIRCULATION -->
+                <section class="mt-14 p-6 sm:p-8 rounded-2xl bg-[#FAF5FF] dark:bg-purple-950/20 border border-[#DDD6FE] dark:border-purple-800/40">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-[#EDE9FE] dark:border-purple-800/30">
+                        <div>
+                            <div class="flex items-center gap-2 mb-1">
+                                <span class="w-2 h-2 rounded-full bg-[#6D28D9] animate-pulse"></span>
+                                <span class="font-mono text-[10px] uppercase tracking-widest text-[#6D28D9] font-bold">Architecture Directory Hubs</span>
+                            </div>
+                            <h4 class="font-serif text-xl font-bold text-[#1E1B4B] dark:text-purple-100">
+                                Explore Production AI Blueprints &amp; Toolkits
+                            </h4>
+                        </div>
+                        <div class="flex flex-wrap items-center gap-2 text-xs font-mono">
+                            <a href="{{ route('workflows.index') }}" class="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-900 border border-[#DDD6FE] text-[#6D28D9] font-bold hover:bg-[#6D28D9] hover:text-white transition-all shadow-2xs">Workflows Library →</a>
+                            <a href="{{ route('mcp.index') }}" class="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-900 border border-[#DDD6FE] text-[#6D28D9] font-bold hover:bg-[#6D28D9] hover:text-white transition-all shadow-2xs">MCP Directory →</a>
+                            <a href="{{ route('news.index') }}" class="px-3 py-1.5 rounded-lg bg-white dark:bg-gray-900 border border-[#DDD6FE] text-[#6D28D9] font-bold hover:bg-[#6D28D9] hover:text-white transition-all shadow-2xs">Realtime News →</a>
+                        </div>
+                    </div>
+
+                    <!-- Recommended Top Pillar Deep Links -->
+                    <div class="mt-6">
+                        <span class="font-mono text-[10px] uppercase tracking-wider text-[#6B7280] dark:text-gray-400 font-bold block mb-3">High-Priority Technical Pillar Guides</span>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+                            <a href="{{ url('/workflow/how-to-build-n8n-workflows-with-claude-code-6-steps') }}" class="p-3 rounded-xl bg-white dark:bg-gray-900 border border-[#EDE9FE] hover:border-[#6D28D9] transition-all group flex items-start gap-2.5">
+                                <span class="font-mono text-[#6D28D9] font-bold text-xs mt-0.5">01.</span>
+                                <div>
+                                    <span class="font-bold text-[#1E1B4B] dark:text-purple-100 group-hover:text-[#6D28D9] transition-colors block">How to Build n8n Workflows with Claude Code</span>
+                                    <span class="text-[11px] text-[#6B7280] dark:text-gray-400 font-sans">Multi-agent orchestrator &amp; runnable 6-step blueprint</span>
+                                </div>
+                            </a>
+                            <a href="{{ url('/workflow/build-langgraph-sales-pipeline-2026') }}" class="p-3 rounded-xl bg-white dark:bg-gray-900 border border-[#EDE9FE] hover:border-[#6D28D9] transition-all group flex items-start gap-2.5">
+                                <span class="font-mono text-[#6D28D9] font-bold text-xs mt-0.5">02.</span>
+                                <div>
+                                    <span class="font-bold text-[#1E1B4B] dark:text-purple-100 group-hover:text-[#6D28D9] transition-colors block">Build a LangGraph Sales Pipeline: 6 Steps</span>
+                                    <span class="text-[11px] text-[#6B7280] dark:text-gray-400 font-sans">StateGraph checkpointing, CRM webhooks &amp; lead qualification</span>
+                                </div>
+                            </a>
+                            <a href="{{ url('/mcp-directory/basert-vs-llamacpp-vs-mlx-apple-silicon-benchmarks-2026') }}" class="p-3 rounded-xl bg-white dark:bg-gray-900 border border-[#EDE9FE] hover:border-[#6D28D9] transition-all group flex items-start gap-2.5">
+                                <span class="font-mono text-[#6D28D9] font-bold text-xs mt-0.5">03.</span>
+                                <div>
+                                    <span class="font-bold text-[#1E1B4B] dark:text-purple-100 group-hover:text-[#6D28D9] transition-colors block">BaseRT vs llama.cpp vs MLX Apple Silicon Benchmarks</span>
+                                    <span class="text-[11px] text-[#6B7280] dark:text-gray-400 font-sans">Tokens/sec throughput, unified memory &amp; FP16 latency</span>
+                                </div>
+                            </a>
+                            <a href="{{ url('/blogs/tensorrt-llm-vs-sglang-blackwell-fp4-serving-speculative-showdown') }}" class="p-3 rounded-xl bg-white dark:bg-gray-900 border border-[#EDE9FE] hover:border-[#6D28D9] transition-all group flex items-start gap-2.5">
+                                <span class="font-mono text-[#6D28D9] font-bold text-xs mt-0.5">04.</span>
+                                <div>
+                                    <span class="font-bold text-[#1E1B4B] dark:text-purple-100 group-hover:text-[#6D28D9] transition-colors block">TensorRT-LLM vs SGLang: Blackwell FP4 Showdown</span>
+                                    <span class="text-[11px] text-[#6B7280] dark:text-gray-400 font-sans">KV cache paging, speculative decoding &amp; token economics</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </section>
 
             </div>
 

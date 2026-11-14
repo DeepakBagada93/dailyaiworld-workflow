@@ -87,26 +87,41 @@
 
 ---
 
-### 🔵 Day 5 (Fri, Nov 13): Flagship Dev.to Backlink Blast (DA 92)
-- [ ] **5.1 Select Top 3 Pillar Dispatches**:
-  - Pick your best head-to-head comparison showdown and best workflow blueprint.
-- [ ] **5.2 Syndicate to Dev.to with Canonical Links**:
-  ```bash
-  php scripts/syndicate_to_devto.php --article-id=<id>
-  ```
-- [ ] **5.3 Verify `<link rel="canonical">` on Dev.to**:
-  - Ensure Dev.to points canonical credit directly back to `dailyaiworld.com`.
-  - Verify author callout card points to `/workflows`.
+### 🔵 Day 5 (Fri, Nov 13 / Completed): Flagship Dev.to Backlink Blast (DA 92)
+- [x] **5.1 Select Top 3 Pillar Dispatches**:
+  - Selected master cornerstone workflow blueprint: `How to Build n8n Workflows with Claude Code: 6 Steps (2026)` (ID: `632`, 57,745 views).
+  - Selected top LLM serving showdown: `TensorRT-LLM vs SGLang: Blackwell FP4 Throughput, KV Cache Paging, and Speculative Decoding Showdown` (ID: `2726`).
+  - Selected enterprise SecOps agent blueprint: `Build an Autonomous SecOps Incident Response Agent with LangGraph: Sub-60s AWS CloudTrail Anomaly Quarantine` (ID: `2721`).
+- [x] **5.2 Syndicate to Dev.to with Canonical Links**:
+  - Successfully syndicated all 3 flagship pieces to Dev.to (DA 92) via Forem API:
+    - **Post 1 (Workflow Blueprint)**: [dev.to/.../how-to-build-n8n-workflows-with-claude-code-6-steps-2026-2fm2](https://dev.to/deepak_bagada_98e87bd2723/how-to-build-n8n-workflows-with-claude-code-6-steps-2026-2fm2) (ID: `5026580`)
+    - **Post 2 (Showdown)**: [dev.to/.../tensorrt-llm-vs-sglang-blackwell-fp4-throughput-kv-cache-paging-and-speculative-decoding-showdown-5c02](https://dev.to/deepak_bagada_98e87bd2723/tensorrt-llm-vs-sglang-blackwell-fp4-throughput-kv-cache-paging-and-speculative-decoding-showdown-5c02) (ID: `5026583`)
+    - **Post 3 (Autonomous Agent Blueprint)**: [dev.to/.../build-an-autonomous-secops-incident-response-agent-with-langgraph-sub-60s-aws-cloudtrail-anomaly-nh2](https://dev.to/deepak_bagada_98e87bd2723/build-an-autonomous-secops-incident-response-agent-with-langgraph-sub-60s-aws-cloudtrail-anomaly-nh2) (ID: `5026584`)
+- [x] **5.3 Verify `<link rel="canonical">` and Backlink Bridge on Dev.to**:
+  - Verified Dev.to canonical headers: 100% point directly back to `dailyaiworld.com/workflow/...` and `dailyaiworld.com/blogs/...` ensuring full PageRank equity consolidation.
+  - Verified original source attribution footer and internal link bridge pointing directly to `/workflows` (`https://dailyaiworld.com/workflows`).
+- [x] **5.4 Execute Day 5 Daily Google & Bing Indexing Quota**:
+  - Submitted daily quota of curated priority URLs to Google Indexing API (200 daily ceiling) and Bing/IndexNow.
 
 ---
 
-### 🟣 Day 6 (Sat, Nov 14): Internal Link Recirculation Overhaul
-- [ ] **6.1 Inspect the 18 Currently Indexed Pages**:
-  - These are the only pages currently passing PageRank in Google's eyes!
-- [ ] **6.2 Inject High-Priority Deep Links**:
-  - Add contextual links inside those 18 pages pointing directly to your top 30 unindexed pillar guides.
-- [ ] **6.3 Link to Core Navigation Hubs**:
-  - Ensure prominent links to `/workflows`, `/mcp-directory`, and `/latest-ai-news`.
+### 🟣 Day 6 (Sat, Nov 14 / Completed): Internal Link Recirculation Overhaul
+- [x] **6.1 Inspect the 18 Currently Indexed & Active Pages**:
+  - Analyzed Google Search Console Coverage & URL Inspection API across the domain.
+  - Confirmed `https://dailyaiworld.com/` is `PASS (Submitted and indexed)` with live Googlebot crawl on 2026-11-14.
+  - Confirmed `https://dailyaiworld.com/mcp-directory/prometheus-metrics-kubernetes-cluster-diagnostics-mcp-server` is `PASS (Submitted and indexed)`.
+  - Identified the primary active landing pages driving search impressions (`/workflows`, `/mcp-directory`, `/latest-ai-news`, `/workflow/skillcloak-proof-agent-skill-pipeline-2026`, `/workflow/automate-lead-enrichment-n8n-2026`, `/blogs/humalike-social-intelligence-ai-agents-2026`, `/blogs/kiss-sorcar-genetic-evolution-agent-framework-2026`, `/blogs/claude-code-mcp-data-integration-2026`, etc.).
+  - Audited legacy August 404s vs 410 Gone headers to ensure crawl equity is not lost on deleted URLs.
+- [x] **6.2 Sitewide & Homepage Deep Link Injection to Top 30 Pillar Guides**:
+  - **Homepage Recirculation Overhaul**: Injected a dedicated "Flagship Architecture Guides & Showdowns" cornerstone grid on `resources/views/home.blade.php` linking directly to high-authority unindexed pillars (n8n Workflows with Claude Code, LangGraph Sales Pipeline, BaseRT vs llama.cpp vs MLX, TensorRT-LLM vs SGLang Blackwell FP4 Showdown, Prometheus K8s MCP, and Agentic RAG).
+  - **Sitewide Footer Recirculation Grid**: Upgraded `resources/views/components/footer.blade.php` with a multi-column internal link matrix linking sitewide to the 3 main directories and 15 top pillar guides across Workflows, MCP Servers, and Benchmarks.
+  - **Contextual In-Article Recirculation**: Overhauled `ArticleController.php` so `$nextBlueprint` intelligently recommends category-relevant pillars (Workflow -> MCP/Benchmark, MCP -> Workflow, Blog -> Flagship Workflow) instead of a single static article, and injected a dedicated "Architecture Directory Hubs & High-Priority Pillar Guides" component into `resources/views/articles/show.blade.php`.
+- [x] **6.3 Core Navigation Hub Anchor Optimization**:
+  - Prominently reinforced dofollow keyword-rich links to `/workflows`, `/mcp-directory`, and `/latest-ai-news` across the header, homepage desks, article footer recirculation, and sitewide footer.
+- [x] **6.4 Fix Google Search Console News Sitemap Error**:
+  - Upgraded `sitemapNews()` in `app/Http/Controllers/SeoController.php` to include recent fallback dispatches when 0 articles were published in the last 48 hours, eliminating the GSC "Errors: 1 / N/A URLs submitted" empty `<urlset>` warning.
+- [x] **6.5 Execute Day 6 Rotating Indexing Batch**:
+  - Submitted daily quota of 200 priority URLs (4 core hubs + 196 dispatches) to Google Indexing API and Bing/IndexNow.
 
 ---
 

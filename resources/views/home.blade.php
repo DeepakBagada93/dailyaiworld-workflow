@@ -356,6 +356,163 @@
             </a>
         </section>
 
+        <!-- Flagship Architecture Pillars & Benchmark Showdowns (Core Recirculation Grid) -->
+        <section class="mt-12 sm:mt-16" aria-labelledby="flagship-pillars-title">
+            <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[#dfddd6]">
+                <div>
+                    <div class="flex items-center gap-2 mb-1.5">
+                        <span class="inline-block w-2 h-2 rounded-full bg-[#6D28D9]"></span>
+                        <span class="font-mono text-[10px] uppercase tracking-widest text-[#6D28D9] font-bold">Cornerstone Blueprints · High-Authority Pillars</span>
+                    </div>
+                    <h2 id="flagship-pillars-title" class="font-serif text-2xl sm:text-3xl font-extrabold text-[#111323] tracking-tight">
+                        Flagship Architecture Guides &amp; Showdowns
+                    </h2>
+                    <p class="text-xs sm:text-sm text-[#586174] mt-1 max-w-2xl">
+                        Deep multi-file runnable agent blueprints, FastMCP server packages, and empirical LLM serving benchmarks.
+                    </p>
+                </div>
+                <div class="flex items-center gap-3 font-mono text-xs font-bold text-[#6D28D9] shrink-0">
+                    <a href="{{ route('workflows.index') }}" class="hover:underline">All Workflows →</a>
+                    <span class="text-gray-300 select-none">·</span>
+                    <a href="{{ route('mcp.index') }}" class="hover:underline">MCP Directory →</a>
+                </div>
+            </div>
+
+            <div class="mt-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                <!-- Pillar 1 -->
+                <article class="p-5 rounded-2xl bg-[#faf5ff] border border-[#e9d5ff] flex flex-col justify-between hover:border-[#6D28D9] hover:shadow-md transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                            <span class="px-2 py-0.5 rounded bg-purple-100 text-[#6D28D9] font-bold uppercase">Workflow</span>
+                            <span class="text-gray-500 font-bold">57k+ Views</span>
+                        </div>
+                        <a href="{{ url('/workflow/how-to-build-n8n-workflows-with-claude-code-6-steps') }}" class="group-hover:text-[#6D28D9] transition-colors">
+                            <h3 class="font-serif text-base font-bold text-[#111323] leading-snug">
+                                How to Build n8n Workflows with Claude Code: 6 Steps
+                            </h3>
+                            <p class="text-xs text-[#586174] mt-2 line-clamp-2 leading-relaxed">
+                                Complete multi-agent orchestration setup connecting Anthropic Claude Code CLI with self-hosted n8n automations.
+                            </p>
+                        </a>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-[#e9d5ff]/60 flex items-center justify-between text-xs font-mono">
+                        <span class="text-[11px] text-[#6D28D9] font-semibold">Blueprint Guide</span>
+                        <a href="{{ url('/workflow/how-to-build-n8n-workflows-with-claude-code-6-steps') }}" class="font-bold text-[#6D28D9] group-hover:translate-x-0.5 transition-transform">Read Blueprint →</a>
+                    </div>
+                </article>
+
+                <!-- Pillar 2 -->
+                <article class="p-5 rounded-2xl bg-[#faf5ff] border border-[#e9d5ff] flex flex-col justify-between hover:border-[#6D28D9] hover:shadow-md transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                            <span class="px-2 py-0.5 rounded bg-purple-100 text-[#6D28D9] font-bold uppercase">LangGraph</span>
+                            <span class="text-gray-500 font-bold">57k+ Views</span>
+                        </div>
+                        <a href="{{ url('/workflow/build-langgraph-sales-pipeline-2026') }}" class="group-hover:text-[#6D28D9] transition-colors">
+                            <h3 class="font-serif text-base font-bold text-[#111323] leading-snug">
+                                Build a LangGraph Sales Pipeline: 6 Steps (2026)
+                            </h3>
+                            <p class="text-xs text-[#586174] mt-2 line-clamp-2 leading-relaxed">
+                                Production StateGraph checkpointing, CRM webhook connectors, and autonomous multi-agent lead enrichment.
+                            </p>
+                        </a>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-[#e9d5ff]/60 flex items-center justify-between text-xs font-mono">
+                        <span class="text-[11px] text-[#6D28D9] font-semibold">StateGraph</span>
+                        <a href="{{ url('/workflow/build-langgraph-sales-pipeline-2026') }}" class="font-bold text-[#6D28D9] group-hover:translate-x-0.5 transition-transform">Read Blueprint →</a>
+                    </div>
+                </article>
+
+                <!-- Pillar 3 -->
+                <article class="p-5 rounded-2xl bg-[#faf5ff] border border-[#e9d5ff] flex flex-col justify-between hover:border-[#6D28D9] hover:shadow-md transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                            <span class="px-2 py-0.5 rounded bg-purple-100 text-[#6D28D9] font-bold uppercase">MCP Server</span>
+                            <span class="text-gray-500 font-bold">56k+ Views</span>
+                        </div>
+                        <a href="{{ url('/mcp-directory/basert-vs-llamacpp-vs-mlx-apple-silicon-benchmarks-2026') }}" class="group-hover:text-[#6D28D9] transition-colors">
+                            <h3 class="font-serif text-base font-bold text-[#111323] leading-snug">
+                                BaseRT vs llama.cpp vs MLX: Apple Silicon Benchmarks
+                            </h3>
+                            <p class="text-xs text-[#586174] mt-2 line-clamp-2 leading-relaxed">
+                                Tokens/sec throughput, unified memory utilization, and local quantization comparisons on M3/M4 Max.
+                            </p>
+                        </a>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-[#e9d5ff]/60 flex items-center justify-between text-xs font-mono">
+                        <span class="text-[11px] text-[#6D28D9] font-semibold">Local Inference</span>
+                        <a href="{{ url('/mcp-directory/basert-vs-llamacpp-vs-mlx-apple-silicon-benchmarks-2026') }}" class="font-bold text-[#6D28D9] group-hover:translate-x-0.5 transition-transform">Read Benchmark →</a>
+                    </div>
+                </article>
+
+                <!-- Pillar 4 -->
+                <article class="p-5 rounded-2xl bg-[#faf5ff] border border-[#e9d5ff] flex flex-col justify-between hover:border-[#6D28D9] hover:shadow-md transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                            <span class="px-2 py-0.5 rounded bg-purple-100 text-[#6D28D9] font-bold uppercase">Showdown</span>
+                            <span class="text-gray-500 font-bold">LLM Serving</span>
+                        </div>
+                        <a href="{{ url('/blogs/tensorrt-llm-vs-sglang-blackwell-fp4-serving-speculative-showdown') }}" class="group-hover:text-[#6D28D9] transition-colors">
+                            <h3 class="font-serif text-base font-bold text-[#111323] leading-snug">
+                                TensorRT-LLM vs SGLang: Blackwell FP4 Throughput Showdown
+                            </h3>
+                            <p class="text-xs text-[#586174] mt-2 line-clamp-2 leading-relaxed">
+                                KV cache paging, speculative decoding verification, and token unit economics on next-gen hardware.
+                            </p>
+                        </a>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-[#e9d5ff]/60 flex items-center justify-between text-xs font-mono">
+                        <span class="text-[11px] text-[#6D28D9] font-semibold">Serving Engine</span>
+                        <a href="{{ url('/blogs/tensorrt-llm-vs-sglang-blackwell-fp4-serving-speculative-showdown') }}" class="font-bold text-[#6D28D9] group-hover:translate-x-0.5 transition-transform">Read Showdown →</a>
+                    </div>
+                </article>
+
+                <!-- Pillar 5 -->
+                <article class="p-5 rounded-2xl bg-[#faf5ff] border border-[#e9d5ff] flex flex-col justify-between hover:border-[#6D28D9] hover:shadow-md transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                            <span class="px-2 py-0.5 rounded bg-purple-100 text-[#6D28D9] font-bold uppercase">MCP Verified</span>
+                            <span class="text-gray-500 font-bold">K8s Ops</span>
+                        </div>
+                        <a href="{{ url('/mcp-directory/prometheus-metrics-kubernetes-cluster-diagnostics-mcp-server') }}" class="group-hover:text-[#6D28D9] transition-colors">
+                            <h3 class="font-serif text-base font-bold text-[#111323] leading-snug">
+                                Prometheus Metrics Kubernetes Diagnostics MCP Server
+                            </h3>
+                            <p class="text-xs text-[#586174] mt-2 line-clamp-2 leading-relaxed">
+                                Real-time cluster health inspection, query diagnostics, and automated pod recovery tools for Claude and Cursor.
+                            </p>
+                        </a>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-[#e9d5ff]/60 flex items-center justify-between text-xs font-mono">
+                        <span class="text-[11px] text-[#6D28D9] font-semibold">DevOps MCP</span>
+                        <a href="{{ url('/mcp-directory/prometheus-metrics-kubernetes-cluster-diagnostics-mcp-server') }}" class="font-bold text-[#6D28D9] group-hover:translate-x-0.5 transition-transform">Inspect Server →</a>
+                    </div>
+                </article>
+
+                <!-- Pillar 6 -->
+                <article class="p-5 rounded-2xl bg-[#faf5ff] border border-[#e9d5ff] flex flex-col justify-between hover:border-[#6D28D9] hover:shadow-md transition-all group">
+                    <div>
+                        <div class="flex items-center justify-between text-[10px] font-mono mb-2">
+                            <span class="px-2 py-0.5 rounded bg-purple-100 text-[#6D28D9] font-bold uppercase">Architecture</span>
+                            <span class="text-gray-500 font-bold">RAG Evals</span>
+                        </div>
+                        <a href="{{ url('/blogs/agentic-rag-2026-reasoning-augmented-retrieval-beats') }}" class="group-hover:text-[#6D28D9] transition-colors">
+                            <h3 class="font-serif text-base font-bold text-[#111323] leading-snug">
+                                Agentic RAG: Reasoning-Augmented Retrieval Beats Vanilla RAG
+                            </h3>
+                            <p class="text-xs text-[#586174] mt-2 line-clamp-2 leading-relaxed">
+                                Self-reflective query rewriting, multi-hop evidence chaining, and precision reranking latency benchmarks.
+                            </p>
+                        </a>
+                    </div>
+                    <div class="mt-4 pt-3 border-t border-[#e9d5ff]/60 flex items-center justify-between text-xs font-mono">
+                        <span class="text-[11px] text-[#6D28D9] font-semibold">RAG Systems</span>
+                        <a href="{{ url('/blogs/agentic-rag-2026-reasoning-augmented-retrieval-beats') }}" class="font-bold text-[#6D28D9] group-hover:translate-x-0.5 transition-transform">Read Analysis →</a>
+                    </div>
+                </article>
+            </div>
+        </section>
+
         <!-- Production Toolkits & Developer Kits Showcase (Founder Deepak Bagada) -->
         <section class="mt-14 sm:mt-16" aria-labelledby="toolkits-showcase-title">
             <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-4 pb-4 border-b border-[#dfddd6]">

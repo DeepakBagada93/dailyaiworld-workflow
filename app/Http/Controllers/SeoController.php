@@ -206,6 +206,16 @@ class SeoController extends Controller
             ->take(15)
             ->get();
 
+        // Fallback: If no news dispatched in last 48 hours, include latest 10 news articles
+        // to prevent GSC from rejecting an empty XML sitemap with "0 URLs discovered / Error".
+        if ($articles->isEmpty()) {
+            $articles = Article::published()
+                ->where('category_id', 11)
+                ->latest('published_at')
+                ->take(10)
+                ->get();
+        }
+
         $content = view('seo.sitemap_articles', [
             'articles' => $articles,
             'priority' => '0.90',

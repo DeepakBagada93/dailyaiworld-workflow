@@ -175,14 +175,14 @@ $recoverySchedule = [
     '2026-11-13' => [
         'day' => 'Day 5 (Fri, Nov 13)',
         'target' => 'Flagship Dev.to Backlink Blast (DA 92 Authority Building)',
-        'status' => 'UPCOMING',
-        'action' => 'Syndicate top 3 dispatches to Dev.to using php scripts/syndicate_to_devto.php with verified canonical.',
+        'status' => 'COMPLETED',
+        'action' => 'Syndicated 3 flagship guides to Dev.to (DA 92) via Forem API with verified canonical URLs.',
     ],
     '2026-11-14' => [
         'day' => 'Day 6 (Sat, Nov 14)',
         'target' => 'Internal Link Recirculation Overhaul',
-        'status' => 'UPCOMING',
-        'action' => 'Inject deep links inside the 18 currently indexed pages pointing to unindexed priority guides.',
+        'status' => 'COMPLETED',
+        'action' => 'Injected deep links to top 30 pillar guides across homepage, sitewide footer, and article recirculation.',
     ],
     '2026-11-15' => [
         'day' => 'Day 7 (Sun, Nov 15)',
