@@ -202,7 +202,7 @@
                 <div class="my-8 py-6 border-y border-[var(--border-subtle)] flex flex-wrap items-center justify-between gap-6">
                     <div class="flex items-center gap-4">
                         @if($article->author->avatar)
-                            <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-12 h-12 rounded-xl object-cover shrink-0 aspect-square border border-[var(--border-subtle)] ring-2 ring-[#6D28D9]/20 author-avatar-cover shadow-sm transition-all duration-300">
+                            <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" width="48" height="48" class="w-12 h-12 rounded-xl object-cover shrink-0 aspect-square border border-[var(--border-subtle)] ring-2 ring-[#6D28D9]/20 author-avatar-cover shadow-sm transition-all duration-300">
                         @else
                             <div class="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-base shrink-0 border border-purple-200 dark:border-purple-800 ring-2 ring-[#6D28D9]/20 font-sans shadow-sm">
                                 {{ substr($article->author->name, 0, 1) }}
@@ -456,7 +456,7 @@
                 <!-- AUTHOR BIO BOX -->
                 <div class="bg-[var(--bg-sec)] border border-[var(--border-subtle)] rounded-xl p-8 my-12 flex flex-col sm:flex-row items-start gap-6">
                     @if($article->author->avatar)
-                        <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-16 h-16 rounded-2xl object-cover shrink-0 aspect-square border border-[var(--border-subtle)] ring-2 ring-[#6D28D9]/20 author-avatar-cover shadow-md transition-all duration-300">
+                        <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" width="64" height="64" loading="lazy" class="w-16 h-16 rounded-2xl object-cover shrink-0 aspect-square border border-[var(--border-subtle)] ring-2 ring-[#6D28D9]/20 author-avatar-cover shadow-md transition-all duration-300">
                     @else
                         <div class="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-xl shrink-0 border border-purple-200 dark:border-purple-800 ring-2 ring-[#6D28D9]/20 font-sans shadow-md">
                             {{ substr($article->author->name, 0, 1) }}

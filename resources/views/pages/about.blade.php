@@ -76,7 +76,7 @@
             <section class="pt-4 border-t border-[#E5E7EB]">
                 <h2 class="text-2xl font-serif font-bold text-[#111827] mb-6">Leadership & Editorial Team</h2>
                 <div class="bg-white border border-[#E5E7EB] rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row gap-6 items-start shadow-xs">
-                    <img src="{{ asset('images/logo.png') }}" alt="Deepak Bagada" class="w-20 h-20 rounded-2xl object-cover bg-purple-100 border border-[#E9D5FF] shrink-0">
+                    <img src="{{ asset('images/logo.png') }}" alt="Deepak Bagada" width="80" height="80" class="w-20 h-20 rounded-2xl object-cover bg-purple-100 border border-[#E9D5FF] shrink-0">
                     <div class="space-y-2">
                         <div class="flex flex-wrap items-center gap-2">
                             <h3 class="text-xl font-bold font-serif text-[#111827]">Deepak Bagada</h3>

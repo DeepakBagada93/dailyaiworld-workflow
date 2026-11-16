@@ -56,7 +56,7 @@
             <div class="mt-4 flex items-center justify-between text-xs text-[var(--text-muted)] font-mono border-t border-[var(--border-subtle)] pt-3">
                 <div class="flex items-center gap-2.5 min-w-0">
                     @if($article->author->avatar)
-                        <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-6 h-6 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
+                        <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" width="24" height="24" class="w-6 h-6 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
                     @else
                         <div class="w-6 h-6 rounded-full bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-[10px] shrink-0 border border-purple-200 dark:border-purple-800 font-sans">
                             {{ substr($article->author->name, 0, 1) }}
@@ -220,7 +220,7 @@
         <div class="px-5 sm:px-6 pb-5 pt-3 mt-auto border-t border-[var(--border-subtle)] flex items-center justify-between text-xs text-[var(--text-muted)] font-mono">
             <div class="flex items-center gap-2 min-w-0">
                 @if($article->author->avatar)
-                    <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" class="w-5 h-5 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
+                    <img src="{{ $article->author->avatar }}" alt="{{ $article->author->name }}" width="20" height="20" class="w-5 h-5 rounded-full object-cover shrink-0 aspect-square border border-[var(--border-subtle)] author-avatar-img" loading="lazy">
                 @else
                     <div class="w-5 h-5 rounded-full bg-purple-100 dark:bg-purple-950 text-[#6D28D9] dark:text-purple-300 flex items-center justify-center font-bold text-[10px] shrink-0 border border-purple-200 dark:border-purple-800 font-sans">
                         {{ substr($article->author->name, 0, 1) }}
